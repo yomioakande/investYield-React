@@ -5,29 +5,22 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import LandingPage from "./components/LandingPage";
 import AuthRoutes from "./routes/AuthRoutes";
-import Dashboard from "./routes/DashboardRoutes";
+import DashboardRoutes from "./routes/DashboardRoutes";
+import { HomePageRoutes, ContactUsPage } from "./routes/HomePageRoutes";
+import PrivateRoute from "./routes/PrivateRoutes";
+// import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <>
-      <React.Fragment>
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              {<Redirect to="/homepage" />}
-            </Route>
-            <Route path="/homepage" component={LandingPage} />
-            <Route path="/auth" component={AuthRoutes} />
-            <Route path="/app" component={Dashboard} />
-          </Switch>
-        </Router>
-      </React.Fragment>
-
       <Router>
-        <Route exact path="/">
-          <LandingPage />
-        </Route>
+        <Switch>
+          <Route exact path="/contactus" component={ContactUsPage} />
+          <Route path="/auth" component={AuthRoutes} />
+          <PrivateRoute path="/app" component={DashboardRoutes} />
+          <Route path="/" component={HomePageRoutes} />
+          <Redirect from="*" to="/" />
+        </Switch>
       </Router>
     </>
   );

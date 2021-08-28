@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import "../../index.css";
+import leftArrow from "../../assets/images/left-arrow.svg"
+import "../../assets/css/style.css"
 import { Link } from "react-router-dom";
+
+
+import { connect } from "react-redux";
+// import { fetchUsers } from "../redux";
+
+
 const First = () => {
   const initialValues = {
     firstName: "",
@@ -54,7 +61,7 @@ const First = () => {
   });
 
   console.log("formikvalues", formik.values);
-
+  console.log(state,setState,handleSubmit)
   //  const obj= {
   //   "firstName": formik.values.firstName,
   //   "lastName": formik.values.firstName,
@@ -77,14 +84,14 @@ const First = () => {
             <div className="col-lg-5 col-xl-4">
               <div className="bg-white login-div p-5 shadow mt-5">
                 <div className="d-flex justify-content-between">
-                  <a href="/" className="d-flex no-decor align-items-center">
+                  <Link to="/auth/login" className="d-flex no-decor align-items-center">
                     <img
-                      src="./assets/images/left-arrow.svg"
+                      src={leftArrow}
                       className="img-fluid"
                       alt="left-arrow"
                     />
                     <span className="px-2 text-dark">Back</span>
-                  </a>
+                  </Link>
                   <h5 className="login-div-header">Get Started</h5>
                   <h5 className="step-text">1/4</h5>
                 </div>
@@ -191,7 +198,7 @@ const First = () => {
                       <p>
                         Already have an account?{" "}
                         <span>
-                          <Link href="/login" className="text-green">
+                          <Link to="/auth/login" className="text-green">
                             Get started here
                           </Link>
                         </span>

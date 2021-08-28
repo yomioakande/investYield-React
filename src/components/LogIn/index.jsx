@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import "../../index.css";
+import invest from "../../assets/images/login-investyield.svg"
+import backArrow from "../../assets/images/left-arrow.svg"
+import "../../assets/css/style.css"
+import { connect } from 'react-redux';
+import { userActions } from '../../redux/actions';
 const Index = () => {
   const initialValues = {
     email: "",
@@ -40,7 +44,7 @@ const Index = () => {
             <div className="col-xl-3 col-lg-4 mt-4">
               <div className="d-flex flex-column">
                 <img
-                  src="./assets/images/login-investyield.svg"
+                  src={invest}
                   className="img-fluid logo-custom-size1"
                   alt="investyieldlogo"
                   style={{ height: "50px", width: "300px" }}
@@ -53,14 +57,14 @@ const Index = () => {
             <div className="col-xl-4 col-lg-5 mt-4">
               <div className="bg-white login-div p-4 shadow">
                 <div className="d-flex justify-content-between">
-                  <Link href="/" className="d-flex no-decor align-items-center">
+                  <a href="/" className="d-flex no-decor align-items-center">
                     <img
-                      src="./assets/images/left-arrow.svg"
+                      src={backArrow}
                       className="img-fluid"
                       alt="leftarrow"
                     />
                     <span className="px-2 text-dark">Back</span>
-                  </Link>
+                  </a>
                   <h5 className="login-div-header">Sign In</h5>
                   <a
                     href="/a"
@@ -68,7 +72,7 @@ const Index = () => {
                     style={{ visibility: "hidden" }}
                   >
                     <img
-                      src="./assets/images/left-arrow.svg"
+                      src={backArrow}
                       className="img-fluid"
                       alt="left-arrow"
                     />
@@ -150,5 +154,11 @@ const Index = () => {
     </main>
   );
 };
+
+
+
+
+
+// const
 
 export default Index;

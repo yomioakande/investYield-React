@@ -23,16 +23,16 @@ const AuthRoutes = () => {
         <Route exact path="/auth">
           {<Redirect to="/auth/login" />}
         </Route>
-        <Route exact path="/auth/signup1">
+        <Route path="/auth/signup1">
           <First />
         </Route>
-        <Route exact path="/auth/signup2">
+        <Route path="/auth/signup2">
           <Second />
         </Route>
-        <Route exact path="/auth/signup3">
+        <Route path="/auth/signup3">
           <Third />
         </Route>
-        <Route exact path="/auth/signup4">
+        <Route path="/auth/signup4">
           <Fourth />
         </Route>
         <Redirect from="*" to="/homepage" />

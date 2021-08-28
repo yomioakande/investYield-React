@@ -1,5 +1,6 @@
 import React from "react";
-import "../../index.css";
+import "../../assets/css/style.css"
+// import "../../index.css";
 const index = () => {
   return (
     <footer>
