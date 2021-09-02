@@ -17,9 +17,6 @@ export const HomePageRoutes = () => {
     <Router>
       <HomePageHeader />
       <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
         <Route exact path="/home">
           {<Redirect to="/" />}
         </Route>
@@ -28,6 +25,13 @@ export const HomePageRoutes = () => {
         </Route>
         <Route exact path="/faq">
           <Faq />
+        </Route>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+
+        <Route exact path="/contactus">
+          <ContactUs/>
         </Route>
         <Redirect from="*" to="/" />
       </Switch>

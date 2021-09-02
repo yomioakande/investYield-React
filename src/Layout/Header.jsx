@@ -1,9 +1,32 @@
-import React, { useState } from "react";
+import React, { useState,Fragment } from "react";
+import { Link, useLocation } from "react-router-dom";
 import invest from "../assets/media/investyieldLogo.svg";
 import johndoe from "../assets/images/icon/avatar-01.jpg";
 import avatar from "../assets/images/icon/avatar-01.jpg";
-// import "../assets/css/theme.css";
-const Header = () => {
+import leftArrow from "../assets/images/left-arrow.svg";
+import "../assets/css/theme.css";
+// import { Disclosure, Menu, Transition } from '@headlessui/react'
+// import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import MenuBar from "./MenuBar"
+import { connect } from "react-redux";
+import { usersActions } from "../redux/actions";
+
+
+const navigation = [
+  { name: 'Dashboard', href: '#', current: true },
+  { name: 'Team', href: '#', current: false },
+  { name: 'Projects', href: '#', current: false },
+  { name: 'Calendar', href: '#', current: false },
+]
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
+
+const Header = ({ username }) => {
+  const location = useLocation().pathname.split("/")[2];
+
   const [scroll, setScroll] = useState(false);
 
   const addShadow = () => {
@@ -14,6 +37,9 @@ const Header = () => {
     }
   };
   window.addEventListener("scroll", addShadow);
+
+
+
 
   return (
     // <!-- HEADER MOBILE-->
@@ -143,13 +169,33 @@ const Header = () => {
 
       {/* // <!-- END HEADER MOBILE--> */}
       {/* <!-- HEADER DESKTOP--> */}
-      <header className={`header-desktop ${scroll? "header-desktop-active":"null"}`}>
+      <header
+        className={`header-desktop ${
+          scroll ? "header-desktop-active" : "null"
+        }`}
+      >
         <div className="section__content section__content--p30">
           <div className="container-fluid">
             <div className="header-wrap">
-              <a href="/" className="au-btn au-btn-icon iy-btn-primary d-flex align-items-center justify-contents-center text-white">
-                Stash
-              </a>
+              {location !== "dashboard" ? (
+                <Link
+                  to="/app/dashboard"
+                  className="d-flex no-decor align-items-center"
+                >
+                  <img src={leftArrow} className="img-fluid" alt="left-arrow" />
+                  <span className="px-2 text-dark">Back</span>
+                </Link>
+              ) : (
+                <Link
+                  to="/app/stash"
+                  className="au-btn au-btn-icon iy-btn-primary d-flex align-items-center justify-contents-center text-white"
+                >
+                  Stash
+                </Link>
+              )}
+
+              {/* <MenuBar/> */}
+
               <div className="header-button">
                 <div className="noti-wrap">
                   <div className="noti__item js-item-menu">
@@ -198,8 +244,8 @@ const Header = () => {
                       <img src={johndoe} alt="John Doe" />
                     </div>
                     <div className="content">
-                      <a className="js-acc-btn" href="/">
-                        john doe
+                      <a className="py-12 js-acc-btn" href="/">
+                        {username.name}
                       </a>
                     </div>
                     <div className="account-dropdown js-dropdown">
@@ -241,6 +287,60 @@ const Header = () => {
                     </div>
                   </div>
                 </div>
+                {/* <Menu as="div" className="ml-3 relative">
+                  <div>
+                    <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                      <span className="sr-only">Open user menu</span>
+                      <img
+                        className="h-8 w-8 rounded-full"
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt=""
+                      />
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Your Profile
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Settings
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Sign out
+                          </a>
+                        )}
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Transition>
+                </Menu> */}
               </div>
             </div>
           </div>
@@ -251,4 +351,14 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  return { alert, username };
+};
+
+const actionCreators = {
+  getData: usersActions.getInfo,
+};
+
+export default connect(mapStateToProps, actionCreators)(Header);

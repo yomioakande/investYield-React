@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
+import { isLogin } from '../helpers//helper';
+export const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
         localStorage.getItem('user')
             ? <Component {...props} />
@@ -9,4 +9,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     )} />
 )
 
-export default PrivateRoute;
+
+export const PublicRoute = ({component: Component, restricted, ...rest}) => {
+    return (
+        <Route {...rest} render={props => (
+            isLogin() && restricted ?
+                <Redirect to="/app/dashboard" />
+            : <Component {...props} />
+        )} />
+    );
+};
+//  default PrivateRoute;

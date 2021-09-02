@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../../assets/css/style.css";
 import logo from "../../assets/images/logo.svg";
 const Index = () => {
@@ -27,7 +27,7 @@ const Index = () => {
           >
             <ul className="navbar-nav">
               <li className="nav-item nav-menu-padding">
-                <a href="/home" className="nav-link menus text-dark">
+                <a href="/" className="nav-link menus text-dark">
                   Home <span className="sr-only">(current)</span>
                 </a>
               </li>
@@ -39,7 +39,7 @@ const Index = () => {
               <li className="nav-item nav-menu-padding">
                 <NavLink
                   to="/contactus"
-                  onClick={() => window.location.href="/contactus"}
+                  // onClick={() => (window.location.href = "/contactus")}
                   className="nav-link menus text-dark"
                 >
                   Contact us

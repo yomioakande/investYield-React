@@ -103,12 +103,23 @@ p {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
-
 .btn {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
+
+
+
+
+
+
+
+
+
+
+
+/*  */
 /* Dashboard Modals */
 .dashboard-modal-header {
   font-size: 1.5rem;
@@ -988,6 +999,11 @@ section {
 }
 
 .form-header2 .au-input:-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #999;
+}
+
+.form-header2 .au-input::placeholder {
   /* Microsoft Edge */
   color: #999;
 }
@@ -3540,24 +3556,28 @@ section {
   background-image: -moz-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
   background-image: -webkit-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
   background-image: -ms-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
+  background-image: linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
 }
 
 .overview-item--c2 {
   background-image: -moz-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
   background-image: -webkit-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
   background-image: -ms-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+  background-image: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
 }
 
 .overview-item--c3 {
   background-image: -moz-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
   background-image: -webkit-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
   background-image: -ms-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
+  background-image: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
 }
 
 .overview-item--c4 {
   background-image: -moz-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
   background-image: -webkit-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
   background-image: -ms-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
+  background-image: linear-gradient(90deg, #45b649 0%, #dce35b 100%);
 }
 
 .overview-box .icon {
@@ -3738,6 +3758,7 @@ a .au-card:hover {
   background-image: -moz-linear-gradient(203deg, #08b29b -7%, #0553c8 64%);
   background-image: -webkit-linear-gradient(203deg, #08b29b -7%, #0553c8 64%);
   background-image: -ms-linear-gradient(203deg, #08b29b -7%, #0553c8 64%);
+  background-image: linear-gradient(203deg, #08b29b -7%, #0553c8 64%);
   box-shadow: none;
 }
 
@@ -3745,6 +3766,7 @@ a .au-card:hover {
   background-image: -moz-linear-gradient(203deg, #0553c8 -38%, #08306b 42%);
   background-image: -webkit-linear-gradient(203deg, #0553c8 -38%, #08306b 42%);
   background-image: -ms-linear-gradient(203deg, #0553c8 -38%, #08306b 42%);
+  background-image: linear-gradient(203deg, #0553c8 -38%, #08306b 42%);
   box-shadow: none;
 }
 
@@ -3752,6 +3774,7 @@ a .au-card:hover {
   background-image: -moz-linear-gradient(203deg, #08b29b -38%, #025348 42%);
   background-image: -webkit-linear-gradient(203deg, #08b29b -38%, #025348 42%);
   background-image: -ms-linear-gradient(203deg, #08b29b -38%, #025348 42%);
+  background-image: linear-gradient(203deg, #08b29b -38%, #025348 42%);
   box-shadow: none;
 }
 
@@ -14229,3 +14252,8 @@ a .au-card:hover {
   background:  #F0F0F0;
   border-radius: 5px;
 }
+
+
+
+
+

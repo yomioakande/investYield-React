@@ -1,7 +1,7 @@
 import React from "react";
 import {
   BrowserRouter as Router,
-  Route,
+  // Route,
   Switch,
   Redirect,
 } from "react-router-dom";
@@ -12,34 +12,56 @@ import Second from "../components/SignUp/Second";
 import Third from "../components/SignUp/Third";
 import Fourth from "../components/SignUp/Fourth";
 import Footer from "../components/Footer";
-const AuthRoutes = () => {
+import ForgotPassword from "../components/Forgot/index";
+import ForgotToken from "../components/Forgot/Token";
+import PasswordForget from "../components/Forgot/Password";
+import { PublicRoute } from "./PrivateRoutes";
+export const AuthRoutes = () => {
   return (
     <Router>
       <Header />
       <Switch>
-        <Route exact path="/auth/login">
+        <PublicRoute restricted={true} exact path="/auth/login">
           <LogIn />
-        </Route>
-        <Route exact path="/auth">
+        </PublicRoute>
+        <PublicRoute restricted={true} exact path="/auth">
           {<Redirect to="/auth/login" />}
-        </Route>
-        <Route path="/auth/signup1">
+        </PublicRoute>
+        <PublicRoute restricted={true} path="/auth/signup1">
           <First />
-        </Route>
-        <Route path="/auth/signup2">
+        </PublicRoute>
+        <PublicRoute restricted={true} path="/auth/signup2">
           <Second />
-        </Route>
-        <Route path="/auth/signup3">
+        </PublicRoute>
+        <PublicRoute restricted={true} path="/auth/signup3">
           <Third />
-        </Route>
-        <Route path="/auth/signup4">
+        </PublicRoute>
+        {/* <PublicRoute restricted={false} exact path="/auth/signup4">
           <Fourth />
-        </Route>
-        <Redirect from="*" to="/homepage" />
+        </PublicRoute> */}
+        <PublicRoute restricted={true} path="/auth/forgotpassword">
+          <ForgotPassword />
+        </PublicRoute>
+        <PublicRoute restricted={true} path="/auth/forgottoken">
+          <ForgotToken />
+        </PublicRoute>
+        <PublicRoute restricted={true} path="/auth/createforgotpassword">
+          <PasswordForget />
+        </PublicRoute>
+
+        <Redirect from="*" to="/" />
       </Switch>
-      <Footer />
     </Router>
   );
 };
 
-export default AuthRoutes;
+// export default AuthRoutes;
+
+export const CreatePin = () => {
+  return (
+    <>
+      <Fourth />
+      <Footer />
+    </>
+  );
+};

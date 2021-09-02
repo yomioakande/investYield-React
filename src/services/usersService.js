@@ -1,57 +1,189 @@
-// import config from "config";
-import { authHeader } from "../helpers/authHeader";
+import { authHeader } from "../helpers/helper";
 
 export const userService = {
   login,
   logout,
-  signUp1
-//   getAll,
-//   getById,
-//   update,
-//   delete: _delete,
+  register1,
+  getData,
+  putData,
+  postData,
+  deleteData,
+  getFreq,
+  getEstimate
 };
 
-function signUp1(user, apiUrl, nextRoute) {
+async function register1(user, apiUrl) {
+
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user),
   };
-//   ${config.apiUrl}/users/register`
-  return fetch(apiUrl, requestOptions).then(
-    (data) => {
-        console.log("data", data);
-       window.location.href = nextRoute;
-      })
-      .catch((error) => {
-     console.log(error)
-    return error})
+  try {
+    const datas = await fetch(
+      `https://api-staging.investyield.ng:44377${apiUrl}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+   
+    return error;
+  }
 }
+const baseUrl = "https://api-staging.investyield.ng:44377";
 
-function login(body,apiUrl) {
+async function login(body) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   };
 
-  return fetch(apiUrl, requestOptions)
-    .then((res) => {
-      if (res.status === 200) {
-        return res.json();
-      }
-      console.log(res.json());
-    })
-    .then((user) => {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem("user", JSON.stringify(user));
-      return user;
-    });
+  try {
+    const res = await fetch(`${baseUrl}/api/v1/identity/login`, requestOptions);
+    const getData = await res.json();
+  
+    return getData;
+  } catch (error) {
+  
+    return error;
+  }
 }
 
 function logout() {
-  // remove user from local storage to log user out
   localStorage.removeItem("user");
+}
+
+// function getData(id) {
+//   const requestOptions = {
+//       method: 'GET',
+//       headers: authHeader()
+//   };
+
+//   // return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
+// }
+
+async function getData(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
+  try {
+    const datas = await fetch(
+      `https://api-staging.investyield.ng:44377${apiUrl}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+    
+    return error;
+  }
+}
+
+
+
+
+
+async function getFreq(apiUrl, firstQ, secondQ) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
+  try {
+    const datas = await fetch(
+      `https://api-staging.investyield.ng:44377${apiUrl}/?code=${firstQ}&ccy=${secondQ}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+    
+    return error;
+  }
+}
+
+
+
+
+
+
+
+
+async function getEstimate(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
+  try {
+    const datas = await fetch(
+      `https://api-staging.investyield.ng:44377${apiUrl}?ExpectedReturn=${firstQ}&Frequency=${secondQ}&TargetDate=${thirdQ}&Product=${fourthQ}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+    
+    return error;
+  }
+}
+
+
+
+
+
+async function postData(user, apiUrl) {
+ 
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      // 'Accept': 'application/json',
+      'Authorization': authHeader()?.Authorization,
+      'Content-Type': 'application/json'
+  },
+    // headers: { "Content-Type": "application/json",authHeader() },
+    body: JSON.stringify(user),
+  };
+  try {
+    const datas = await fetch(
+      `https://api-staging.investyield.ng:44377${apiUrl}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+    
+    return error;
+  }
+}
+
+
+
+
+async function putData(user, apiUrl) {
+
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      // 'Accept': 'application/json',
+      'Authorization': authHeader()?.Authorization,
+      'Content-Type': 'application/json'
+  },
+    // headers: { "Content-Type": "application/json",authHeader() },
+    body: JSON.stringify(user),
+  };
+  try {
+    const datas = await fetch(
+      `https://api-staging.investyield.ng:44377${apiUrl}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+    
+    return error;
+  }
 }
 
 
@@ -69,61 +201,20 @@ function logout() {
 
 
 
-
-
-
-// function getAll() {
-//     const requestOptions = {
-//         method: 'GET',
-//         headers: authHeader()
-//     };
-
-//     return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
-// }
-
-// function getById(id) {
-//     const requestOptions = {
-//         method: 'GET',
-//         headers: authHeader()
-//     };
-
-//     return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-// }
-
-// function update(user) {
-//     const requestOptions = {
-//         method: 'PUT',
-//         headers: { ...authHeader(), 'Content-Type': 'application/json' },
-//         body: JSON.stringify(user)
-//     };
-
-//     return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);;
-// }
-
-// prefixed function name with underscore because delete is a reserved word in javascript
-// function _delete(id) {
-//     const requestOptions = {
-//         method: 'DELETE',
-//         headers: authHeader()
-//     };
-
-//     return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-// }
-
-// function handleResponse(response) {
-//     return response.text().then(text => {
-//         const data = text && JSON.parse(text);
-//         if (!response.ok) {
-//             if (response.status === 401) {
-//                 // auto logout if 401 response returned from api
-//                 logout();
-//                 location.reload(true);
-//             }
-
-//             const error = (data && data.message) || response.statusText;
-//             return Promise.reject(error);
-//         }
-
-//         return data;
-//     });
-// }
+async function deleteData(apiUrl,id) {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: authHeader()
+};
+  try {
+    const datas = await fetch(
+      `https://api-staging.investyield.ng:44377${apiUrl}/${id}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+    
+    return error;
+  }
+}

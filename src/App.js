@@ -5,20 +5,24 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import AuthRoutes from "./routes/AuthRoutes";
+// import './styles/output.css'
+// import "./index.css"
+import {AuthRoutes,CreatePin} from "./routes/AuthRoutes";
 import DashboardRoutes from "./routes/DashboardRoutes";
 import { HomePageRoutes, ContactUsPage } from "./routes/HomePageRoutes";
-import PrivateRoute from "./routes/PrivateRoutes";
+import {PrivateRoute,PublicRoute} from "./routes/PrivateRoutes";
 // import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <>
       <Router>
         <Switch>
-          <Route exact path="/contactus" component={ContactUsPage} />
-          <Route path="/auth" component={AuthRoutes} />
+          {/* <Route exact path="/contactus" component={ContactUs} /> */}
+          {/* <Route path="/auth" component={AuthRoutes} /> */}
+          <PublicRoute path="/auth" restricted={true} component={AuthRoutes} />
           <PrivateRoute path="/app" component={DashboardRoutes} />
-          <Route path="/" component={HomePageRoutes} />
+          <Route path="/createpin" component={CreatePin} />
+          <Route exact path="/" component={HomePageRoutes} />
           <Redirect from="*" to="/" />
         </Switch>
       </Router>

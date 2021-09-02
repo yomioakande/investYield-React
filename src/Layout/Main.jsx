@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import dashboard from "../assets/images/dashboard_card_bg.jpg";
 import retirement from "../assets/images/Savingsplan/retirementplan.svg";
 import homeplan from "../assets/images/Savingsplan/homeplan.svg";
@@ -6,19 +7,88 @@ import emergency from "../assets/images/Savingsplan/emergencyplan.svg";
 import personalplan from "../assets/images/Savingsplan/personalplan.svg";
 import stash from "../assets/images/Stash/plus2.svg";
 import challenge from "../assets/images/savingschallenge.svg";
+import "../assets/css/theme.css";
+import CardTransfer from "./common/CardTransfer";
+import Plan from "./common/Plan";
+import { connect } from "react-redux";
+import { usersActions } from "../redux/actions";
+import Modal1 from "./Modal";
+import Loader from "../common/Loader";
+import Purse from "./common/myPurse";
+import { CSSTransition } from "react-transition-group";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./transitions.css";
+import "swiper/swiper-bundle.min.css";
 
-const Main = () => {
+// import swiper from "swiper";
+// import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/swiper-bundle.min.js";
+// import "../assets/js/swiper.min.js"
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/scrollbar';
+// import ScriptTag from "react-script-tag";
+
+const Main = ({ getData }) => {
+  const [summaryInfo, setSummaryInfo] = useState({});
+  const [modalInOpen, setModalInOpen] = useState(false);
+  const [transactions, setTransactions] = useState([]);
+  const [todoList, setTodoList] = useState({});
+  const [hide, setHide] = useState(false);
+  const [loading, setloading] = useState(false);
+
+  const modalToggle = () => {
+    setModalInOpen(true);
+  };
+
+  const close = () => {
+    setModalInOpen(false);
+  };
+
+  const hider = () => {
+    setHide(!hide);
+  };
+
+  useEffect(() => {
+    (async function dataInfo() {
+      setloading(true);
+      const data = await getData("/api/v1/user/summary").then();
+      const transactionsData = await getData("/api/v1/user/transaction").then();
+      const todo = await getData("/api/v1/user/todo").then();
+      console.log(todo);
+      setTodoList(todo);
+      setTransactions(transactionsData);
+      console.log(transactionsData);
+      setSummaryInfo(data);
+      console.log(todo);
+      setloading(false);
+    })();
+  }, []);
+
+  useEffect(() => {
+    todoList.bvnConfirmed == false &&
+      setTimeout(() => {
+        setModalInOpen(true);
+      }, 2500);
+  }, []);
+
   return (
     <>
-      {/* //   <!-- MAIN CONTENT--> */}
-
+      {loading && <Loader />}
+      {/*MAIN CONTENT */}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">
-            <a href="/" className="col-lg-4 col-md-6 d-flex flex-column mb-4">
+            <a href="#" className="col-lg-4 col-md-6 d-flex flex-column mb-4">
               <div className="au-card au-card--bg-blue flex-grow-1">
                 <div className="bg-card-img">
-                  <img className="h-100 w-100" src={dashboard} alt="dashboard"/>
+                  <img
+                    className="h-100 w-100"
+                    src={dashboard}
+                    alt="dashboard"
+                  />
                 </div>
                 <h5 className="text-white text-center mb-2 money-card-header">
                   Total Balance
@@ -28,15 +98,23 @@ const Main = () => {
                     ₦
                   </p>
                   <h3 className="text-white text-center money-card-body">
-                    500,000.00
+                    {summaryInfo.totAmt}
                   </h3>
                 </div>
               </div>
             </a>
-            <a className="col-lg-4 col-md-6 d-flex flex-column mb-4" href="/">
+            <a
+              href="#"
+              className="col-lg-4 col-md-6 d-flex flex-column mb-4"
+              href="/"
+            >
               <div className="au-card au-card--bg-savings flex-grow-1">
                 <div className="bg-card-img">
-                  <img className="h-100 w-100" src={dashboard} alt="dashboard" />
+                  <img
+                    className="h-100 w-100"
+                    src={dashboard}
+                    alt="dashboard"
+                  />
                 </div>
                 <h5 className="text-white text-center mb-2 money-card-header">
                   Total Dollars
@@ -46,15 +124,19 @@ const Main = () => {
                     $
                   </p>
                   <h3 className="text-white text-center money-card-body">
-                    500.00
+                    {summaryInfo.totDollar}
                   </h3>
                 </div>
               </div>
             </a>
-            <a href="/" className="col-lg-4 col-md-6 d-flex flex-column mb-4">
+            <a href="#" className="col-lg-4 col-md-6 d-flex flex-column mb-4">
               <div className="au-card au-card--bg-investment flex-grow-1">
                 <div className="bg-card-img">
-                  <img className="h-100 w-100" src={dashboard} alt="dashboard" />
+                  <img
+                    className="h-100 w-100"
+                    src={dashboard}
+                    alt="dashboard"
+                  />
                 </div>
                 <h5 className="text-white text-center mb-2 money-card-header">
                   Total Naira
@@ -64,7 +146,7 @@ const Main = () => {
                     ₦
                   </p>
                   <h3 className="text-white text-center money-card-body">
-                    250,000.00
+                    {summaryInfo.totNaira}
                   </h3>
                 </div>
               </div>
@@ -76,34 +158,41 @@ const Main = () => {
                 <div className="au-card-inner">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">Create A Savings Plan</h3>
-                    <a href="/" className="au-btn-link">View more</a>
+                    <a href="/" className="au-btn-link">
+                      View more
+                    </a>
                   </div>
 
                   <div className="row px-3 cg-3 mt-4">
-                    <a className="card-box d-flex flex-column mb-4" href="/">
-                      <div className="au-card-smaller au-card-bg-retirement flex-grow-1">
-                        <img src={retirement} alt="retirement" />
-                        <p className="text-green">Retirement Savings Plan</p>
-                      </div>
-                    </a>
-                    <a href="/" className="card-box d-flex flex-column mb-4">
-                      <div className="au-card-smaller au-card-bg-homeplan flex-grow-1">
-                        <img src={homeplan} alt="home savings plan" />
-                        <p className="text-blue">Home Savings Plan</p>
-                      </div>
-                    </a>
-                    <a href="/" className="card-box d-flex flex-column mb-4">
-                      <div className="au-card-smaller au-card-bg-emergency flex-grow-1">
-                        <img src={emergency} alt="emergency stash" />
-                        <p className="text-stash">Emergency Savings Plan</p>
-                      </div>
-                    </a>
-                    <a href="/" className="card-box d-flex flex-column mb-4">
+                    <Plan
+                      image={retirement}
+                      nameClass={"au-card-bg-retirement"}
+                      planName={"Retirement Savings Plan"}
+                    />
+                    <Plan
+                      image={homeplan}
+                      nameClass={"au-card-bg-homeplan"}
+                      planName={"Home Savings Plan"}
+                    />
+
+                    <Plan
+                      image={emergency}
+                      nameClass={"au-card-bg-emergency"}
+                      planName={"Emergency Savings Plan"}
+                    />
+
+                    <Plan
+                      image={personalplan}
+                      nameClass={"au-card-personalplan"}
+                      planName={"Create A Savings Plan"}
+                    />
+
+                    {/* <a href="/" className="card-box d-flex flex-column mb-4">
                       <div className="au-card-smaller au-card-personalplan flex-grow-1">
                         <img src={personalplan} alt="your savings plan" />
                         <p className="text-black">Create A Savings Plan</p>
                       </div>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
@@ -112,11 +201,13 @@ const Main = () => {
                 <div className="au-card-inner">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">myPurse</h3>
-                    <a href="/" className="au-btn-link">View more</a>
+                    <a href="/" className="au-btn-link">
+                      View more
+                    </a>
                   </div>
 
                   <div className="row px-3 cg-3 mt-4">
-                  <a href="/" className="card-box d-flex flex-column mb-4">
+                    <a href="/" className="card-box d-flex flex-column mb-4">
                       <div className="au-card-purse au-card-bg-create-purse flex-grow-1">
                         <div className="au-card-elements">
                           <img src={stash} alt="new" />
@@ -124,7 +215,7 @@ const Main = () => {
                         </div>
                       </div>
                     </a>
-                    <a href="/" className="card-box d-flex flex-column mb-4">
+                    {/* <a href="/" className="card-box d-flex flex-column mb-4">
                       <div className="au-card-purse au-card-bg-vibe-cash flex-grow-1">
                         <div className="au-card-elements">
                           <p className="mt-1">Vibe Cash</p>
@@ -132,8 +223,25 @@ const Main = () => {
                           <p className="mt-2 purse-link-btn">Hide Balance</p>
                         </div>
                       </div>
-                    </a>
-                    <a href="/" className="card-box d-flex flex-column mb-4">
+                    </a> */}
+
+                    <Purse
+                      namePurse={"Vibe Cash"}
+                      purseAmount={"5,024.12"}
+                      nameClass={"au-card-bg-vibe-cash"}
+                      hider={hider}
+                      hide={hide}
+                    />
+
+                    <Purse
+                      namePurse={"Food Cash"}
+                      purseAmount={"50.00"}
+                      nameClass={"au-card-bg-food-cash"}
+                      hider={hider}
+                      hide={hide}
+                    />
+
+                    {/* <a href="/" className="card-box d-flex flex-column mb-4">
                       <div className="au-card-purse au-card-bg-food-cash flex-grow-1">
                         <div className="au-card-elements">
                           <p className="mt-1">Food Cash</p>
@@ -141,7 +249,7 @@ const Main = () => {
                           <p className="mt-2 purse-link-btn">Hide Balance</p>
                         </div>
                       </div>
-                    </a>
+                    </a> */}
                     <a href="/" className="card-box d-flex flex-column mb-4">
                       <div className="au-card-purse au-card-bg-tgif-cash flex-grow-1">
                         <div className="au-card-elements">
@@ -159,90 +267,20 @@ const Main = () => {
                 <div className="au-card-inner recent-activities">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">Recent Activities</h3>
-                    <a href="/" className="au-btn-link">View more</a>
+                    <a href="/" className="au-btn-link">
+                      View more
+                    </a>
                   </div>
-
                   <div className="au-message-list">
-                    <div className="d-flex justify-content-between mt-4 align-items-start">
-                      <div className="au-message__item w-100">
-                        <div className="au-message__item-inner px-2 py-3 justify-content-between align-items-start">
-                          <div className="col-lg-1">
-                            <i className="fas fa-caret-up text-green"></i>
-                          </div>
-                          <div className="au-message__item-text col-lg-8">
-                            <div className="text px-0 mx-0">
-                              <h5 className="name">
-                                Transfer from RAYMOND ADEWOLE [******8907].
-                                Transaction ID: XXXXXXXXXXXXXXX
-                              </h5>
-                              <p className="mt-3">
-                                <span className="mr-2">Date:</span>
-                                <span>Fri, 04 Sep 2020 15:34:20 GMT</span>{" "}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="mt-0 col-lg-3 text-right">
-                            <h4 className="font-weight-bold text-green">
-                              ₦ 5000.00
-                            </h4>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {transactions && transactions.length > 0 ? (
+                      <CardTransfer value={true} />
+                    ) : (
+                      <p className="text-danger py-3 text-3xl fw-bolder">
+                        No transactions recorded yet
+                      </p>
+                    )}
 
-                    <div className="d-flex justify-content-between mt-4 align-items-start">
-                      <div className="au-message__item w-100">
-                        <div className="au-message__item-inner px-2 py-3 justify-content-between align-items-start">
-                          <div className="col-lg-1">
-                            <i className="fas fa-caret-down text-danger"></i>
-                          </div>
-                          <div className="au-message__item-text col-lg-8">
-                            <div className="text px-0 mx-0">
-                              <h5 className="name">
-                                Transfer from RAYMOND ADEWOLE [******8907].
-                                Transaction ID: XXXXXXXXXXXXXXX
-                              </h5>
-                              <p className="mt-3">
-                                <span className="mr-2">Date:</span>
-                                <span>Fri, 04 Sep 2020 15:34:20 GMT</span>{" "}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="mt-0 col-lg-3 text-right">
-                            <h4 className="font-weight-bold text-danger">
-                              - ₦ 5000.00
-                            </h4>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="d-flex justify-content-between mt-4 align-items-start">
-                      <div className="au-message__item w-100">
-                        <div className="au-message__item-inner px-2 py-3 justify-content-between align-items-start">
-                          <div className="col-lg-1">
-                            <i className="fas fa-caret-up text-green"></i>
-                          </div>
-                          <div className="au-message__item-text col-lg-8">
-                            <div className="text px-0 mx-0">
-                              <h5 className="name">
-                                Transfer from RAYMOND ADEWOLE [******8907].
-                                Transaction ID: XXXXXXXXXXXXXXX
-                              </h5>
-                              <p className="mt-3">
-                                <span className="mr-2">Date:</span>
-                                <span>Fri, 04 Sep 2020 15:34:20 GMT</span>{" "}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="mt-0 col-lg-3 text-right">
-                            <h4 className="font-weight-bold text-green">
-                              ₦ 5000.00
-                            </h4>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {/* <CardTransfer value={false} /> */}
                   </div>
                 </div>
               </div>
@@ -258,10 +296,15 @@ const Main = () => {
                     <div className="au-message__item">
                       <div className="au-message__item-inner px-2 py-2">
                         <div className="au-message__item-text">
-                          <div className="text px-0 mx-0">
-                            <h5 className="name">Link your BVN</h5>
-                            <p>Gain access to more features</p>
-                          </div>
+                          {!todoList.bvnConfirmed && (
+                            <Link
+                              onClick={() => modalToggle()}
+                              className="text px-0 mx-0"
+                            >
+                              <h5 className="name">Link your BVN</h5>
+                              <p>Gain access to more features</p>
+                            </Link>
+                          )}
                         </div>
                         <div className="au-message__item-time mt-0">
                           <span>
@@ -273,7 +316,7 @@ const Main = () => {
 
                     <div className="au-message__item">
                       <div className="au-message__item-inner px-2 py-2">
-                        <div className="au-message__item-text">
+                        <Link to="/app/help" className="au-message__item-text">
                           <div className="text px-0 mx-0">
                             <h5 className="name">
                               Let us help you save better
@@ -283,6 +326,29 @@ const Main = () => {
                               saving options for you
                             </p>
                           </div>
+                        </Link>
+                        <div className="au-message__item-time mt-0">
+                          <span>
+                            <i data-feather="chevron-right"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="au-message__item">
+                      <div className="au-message__item-inner px-2 py-2">
+                        <div className="au-message__item-text">
+                          {!todoList.cardLinked && (
+                            <Link
+                              to="/app/account/linkcard"
+                              className="text px-0 mx-0"
+                            >
+                              <h5 className="name">Link your card</h5>
+                              <p>
+                                Link your debit card for faster saving options.
+                              </p>
+                            </Link>
+                          )}
                         </div>
                         <div className="au-message__item-time mt-0">
                           <span>
@@ -295,33 +361,20 @@ const Main = () => {
                     <div className="au-message__item">
                       <div className="au-message__item-inner px-2 py-2">
                         <div className="au-message__item-text">
-                          <div className="text px-0 mx-0">
-                            <h5 className="name">Link your card</h5>
-                            <p>
-                              Link your debit card for faster saving options.
-                            </p>
-                          </div>
-                        </div>
-                        <div className="au-message__item-time mt-0">
-                          <span>
-                            <i data-feather="chevron-right"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="au-message__item">
-                      <div className="au-message__item-inner px-2 py-2">
-                        <div className="au-message__item-text">
-                          <div className="text px-0 mx-0">
-                            <h5 className="name">
-                              Make your first Core savings
-                            </h5>
-                            <p>
-                              Choose a savings option and fund it to start
-                              saving.
-                            </p>
-                          </div>
+                          {!todoList.savingsCreated && (
+                            <Link
+                              to="/app/savings/create"
+                              className="text px-0 mx-0"
+                            >
+                              <h5 className="name">
+                                Make your first Core savings
+                              </h5>
+                              <p>
+                                Choose a savings option and fund it to start
+                                saving.
+                              </p>
+                            </Link>
+                          )}
                         </div>
                         <div className="au-message__item-time mt-0">
                           <span>
@@ -391,7 +444,9 @@ const Main = () => {
                         <div className="swiper-button-next"></div>
                         <div className="swiper-button-prev"></div>
                       </div>
-                      <a href="/" className="au-btn-link">View more</a>
+                      <a href="/" className="au-btn-link">
+                        View more
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -412,9 +467,31 @@ const Main = () => {
         </div>
       </div>
 
+      <CSSTransition
+        in={modalInOpen}
+        className="modal-transition"
+        classNames="modal-transition"
+        unmountOnExit
+        timeout={500}
+      >
+        <Modal1 close={close} />
+      </CSSTransition>
+      <ToastContainer autoClose={1000} hideProgressBar />
       {/* <!-- END MAIN CONTENT-->; */}
+      {/* <script src=></script> */}
     </>
   );
 };
 
-export default Main;
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  // const loading = state.authentication.loading;
+  return { alert, username };
+};
+
+const actionCreators = {
+  getData: usersActions.getInfo,
+};
+
+export default connect(mapStateToProps, actionCreators)(Main);

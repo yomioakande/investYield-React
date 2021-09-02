@@ -1,9 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import investYield from "../assets/media/investyieldLogo.svg";
-// import "../assets/css/theme.css";
+import "../assets/css/theme.css";
 import { Home, Shield, Activity, File, User, LogOut } from "react-feather";
-const Sidebar = () => {
+import { connect } from "react-redux";
+import { usersActions } from "../redux/actions";
+
+const Sidebar = (props) => {
+
   return (
     <>
       {/* // <!-- MENU SIDEBAR--> */}
@@ -18,7 +22,7 @@ const Sidebar = () => {
           <nav className="navbar-sidebar">
             <ul className="list-unstyled navbar__list">
               <li className="active mt-2 mb-3">
-                <NavLink className="js-arrow" to="/app/dashboard">
+                <NavLink className="js-arrow active" to="/app/dashboard">
                   <Home className="mr-3" />
                   Home
                 </NavLink>
@@ -32,7 +36,7 @@ const Sidebar = () => {
               <li className="has-sub mb-3">
                 <NavLink className="js-arrow" to="/app/investment">
                   <Activity className="mr-3" />
-                  Investment
+                  Invest
                 </NavLink>
               </li>
               <li className="has-sub mb-3">
@@ -48,7 +52,11 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="log-out-btn mb-3">
-                <a href="/app" className="js-arrow">
+                <a
+                  href="/auth/login"
+                  onClick={() => props.logout()}
+                  className="js-arrow"
+                >
                   <LogOut className="mr-3" />
                   Log Out
                 </a>
@@ -62,4 +70,15 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+const mapStateToProps = (state) => {
+  const { loggingIn } = state.authentication;
+  const { alert } = state;
+  return { loggingIn, alert };
+};
+
+const actionCreators = {
+  // register: usersActions.register,
+  logout: usersActions.logout,
+};
+
+export default connect(mapStateToProps, actionCreators)(Sidebar);

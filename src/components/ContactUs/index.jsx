@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import callIcon from "../../assets/images/callIcon.svg";
@@ -9,8 +10,9 @@ import locationIcon from "../../assets/images/locationIcon.svg";
 import facebookIcon from "../../assets/images/facebookIcon.svg";
 import IGIcon from "../../assets/images/IGIcon.svg";
 import twitterIcon from "../../assets/images/twitterIcon.svg";
-
+// import {}
 const Index = () => {
+  
   const success = () => {
     toast.success("Submitted Successfully!", {
       position: toast.POSITION.TOP_CENTER,
@@ -32,15 +34,26 @@ const Index = () => {
       .required("A Message is Required"),
   });
 
-  //   const handleSubmit = () => {};
-  const onSubmit = (values, onSubmitProps) => {
-    //   sendMessage()
-    console.log(values);
-    console.log(onSubmitProps);
-    // handleSubmit(values);
-    success();
-    onSubmitProps.resetForm();
+  const apiUrl = "";
+  const handleSubmit = async (reqBody) => {
+    try {
+      let res = await axios({
+        method: "POST",
+        url: apiUrl,
+        data: reqBody,
+      });
+      let data = res.data;
+    
+      return data;
+    } catch (error) {
+      // console.log(error.response);
+      return error.response;
+    }
+  };
 
+  const onSubmit = (values, onSubmitProps) => {
+    handleSubmit(values);
+    onSubmitProps.resetForm();
     onSubmitProps.setSubmiting(false);
   };
 
@@ -51,7 +64,7 @@ const Index = () => {
     validateOnMount: true,
   });
 
-  console.log("formikvalues", formik.values);
+
 
   return (
     <main>

@@ -1,10 +1,13 @@
 import React from "react";
-import challenge from "../assets/images/savingschallenge.svg";
-import plus2 from "../assets/images/Stash/plus2.svg";
-import savings from "../assets/images/individual-savings-icon.svg";
-import group from "../assets/images/create-new-group-icon.svg";
-import blog from "../assets/images/BlogImg.png";
+import { Link } from "react-router-dom";
+import "../../assets/css/theme.css";
+import challenge from "../../assets/images/savingschallenge.svg";
+import plus2 from "../../assets/images/Stash/plus2.svg";
+import savings from "../../assets/images/individual-savings-icon.svg";
+import group from "../../assets/images/create-new-group-icon.svg";
+import blog from "../../assets/images/BlogImg.png";
 
+import Charts from "../Charts";
 const Savings = () => {
   return (
     <>
@@ -28,9 +31,21 @@ const Savings = () => {
             <div className="col-lg-7 col-md-8 d-flex flex-column mb-3">
               <div className="au-card d-flex justify-content-between align-items-center flex-grow-1">
                 <div className="au-card-inner w-100">
-                  <div className="row align-items-center justify-content-center">
+                  <div className="row align-items-center d-flex justify-content-center">
                     <div className="col-lg-7 profile-cards col-md-6">
-                      <canvas id="myChart" width="800" height="550"></canvas>
+                      <Charts />
+                      <p
+                        style={{
+                          marginTop: "-6.5rem",
+                          color: "#333333",
+                          fontStyle: "Comfortaa",
+                          textAlign: "center",
+                        }}
+                        class="chart2-title"
+                      >
+                        ₦10,000,000.00
+                      </p>
+                      {/* <canvas id="myChart" width="800" height="550"></canvas> */}
                     </div>
                     <div className="col-lg-5 w-auto profile-cards col-md-4 mt-3">
                       <ul className="pie-text mt-3">
@@ -116,14 +131,19 @@ const Savings = () => {
                 <div className="au-card-inner">
                   <div className="d-flex justify-content-between align-items-start">
                     <div className="title-2">myPurse</div>
-                    <a href="/app/view" className="au-btn-link">View All Purses</a>
+                    <a href="/app/view" className="au-btn-link">
+                      View All Purses
+                    </a>
                   </div>
 
                   <div
                     className="row px-3 cg-3 mt-4"
-                    style={{overflowX: "hidden"}}
+                    style={{ overflowX: "hidden" }}
                   >
-                   <a href="/" className="card-box d-flex flex-column mb-4">
+                    <a
+                      href="#"
+                      className="card-box d-flex flex-column mb-4"
+                    >
                       <div className="au-card-purse au-card-bg-create-purse flex-grow-1">
                         <div className="au-card-elements">
                           <img src={plus2} alt="new" />
@@ -187,7 +207,10 @@ const Savings = () => {
                 <div className="au-card-inner">
                   <div className="row mt-4">
                     <div className="col-lg-4 d-flex flex-column flex-grow-1">
-                      <a href="/" className="card-box d-flex flex-column mb-4 w-100">
+                      <a
+                        href="/"
+                        className="card-box d-flex flex-column mb-4 w-100"
+                      >
                         <div className="au-card-purse au-card-bg-create-stash flex-grow-1">
                           <div className="au-card-elements">
                             <img src={plus2} className="img-fluid" alt="new" />
@@ -210,7 +233,10 @@ const Savings = () => {
                       </a>
                     </div>
                     <div className="col-lg-4 d-flex flex-column flex-grow-1">
-                      <a href="/" className="card-box d-flex flex-column mb-4 w-100">
+                      <Link
+                        to="/app/savings/create"
+                        className="card-box d-flex flex-column mb-4 w-100"
+                      >
                         <div className="au-card-purse au-card-bg-food-cash flex-grow-1">
                           <div className="au-card-elements">
                             <img
@@ -234,10 +260,13 @@ const Savings = () => {
                             </div>
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div className="col-lg-4 d-flex flex-column flex-grow-1">
-                      <a href="/" className="card-box d-flex flex-column mb-4 w-100">
+                      <a
+                        href="/"
+                        className="card-box d-flex flex-column mb-4 w-100"
+                      >
                         <div className="au-card-purse au-card-bg-create-group flex-grow-1">
                           <div className="au-card-elements">
                             <img src={group} className="img-fluid" alt="new" />
@@ -273,7 +302,10 @@ const Savings = () => {
                   </div>
 
                   <div className="row mt-4">
-                    <a href="/" className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
+                    <a
+                      href="/"
+                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                    >
                       <div className="savings-card-box d-flex flex-column">
                         <div className="savings-card-img-box">
                           <img
@@ -301,7 +333,10 @@ const Savings = () => {
                         </div>
                       </div>
                     </a>
-                    <a href="/" className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
+                    <a
+                      href="/"
+                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                    >
                       <div className="savings-card-box d-flex flex-column">
                         <div className="savings-card-img-box">
                           <img
@@ -329,7 +364,10 @@ const Savings = () => {
                         </div>
                       </div>
                     </a>
-                    <a href="/" className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
+                    <a
+                      href="/"
+                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                    >
                       <div className="savings-card-box d-flex flex-column">
                         <div className="savings-card-img-box">
                           <img
@@ -357,7 +395,10 @@ const Savings = () => {
                         </div>
                       </div>
                     </a>
-                    <a href="/" className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
+                    <a
+                      href="/"
+                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                    >
                       <div className="savings-card-box d-flex flex-column">
                         <div className="savings-card-img-box">
                           <img
@@ -394,7 +435,10 @@ const Savings = () => {
                   </div>
 
                   <div className="row mt-4">
-                    <a href="/" className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
+                    <a
+                      href="/"
+                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                    >
                       <div className="savings-card-box d-flex flex-column">
                         <div className="p-4 detail-div">
                           <div className="">
@@ -415,7 +459,10 @@ const Savings = () => {
                         </div>
                       </div>
                     </a>
-                    <a href="/" className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
+                    <a
+                      href="/"
+                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                    >
                       <div className="savings-card-box d-flex flex-column">
                         <div className="p-4 detail-div">
                           <div className="">
