@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import leftArrow from "../../assets/images/left-arrow.svg";
 import "../../assets/css/style.css";
 import { useFormik } from "formik";
@@ -6,10 +6,16 @@ import * as Yup from "yup";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 import Loader from "../../common/Loader";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Congrats from "../../Layout/Congrats";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 const Fourth = (props) => {
+  const [congratsModal1, setCongratsModal1] = useState(false);
+
+  const modalToggle2 = () => {
+    setCongratsModal1(true);
+  };
   const initialValues = {
     pin: "",
     confirmPin: "",
@@ -26,11 +32,11 @@ const Fourth = (props) => {
     }),
   });
 
-  const success = () => {
-    toast.success("You have been successfully registered", {
-      position: toast.POSITION.TOP_CENTER,
-    });
-  };
+  // const success = () => {
+  //   toast.success("You have been successfully registered", {
+  //     position: toast.POSITION.TOP_CENTER,
+  //   });
+  // };
 
   const onSubmit = (values, onSubmitProps) => {
     const obj = {
@@ -40,7 +46,7 @@ const Fourth = (props) => {
         id: "string",
       },
     };
-    props.register4(obj, "/api/v1/user/pin", "/app/dashboard", success);
+    props.register4(obj, "/api/v1/user/pin", modalToggle2);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };
@@ -129,7 +135,7 @@ const Fourth = (props) => {
                         <button onClick={() => later()} class="text-green">
                           I'll do this later
                         </button>
-                        <ToastContainer autoClose={1000} hideProgressBar />
+                        {/* <ToastContainer autoClose={1000} hideProgressBar /> */}
                       </div>
                     </form>
                   </div>
@@ -139,6 +145,15 @@ const Fourth = (props) => {
           </div>
         </section>
       </main>
+      {congratsModal1 && (
+        <Congrats
+          headline1={"Fantastic!"}
+          headline2={" Sign up successfully completed"}
+          content={
+            "Welcome to smart money habits. You can now start creating savings plans to achieve those financial goals that are important to you."
+          }
+        />
+      )}
     </>
   );
 };

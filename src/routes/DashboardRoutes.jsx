@@ -15,10 +15,13 @@ import CreateSavings2 from "../Layout/Savings/CreateSavings2";
 import CreateSavings3 from "../Layout/Savings/CreateSavings3";
 import CreateSavings4 from "../Layout/Savings/CreateSavings4";
 import CreateSavingsOTP from "../Layout/Savings/Otp";
-import myProfile from "../Layout/Account/Index";
+import Account from "../Layout/Account/Index";
 import Support from "../Layout/Account/Support";
 import Beneficiary from "../Layout/Account/Beneficiary";
 import linkCard from "../Layout/Account/LinkCard";
+
+import myProfile from "../Layout/Account/Profile";
+import myPurse from "../Layout/myPurse/index";
 import Help from "../Layout/Help";
 
 import { PrivateRoute } from "./PrivateRoutes";
@@ -39,11 +42,18 @@ const DashboardRoutes = () => {
         <PrivateRoute path="/app/savings/create3" component={CreateSavings3} />
         <PrivateRoute path="/app/savings/create4" component={CreateSavings4} />
         <PrivateRoute path="/app/savings/otp" component={CreateSavingsOTP} />
+
+        <PrivateRoute path="/app/savings/mypurse" component={myPurse} />
+
         <PrivateRoute path="/app/savings" component={Savings} />
         <PrivateRoute path="/app/account/support" component={Support} />
         <PrivateRoute path="/app/account/beneficiary" component={Beneficiary} />
         <PrivateRoute path="/app/account/linkcard" component={linkCard} />
-        <PrivateRoute path="/app/account" component={myProfile} />
+
+        <PrivateRoute exact path="/app/account" component={Account} />
+
+        <PrivateRoute path="/app/account/profile" component={myProfile} />
+
         <Redirect from="/app" to="/app/dashboard" />
       </Switch>
     </DashboardLayout>

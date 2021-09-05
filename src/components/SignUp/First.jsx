@@ -61,6 +61,7 @@ const First = (props) => {
     props.register(obj, "/api/v1/identity/register", "/auth/signup2");
 
     // onSubmitProps.resetForm();
+    show()
     onSubmitProps.setSubmitting(false);
   };
 
@@ -76,10 +77,9 @@ const First = (props) => {
   const show = () => {
     setTimeout(() => {
       setShowError(false);
-    }, 2500);
+    }, 3000);
   };
 
-  props.alertType && show();
 
   return (
     <>

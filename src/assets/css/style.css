@@ -616,6 +616,10 @@ a.btn {
 .mt-30 {
   margin-top: 30px;
 }
+
+.mt-3{
+  margin-top:1rem;
+}
 .py-80 {
   padding-top: 80px;
   padding-bottom: 80px;

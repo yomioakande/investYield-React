@@ -3,24 +3,22 @@ import { userService } from "../services/usersService";
 
 export function authHeader() {
   // return authorization header with jwt token
-  const user = JSON.parse(localStorage.getItem("user"));
-
+  let user = JSON.parse(localStorage.getItem("user"));
   const d = new Date();
   const now = d.getTime();
-
   const isExpiry = now > user.expiresAt ? true : false;
 
   if (isExpiry) {
-    
     const getRef = async () => {
-      
+      let user = JSON.parse(localStorage.getItem("user"));
+
       const data = await userService.register1(
         { token: user.token, refreshToken: user.refreshToken },
         "/api/v1/identity/refresh"
       );
 
       const expires_at = data.expiresIn + now;
-      let user = {
+      user = {
         name: data.name,
         expiresAt: expires_at,
         refreshToken: data.refreshToken,
@@ -62,3 +60,36 @@ export const Schema = Yup.object().shape({
     ),
   }),
 });
+
+//DATE FORMATTER
+
+export function dateConv(CurrentDate) {
+  let date = new Date(CurrentDate);
+  let year = date.getFullYear();
+  // let hh = date.getHours();
+  // let sec = date.getSeconds();
+  // let min = date.getMinutes();
+  let m = [
+    "Jan",
+    "Feb",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = m[date.getMonth()];
+  let dt = date.getDate();
+  if (dt < 10) {
+    dt = "0" + dt;
+  }
+
+  return [`${dt}-${month}-${year}`];
+}
+
+//CURRENCY FORMATTER

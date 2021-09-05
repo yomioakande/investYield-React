@@ -10,11 +10,11 @@ import { usersActions } from "../../redux/actions";
 import { alertActions } from "../../redux/actions";
 import Loader from "../../common/Loader";
 const Index = (props) => {
-  const alert = props.alert;
-
-  // alertActions.clear();
+  // const alert = props.alert;
 
   const [loading, setloading] = useState(false);
+  const [showError, setShowError] = useState(true);
+
   const initialValues = {
     email: "",
     password: "",
@@ -31,6 +31,7 @@ const Index = (props) => {
     };
 
     props.login(obj);
+    show();
     // onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };
@@ -50,8 +51,11 @@ const Index = (props) => {
     validationSchema,
   });
 
-
-
+  const show = () => {
+    setTimeout(() => {
+      setShowError(false);
+    }, 5000);
+  };
 
   return (
     <>
@@ -105,16 +109,14 @@ const Index = (props) => {
                     <div className="mt-5">
                       <form onSubmit={formik.handleSubmit}>
                         <div className="form-group">
-                          {
-                          // setTimeout(()=>{
-                            // return 
-                            alert.message && (
-                            <div className={`font-sm alert ${alert.type}`}>
-                              {alert.message}
-                            </div>
-                          )
-                          // },1500)
-                          }
+                          {props.alertType && (
+                                <div
+                                  className={`font-sm alert ${props.alertType}`}
+                                >
+                                  {props.message}
+                                </div>
+                              )
+                            }
                           <input
                             type="email"
                             name="email"
@@ -195,16 +197,16 @@ const Index = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { loggingIn } = state.authentication;
-  const { alert } = state;
+  const { loggingIn, alertType, message } = state.authentication;
+  // const { alert } = state;
   const loading = state.authentication.loading;
-  
-  return { loggingIn, alert, loading };
+
+  return { loggingIn,message, alertType, loading };
 };
 
 const actionCreators = {
   login: usersActions.login,
-  clear: alertActions.clear
+  clear: alertActions.clear,
 };
 
 export default connect(mapStateToProps, actionCreators)(Index);

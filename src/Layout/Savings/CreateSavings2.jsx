@@ -19,6 +19,7 @@ const CreateSavings2 = ({ username, register }) => {
     name: "",
     ccyCode: "",
     target: "",
+    startDate: "",
     endDate: "",
   };
 
@@ -29,7 +30,7 @@ const CreateSavings2 = ({ username, register }) => {
   //   2"earnInterest": true,
   //   2"frequency": 0,
   //   2"amount": 0,
-  //   1"target": 0,
+  //   1"target": 0, 
   //   1"endDate": "2021-08-30T23:27:32.168Z",
   //   2"imageRef": "string"
   // }
@@ -38,9 +39,10 @@ const CreateSavings2 = ({ username, register }) => {
 
   const validationSchema = Yup.object({
     name: Yup.string().required("A plan Name is Required"),
-    ccyCode:Yup.string().required("A plan Name is Required"),
+    ccyCode: Yup.string().required("A plan Name is Required"),
     lastName: Yup.string().required("Pick the Currency to save in"),
     target: Yup.string().required("A target amount is required"),
+    startDate: Yup.string().required("Enter a Date"),
     endDate: Yup.string().required("Enter a Date"),
   });
 
@@ -49,12 +51,14 @@ const CreateSavings2 = ({ username, register }) => {
       name: formik.values.name,
       ccyCode: formik.values.ccyCode,
       target: formik.values.target,
+      startDate: formik.values.startDate,
       endDate: formik.values.endDate,
     };
     localStorage.setItem("savingsInfo", JSON.stringify(obj));
     window.location.href = "/app/savings/create3";
     // register(obj, "/api/v1/identity/register", "/auth/signup2");
-    // onSubmitProps.resetForm();
+    onSubmitProps.resetForm();
+    onSubmitProps.setSubmitting(false);
   };
 
   const formik = useFormik({
@@ -63,8 +67,6 @@ const CreateSavings2 = ({ username, register }) => {
     // validationSchema,
     validateOnMount: true,
   });
-
-  
 
   return (
     <>
@@ -116,7 +118,7 @@ const CreateSavings2 = ({ username, register }) => {
                                     type="radio"
                                     name="ccyCode"
                                     // checked={formik.values.ccyCode === 2}
-                                    value={'2'}
+                                    value={"2"}
                                     onChange={formik.handleChange}
                                     // {...formik.getFieldProps("ccyCode")}
                                   />
@@ -133,7 +135,7 @@ const CreateSavings2 = ({ username, register }) => {
                                     type="radio"
                                     name="ccyCode"
                                     // checked={formik.values.ccyCode === 1}
-                                    value={'1'}
+                                    value={"1"}
                                     onChange={formik.handleChange}
                                     // {...formik.getFieldProps("ccyCode")}
                                   />
@@ -158,10 +160,16 @@ const CreateSavings2 = ({ username, register }) => {
                           />
                         </div>
 
-                        {/* <div className="form-group">
+                        <div className="form-group">
                           <h5 className="text-blue">Choose a start date</h5>
-                          <input type="date" className="text-field mt-2" />
-                        </div> */}
+                          <input
+                            type="date"
+                            className="text-field mt-2"
+                            name={"startDate"}
+                            value={formik.values.startDate}
+                            onChange={formik.handleChange}
+                          />
+                        </div>
 
                         <div className="form-group">
                           <h5 className="text-blue">Choose a target date</h5>

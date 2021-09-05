@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+// import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ReactDom from "react-dom";
 import modalclose from "../../assets/images/modal-close.svg";

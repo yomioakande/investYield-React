@@ -13,9 +13,11 @@ export const usersActions = {
   getInfo,
   bvnReg,
   confirmBvnReg,
+  postFeedBack,
   deleteData,
   getFrequency,
   createStash,
+  getTargetValue,
 };
 
 function login(body) {
@@ -41,12 +43,12 @@ function login(body) {
       function success(user) {
         return { type: userConstants.LOGIN_SUCCESS, user };
       }
-      dispatch(success(data));
+      // dispatch(success(data));
       window.location.href = "/app/dashboard";
     } else {
       dispatch(failure(messages[0]));
-      dispatch(alertActions.errorLogIn(messages[0]));
-      dispatch(failure(data));
+      // dispatch(alertActions.errorLogIn(messages[0]));
+      // dispatch(failure(data));
     }
   };
 
@@ -57,8 +59,8 @@ function login(body) {
   // function success(user) {
   //   return { type: userConstants.LOGIN_SUCCESS, payload: user };
   // }
-  function failure(error) {
-    return { type: userConstants.LOGIN_FAILURE, error };
+  function failure(message) {
+    return { type: userConstants.LOGIN_FAILURE, payload: message };
   }
 }
 
@@ -69,7 +71,7 @@ function logout() {
 }
 
 //REGISTER ACTION
-function register(user, apiUrl, nextRoute) {
+function register(user, apiUrl, nextRoute, func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.register1(user, apiUrl);
@@ -77,9 +79,20 @@ function register(user, apiUrl, nextRoute) {
     const { data, success, messages } = register;
 
     //FIRST SIGNUP
-    if (apiUrl === "/api/v1/identity/register" && success === true) {
+    if (success === true) {
       dispatch(successReg(messages));
-      localStorage.setItem("userReg", JSON.stringify(data));
+      console.log(register);
+      if (
+        apiUrl === "/api/v1/identity/resetpasswordtoken" ||
+        apiUrl === "/api/v1/identity/register"
+      ) {
+        localStorage.setItem("userReg", JSON.stringify(data));
+      }
+
+      if (apiUrl === "/api/vi/identity/resetpassword") {
+        func();
+      }
+
       window.location.href = nextRoute;
       return;
     } else {
@@ -147,16 +160,14 @@ function register3(user, apiUrl, nextRoute) {
   };
 }
 
-function register4(obj, apiUrl, nextRoute, func) {
+function register4(obj, apiUrl, func) {
   return async (dispatch) => {
     dispatch(request());
-    const register = await userService.register1(obj, apiUrl);
-
+    const register = await userService.postData(obj, apiUrl);
     const { data, success, messages } = register;
-
-    if (apiUrl === "/api/v1/identity/createpassword" && success === true) {
+    if (apiUrl === "/api/v1/user/pin" && success === true) {
       func();
-      window.location.href = nextRoute;
+      // window.location.href = nextRoute;
     } else {
       dispatch(failure(messages));
     }
@@ -220,6 +231,23 @@ function createStash(obj1, obj2, apiUrl, nextRoute) {
       localStorage.setItem("stash", JSON.stringify({ ...obj1, ...obj2 }));
       window.location.href = nextRoute;
       // func();
+    } else {
+      dispatch(failure(messages));
+      return;
+    }
+  };
+}
+
+function postFeedBack(obj, apiUrl, func) {
+  return async (dispatch) => {
+    dispatch(request());
+    const register = await userService.postData(obj, apiUrl);
+
+    const { data, success, messages } = register;
+    if (apiUrl === "/api/v1/util/feedback" && success === true) {
+      dispatch(successReg(data));
+
+      func();
     } else {
       dispatch(failure(messages));
       return;
@@ -300,7 +328,31 @@ function getFrequency(apiUrl, firstQ, secondQ) {
   };
 }
 
+function getTargetValue(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
+  return async (dispatch) => {
+    const getAll = await userService.getTargetValue(
+      apiUrl,
+      firstQ,
+      secondQ,
+      thirdQ,
+      fourthQ
+    );
 
+    const { data, success, messages } = getAll;
+
+    if (apiUrl === "/api/v1/util/future_value" && success === true) {
+      return data;
+    } else {
+      dispatch(alertActions.error(messages));
+    }
+
+    if (apiUrl && success === true) {
+      return data;
+    } else {
+      dispatch(alertActions.error(messages));
+    }
+  };
+}
 
 function deleteData(apiUrl, id) {
   return async (dispatch) => {
@@ -313,7 +365,7 @@ function deleteData(apiUrl, id) {
       return data;
     } else {
       dispatch(alertActions.error(messages));
-      dispatch(failure(messages))
+      dispatch(failure(messages));
     }
   };
 
@@ -327,9 +379,6 @@ function deleteData(apiUrl, id) {
     return { type: userConstants.DELETE_FAILURE, id, error };
   }
 }
-
-
-
 
 // function request() {
 //   return { type: userConstants.GETALL_REQUEST };

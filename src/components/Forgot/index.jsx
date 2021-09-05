@@ -12,7 +12,7 @@ const Index = (props) => {
   const alert = props.alert;
   const initialValues = {
     userID: "",
-    password: "",
+    // password: "",
   };
 
   const onSubmit = (values, onSubmitProps) => {
@@ -29,8 +29,9 @@ const Index = (props) => {
       "/api/v1/identity/resetpasswordtoken",
       "/auth/forgottoken"
     );
-    
-    alert?.type && onSubmitProps.resetForm();
+    // alert?.type &&
+    onSubmitProps.resetForm();
+    onSubmitProps.setSubmitting(false);
   };
 
   const validationSchema = Yup.object({
@@ -114,7 +115,7 @@ const Index = (props) => {
                     <div className="form-group mt-5">
                       <input
                         type="submit"
-                        // disabled={!formik.isValid || formik.isSubmitting}
+                        disabled={!formik.isValid || formik.isSubmitting}
                         className="btn login-submit"
                         value="NEXT"
                       />

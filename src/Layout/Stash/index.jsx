@@ -161,7 +161,7 @@ const Index = ({ getFrequency, createStash }) => {
                           <input
                             type="text"
                             className="text-field"
-                            placeholder="Amount (N)"
+                            placeholder="Amount"
                             name="amount"
                             onChange={formik.handleChange}
                           />

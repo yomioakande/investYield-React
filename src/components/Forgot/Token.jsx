@@ -15,7 +15,7 @@ const Token = (props) => {
   };
 
   const onSubmit = (values, onSubmitProps) => {
-    const getID = JSON.parse(localStorage.getItem("id")) || null;
+    const getID = JSON.parse(localStorage.getItem("userReg")).id || null;
     const obj = {
       id: getID,
       token: values.token,

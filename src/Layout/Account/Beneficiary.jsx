@@ -6,7 +6,7 @@ import { usersActions } from "../../redux/actions";
 import ModalB from "./ModalBeneficiary";
 const Beneficiary = ({ getData, deleteData }) => {
   const [beneficiary, setBeneficiary] = useState([]);
-  const [loading, setloading] = useState(false);
+  // const [loading, setloading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   //DELETE BENEFICIARY DATA
   const deleteBenef = (id) => {
@@ -23,11 +23,11 @@ const Beneficiary = ({ getData, deleteData }) => {
 
   useEffect(() => {
     (async function dataInfo() {
-      setloading(true);
+      // setloading(true);
       const data = await getData("/api/v1/user/beneficiaries").then();
       setBeneficiary(data);
     })();
-  }, []);
+  }, [getData]);
 
   return (
     <>

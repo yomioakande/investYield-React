@@ -8,6 +8,9 @@ import "../../assets/css/style.css";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const PasswordForgot = (props) => {
   const initialValues = {
     password: "",
@@ -28,9 +31,19 @@ const PasswordForgot = (props) => {
     }),
   });
 
- 
+  const success = () => {
+    toast.success("Your Password has been successfully saved", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
+
+  console.log("forward redirect");
+  const getID = JSON.parse(localStorage.getItem("userReg")) || null;
+  const forgotToken = JSON.parse(localStorage.getItem("forgotToken")) || null;
+  console.log(forgotToken);
+  console.log(getID);
   const onSubmit = (values, onSubmitProps) => {
-    const getID = JSON.parse(localStorage.getItem("id")) || null;
+    const getID = JSON.parse(localStorage.getItem("userReg")).id || null;
     const forgotToken = JSON.parse(localStorage.getItem("forgotToken")) || null;
     const obj = {
       id: getID,
@@ -41,11 +54,16 @@ const PasswordForgot = (props) => {
         id: "string",
       },
     };
+    console.log("retro", obj);
+    props.register(
+      obj,
+      "/api/v1/identity/resetpassword",
+      "/auth/login",
+      success
+    );
 
-    props.register(obj, "/api/v1/identity/resetpassword", "/auth/login");
-    
     // onSubmitProps.resetForm();
-    // onSubmitProps.setSubmiting(false);
+    onSubmitProps.setSubmitting(false);
   };
 
   const formik = useFormik({
@@ -56,7 +74,6 @@ const PasswordForgot = (props) => {
   });
 
   const alert = props.alert;
-
 
   return (
     <main>
@@ -136,6 +153,7 @@ const PasswordForgot = (props) => {
                       />
                     </div>
                   </form>
+                  <ToastContainer autoClose={1000} hideProgressBar />
                 </div>
               </div>
             </div>

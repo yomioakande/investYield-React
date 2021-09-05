@@ -14,7 +14,7 @@ const Sidebar = (props) => {
 
       <aside className="menu-sidebar d-none d-lg-block">
         <div className="logo">
-          <NavLink to="/app/dashboard">
+          <NavLink to="/">
             <img src={investYield} alt="investYield" />
           </NavLink>
         </div>

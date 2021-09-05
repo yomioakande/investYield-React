@@ -59,19 +59,17 @@ const Main = ({ getData }) => {
       const todo = await getData("/api/v1/user/todo").then();
       console.log(todo);
       setTodoList(todo);
+      todoList.bvnConfirmed !== true &&
+        setTimeout(() => {
+          setModalInOpen(true);
+        }, 2000);
       setTransactions(transactionsData);
       console.log(transactionsData);
       setSummaryInfo(data);
       console.log(todo);
       setloading(false);
     })();
-  }, []);
-
-  useEffect(() => {
-    todoList.bvnConfirmed == false &&
-      setTimeout(() => {
-        setModalInOpen(true);
-      }, 2500);
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -81,7 +79,10 @@ const Main = ({ getData }) => {
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">
-            <a href="#" className="col-lg-4 col-md-6 d-flex flex-column mb-4">
+            <a
+              href="/app"
+              className="col-lg-4 col-md-6 d-flex flex-column mb-4"
+            >
               <div className="au-card au-card--bg-blue flex-grow-1">
                 <div className="bg-card-img">
                   <img
@@ -103,11 +104,7 @@ const Main = ({ getData }) => {
                 </div>
               </div>
             </a>
-            <a
-              href="#"
-              className="col-lg-4 col-md-6 d-flex flex-column mb-4"
-              href="/"
-            >
+            <a href="/" className="col-lg-4 col-md-6 d-flex flex-column mb-4">
               <div className="au-card au-card--bg-savings flex-grow-1">
                 <div className="bg-card-img">
                   <img
@@ -129,7 +126,10 @@ const Main = ({ getData }) => {
                 </div>
               </div>
             </a>
-            <a href="#" className="col-lg-4 col-md-6 d-flex flex-column mb-4">
+            <a
+              href="/app"
+              className="col-lg-4 col-md-6 d-flex flex-column mb-4"
+            >
               <div className="au-card au-card--bg-investment flex-grow-1">
                 <div className="bg-card-img">
                   <img
@@ -158,7 +158,7 @@ const Main = ({ getData }) => {
                 <div className="au-card-inner">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">Create A Savings Plan</h3>
-                    <a href="/" className="au-btn-link">
+                    <a href="/app" className="au-btn-link">
                       View more
                     </a>
                   </div>
@@ -267,7 +267,7 @@ const Main = ({ getData }) => {
                 <div className="au-card-inner recent-activities">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">Recent Activities</h3>
-                    <a href="/" className="au-btn-link">
+                    <a href="/app" className="au-btn-link">
                       View more
                     </a>
                   </div>
@@ -315,24 +315,30 @@ const Main = ({ getData }) => {
                     </div>
 
                     <div className="au-message__item">
-                      <div className="au-message__item-inner px-2 py-2">
-                        <Link to="/app/help" className="au-message__item-text">
-                          <div className="text px-0 mx-0">
-                            <h5 className="name">
-                              Let us help you save better
-                            </h5>
-                            <p>
-                              Fill in some details and help us suggest better
-                              saving options for you
-                            </p>
+                      {!todoList?.riskProfiled && (
+                        <div className="au-message__item-inner px-2 py-2">
+                          <Link
+                            to="/app/help"
+                            className="au-message__item-text"
+                          >
+                            <div className="text px-0 mx-0">
+                              <h5 className="name">
+                                Let us help you save better
+                              </h5>
+                              <p>
+                                Fill in some details and help us suggest better
+                                saving options for you
+                              </p>
+                            </div>
+                          </Link>
+
+                          <div className="au-message__item-time mt-0">
+                            <span>
+                              <i data-feather="chevron-right"></i>
+                            </span>
                           </div>
-                        </Link>
-                        <div className="au-message__item-time mt-0">
-                          <span>
-                            <i data-feather="chevron-right"></i>
-                          </span>
                         </div>
-                      </div>
+                      )}
                     </div>
 
                     <div className="au-message__item">

@@ -1,12 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { dateConv } from "../../helpers";
+import { connect } from "react-redux";
+import { usersActions } from "../../redux";
 
-const Breakdown = () => {
-  const [list, setList] = useState("");
-
+const Breakdown = (props) => {
+  // const [list, setList] = useState("");
+  const [targetValue, setTargetValue] = useState("");
   const stash = JSON.parse(localStorage.getItem("stash"));
 
+  let date = new Date();
+  //START DATE
+  const startDate = dateConv(date);
+  // NEXT DATE
+  let df = date.setDate(date.getDate() + stash.frequency);
+  const nxt = new Date(df);
+  const nextDate = dateConv(nxt);
 
+  useEffect(() => {
+    (async function dataInfo() {
+      const getTargetValue = await props.getTargetValue(
+        "/api/v1/util/future_value",
+        stash.amount,
+        stash.tenor.code,
+        "0103",
+        stash.ccyCode
+      );
+      setTargetValue(getTargetValue);
+    })();
+  }, [stash.amount, stash.tenor.code, stash.ccyCode]);
 
+  // console.log(targetValue);
+
+  const currencyVal = (number) =>
+    new Intl.NumberFormat(stash.ccyCode === "1" ? "en-NG" : "en-US", {
+      style: "currency",
+      currency: stash.ccyCode === "1" ? "NGN" : "USD",
+    }).format(number);
 
   return (
     <>
@@ -23,22 +52,26 @@ const Breakdown = () => {
                   <div className="savings-breakdown p-4 px-lg-5">
                     <div className="savings-breakdown-row text-black">
                       <p>You are saving:</p>
-                      <p className="font-weight-bold">N{stash.amount}</p>
+                      <p className="font-weight-bold">
+                        {currencyVal(stash.amount)}
+                      </p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
                       <p>Interest Rate</p>
-                      <p className="font-weight-bold">{stash.rate}% per annum</p>
+                      <p className="font-weight-bold">
+                        {stash.rate}% per annum
+                      </p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
                       <p>Start Date</p>
-                      <p className="font-weight-bold">12 - February - 2021</p>
+                      <p className="font-weight-bold">{startDate}</p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
                       <p>End Date:</p>
-                      <p className="font-weight-bold">12 - December - 2021</p>
+                      <p className="font-weight-bold">{nextDate}</p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
@@ -48,7 +81,9 @@ const Breakdown = () => {
 
                     <div className="savings-breakdown-row text-black">
                       <p>Proposed Target Amount:</p>
-                      <p className="font-weight-bold">N5,025.00</p>
+                      <p className="font-weight-bold">
+                        {currencyVal(targetValue?.value)}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -121,4 +156,17 @@ const Breakdown = () => {
   );
 };
 
-export default Breakdown;
+// export default /;
+
+const mapStateToProps = (state) => {
+  const { loggingIn, loading, alertType, message } = state.registration;
+  const { alert } = state;
+  return { loggingIn, alert, loading, alertType, message };
+};
+
+const actionCreators = {
+
+  getTargetValue: usersActions.getTargetValue,
+};
+
+export default connect(mapStateToProps, actionCreators)(Breakdown);

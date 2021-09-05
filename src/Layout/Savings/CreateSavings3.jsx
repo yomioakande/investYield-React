@@ -9,55 +9,59 @@ import homeImg from "../../assets/images/homeImg 2.png";
 
 const CreateSavings3 = () => {
   const [targetNum, setTargetNum] = useState("");
-  const [file, setFile]=useState("");
-  const savingTarget = JSON.parse(localStorage.getItem("savingsInfo")).target;
-  let targetTime = JSON.parse(localStorage.getItem("savingsInfo")).endDate;
+  const [file, setFile] = useState("");
+  const [base64, setBase64] = useState();
+  const firstData = JSON.parse(localStorage.getItem("savingsInfo"));
+
+  const savingTarget = firstData.target;
+  let targetTime = firstData.endDate;
   const nowDate = new Date();
   let cap = new Date(targetTime);
   let timeDifference = cap.getTime() - nowDate.getTime();
   var days = Math.floor(timeDifference / (1000 * 3600 * 24));
 
-
   const initialValues = {
     earnInterest: "",
     frequency: 0,
     amount: 0,
-    imageRef: "",
+    // imageRef: "",
   };
-  // isAutomated:true,
 
   const validationSchema = Yup.object({
     earnInterest: Yup.string().required("A plan Name is Required"),
     frequency: Yup.string().required("A plan Name is Required"),
     amount: Yup.string().required("Pick the Currency to save in"),
-    imageRef: Yup.string().required("A target amount is required"),
+    // imageRef: Yup.string().required("A target amount is required"),
   });
 
-  useEffect(() => {
-    (async function dataInfo() {
-      const data = await userService.getEstimate(
-        "/api/v1/util/estimate",
-        savingTarget,
-        4,
-        targetTime,
-        "0201"
-      );
-    
-    })();
-  });
+  //CHANGE TO BASE64
+  const onChanger = (e) => {
+    console.log("file", e.target.files[0]);
+    let file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = _handleReaderLoaded;
+      reader.readAsBinaryString(file);
+    }
+  };
+  const _handleReaderLoaded = (readerEvt) => {
+    let binaryString = readerEvt.target.result;
+    setBase64(btoa(binaryString));
+  };
 
   const onSubmit = (values, onSubmitProps) => {
-    // const obj = {
-    //   name: formik.values.name,
-    //   ccyCode: formik.values.ccyCode,
-    //   target: formik.values.target,
-    //   endDate: formik.values.endDate,
-    // };
+    const obj = {
+      earnInterest: values.earnInterest,
+      frequency: values.frequency,
+      amount: values.amount,
+      endDate: values.endDate,
+      imageRef: base64,
+      isAutomated: true,
+    };
 
-  
     // register(obj, "/api/v1/identity/register", "/auth/signup2");
-
-    // localStorage.setItem("savingsInfo", JSON.stringify(obj));
+    console.log({ ...obj, ...firstData });
+    // localStorage.setItem("savingsInfo", JSON.stringify({ ...obj, ...firstData }));
     // window.location.href = "/app/savings/create3";
     // register(obj, "/api/v1/identity/register", "/auth/signup2");
     // onSubmitProps.resetForm();
@@ -66,27 +70,25 @@ const CreateSavings3 = () => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    // validationSchema,
+    validationSchema,
     validateOnMount: true,
   });
 
+  const freq = formik.values.frequency;
+  useEffect(() => {
+    (async function dataInfo() {
+      const data = await userService.getEstimate(
+        "/api/v1/util/estimate",
+        savingTarget,
+        freq,
+        targetTime,
+        "0201"
+      );
+      setTargetNum(data?.data?.estimate);
+    })();
+  }, [freq]);
 
-
-
-// if (file) {
-//   const data = new FormData();
-//   const filename = Date.now() + file.name;
-//   data.append("name", filename);
-//   data.append("file", file);
-//   console.log(filename);
-// }
-
-
-
-
-
-
-
+  console.log("transcends", targetNum);
 
   return (
     <>
@@ -217,7 +219,7 @@ const CreateSavings3 = () => {
                         <input
                           type="text"
                           className="text-field mt-2"
-                          value="50,000 (N)"
+                          value={targetNum + "(N)"}
                           disabled
                         />
                         <div className="d-flex justify-content-end mt-2">
@@ -248,7 +250,7 @@ const CreateSavings3 = () => {
                             name="file"
                             style={{ display: "none" }}
                             id="fileInput"
-                            onChange={(e) => setFile(e.target.files[0])}
+                            onChange={(e) => onChanger(e)}
                           />
                         </div>
                         <div className="mt-3">
@@ -268,12 +270,14 @@ const CreateSavings3 = () => {
                               </button>
                             </div>
                             <div className="col-lg-6">
-                              <a
-                                href={"/app/savings/create4"}
+                              <input
+                                type="submit"
+                                value="NEXT"
+                                // href={"/app/savings/create4"}
                                 className="btn login-submit"
-                              >
-                                NEXT
-                              </a>
+                              />
+                              {/* NEXT */}
+                              {/* </a> */}
                             </div>
                           </div>
                         </div>

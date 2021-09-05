@@ -64,10 +64,11 @@ const Modal1 = ({
         id: values.bvn,
         token: values.otp,
       };
-    
+
       confirmBvnReg(obj, "/api/v1/user/bvn", success);
     }
-    alertType && show();
+    // alertType &&
+    show();
     onSubmitProps.setSubmitting(false);
   };
 
@@ -81,10 +82,8 @@ const Modal1 = ({
   const show = () => {
     setTimeout(() => {
       setShowError(false);
-    }, 5000);
+    }, 4000);
   };
-  // alertType && show();
-
 
 
   return ReactDom.createPortal(
@@ -127,7 +126,9 @@ const Modal1 = ({
                         </p>
                         {showError
                           ? alertType && (
-                              <div className={`font-sm alert ${alertType}`}>
+                              <div
+                                className={`font-sm alert mt-3 ${alertType}`}
+                              >
                                 {message}
                               </div>
                             )
@@ -272,12 +273,12 @@ const Modal1 = ({
                             <p className="text-center weight-600 dashboard-modal-p">
                               Did not get OTP?
                             </p>
-                            <a
+                            <button
                               href="#"
                               className="text-green no-decor text-center mt-2"
                             >
                               Resend OTP
-                            </a>
+                            </button>
                           </div>
                         </form>
                       </div>

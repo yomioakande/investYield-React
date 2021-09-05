@@ -1,7 +1,62 @@
 import React, { useState } from "react";
+import Congrats from "./Congrats";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { connect } from "react-redux";
+import { usersActions } from "../redux/actions";
 
-const Help = () => {
+const Help = (props) => {
+  // eslint-disable-next-line
   const [active, setActive] = useState("1");
+  const [congratsModal, setCongratsModal] = useState(false);
+
+  const modalToggle1 = () => {
+    setCongratsModal(true);
+  };
+
+  const close = () => {
+    setCongratsModal(false);
+  };
+  const initialValues = {
+    frequency: "",
+    mEarn: "",
+    mExp: "",
+    savingPercent: "",
+    isSaving: "",
+    projection: "",
+  };
+
+  const validationSchema = Yup.object({
+    frequency: Yup.number().required("Frequency is Required"),
+    mEarn: Yup.number().required("mEarn is Required"),
+    mExp: Yup.string().required("mExp is Required"),
+    savingPercent: Yup.number().required("A savingPercent is required"),
+    isSaving: Yup.string().required("Enter a value"),
+    projection: Yup.number().required("Enter a projection"),
+  });
+
+  const onSubmit = (values, onSubmitProps) => {
+    const obj = {
+      frequency: values.frequency,
+      mEarn: values.mEarn,
+      mExp: values.mExp,
+      savingPercent: values.savingPercent,
+      isSaving: values.isSaving,
+      projection: values.projection,
+    };
+
+    console.log(obj);
+
+    props.postFeedBack(obj, "/api/v1/util/feedback", modalToggle1);
+    // onSubmitProps.resetForm();
+  };
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+    validateOnMount: true,
+  });
 
   return (
     <>
@@ -15,170 +70,91 @@ const Help = () => {
                   <div className="small-red-line"></div>
                   <div className="mt-5">
                     <>
-                      {active === "1" ? (
-                        <form action="">
-                          <div className="mt-4">
-                            <h5>
-                              We would like some information from which will
-                              help suggest better savings options tailored for
-                              you.
-                            </h5>
-                            <div className="mt-5">
-                              <label className="text-blue weight-500">
-                                How frequently do you think of saving money?
-                              </label>
-                              <div className="form-group">
-                                <input
-                                  type="checkbox"
-                                  name="interval"
-                                  className="styled-checkbox"
-                                  id="styled-checkbox-1"
-                                  value="value1"
-                                />
-                                <label for="styled-checkbox-1">Daily</label>
-                              </div>
-                              <div className="form-group mt-1">
-                                <input
-                                  type="checkbox"
-                                  name="interval"
-                                  className="styled-checkbox"
-                                  id="styled-checkbox-2"
-                                  value="value2"
-                                />
-                                <label for="styled-checkbox-2">Weekly</label>
-                              </div>
-                              <div className="form-group mt-1">
-                                <input
-                                  name="interval"
-                                  className="styled-checkbox"
-                                  id="styled-checkbox-3"
-                                  type="checkbox"
-                                  value="value3"
-                                />
-                                <label for="styled-checkbox-3">Monthly</label>
-                              </div>
-                              <div className="form-group mt-1">
-                                <input
-                                  name="interval"
-                                  className="styled-checkbox"
-                                  id="styled-checkbox-4"
-                                  type="checkbox"
-                                  value="value4"
-                                />
-                                <label for="styled-checkbox-4">Quarterly</label>
-                              </div>
-                              <div className="form-group mt-1">
-                                <input
-                                  name="interval"
-                                  className="styled-checkbox"
-                                  id="styled-checkbox-5"
-                                  type="checkbox"
-                                  value="value5"
-                                />
-                                <label for="styled-checkbox-5">Never</label>
-                              </div>
-                            </div>
-                            <div className="row mt-50 align-items-center justify-content-end">
-                              <div className="col-lg-5">
-                                <div className="">
-                                  <button
-                                    onClick={() => setActive("2")}
-                                    className="btn login-submit"
-                                  >
-                                    NEXT
-                                  </button>
+                      <button onClick={() => modalToggle1()}>Test Here</button>
+                      <form onSubmit={formik.handleSubmit}>
+                        {active === "1" ? (
+                          <>
+                            <div className="mt-4">
+                              <h5>
+                                We would like some information from which will
+                                help suggest better savings options tailored for
+                                you.
+                              </h5>
+                              <div className="mt-5">
+                                <label className="text-blue weight-500">
+                                  How frequently do you think of saving money?
+                                </label>
+                                <div className="form-group">
+                                  <input
+                                    type="radio"
+                                    name="frequency"
+                                    className="styled-checkbox"
+                                    id="styled-checkbox-1"
+                                    value={1}
+                                    onChange={formik.handleChange}
+                                  />
+                                  <label htmlFor="styled-checkbox-1">
+                                    Daily
+                                  </label>
+                                </div>
+                                <div className="form-group mt-1">
+                                  <input
+                                    type="radio"
+                                    name="frequency"
+                                    className="styled-checkbox"
+                                    id="styled-checkbox-2"
+                                    value={7}
+                                    onChange={formik.handleChange}
+                                  />
+                                  <label htmlFor="styled-checkbox-2">
+                                    Weekly
+                                  </label>
+                                </div>
+                                <div className="form-group mt-1">
+                                  <input
+                                    name="frequency"
+                                    className="styled-checkbox"
+                                    id="styled-checkbox-3"
+                                    type="radio"
+                                    value={30}
+                                    onChange={formik.handleChange}
+                                  />
+                                  <label htmlFor="styled-checkbox-3">
+                                    Monthly
+                                  </label>
+                                </div>
+                                <div className="form-group mt-1">
+                                  <input
+                                    name="frequency"
+                                    className="styled-checkbox"
+                                    id="styled-checkbox-4"
+                                    type="radio"
+                                    value={90}
+                                    onChange={formik.handleChange}
+                                  />
+                                  <label htmlFor="styled-checkbox-4">
+                                    Quarterly
+                                  </label>
+                                </div>
+                                <div className="form-group mt-1">
+                                  <input
+                                    name="frequency"
+                                    className="styled-checkbox"
+                                    id="styled-checkbox-5"
+                                    type="radio"
+                                    value={0}
+                                    onChange={formik.handleChange}
+                                  />
+                                  <label htmlFor="styled-checkbox-5">
+                                    Never
+                                  </label>
                                 </div>
                               </div>
-                            </div>
-                          </div>
-                        </form>
-                      ) : active === "2" ? (
-                        <form action="">
-                          <div className="mt-4">
-                            <h5>
-                              We would like some information from which will
-                              help suggest better savings options tailored for
-                              you.
-                            </h5>
-                            <div className="mt-5">
-                              <label className="text-blue weight-500">
-                                How much do you earn monthly in Naira?
-                              </label>
-                              <div className="form-group">
-                                <input
-                                  name="interval"
-                                  className="styled-checkbox"
-                                  id="styled-checkbox-1"
-                                  type="checkbox"
-                                  value="value1"
-                                />
-                                <label for="styled-checkbox-1">
-                                  #60 100,000
-                                </label>
-                              </div>
-                              <div className="form-group mt-1">
-                                <input
-                                  name="interval"
-                                  className="styled-checkbox"
-                                  id="styled-checkbox-2"
-                                  type="checkbox"
-                                  value="value2"
-                                />
-                                <label for="styled-checkbox-2">
-                                  100,000 - 250,000
-                                </label>
-                              </div>
-                              <div className="form-group mt-1">
-                                <input
-                                  name="interval"
-                                  className="styled-checkbox"
-                                  id="styled-checkbox-3"
-                                  type="checkbox"
-                                  value="value3"
-                                />
-                                <label for="styled-checkbox-3">
-                                  251,000 - 500,000
-                                </label>
-                              </div>
-                              <div className="form-group mt-1">
-                                <input
-                                  name="interval"
-                                  className="styled-checkbox"
-                                  id="styled-checkbox-4"
-                                  type="checkbox"
-                                  value="value4"
-                                />
-                                <label for="styled-checkbox-4">
-                                  501,000 - 1,000,000
-                                </label>
-                              </div>
-                              <div className="form-group mt-1">
-                                <input
-                                  name="interval"
-                                  className="styled-checkbox"
-                                  id="styled-checkbox-5"
-                                  type="checkbox"
-                                  value="value5"
-                                />
-                                <label for="styled-checkbox-5">
-                                  &gt 1,000,000
-                                </label>
-                              </div>
-                            </div>
-                            <div className="row mt-50 align-items-center justify-content-end">
-                              <div className="col-lg-8">
-                                <div className="row align-items-center">
-                                  <div className="col-lg-6">
+                              <div className="row mt-50 align-items-center justify-content-end">
+                                <div className="col-lg-5">
+                                  <div className="">
                                     <button
-                                      onClick={() => setActive("1")}
-                                      className="btn  text-green"
-                                    >
-                                      PREVIOUS
-                                    </button>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <button
-                                      onClick={() => setActive("3")}
+                                      onClick={() => setActive("2")}
                                       className="btn login-submit"
                                     >
                                       NEXT
@@ -187,11 +163,112 @@ const Help = () => {
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </form>
-                      ) : active === "3" ? (
-                        <>
-                          <form action="">
+                            {/* </form> */}
+                          </>
+                        ) : active === "2" ? (
+                          <>
+                            <div className="mt-4">
+                              <h5>
+                                We would like some information from which will
+                                help suggest better savings options tailored for
+                                you.
+                              </h5>
+                              <div className="mt-5">
+                                <label className="text-blue weight-500">
+                                  How much do you earn monthly in Naira?
+                                </label>
+                                <div className="form-group">
+                                  <input
+                                    name="mEarn"
+                                    className="styled-checkbox"
+                                    id="styled-checkbox-e1"
+                                    type="radio"
+                                    value={1}
+                                    onChange={formik.handleChange}
+                                  />
+                                  <label htmlFor="styled-checkbox-e1">
+                                    &#8358; 100,000
+                                  </label>
+                                </div>
+                                <div className="form-group mt-1">
+                                  <input
+                                    name="mEarn"
+                                    className="styled-checkbox"
+                                    id="styled-checkbox-e2"
+                                    type="radio"
+                                    value={2}
+                                    onChange={formik.handleChange}
+                                  />
+                                  <label htmlFor="styled-checkbox-e2">
+                                    &#8358; 100,000 - 250,000
+                                  </label>
+                                </div>
+                                <div className="form-group mt-1">
+                                  <input
+                                    name="mEarn"
+                                    className="styled-checkbox"
+                                    id="styled-checkbox-e3"
+                                    type="radio"
+                                    value={3}
+                                    onChange={formik.handleChange}
+                                  />
+                                  <label htmlFor="styled-checkbox-e3">
+                                    &#8358; 251,000 - 500,000
+                                  </label>
+                                </div>
+                                <div className="form-group mt-1">
+                                  <input
+                                    name="mEarn"
+                                    className="styled-checkbox"
+                                    id="styled-checkbox-e4"
+                                    type="radio"
+                                    value={4}
+                                    onChange={formik.handleChange}
+                                  />
+                                  <label htmlFor="styled-checkbox-e4">
+                                    &#8358; 501,000 - 1,000,000
+                                  </label>
+                                </div>
+                                <div className="form-group mt-1">
+                                  <input
+                                    name="mEarn"
+                                    className="styled-checkbox"
+                                    id="styled-checkbox-e5"
+                                    type="radio"
+                                    value={5}
+                                    onChange={formik.handleChange}
+                                  />
+                                  <label htmlFor="styled-checkbox-e5">
+                                    &#8358; 1,000,000
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="row mt-50 align-items-center justify-content-end">
+                                <div className="col-lg-8">
+                                  <div className="row align-items-center">
+                                    <div className="col-lg-6">
+                                      <button
+                                        onClick={() => setActive("1")}
+                                        className="btn  text-green"
+                                      >
+                                        PREVIOUS
+                                      </button>
+                                    </div>
+                                    <div className="col-lg-6">
+                                      <button
+                                        onClick={() => setActive("3")}
+                                        className="btn login-submit"
+                                      >
+                                        NEXT
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        ) : active === "3" ? (
+                          <>
                             <div className="mt-4">
                               <h5>
                                 We would like some information from which will
@@ -205,61 +282,68 @@ const Help = () => {
                                 </label>
                                 <div className="form-group">
                                   <input
-                                    type="checkbox"
-                                    name="interval"
+                                    type="radio"
+                                    name="mExp"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-1"
-                                    value="value1"
+                                    id="styled-checkbox-f1"
+                                    value={1}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-1">
-                                    &#60 10%
+                                  <label htmlFor="styled-checkbox-f1">
+                                    &#60; 10%
                                   </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="mExp"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-2"
-                                    type="checkbox"
-                                    value="value2"
+                                    id="styled-checkbox-f2"
+                                    type="radio"
+                                    value={2}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-2">
+                                  <label htmlFor="styled-checkbox-f2">
                                     11 - 25%
                                   </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="mExp"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-3"
-                                    type="checkbox"
-                                    value="value3"
+                                    id="styled-checkbox-f3"
+                                    type="radio"
+                                    value={3}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-3">
+                                  <label htmlFor="styled-checkbox-f3">
                                     26 - 50%
                                   </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="mExp"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-4"
-                                    type="checkbox"
-                                    value="value4"
+                                    id="styled-checkbox-f4"
+                                    type="radio"
+                                    value={4}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-4">
+                                  <label htmlFor="styled-checkbox-f4">
                                     51 - 80%
                                   </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="mExp"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-5"
-                                    type="checkbox"
-                                    value="value5"
+                                    id="styled-checkbox-f5"
+                                    type="radio"
+                                    value={5}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-5">100%</label>
+                                  <label htmlFor="styled-checkbox-f5">
+                                    100%
+                                  </label>
                                 </div>
                               </div>
                               <div className="row mt-50 align-items-center justify-content-end">
@@ -285,12 +369,9 @@ const Help = () => {
                                 </div>
                               </div>
                             </div>
-                          </form>
-                        </>
-                      ) : active === "4" ? (
-                        <>
-                          {" "}
-                          <form action="">
+                          </>
+                        ) : active === "4" ? (
+                          <>
                             <div className="mt-4">
                               <h5>
                                 We would like some information from which will
@@ -304,53 +385,68 @@ const Help = () => {
                                 </label>
                                 <div className="form-group">
                                   <input
-                                    type="checkbox"
-                                    name="interval"
+                                    type="radio"
+                                    name="savingPercent"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-1"
-                                    value="value1"
+                                    id="styled-checkbox-g1"
+                                    value={10}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-1">10%</label>
+                                  <label htmlFor="styled-checkbox-g1">
+                                    10%
+                                  </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="savingPercent"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-2"
-                                    type="checkbox"
-                                    value="value2"
+                                    id="styled-checkbox-g2"
+                                    type="radio"
+                                    value={25}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-2">25%</label>
+                                  <label htmlFor="styled-checkbox-g2">
+                                    25%
+                                  </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="savingPercent"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-3"
-                                    type="checkbox"
-                                    value="value3"
+                                    id="styled-checkbox-g3"
+                                    type="radio"
+                                    value={50}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-3">50%</label>
+                                  <label htmlFor="styled-checkbox-g3">
+                                    50%
+                                  </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="savingPercent"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-4"
-                                    type="checkbox"
-                                    value="value4"
+                                    id="styled-checkbox-g4"
+                                    type="radio"
+                                    value={75}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-4">75%</label>
+                                  <label htmlFor="styled-checkbox-g4">
+                                    75%
+                                  </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="savingPercent"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-5"
-                                    type="checkbox"
-                                    value="value5"
+                                    id="styled-checkbox-g5"
+                                    type="radio"
+                                    value={90}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-5">90%</label>
+                                  <label htmlFor="styled-checkbox-g5">
+                                    90%
+                                  </label>
                                 </div>
                               </div>
                               <div className="row mt-50 align-items-center justify-content-end">
@@ -376,11 +472,9 @@ const Help = () => {
                                 </div>
                               </div>
                             </div>
-                          </form>
-                        </>
-                      ) : active === 5 ? (
-                        <>
-                          <form action="">
+                          </>
+                        ) : active === "5" ? (
+                          <>
                             <div className="mt-4">
                               <h5>
                                 We would like some information from which will
@@ -394,23 +488,27 @@ const Help = () => {
                                 </label>
                                 <div className="form-group">
                                   <input
-                                    name="interval"
+                                    name="isSaving"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-1"
-                                    type="checkbox"
-                                    value="value1"
+                                    id="styled-checkbox-h1"
+                                    type="radio"
+                                    value={true}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-1">Yes</label>
+                                  <label htmlFor="styled-checkbox-h1">
+                                    Yes
+                                  </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="isSaving"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-2"
-                                    type="checkbox"
-                                    value="value2"
+                                    id="styled-checkbox-h2"
+                                    type="radio"
+                                    value={false}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-2">No</label>
+                                  <label htmlFor="styled-checkbox-h2">No</label>
                                 </div>
                               </div>
                               <div className="row mt-50 align-items-center justify-content-end">
@@ -436,11 +534,9 @@ const Help = () => {
                                 </div>
                               </div>
                             </div>
-                          </form>
-                        </>
-                      ) : active === 6 ? (
-                        <>
-                          <form action="">
+                          </>
+                        ) : active === "6" ? (
+                          <>
                             <div className="mt-4">
                               <h5>
                                 We would like some information from which will
@@ -454,53 +550,68 @@ const Help = () => {
                                 </label>
                                 <div className="form-group">
                                   <input
-                                    name="interval"
+                                    name="projection"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-1"
-                                    type="checkbox"
-                                    value="value1"
+                                    id="styled-checkbox-i1"
+                                    type="radio"
+                                    value={15}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label htmlFor="styled-checkbox-1">15%</label>
+                                  <label htmlFor="styled-checkbox-i1">
+                                    15%
+                                  </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="projection"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-2"
-                                    type="checkbox"
-                                    value="value2"
+                                    id="styled-checkbox-i2"
+                                    type="radio"
+                                    value={30}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-2">30%</label>
+                                  <label htmlFor="styled-checkbox-i2">
+                                    30%
+                                  </label>
+                                </div>
+                                <div className="form-group mt-i1">
+                                  <input
+                                    name="projection"
+                                    className="styled-checkbox"
+                                    id="styled-checkbox-i3"
+                                    type="radio"
+                                    value={60}
+                                    onChange={formik.handleChange}
+                                  />
+                                  <label htmlFor="styled-checkbox-i3">
+                                    60%
+                                  </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="projection"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-3"
-                                    type="checkbox"
-                                    value="value3"
+                                    id="styled-checkbox-i4"
+                                    type="radio"
+                                    value={85}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-3">60%</label>
+                                  <label htmlFor="styled-checkbox-i4">
+                                    85%
+                                  </label>
                                 </div>
                                 <div className="form-group mt-1">
                                   <input
-                                    name="interval"
+                                    name="projection"
                                     className="styled-checkbox"
-                                    id="styled-checkbox-4"
-                                    type="checkbox"
-                                    value="value4"
+                                    id="styled-checkbox-i5"
+                                    type="radio"
+                                    value={100}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="styled-checkbox-4">85%</label>
-                                </div>
-                                <div className="form-group mt-1">
-                                  <input
-                                    name="interval"
-                                    className="styled-checkbox"
-                                    id="styled-checkbox-5"
-                                    type="checkbox"
-                                    value="value5"
-                                  />
-                                  <label for="styled-checkbox-5">100%</label>
+                                  <label htmlFor="styled-checkbox-i5">
+                                    100%
+                                  </label>
                                 </div>
                               </div>
                               <div className="row mt-50 align-items-center justify-content-end">
@@ -515,20 +626,20 @@ const Help = () => {
                                       </button>
                                     </div>
                                     <div className="col-lg-6">
-                                      <button
-                                        disabled
+                                      <input
+                                        type="submit"
+                                        // disabled
                                         className="btn login-submit"
-                                      >
-                                        NEXT
-                                      </button>
+                                        value="NEXT"
+                                      />
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </form>
-                        </>
-                      ) : null}
+                          </>
+                        ) : null}
+                      </form>
                     </>
                   </div>
                 </div>
@@ -537,8 +648,27 @@ const Help = () => {
           </div>
         </div>
       </div>
+
+      {congratsModal && (
+        <Congrats
+          headline1={"Fantastic!"}
+          headline2={"Thank you for the Feedback"}
+          content={""}
+        />
+      )}
     </>
   );
 };
 
-export default Help;
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  // const loading = state.authentication.loading;
+  return { alert, username };
+};
+
+const actionCreators = {
+  postFeedBack: usersActions.postFeedBack,
+};
+
+export default connect(mapStateToProps, actionCreators)(Help);

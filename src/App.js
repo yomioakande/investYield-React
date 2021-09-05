@@ -9,14 +9,16 @@ import {
 // import "./index.css"
 import {AuthRoutes,CreatePin} from "./routes/AuthRoutes";
 import DashboardRoutes from "./routes/DashboardRoutes";
-import { HomePageRoutes, ContactUsPage } from "./routes/HomePageRoutes";
+import { HomePageRoutes } from "./routes/HomePageRoutes";
 import {PrivateRoute,PublicRoute} from "./routes/PrivateRoutes";
+import Congrats from "./Layout/Congrats"
 // import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <>
       <Router>
         <Switch>
+        {/* <Route exact path="/test"  component={Congrats} /> */}
           {/* <Route exact path="/contactus" component={ContactUs} /> */}
           {/* <Route path="/auth" component={AuthRoutes} /> */}
           <PublicRoute path="/auth" restricted={true} component={AuthRoutes} />
