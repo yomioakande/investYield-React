@@ -16,8 +16,10 @@ export const usersActions = {
   postFeedBack,
   deleteData,
   getFrequency,
+  createCore,
   createStash,
   getTargetValue,
+  postImageBase64,
 };
 
 function login(body) {
@@ -174,6 +176,21 @@ function register4(obj, apiUrl, func) {
   };
 }
 
+function postImageBase64(obj, apiUrl, func) {
+  return async (dispatch) => {
+    dispatch(request());
+    const register = await userService.postData(obj, apiUrl);
+    const { data, success, messages } = register;
+    if (apiUrl === "/api/v1/util/fileupload" && success === true) {
+      func();
+      dispatch(successReg(messages));
+      return data;
+    } else {
+      dispatch(failure(messages));
+    }
+  };
+}
+
 function resend(resendObj, apiUrl) {
   return async (dispatch) => {
     dispatch(request());
@@ -231,6 +248,23 @@ function createStash(obj1, obj2, apiUrl, nextRoute) {
       localStorage.setItem("stash", JSON.stringify({ ...obj1, ...obj2 }));
       window.location.href = nextRoute;
       // func();
+    } else {
+      dispatch(failure(messages));
+      return;
+    }
+  };
+}
+
+function createCore(obj, apiUrl, nextRoute) {
+  return async (dispatch) => {
+    dispatch(request());
+    const register = await userService.postData(obj, apiUrl);
+
+    const { data, success, messages } = register;
+    if (apiUrl === "/api/v1/user/coreaccount" && success === true) {
+      dispatch(successReg(data?.reference));
+      localStorage.setItem("core", JSON.stringify(obj));
+      window.location.href = nextRoute;
     } else {
       dispatch(failure(messages));
       return;

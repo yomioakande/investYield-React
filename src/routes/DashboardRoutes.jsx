@@ -22,6 +22,10 @@ import linkCard from "../Layout/Account/LinkCard";
 
 import myProfile from "../Layout/Account/Profile";
 import myPurse from "../Layout/myPurse/index";
+import myPurse2 from "../Layout/myPurse/MyPurse2"
+import myPurse3 from "../Layout/myPurse/MyPurse3"
+import myPurse4 from "../Layout/myPurse/MyPurse4"
+import Blog from "../Layout/Blog/index"
 import Help from "../Layout/Help";
 
 import { PrivateRoute } from "./PrivateRoutes";
@@ -44,14 +48,21 @@ const DashboardRoutes = () => {
         <PrivateRoute path="/app/savings/otp" component={CreateSavingsOTP} />
 
         <PrivateRoute path="/app/savings/mypurse" component={myPurse} />
+        <PrivateRoute path="/app/savings/pursestep1" component={myPurse2} />
+        <PrivateRoute path="/app/savings/pursestep2" component={myPurse3} />
+       <PrivateRoute path="/app/savings/pursestep3" component={myPurse4} />
+        {/* <PrivateRoute path="/app/savings/mypurse" component={myPurse} />  */}
 
         <PrivateRoute path="/app/savings" component={Savings} />
         <PrivateRoute path="/app/account/support" component={Support} />
         <PrivateRoute path="/app/account/beneficiary" component={Beneficiary} />
         <PrivateRoute path="/app/account/linkcard" component={linkCard} />
 
-        <PrivateRoute exact path="/app/account" component={Account} />
 
+        <PrivateRoute path="/app/blog" component={Blog} />
+
+
+        <PrivateRoute exact path="/app/account" component={Account} />
         <PrivateRoute path="/app/account/profile" component={myProfile} />
 
         <Redirect from="/app" to="/app/dashboard" />

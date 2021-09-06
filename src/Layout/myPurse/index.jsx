@@ -1,4 +1,12 @@
 import React from "react";
+import {Link} from "react-router-dom"
+import coinStack from "../../assets/images/coin-stack.svg";
+import familyIcon from "../../assets/images/familyIcon.svg";
+import tgifIcon from "../../assets/images/TGIFIcon.svg";
+import dinnerDateIcon from "../../assets/images/dinnerDateIcon.svg";
+import movies from "../../assets/images/movies1.svg";
+import shoppingIcon from "../../assets/images/shoppingIcon.svg";
+import entertainIcon from "../../assets/images/entertainmentIcon.svg";
 
 const Index = () => {
   return (
@@ -21,10 +29,10 @@ const Index = () => {
                   </div>
 
                   <div className="row mt-4">
-                    <a className="col-xl-2 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
+                    <a href="/app/savings/pursestep1" className="col-xl-2 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
                       <div className="au-card-smaller au-card-bg-create-savings-ind flex-grow-1 px-3">
                         <img
-                          src="./assets/images/coin-stack.svg"
+                          src={coinStack}
                           className="img-fluid"
                           alt="Coin stack"
                         />
@@ -33,49 +41,37 @@ const Index = () => {
                     </a>
                     <a className="col-xl-2 col-lg-4 col-md-6 col-6 d-flex flex-column flex-grow-1 mb-4">
                       <div className="au-card-smaller au-card-bg-retirement h-100 px-3">
-                        <img
-                          src="./assets/images/familyIcon.svg"
-                          alt="Food Tray"
-                        />
+                        <img src={familyIcon} alt="Food Tray" />
                         <p className="text-green">Family</p>
                       </div>
                     </a>
                     <a className="col-xl-2 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
                       <div className="au-card-smaller au-card-bg-homeplan flex-grow-1 px-3">
-                        <img src="./assets/images/TGIFIcon.svg" alt="TGIF" />
+                        <img src={tgifIcon} alt="TGIF" />
                         <p className="text-blue">TGIF</p>
                       </div>
                     </a>
                     <a className="col-xl-2 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
                       <div className="au-card-smaller au-card-bg-emergency flex-grow-1 px-3">
-                        <img
-                          src="./assets/images/dinnerDateIcon.svg"
-                          alt="Dinner Date"
-                        />
+                        <img src={dinnerDateIcon} alt="Dinner Date" />
                         <p className="text-stash">Dinner date</p>
                       </div>
                     </a>
                     <a className="col-xl-2 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
                       <div className="au-card-smaller au-card-bg-movie flex-grow-1 px-3">
-                        <img src="./assets/images/movies1.svg" alt="Shopping" />
+                        <img src={movies} alt="Shopping" />
                         <p className="text-movie">Movies</p>
                       </div>
                     </a>
                     <a className="col-xl-2 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
                       <div className="au-card-smaller au-card-bg-wedding flex-grow-1 px-3">
-                        <img
-                          src="./assets/images/shoppingIcon.svg"
-                          alt="Family"
-                        />
+                        <img src={shoppingIcon} alt="Family" />
                         <p className="text-movie">Shopping</p>
                       </div>
                     </a>
                     <a className="col-xl-2 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
                       <div className="au-card-smaller au-card-bg-family flex-grow-1 px-3">
-                        <img
-                          src="./assets/images/entertainmentIcon.svg"
-                          alt="Celebration"
-                        />
+                        <img src={entertainIcon} alt="Celebration" />
                         <p className="text-stash3">Entertaiment</p>
                       </div>
                     </a>
