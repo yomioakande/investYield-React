@@ -12,17 +12,20 @@ export function authHeader() {
     const getRef = async () => {
       let user = JSON.parse(localStorage.getItem("user"));
 
-      const data = await userService.register1(
-        { token: user.token, refreshToken: user.refreshToken },
-        "/api/v1/identity/refresh"
-      );
+      const refreshObj = {
+      token: user.token,
+      refreshToken: user.refreshToken,
+    };
 
-      const expires_at = data.expiresIn + now;
+      const data = await userService.register1(refreshObj, "/api/v1/identity/refresh");
+      // console.log(data);
+
+      const expires_at = d.getTime() + 1 * 60 * 60 * 1000;
       user = {
-        name: data.name,
+        name: data.data.name,
         expiresAt: expires_at,
-        refreshToken: data.refreshToken,
-        token: data.token,
+        refreshToken: data.data.refreshToken,
+        token: data.data.token,
       };
       localStorage.setItem("user", JSON.stringify(user));
       return { Authorization: "Bearer " + user.token };

@@ -40,8 +40,6 @@ const PasswordForgot = (props) => {
   console.log("forward redirect");
   const getID = JSON.parse(localStorage.getItem("userReg")) || null;
   const forgotToken = JSON.parse(localStorage.getItem("forgotToken")) || null;
-  console.log(forgotToken);
-  console.log(getID);
   const onSubmit = (values, onSubmitProps) => {
     const getID = JSON.parse(localStorage.getItem("userReg")).id || null;
     const forgotToken = JSON.parse(localStorage.getItem("forgotToken")) || null;

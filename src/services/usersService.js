@@ -53,15 +53,6 @@ function logout() {
   localStorage.removeItem("user");
 }
 
-// function getData(id) {
-//   const requestOptions = {
-//       method: 'GET',
-//       headers: authHeader()
-//   };
-
-//   // return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-// }
-
 async function getData(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
   const requestOptions = {
     method: "GET",

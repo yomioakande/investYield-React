@@ -57,9 +57,10 @@ const Main = ({ getData }) => {
       const data = await getData("/api/v1/user/summary").then();
       const transactionsData = await getData("/api/v1/user/transaction").then();
       const todo = await getData("/api/v1/user/todo").then();
+      // const getMyStash=await getData("api/v1/user/stash").then();
       console.log(todo);
       setTodoList(todo);
-      todoList.bvnConfirmed !== true &&
+      todo.bvnConfirmed !== true &&
         setTimeout(() => {
           setModalInOpen(true);
         }, 2000);
@@ -201,9 +202,9 @@ const Main = ({ getData }) => {
                 <div className="au-card-inner">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">myPurse</h3>
-                    <a href="/" className="au-btn-link">
+                    <Link to="/app/savings/mypurse" className="au-btn-link">
                       View more
-                    </a>
+                    </Link>
                   </div>
 
                   <div className="row px-3 cg-3 mt-4">
@@ -315,7 +316,7 @@ const Main = ({ getData }) => {
                     </div>
 
                     <div className="au-message__item">
-                      {!todoList?.riskProfiled && (
+                      {!todoList.riskProfiled && (
                         <div className="au-message__item-inner px-2 py-2">
                           <Link
                             to="/app/help"

@@ -16,8 +16,10 @@ export const usersActions = {
   postFeedBack,
   deleteData,
   getFrequency,
+  createCore,
   createStash,
   getTargetValue,
+  postImageBase64,
 };
 
 function login(body) {
@@ -29,7 +31,6 @@ function login(body) {
     if (success === true) {
       const d = new Date();
       const expires_at = d.getTime() + 1 * 60 * 60 * 1000;
-      // const expires_at = data.expiresIn + now;
 
       let user = {
         name: data.name,
@@ -81,7 +82,6 @@ function register(user, apiUrl, nextRoute, func) {
     //FIRST SIGNUP
     if (success === true) {
       dispatch(successReg(messages));
-      console.log(register);
       if (
         apiUrl === "/api/v1/identity/resetpasswordtoken" ||
         apiUrl === "/api/v1/identity/register"
@@ -174,6 +174,21 @@ function register4(obj, apiUrl, func) {
   };
 }
 
+function postImageBase64(obj, apiUrl, func) {
+  return async (dispatch) => {
+    dispatch(request());
+    const register = await userService.postData(obj, apiUrl);
+    const { data, success, messages } = register;
+    if (apiUrl === "/api/v1/util/fileupload" && success === true) {
+      func();
+      dispatch(successReg(messages));
+      return data;
+    } else {
+      dispatch(failure(messages));
+    }
+  };
+}
+
 function resend(resendObj, apiUrl) {
   return async (dispatch) => {
     dispatch(request());
@@ -231,6 +246,23 @@ function createStash(obj1, obj2, apiUrl, nextRoute) {
       localStorage.setItem("stash", JSON.stringify({ ...obj1, ...obj2 }));
       window.location.href = nextRoute;
       // func();
+    } else {
+      dispatch(failure(messages));
+      return;
+    }
+  };
+}
+
+function createCore(obj, apiUrl, nextRoute) {
+  return async (dispatch) => {
+    dispatch(request());
+    const register = await userService.postData(obj, apiUrl);
+
+    const { data, success, messages } = register;
+    if (apiUrl === "/api/v1/user/coreaccount" && success === true) {
+      dispatch(successReg(data?.reference));
+      localStorage.setItem("core", JSON.stringify(obj));
+      window.location.href = nextRoute;
     } else {
       dispatch(failure(messages));
       return;

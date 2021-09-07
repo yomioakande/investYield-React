@@ -140,8 +140,8 @@ const Savings = () => {
                     className="row px-3 cg-3 mt-4"
                     style={{ overflowX: "hidden" }}
                   >
-                    <a
-                      href="#"
+                    <Link to='/app/savings/mypurse'
+                      // href="#"
                       className="card-box d-flex flex-column mb-4"
                     >
                       <div className="au-card-purse au-card-bg-create-purse flex-grow-1">
@@ -150,7 +150,7 @@ const Savings = () => {
                           <p className="text-green">Create A New Purse</p>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                     <a href="/" className="card-box d-flex flex-column mb-4">
                       <div className="au-card-purse au-card-bg-vibe-cash flex-grow-1">
                         <div className="au-card-elements">

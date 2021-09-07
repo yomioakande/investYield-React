@@ -1,6 +1,21 @@
-import React from "react";
-import {Link} from "react-router-dom"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { dateConv } from "../../helpers";
 const CreateSavings4 = () => {
+  const coreDetails = JSON.parse(localStorage.getItem("core"));
+  const [core, setCore] = useState(coreDetails);
+  console.log(core);
+
+  const main1 =
+    new Date(core.endDate).getTime() - new Date(core.startDate).getTime();
+  const numOfDays = main1 / (1000 * 3600 * 24);
+
+  const currencyVal = (number) =>
+    new Intl.NumberFormat(core.ccyCode === "1" ? "en-NG" : "en-US", {
+      style: "currency",
+      currency: core.ccyCode === "1" ? "NGN" : "USD",
+    }).format(number);
+
   return (
     <>
       <div className="section__content section__content--p30">
@@ -30,19 +45,25 @@ const CreateSavings4 = () => {
                         </tr>
                         <tr>
                           <td>Start Date:</td>
-                          <td className="text-right">12 - February - 2021</td>
+                          <td className="text-right">
+                            {dateConv(core.startDate)}
+                          </td>
                         </tr>
                         <tr>
                           <td>End Date:</td>
-                          <td className="text-right">12 - December - 2021</td>
+                          <td className="text-right">
+                            {dateConv(core.endDate)}
+                          </td>
                         </tr>
                         <tr>
                           <td>Amount of days:</td>
-                          <td className="text-right">303 days</td>
+                          <td className="text-right">{numOfDays} days</td>
                         </tr>
                         <tr>
                           <td>Target Amount:</td>
-                          <td className="text-right">₦ 1,515,000.00</td>
+                          <td className="text-right">
+                            {currencyVal(core.target)}
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -51,7 +72,9 @@ const CreateSavings4 = () => {
                         <tbody>
                           <tr>
                             <td>Proposed Total Earnings:</td>
-                            <td className="text-right">₦ 1,666,500.00</td>
+                            <td className="text-right">
+                              {currencyVal(core.amount)}
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -99,7 +122,12 @@ const CreateSavings4 = () => {
                               </button>
                             </div>
                             <div className="col-lg-6">
-                              <Link to="/app/savings/otp" className="btn login-submit">NEXT</Link>
+                              <Link
+                                to="/app/savings/otp"
+                                className="btn login-submit"
+                              >
+                                NEXT
+                              </Link>
                             </div>
                           </div>
                         </div>

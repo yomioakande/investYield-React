@@ -4,13 +4,19 @@ import { usersActions } from "../../redux/actions";
 import { userService } from "../../services/usersService";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import trashCan from "../../assets/images/trashCan.svg";
-import homeImg from "../../assets/images/homeImg 2.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// import trashCan from "../../assets/images/trashCan.svg";
+// import homeImg from "../../assets/images/homeImg 2.png";
 
-const CreateSavings3 = () => {
+const CreateSavings3 = (props) => {
   const [targetNum, setTargetNum] = useState("");
   const [file, setFile] = useState("");
   const [base64, setBase64] = useState();
+  const [imgName, setImgName] = useState("");
+  const [imageRef, setImageRef] = useState("");
+
+  const [imageFile, setImageFile] = useState(null);
   const firstData = JSON.parse(localStorage.getItem("savingsInfo"));
 
   const savingTarget = firstData.target;
@@ -23,25 +29,49 @@ const CreateSavings3 = () => {
   const initialValues = {
     earnInterest: "",
     frequency: 0,
-    amount: 0,
-    // imageRef: "",
+    amount: targetNum,
   };
+
+  const [state, setState] = useState(initialValues);
 
   const validationSchema = Yup.object({
     earnInterest: Yup.string().required("A plan Name is Required"),
     frequency: Yup.string().required("A plan Name is Required"),
     amount: Yup.string().required("Pick the Currency to save in"),
-    // imageRef: Yup.string().required("A target amount is required"),
   });
+
+  //UPLOAD SUCCESSFUL ALERT
+  const success = () => {
+    toast.success("Uploaded Successfully!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
 
   //CHANGE TO BASE64
   const onChanger = (e) => {
-    console.log("file", e.target.files[0]);
+    setImageFile(e.target.files[0]);
     let file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = _handleReaderLoaded;
       reader.readAsBinaryString(file);
+    }
+
+    const reader = new FileReader();
+    if (reader !== undefined && file !== undefined) {
+      reader.onloadend = () => {
+        //file.name,file.size,reader.result
+        const baseObj = {
+          name: file.name,
+          content: reader.result,
+        };
+        console.log(baseObj);
+
+        const postImageRef = props
+          .postImageBase64(baseObj, "/api/v1/util/fileupload", success)
+          .then((data) => setImageRef(data));
+      };
+      reader.readAsDataURL(file);
     }
   };
   const _handleReaderLoaded = (readerEvt) => {
@@ -55,12 +85,14 @@ const CreateSavings3 = () => {
       frequency: values.frequency,
       amount: values.amount,
       endDate: values.endDate,
-      imageRef: base64,
+      imageRef: imageRef.reference,
       isAutomated: true,
     };
-
-    // register(obj, "/api/v1/identity/register", "/auth/signup2");
-    console.log({ ...obj, ...firstData });
+    console.log(obj);
+    const mainObj = { ...obj, ...firstData };
+    // console.log(mainObj)
+    props.createCore(mainObj, "/api/v1/user/coreaccount", "/app/savings/create4");
+    // console.log({ ...obj, ...firstData });
     // localStorage.setItem("savingsInfo", JSON.stringify({ ...obj, ...firstData }));
     // window.location.href = "/app/savings/create3";
     // register(obj, "/api/v1/identity/register", "/auth/signup2");
@@ -68,6 +100,7 @@ const CreateSavings3 = () => {
   };
 
   const formik = useFormik({
+     enableReinitialize:true,
     initialValues,
     onSubmit,
     validationSchema,
@@ -88,10 +121,12 @@ const CreateSavings3 = () => {
     })();
   }, [freq]);
 
-  console.log("transcends", targetNum);
+  console.log(formik.values);
 
   return (
     <>
+      <ToastContainer autoClose={1000} hideProgressBar />
+
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="d-flex justify-content-center">
@@ -219,8 +254,9 @@ const CreateSavings3 = () => {
                         <input
                           type="text"
                           className="text-field mt-2"
-                          value={targetNum + "(N)"}
-                          disabled
+                          name="amount"
+                          value={formik.values.amount +"(N)"}
+                      disabled
                         />
                         <div className="d-flex justify-content-end mt-2">
                           <h6 className="text-danger weight-600">
@@ -253,13 +289,17 @@ const CreateSavings3 = () => {
                             onChange={(e) => onChanger(e)}
                           />
                         </div>
-                        <div className="mt-3">
-                          <img
-                            src={homeImg}
-                            className="img-fluid w-100"
-                            alt=""
-                          />
-                        </div>
+
+                        {imageFile && (
+                          <div className="mt-3">
+                            {" "}
+                            <img
+                              className="img-fluid w-100"
+                              src={URL.createObjectURL(imageFile)}
+                              alt="goalImagePreview"
+                            />{" "}
+                          </div>
+                        )}
                       </div>
                       <div className="row mt-4 align-items-center justify-content-end">
                         <div className="col-lg-8">
@@ -301,7 +341,8 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
-  getData: usersActions.getInfo,
+  createCore: usersActions.createCore,
+  postImageBase64: usersActions.postImageBase64,
 };
 
 export default connect(mapStateToProps, actionCreators)(CreateSavings3);
