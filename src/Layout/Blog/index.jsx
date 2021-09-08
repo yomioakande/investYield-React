@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import search from "../../assets/images/search-icon2.svg";
 import "../../assets/css/style.css";
 import BlogImg from "../../assets/images/BlogImg.png";
@@ -35,7 +36,7 @@ const index = () => {
           </div>
 
           <div className="row mt-4">
-            <a className="col-xl-4 col-lg-4 col-md-6 col-1 d-flex flex-column mb-4 page-item ">
+            <Link to="/app/blog/:id" className="col-xl-4 col-lg-4 col-md-6 col-1 d-flex flex-column mb-4 page-item ">
               <div className="shadow d-flex flex-column">
                 <div>
                   <img
@@ -72,7 +73,7 @@ const index = () => {
                   </div>
                 </div>
               </div>
-            </a>
+            </Link>
            
           </div>
         </div>

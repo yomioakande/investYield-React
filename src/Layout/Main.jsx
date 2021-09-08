@@ -58,15 +58,13 @@ const Main = ({ getData }) => {
       const transactionsData = await getData("/api/v1/user/transaction").then();
       const todo = await getData("/api/v1/user/todo").then();
       // const getMyStash=await getData("api/v1/user/stash").then();
-      console.log(todo);
-      setTodoList(todo);
+      setTodoList(todo); 
+      setTransactions(transactionsData);
+      setSummaryInfo(data);
       todoList.bvnConfirmed !== true &&
         setTimeout(() => {
           setModalInOpen(true);
         }, 2000);
-      setTransactions(transactionsData);
-      console.log(transactionsData);
-      setSummaryInfo(data);
       console.log(todo);
       setloading(false);
     })();
@@ -159,9 +157,9 @@ const Main = ({ getData }) => {
                 <div className="au-card-inner">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">Create A Savings Plan</h3>
-                    <a href="/app" className="au-btn-link">
+                    <Link to="/app/savings/create" className="au-btn-link">
                       View more
-                    </a>
+                    </Link>
                   </div>
 
                   <div className="row px-3 cg-3 mt-4">
@@ -208,23 +206,15 @@ const Main = ({ getData }) => {
                   </div>
 
                   <div className="row px-3 cg-3 mt-4">
-                    <a href="/" className="card-box d-flex flex-column mb-4">
+                    <Link to="/app/savings/mypurse" className="card-box d-flex flex-column mb-4">
                       <div className="au-card-purse au-card-bg-create-purse flex-grow-1">
                         <div className="au-card-elements">
                           <img src={stash} alt="new" />
                           <p className="text-green">Create A New Purse</p>
                         </div>
                       </div>
-                    </a>
-                    {/* <a href="/" className="card-box d-flex flex-column mb-4">
-                      <div className="au-card-purse au-card-bg-vibe-cash flex-grow-1">
-                        <div className="au-card-elements">
-                          <p className="mt-1">Vibe Cash</p>
-                          <p className="mt-1">₦ 5,024.12</p>
-                          <p className="mt-2 purse-link-btn">Hide Balance</p>
-                        </div>
-                      </div>
-                    </a> */}
+                    </Link>
+    
 
                     <Purse
                       namePurse={"Vibe Cash"}
@@ -339,7 +329,7 @@ const Main = ({ getData }) => {
                             </span>
                           </div>
                         </div>
-                      )}
+                      )} 
                     </div>
 
                     <div className="au-message__item">

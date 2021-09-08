@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
+import Loader from "../../common/Loader";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
-const Index = ({ getFrequency, createStash }) => {
+const Index = ({ getFrequency, createStash, loading }) => {
   const [frequency, setFrequency] = useState("");
   const [freqOptions, setFreqOptions] = useState([]);
 
@@ -17,8 +17,8 @@ const Index = ({ getFrequency, createStash }) => {
 
   const validationSchema = Yup.object({
     amount: Yup.number().required("An Amount is Required"),
-    frequency: Yup.number().required("Choose a frequency"),
-    ccyCode: Yup.number().required("Pick the Currency to save in"),
+    frequency: Yup.string().required("Choose a frequency"),
+    ccyCode: Yup.string().required("Pick the Currency to save in"),
   });
 
   const onSubmit = (values, onSubmitProps) => {
@@ -42,7 +42,7 @@ const Index = ({ getFrequency, createStash }) => {
     validationSchema,
     validateOnMount: true,
   });
-  console.log(formik.values)
+  console.log(formik.values);
 
   const ccy = formik.values.ccyCode;
   useEffect(() => {
@@ -100,6 +100,7 @@ const Index = ({ getFrequency, createStash }) => {
 
   return (
     <>
+      {loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row justify-content-center">
@@ -148,6 +149,12 @@ const Index = ({ getFrequency, createStash }) => {
                                   <label for="radio2">
                                     <span>₦ Naira</span>
                                   </label>
+                                  {formik.touched.ccyCode &&
+                                    formik.errors.ccyCode && (
+                                      <p className="text-danger font-sm error1 font-weight-bold">
+                                        {formik.errors.ccyCode}
+                                      </p>
+                                    )}
                                 </div>
                               </div>
                             </div>
@@ -159,12 +166,17 @@ const Index = ({ getFrequency, createStash }) => {
                             How much will you like to stash daily?
                           </label>
                           <input
-                            type="text"
+                            type="number"
                             className="text-field"
                             placeholder="Amount"
                             name="amount"
                             onChange={formik.handleChange}
                           />
+                          {formik.touched.amount && formik.errors.amount && (
+                            <p className="text-danger font-sm error1 font-weight-bold">
+                              {formik.errors.amount}
+                            </p>
+                          )}
                         </div>
 
                         <div className="form-group mt-4">
@@ -189,6 +201,12 @@ const Index = ({ getFrequency, createStash }) => {
                               autoFocus={true}
                             />
                           </div>
+                          {formik.touched.frequency &&
+                            formik.errors.frequency && (
+                              <p className="text-danger font-sm error1 font-weight-bold">
+                                {formik.errors.frequency}
+                              </p>
+                            )}
                         </div>
                         <div className="row mt-5 align-items-center justify-content-end">
                           <div className="col-lg-8">
@@ -202,11 +220,9 @@ const Index = ({ getFrequency, createStash }) => {
                                 <input
                                   type="submit"
                                   value={"NEXT"}
-                                  // href="/app/stash/breakdown"
+                                  disabled={!formik.isValid || formik.isSubmitting}
                                   className="btn login-submit"
                                 />
-                                {/* NEXT */}
-                                {/* </a> */}
                               </div>
                             </div>
                           </div>

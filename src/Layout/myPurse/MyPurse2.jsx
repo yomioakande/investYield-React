@@ -34,11 +34,11 @@ const MyPurse2 = () => {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("A plan Name is Required"),
-    ccyCode: Yup.string().required("A plan Name is Required"),
-    crFreq: Yup.string().required("A target amount is required"),
+    name: Yup.string().required("A Plan Name is Required"),
+    ccyCode: Yup.string().required("Select your preferred Currency"),
+    crFreq: Yup.string().required("Select your preferred Frequency options"),
     startDate: Yup.string().required("Enter a Date"),
-    amount: Yup.string().required("Enter a Date"),
+    amount: Yup.string().required("Enter your preferred Amount"),
   });
 
   const onSubmit = (values, onSubmitProps) => {
@@ -50,17 +50,16 @@ const MyPurse2 = () => {
       amount: values.amount,
     };
     console.log(obj);
-    // localStorage.setItem("savingsInfo", JSON.stringify(obj));
-    // window.location.href = "/app/savings/create3";
-    // register(obj, "/api/v1/identity/register", "/auth/signup2");
-    // onSubmitProps.resetForm();
-    // onSubmitProps.setSubmitting(false);
+    localStorage.setItem("purseObj1", JSON.stringify(obj));
+    window.location.href = "/app/savings/pursestep2";
+    onSubmitProps.resetForm();
+    onSubmitProps.setSubmitting(false);
   };
 
   const formik = useFormik({
     initialValues,
     onSubmit,
-    // validationSchema,
+    validationSchema,
     validateOnMount: true,
   });
 
@@ -90,6 +89,7 @@ const MyPurse2 = () => {
                               className="text-field-profile"
                               name={"name"}
                               onChange={formik.handleChange}
+                              {...formik.getFieldProps("name")}
                               placeholder="e.g Shopping Cash"
                             />
                             <label
@@ -100,6 +100,11 @@ const MyPurse2 = () => {
                               Goal Name
                             </label>
                           </div>
+                          {formik.touched.name && formik.errors.name && (
+                            <p className="text-danger font-sm error1 font-weight-bold">
+                              {formik.errors.name}
+                            </p>
+                          )}
                         </div>
                         <div className="mt-4">
                           <label className="text-blue weight-500">
@@ -139,6 +144,11 @@ const MyPurse2 = () => {
                               </div>
                             </div>
                           </div>
+                          {formik.touched.ccyCode && formik.errors.ccyCode && (
+                            <p className="text-danger font-sm error1 font-weight-bold">
+                              {formik.errors.ccyCode}
+                            </p>
+                          )}
                         </div>
                         <div className="form-group mt-4">
                           <label className="text-blue">
@@ -152,6 +162,12 @@ const MyPurse2 = () => {
                             onChange={formik.handleChange}
                           />
                         </div>
+                        {formik.touched.startDate &&
+                          formik.errors.startDate && (
+                            <p className="text-danger font-sm error1 font-weight-bold">
+                              {formik.errors.startDate}
+                            </p>
+                          )}
                         <div className="mt-4">
                           <label className="text-blue weight-500">
                             How often would you like members to save?
@@ -225,23 +241,41 @@ const MyPurse2 = () => {
                             </div>
                           </div>
                         </div>
+                        {formik.touched.crFreq && formik.errors.crFreq && (
+                          <p className="text-danger font-sm error1 font-weight-bold">
+                            {formik.errors.crFreq}
+                          </p>
+                        )}
                         <div className="form-group mt-4">
                           <label for="Amount" className="text-blue weight-500">
                             How much will you like to save daily?
                           </label>
                           <input
-                            type="text"
+                            type="number"
                             className="text-field"
                             placeholder="Amount (N)"
                             name="amount"
                             value={formik.values.amount}
                             onChange={formik.handleChange}
+                            {...formik.getFieldProps("amount")}
                           />
                         </div>
+                        {formik.touched.amount && formik.errors.amount && (
+                          <p className="text-danger font-sm error1 font-weight-bold">
+                            {formik.errors.amount}
+                          </p>
+                        )}
                         <div className="row mt-4 align-items-center justify-content-end">
                           <div className="col-lg-4">
                             <div className="">
-                              <button className="btn login-submit">NEXT</button>
+                              <input
+                                type="submit"
+                                disabled={
+                                  !formik.isValid || formik.isSubmitting
+                                }
+                                className="btn login-submit"
+                                value="NEXT"
+                              />
                             </div>
                           </div>
                         </div>

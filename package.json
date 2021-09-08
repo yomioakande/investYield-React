@@ -14,6 +14,7 @@
     "chart.js": "^3.5.1",
     "chartjs": "^0.3.24",
     "craco": "^0.0.3",
+    "date-fns": "^2.23.0",
     "formik": "^2.2.9",
     "react": "^17.0.2",
     "react-accessible-accordion": "^3.3.5",

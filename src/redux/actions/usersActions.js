@@ -225,12 +225,21 @@ function confirmBvnReg(obj, apiUrl, func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.putData(obj, apiUrl);
-
+console.log(register)
     const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/bvn" && success === true) {
       dispatch(successReg(data?.challenge));
       func();
-    } else {
+    } 
+    else if(success === true){
+      console.log(data)
+      
+      dispatch(successReg(messages));
+      func();
+    }
+    
+    else {
+     
       dispatch(failure(messages));
       return;
     }
@@ -244,7 +253,7 @@ function createStash(obj1, obj2, apiUrl, nextRoute) {
 
     const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/stash" && success === true) {
-      dispatch(successReg(data?.reference));
+      // dispatch(successReg(data?.reference));
       localStorage.setItem("stash", JSON.stringify({ ...obj1, ...obj2 }));
       window.location.href = nextRoute;
       // func();
@@ -289,44 +298,14 @@ function postFeedBack(obj, apiUrl, func) {
   };
 }
 
-// //RESET PASSWORD 1
-// if (apiUrl === "/api/v1/identity/resetpasswordtoken" && success === true) {
-//   localStorage.setItem("id", JSON.stringify(data?.id));
-//   window.location.href = nextRoute;
-//   return;
-// } else {
-//   dispatch(alertActions.error(messages));
-// }
-
-// //RESET PASSWORD 2
-// if (
-//   apiUrl === "/api/v1/identity/validateresetpasswordtoken" &&
-//   success === true
-// ) {
-//   window.location.href = nextRoute;
-//   return;
-// } else {
-//   dispatch(alertActions.error(messages));
-// }
-
-// if (apiUrl === "/api/v1/identity/resetpassword" && success === true) {
-//   //custom alert message
-//   window.location.href = nextRoute;
-//   return;
-// } else {
-//   dispatch(alertActions.error(messages));
-// }
-//   };
-
-// }
 
 function getInfo(apiUrl) {
   return async (dispatch) => {
     const getAll = await userService.getData(apiUrl);
 
     const { data, success, messages } = getAll;
-
-    if (apiUrl === "/api/v1/user/summary" && success === true) {
+    // apiUrl === "/api/v1/user/summary" && 
+    if (success === true) {
       return data;
     } else {
       dispatch(alertActions.error(messages));
@@ -355,6 +334,7 @@ function getFrequency(apiUrl, firstQ, secondQ) {
     }
 
     if (apiUrl && success === true) {
+      console.log(data)
       return data;
     } else {
       dispatch(alertActions.error(messages));

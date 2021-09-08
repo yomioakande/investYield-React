@@ -1,4 +1,15 @@
 import React from 'react'
+import blog from "../../assets/images/img-blog-wide.png";
+import justDot from "../../assets/images/justDot.svg"
+
+import red from "../../assets/images/red-like.svg"
+import blueShare from "../../assets/images/blue-share.svg"
+import blogImg from "../../assets/images/BlogImg.png"
+import search from "../../assets/images/search-icon2.svg"
+
+
+import loveIcon from "../../assets/images/loveIcon.svg"
+import shareIcon from "../../assets/images/shareIcon.svg"
 
 const Main = () => {
     return (
@@ -20,10 +31,10 @@ const Main = () => {
                       placeholder="Search..."
                     />
                     <img
-                      src="./assets/images/search-icon2.svg"
+                      src={search}
                       class="img-fluid position-absolute"
                       alt="Search"
-                      style="left: 5%; top: 33%"
+                      style={{left: "5%" ,top: "33%"}}
                     />
                   </div>
                 </div>
@@ -32,7 +43,7 @@ const Main = () => {
               <div class="row mt-4">
                 <div class="col-12">
                   <img
-                    src="./assets/images/img-blog-wide.png"
+                    src={blog}
                     class="img-fluid w-100"
                     alt=""
                   />
@@ -52,7 +63,7 @@ const Main = () => {
                           <div class="d-flex justify-content-between">
                             <p class="font-sm">Investopedia</p>
                             <img
-                              src="./assets/images/justDot.svg"
+                              src={justDot}
                               class="img-fluid"
                               alt="dot"
                             />
@@ -104,11 +115,11 @@ const Main = () => {
                         <div class="col-xl-2 col-lg-4">
                           <div class="d-flex justify-content-between">
                             <a href="#">
-                              <img src="./assets/images/red-like.svg" alt="" />
+                              <img src={red} alt="" />
                             </a>
                             <a href="#">
                               <img
-                                src="./assets/images/blue-share.svg"
+                                src={blueShare}
                                 alt=""
                               />
                             </a>
@@ -135,7 +146,7 @@ const Main = () => {
                     <div class="shadow d-flex flex-column">
                       <div>
                         <img
-                          src="./assets/images/BlogImg.png"
+                          src={blogImg}
                           class="img-fluid w-100"
                           alt="Team member pic"
                         />
@@ -168,7 +179,7 @@ const Main = () => {
                               >
                                 <p class="font-sm">Investopedia</p>
                                 <img
-                                  src="./assets/images/justDot.svg"
+                                  src={justDot}
                                   class="img-fluid"
                                   alt="dot"
                                 />
@@ -184,12 +195,12 @@ const Main = () => {
                                 "
                               >
                                 <img
-                                  src="./assets/images/loveIcon.svg"
+                                  src={loveIcon}
                                   class="img-fluid"
                                   alt=""
                                 />
                                 <img
-                                  src="./assets/images/shareIcon.svg"
+                                  src={shareIcon}
                                   class="img-fluid"
                                   alt=""
                                 />
@@ -211,7 +222,7 @@ const Main = () => {
                     <div class="shadow d-flex flex-column">
                       <div>
                         <img
-                          src="./assets/images/BlogImg.png"
+                          src={blogImg}
                           class="img-fluid w-100"
                           alt="Team member pic"
                         />
@@ -244,7 +255,7 @@ const Main = () => {
                               >
                                 <p class="font-sm">Investopedia</p>
                                 <img
-                                  src="./assets/images/justDot.svg"
+                                  src={justDot}
                                   class="img-fluid"
                                   alt="dot"
                                 />
@@ -260,12 +271,12 @@ const Main = () => {
                                 "
                               >
                                 <img
-                                  src="./assets/images/loveIcon.svg"
+                                  src={loveIcon}
                                   class="img-fluid"
                                   alt=""
                                 />
                                 <img
-                                  src="./assets/images/shareIcon.svg"
+                                  src={shareIcon}
                                   class="img-fluid"
                                   alt=""
                                 />
@@ -287,7 +298,7 @@ const Main = () => {
                     <div class="shadow d-flex flex-column">
                       <div>
                         <img
-                          src="./assets/images/BlogImg.png"
+                          src={blogImg}
                           class="img-fluid w-100"
                           alt="Team member pic"
                         />
@@ -320,7 +331,7 @@ const Main = () => {
                               >
                                 <p class="font-sm">Investopedia</p>
                                 <img
-                                  src="./assets/images/justDot.svg"
+                                  src={justDot}
                                   class="img-fluid"
                                   alt="dot"
                                 />
@@ -336,12 +347,12 @@ const Main = () => {
                                 "
                               >
                                 <img
-                                  src="./assets/images/loveIcon.svg"
+                                  src={loveIcon}
                                   class="img-fluid"
                                   alt=""
                                 />
                                 <img
-                                  src="./assets/images/shareIcon.svg"
+                                  src={shareIcon}
                                   class="img-fluid"
                                   alt=""
                                 />

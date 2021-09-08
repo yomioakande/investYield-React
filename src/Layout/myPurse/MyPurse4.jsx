@@ -2,7 +2,39 @@ import React from "react";
 import withdrawal from "../../assets/images/withdrawFundIcon.svg";
 import "../../assets/css/theme.css";
 import "../../assets/css/style.css";
+import { dateConv } from "../../helpers";
+
+
 const MyPurse4 = () => {
+
+
+const purse= JSON.parse(localStorage.getItem("mainPurseObj"))
+
+
+// const currencyVal = (number) =>
+// new Intl.NumberFormat(purse.ccyCode === "1" ? "en-NG" : "en-US", {
+//   style: "currency",
+//   currency: purse.ccyCode === "1" ? "NGN" : "USD",
+// }).format(number);
+
+// console.log()
+function daysToWeeks(percent,days){
+if(purse.drFreq!="001"){
+    return `${percent}% / Every ${Math.floor(days/7)} weeks`
+}
+    else{
+return `${percent}% / Every ${Math.floor(days/7)} weeks`
+
+    }
+
+     
+
+}
+
+console.log(new Date('2021-09-22').getDay())
+
+console.log(daysToWeeks(purse.drPct,purse.drFreq))
+
   return (
     <>
       <div className="section__content section__content--p30 pb-4">
@@ -45,12 +77,12 @@ const MyPurse4 = () => {
 
                     <div className="savings-breakdown-row text-black">
                       <p>Start Date</p>
-                      <p className="font-weight-bold">12 - February - 2021</p>
+                      <p className="font-weight-bold">{dateConv(purse.startDate)}</p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
                       <p>Autowithdrawal:</p>
-                      <p className="font-weight-bold">20% / Every week</p>
+                      <p className="font-weight-bold"></p>
                     </div>
                   </div>
                 </div>

@@ -28,11 +28,13 @@ const Help = (props) => {
 
   const validationSchema = Yup.object({
     frequency: Yup.number().required("Frequency is Required"),
-    mEarn: Yup.number().required("mEarn is Required"),
-    mExp: Yup.string().required("mExp is Required"),
-    savingPercent: Yup.number().required("A savingPercent is required"),
-    isSaving: Yup.string().required("Enter a value"),
-    projection: Yup.number().required("Enter a projection"),
+    mEarn: Yup.number().required("Your monthly earnings is Required"),
+    mExp: Yup.string().required("Your monthly expenses is Required"),
+    savingPercent: Yup.number().required(
+      "Your monthly savings option is required"
+    ),
+    isSaving: Yup.string().required("This field is required"),
+    projection: Yup.number().required("Your projection is required"),
   });
 
   const onSubmit = (values, onSubmitProps) => {
@@ -49,6 +51,7 @@ const Help = (props) => {
 
     props.postFeedBack(obj, "/api/v1/util/feedback", modalToggle1);
     // onSubmitProps.resetForm();
+    onSubmitProps.setSubmitting(false);
   };
 
   const formik = useFormik({
@@ -163,7 +166,12 @@ const Help = (props) => {
                                 </div>
                               </div>
                             </div>
-                            {/* </form> */}
+                            {formik.touched.frequency &&
+                              formik.errors.frequency && (
+                                <p className="text-danger font-sm error1 font-weight-bold">
+                                  {formik.errors.frequency}
+                                </p>
+                              )}
                           </>
                         ) : active === "2" ? (
                           <>
@@ -243,6 +251,11 @@ const Help = (props) => {
                                   </label>
                                 </div>
                               </div>
+                              {formik.touched.mEarn && formik.errors.mEarn && (
+                                <p className="text-danger font-sm error1 font-weight-bold">
+                                  {formik.errors.mEarn}
+                                </p>
+                              )}
                               <div className="row mt-50 align-items-center justify-content-end">
                                 <div className="col-lg-8">
                                   <div className="row align-items-center">
@@ -346,6 +359,11 @@ const Help = (props) => {
                                   </label>
                                 </div>
                               </div>
+                              {formik.touched.mExp && formik.errors.mExp && (
+                                <p className="text-danger font-sm error1 font-weight-bold">
+                                  {formik.errors.mExp}
+                                </p>
+                              )}
                               <div className="row mt-50 align-items-center justify-content-end">
                                 <div className="col-lg-8">
                                   <div className="row align-items-center">
@@ -449,6 +467,12 @@ const Help = (props) => {
                                   </label>
                                 </div>
                               </div>
+                              {formik.touched.savingPercent &&
+                                formik.errors.savingPercent && (
+                                  <p className="text-danger font-sm error1 font-weight-bold">
+                                    {formik.errors.savingPercent}
+                                  </p>
+                                )}
                               <div className="row mt-50 align-items-center justify-content-end">
                                 <div className="col-lg-8">
                                   <div className="row align-items-center">
@@ -511,6 +535,12 @@ const Help = (props) => {
                                   <label htmlFor="styled-checkbox-h2">No</label>
                                 </div>
                               </div>
+                              {formik.touched.isSaving &&
+                                formik.errors.isSaving && (
+                                  <p className="text-danger font-sm error1 font-weight-bold">
+                                    {formik.errors.isSaving}
+                                  </p>
+                                )}
                               <div className="row mt-50 align-items-center justify-content-end">
                                 <div className="col-lg-8">
                                   <div className="row align-items-center">
@@ -614,6 +644,12 @@ const Help = (props) => {
                                   </label>
                                 </div>
                               </div>
+                              {formik.touched.projection &&
+                                formik.errors.projection && (
+                                  <p className="text-danger font-sm error1 font-weight-bold">
+                                    {formik.errors.projection}
+                                  </p>
+                                )}
                               <div className="row mt-50 align-items-center justify-content-end">
                                 <div className="col-lg-8">
                                   <div className="row align-items-center">
@@ -628,7 +664,9 @@ const Help = (props) => {
                                     <div className="col-lg-6">
                                       <input
                                         type="submit"
-                                        // disabled
+                                        disabled={
+                                          !formik.isValid || formik.isSubmitting
+                                        }
                                         className="btn login-submit"
                                         value="NEXT"
                                       />
