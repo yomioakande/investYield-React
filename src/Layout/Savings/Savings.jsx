@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../assets/css/theme.css";
 import challenge from "../../assets/images/savingschallenge.svg";
@@ -6,12 +6,30 @@ import plus2 from "../../assets/images/Stash/plus2.svg";
 import savings from "../../assets/images/individual-savings-icon.svg";
 import group from "../../assets/images/create-new-group-icon.svg";
 import blog from "../../assets/images/BlogImg.png";
+import { connect } from "react-redux";
+import { usersActions } from "../../redux/actions";
+import Loader from "../../common/Loader";
 
 import Charts from "../Charts";
-const Savings = () => {
+const Savings = ({ getData }) => {
+  const [summaryInfo, setSummaryInfo] = useState({});
+  const [loading, setloading] = useState(false);
+
+  useEffect(() => {
+    (async function dataInfo() {
+      setloading(true);
+      const data = await getData("/api/v1/user/summary").then();
+      setSummaryInfo(data);
+      // console.log(summaryInfo)
+      console.log(data);
+      setloading(false);
+    })();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <>
-      {/* <div className="main-content"> */}
+      {loading && <Loader />}
       <div className="section__content section__content--p30 pb-4">
         <div className="container-fluid">
           <div className="row">
@@ -33,7 +51,7 @@ const Savings = () => {
                 <div className="au-card-inner w-100">
                   <div className="row align-items-center d-flex justify-content-center">
                     <div className="col-lg-7 profile-cards col-md-6">
-                      <Charts />
+                      <Charts summaryInfo={summaryInfo} />
                       <p
                         style={{
                           marginTop: "-6.5rem",
@@ -43,7 +61,7 @@ const Savings = () => {
                         }}
                         class="chart2-title"
                       >
-                        ₦10,000,000.00
+                        {/* ₦10,000,000.00 */}
                       </p>
                       {/* <canvas id="myChart" width="800" height="550"></canvas> */}
                     </div>
@@ -140,8 +158,8 @@ const Savings = () => {
                     className="row px-3 cg-3 mt-4"
                     style={{ overflowX: "hidden" }}
                   >
-                    <Link to='/app/savings/mypurse'
-                      // href="#"
+                    <Link
+                      to="/app/savings/mypurse"
                       className="card-box d-flex flex-column mb-4"
                     >
                       <div className="au-card-purse au-card-bg-create-purse flex-grow-1">
@@ -207,8 +225,8 @@ const Savings = () => {
                 <div className="au-card-inner">
                   <div className="row mt-4">
                     <div className="col-lg-4 d-flex flex-column flex-grow-1">
-                      <a
-                        href="/"
+                      <Link
+                        to="/app/stash"
                         className="card-box d-flex flex-column mb-4 w-100"
                       >
                         <div className="au-card-purse au-card-bg-create-stash flex-grow-1">
@@ -230,7 +248,7 @@ const Savings = () => {
                             </div>
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div className="col-lg-4 d-flex flex-column flex-grow-1">
                       <Link
@@ -263,8 +281,8 @@ const Savings = () => {
                       </Link>
                     </div>
                     <div className="col-lg-4 d-flex flex-column flex-grow-1">
-                      <a
-                        href="/"
+                      <Link
+                        to="/app/savings/create"
                         className="card-box d-flex flex-column mb-4 w-100"
                       >
                         <div className="au-card-purse au-card-bg-create-group flex-grow-1">
@@ -286,7 +304,7 @@ const Savings = () => {
                             </div>
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -495,4 +513,15 @@ const Savings = () => {
   );
 };
 
-export default Savings;
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  // const loading = state.authentication.loading;
+  return { alert, username };
+};
+
+const actionCreators = {
+  getData: usersActions.getInfo,
+};
+
+export default connect(mapStateToProps, actionCreators)(Savings);

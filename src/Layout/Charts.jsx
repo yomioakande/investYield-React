@@ -1,28 +1,30 @@
 import styled from "styled-components";
 import { Doughnut } from "react-chartjs-2";
 
-const state = {
-  //   maintainAspectRatio: true,
-  labels: ["Total Naira Savings", "Total Dollar Savings"],
-  datasets: [
-    {
-      label: "Social Media Platforms",
-      backgroundColor: ["#08B29B", "#0553C8"],
-      hoverBackgroundColor: ["#08B29B", "#0553C8"],
-      data: [60, 40],
-      borderWidth: 0,
-      borderRadius: 0,
-      radius: "100%",
-      cutout: "80%",
-    },
-  ],
-};
 
-const ChartT = styled.div`
-  margin-top: -180px;
-`;
 
-const Charts = () => {
+const Charts = ({summaryInfo}) => {
+
+  const state = {
+    //   maintainAspectRatio: true,
+    labels: ["Total Naira Savings", "Total Dollar Savings"],
+    datasets: [
+      {
+        label: "Social Media Platforms",
+        backgroundColor: ["#08B29B", "#0553C8"],
+        hoverBackgroundColor: ["#08B29B", "#0553C8"],
+        data: [summaryInfo.totNaira, summaryInfo.totDollar],
+        borderWidth: 0,
+        borderRadius: 0,
+        radius: "100%",
+        cutout: "80%",
+      },
+    ],
+  };
+  
+  const ChartT = styled.div`
+    margin-top: -180px;
+  `;
   return (
     <ChartT>
       <Doughnut

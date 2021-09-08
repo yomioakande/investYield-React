@@ -7,7 +7,7 @@ import "../../assets/css/checkBox.css";
 import "../../assets/css/style.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
+import Loader from "../../common/Loader";
 const CreateSavings2 = ({ username, register }) => {
   const location = useLocation();
   const link = location.pathname.split("/");
@@ -30,7 +30,7 @@ const CreateSavings2 = ({ username, register }) => {
   //   2"earnInterest": true,
   //   2"frequency": 0,
   //   2"amount": 0,
-  //   1"target": 0, 
+  //   1"target": 0,
   //   1"endDate": "2021-08-30T23:27:32.168Z",
   //   2"imageRef": "string"
   // }
@@ -38,15 +38,15 @@ const CreateSavings2 = ({ username, register }) => {
   const [state, setState] = useState(initialValues);
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("A plan Name is Required"),
-    ccyCode: Yup.string().required("A plan Name is Required"),
-    lastName: Yup.string().required("Pick the Currency to save in"),
+    name: Yup.string().required("Enter a Plan name"),
+    ccyCode: Yup.string().required("Select a Currrency Type"),
     target: Yup.string().required("A target amount is required"),
     startDate: Yup.string().required("Enter a Date"),
     endDate: Yup.string().required("Enter a Date"),
   });
 
   const onSubmit = (values, onSubmitProps) => {
+    setloading(true);
     const obj = {
       name: formik.values.name,
       ccyCode: formik.values.ccyCode,
@@ -59,17 +59,21 @@ const CreateSavings2 = ({ username, register }) => {
     // register(obj, "/api/v1/identity/register", "/auth/signup2");
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
+    // setloading(false);
   };
 
   const formik = useFormik({
     initialValues,
     onSubmit,
-    // validationSchema,
+    validationSchema,
     validateOnMount: true,
   });
 
+  console.log(formik.values);
+
   return (
     <>
+      {loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row justify-content-center">
@@ -92,9 +96,9 @@ const CreateSavings2 = ({ username, register }) => {
                             <input
                               type="text"
                               className="text-field-profile"
-                              name={"name"}
+                              name="name"
                               onChange={formik.handleChange}
-                              // {...formik.getFieldProps("name")}
+                              {...formik.getFieldProps("name")}
                               placeholder={`e.g ${username}'s ${name} plan`}
                             />
                             <label
@@ -104,6 +108,11 @@ const CreateSavings2 = ({ username, register }) => {
                             >
                               Goal Name
                             </label>
+                            {formik.touched.name && formik.errors.name && (
+                              <p className="text-danger font-sm error1 font-weight-bold">
+                                {formik.errors.name}
+                              </p>
+                            )}
                           </div>
                         </div>
                         <div class="mt-4">
@@ -134,13 +143,18 @@ const CreateSavings2 = ({ username, register }) => {
                                   <input
                                     type="radio"
                                     name="ccyCode"
-                                    // checked={formik.values.ccyCode === 1}
                                     value={"1"}
                                     onChange={formik.handleChange}
                                     // {...formik.getFieldProps("ccyCode")}
                                   />
                                   <span class="text-center">₦ Naira</span>
                                 </label>
+                                {formik.touched.ccyCode &&
+                                  formik.errors.ccyCode && (
+                                    <p className="text-danger font-sm error1 font-weight-bold">
+                                      {formik.errors.ccyCode}
+                                    </p>
+                                  )}
                               </div>
                             </div>
                           </div>
@@ -150,14 +164,18 @@ const CreateSavings2 = ({ username, register }) => {
                             Set a target amount for your {name} goal
                           </label>
                           <input
-                            type="text"
+                            type="number"
                             className="text-field"
-                            name={"target"}
-                            // value={}
+                            name="target"
                             onChange={formik.handleChange}
-                            // {...formik.getFieldProps("target")}
+                            {...formik.getFieldProps("target")}
                             placeholder="Target Amount"
                           />
+                          {formik.touched.target && formik.errors.target && (
+                            <p className="text-danger font-sm error1 font-weight-bold">
+                              {formik.errors.target}
+                            </p>
+                          )}
                         </div>
 
                         <div className="form-group">
@@ -169,6 +187,11 @@ const CreateSavings2 = ({ username, register }) => {
                             value={formik.values.startDate}
                             onChange={formik.handleChange}
                           />
+                          {formik.touched.startDate && formik.errors.startDate && (
+                            <p className="text-danger font-sm error1 font-weight-bold">
+                              {formik.errors.startDate}
+                            </p>
+                          )}
                         </div>
 
                         <div className="form-group">
@@ -180,6 +203,11 @@ const CreateSavings2 = ({ username, register }) => {
                             name={"endDate"}
                             onChange={formik.handleChange}
                           />
+                          {formik.touched.endDate && formik.errors.endDate && (
+                            <p className="text-danger font-sm error1 font-weight-bold">
+                              {formik.errors.endDate}
+                            </p>
+                          )}
                         </div>
                         <div className="row mt-4 align-items-center justify-content-end">
                           <div className="col-lg-8">
@@ -192,10 +220,7 @@ const CreateSavings2 = ({ username, register }) => {
                               <div className="col-lg-6">
                                 <input
                                   type="submit"
-                                  // onClick={()=>alert('err')}
-                                  // disabled={
-                                  //   !formik.isValid || formik.isSubmitting
-                                  // }
+                                  disabled={!formik.isValid || formik.isSubmitting}
                                   className="btn login-submit"
                                   value="NEXT"
                                 />

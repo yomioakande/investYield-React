@@ -131,12 +131,12 @@ const Index = () => {
             </div>
           </div>
           <div className="row mt-4">
-            <MenuBar image={userIcon} menuText={" My Account Settings"} link={"/app/account"}/>
+            <MenuBar image={userIcon} menuText={" My Account Settings"} link={"/app/account/profile"}/>
             <MenuBar image={supportIcon} menuText={"Support"} link={"/app/account/support"} />
             <MenuBar image={settings} menuText={"My Card and Bank Settings"} link={""}/>
-            <MenuBar image={referIcon} menuText={"Refer and Earn"} />
+            <MenuBar image={referIcon} menuText={"Refer and Earn"} link={"/app/account/refer"} />
             <MenuBar image={beneficiary} menuText={"Manage Beneficiaries"} link={"/app/account/beneficiary"}/>
-            <MenuBar image={securityIcon} menuText={"My Security Settings"} link={""} />
+            <MenuBar image={securityIcon} menuText={"My Security Settings"} link={"/app/account/changepassword"} />
 
           </div>
         </div>
