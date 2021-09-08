@@ -63,7 +63,7 @@ const MyPurse2 = () => {
     validateOnMount: true,
   });
 
-  console.log(formik.values);
+//   console.log(formik.values);
 
   return (
     <>
