@@ -1,59 +1,38 @@
-import React from "react";
-import styled from "styled-components";
-import Select from "react-select";
-// import callIcon from "../../assets/images/callIconBlue.svg";
-// import mailIcon from "../../assets/images/mailIconBlue.svg";
-// import locationBlue from "../../assets/images/locationIconBlue.svg";
-// import FAQ from "../../assets/images/FAQIcon.svg";
-// import termIcon from "../../assets/images/termsIcon.svg";
+import React, { useState, useEffect } from "react";
+import uploadImg from "../../assets/images/uploadImg.svg";
+import cloudUpload from "../../assets/images/upload-cloud1.svg";
+import Style from "./style";
+import Loader from "../../common/Loader";
+import { connect } from "react-redux";
+import { usersActions } from "../../redux/actions";
+import { format, compareAsc } from "date-fns";
+const Profile = ({ getData }) => {
+  const [profile, setProfile] = useState({});
+  const [loading, setloading] = useState(false);
 
-const Profile = () => {
-  const options = [
-    { value: "date", label: "Date Posted" },
-    { value: "views", label: "No. of Views" },
-    { value: "shares", label: "No. of Shares" },
-  ];
+  useEffect(() => {
+    (async function dataInfo() {
+      setloading(true);
+      const data = await getData("/api/v1/user/profile").then();
+      setProfile(data);
+      console.log("profile", profile);
+      setloading(false);
+    })();
+    // eslint-disable-next-line
+  }, []);
 
-  const customStyles = {
-      
-    option: (provided, state) => ({
-      ...provided,
-      width: "100%",
-    //   height: "140%",
-      borderBottom: "1px solid #DDE9FB",
-      color: state.selectProps.menuColor,
-      paddingTop: 14,
-      paddingBottom: 14,
-      hover: "#DDE9FB",
-    }),
+  //   console.log(profile,"bobo")
+  //   console.log(new Date(profile.dateOfBirth))
 
-    menuList: (provided, state) => ({
-      paddingTop: 0,
-      paddingBottom: 0,
-      background: "#fff",
-      hover: "#DDE9FB",
-    }),
-
-    control: (base, state) => ({
-      ...base,
-      height:'4rem',
-      border: state.isFocused ? 0 : 0,
-      boxShadow: state.isFocused ? 0 : 0,
-      "&:hover": {
-        border: state.isFocused ? 0 : 0,
-      },
-    }),
-    indicatorSeparator: state => ({
-        display: 'none',
-      }),
-  };
+  // console.log()
   return (
     <>
+      {loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12">
-              <h5 className="get-started-header title-2">Account</h5>
+              <h5 className="get-started-header title-2">My Portfolio</h5>
               <div className="small-red-line mt-3"></div>
             </div>
           </div>
@@ -62,15 +41,25 @@ const Profile = () => {
               <div className="mt-4">
                 <div className="d-flex flex-wrap justify-content-between">
                   <div className="col-lg-3 px-0">
-                    <p className="text-blue mt-3">Account / Support</p>
+                    <p className="text-blue mt-3">
+                      My Portfolio / Profile Settings
+                    </p>
                   </div>
-                  <div className="col-lg-7 px-0 d-flex justify-content-end flex-wrap">
-                    <div className="col-lg-5 mt-2">
+                  <div
+                    className="
+                          col-lg-5
+                          px-0
+                          d-flex
+                          justify-content-between
+                          cg-3
+                        "
+                  >
+                    <div className="mt-2 flex-grow-1 w-auto">
                       <button className="btn btn-transfer">
                         Transfer Funds
                       </button>
                     </div>
-                    <div className="col-lg-5 mt-2">
+                    <div className="mt-2 flex-grow-1 w-auto">
                       <button className="btn btn-withdraw">
                         Withdraw Funds
                       </button>
@@ -80,237 +69,315 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <ProfileStyle>
-            <div className="row mt-4 rounded">
-              <div className="col-lg-12">
-                <div className="au-card h-100">
-                  <div className="d-flex flex-row">
-                    <h2>My Profile</h2>
-                    <h2>Next of Kin</h2>
-                  </div>
-                  <div className="profile-details">
-                    <div className="name">
-                      <p className="title1">Your Full Name</p>
-                      <div className="input-bg">
-                        <p className="input-title">First Name</p>
-                        <input type="text" value="Raymond" />
-                      </div>
-
-                      <div className="input-bg">
-                        <p className="input-title">Last Name</p>
-                        <input type="text" value="Adewole" />
-                      </div>
+          <div className="row mt-4">
+            <div className="col-lg-12">
+              <div className="au-card h-100">
+                <div className="au-card-inner">
+                  <Style>
+                    <ul
+                      className="nav nav-pills mb-5"
+                      id="pills-tab"
+                      role="tablist"
+                    >
+                      <li className="nav-item">
+                        <a
+                          className="nav-link active"
+                          id="#pills-debitCard-tab"
+                          data-toggle="pill"
+                          href="#pills-debitCard"
+                          role="tab"
+                          aria-controls="#pills-debitCard"
+                          aria-selected="true"
+                        >
+                          My Profile
+                        </a>
+                      </li>
+                      <li className="nav-item">
+                        <a
+                          className="nav-link"
+                          id="pills-pills-withdrawalAccount-tab"
+                          data-toggle="pill"
+                          href="#pills-withdrawalAccount"
+                          role="tab"
+                          aria-controls="pills-withdrawalAccount"
+                          aria-selected="false"
+                        >
+                          Next of Kin
+                        </a>
+                      </li>
+                    </ul>
+                  </Style>
+                  <div className="tab-content" id="pills-tabContent">
+                    <div
+                      className="tab-pane fade show active"
+                      id="pills-home"
+                      role="tabpanel"
+                      aria-labelledby="pills-home-tab"
+                    >
+                      <form action="">
+                        <div className="d-flex justify-content-center">
+                          <div className="col-lg-6">
+                            <div className="d-flex justify-content-center align-items-center">
+                              <div>
+                                <input
+                                  type="file"
+                                  className="d-none"
+                                  id="fileUpload"
+                                />
+                                <a href="#" id="openFileUpload">
+                                  <img
+                                    src={uploadImg}
+                                    className="img-fluid"
+                                    alt="Upload Image"
+                                  />
+                                  <span>Tap to edit profile picture</span>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row mt-5">
+                          <div className="col-lg-3">
+                            <h5 className="mb-0 text-blue">Your Full Name</h5>
+                          </div>
+                          <div className="col-lg-9">
+                            <div className="row">
+                              <div className="col-lg-6">
+                                <div className="form-group position-relative">
+                                  <input
+                                    type="text"
+                                    className="text-field-profile"
+                                    value={profile.firstName}
+                                    disabled
+                                  />
+                                  <label
+                                    for="firstName"
+                                    className="font-sm position-absolute"
+                                    style={{ left: "15px", top: "15%" }}
+                                  >
+                                    First Name
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="col-lg-6">
+                                <div className="form-group position-relative">
+                                  <input
+                                    type="text"
+                                    className="text-field-profile"
+                                    value={profile.lastName}
+                                    disabled
+                                  />
+                                  <label
+                                    for="firstName"
+                                    className="font-sm position-absolute"
+                                    style={{ left: "15px", top: "15%" }}
+                                  >
+                                    Last Name
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row mt-4">
+                          <div className="col-lg-3">
+                            <h5 className="mb-0 text-blue">Contact Details</h5>
+                          </div>
+                          <div className="col-lg-9">
+                            <div className="row">
+                              <div className="col-lg-6">
+                                <div className="form-group position-relative">
+                                  <input
+                                    type="text"
+                                    className="text-field-profile"
+                                    value={profile.email}
+                                    disabled
+                                  />
+                                  <label
+                                    for="firstName"
+                                    className="font-sm position-absolute"
+                                    style={{ left: "15px", top: "15%" }}
+                                  >
+                                    Email Address
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="col-lg-6">
+                                <div className="form-group position-relative">
+                                  <input
+                                    type="text"
+                                    className="text-field-profile"
+                                    value={profile.phoneNumber}
+                                    disabled
+                                  />
+                                  <label
+                                    for="firstName"
+                                    className="font-sm position-absolute"
+                                    style={{ left: "15px", top: "15%" }}
+                                  >
+                                    Phone Number
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row mt-4">
+                          <div className="col-lg-3">
+                            <h5 className="mb-0 text-blue">
+                              Date of birth and Residential details
+                            </h5>
+                          </div>
+                          <div className="col-lg-9">
+                            <div className="row">
+                              <div className="col-lg-6">
+                                <div className="form-group position-relative">
+                                  <input
+                                    type="text"
+                                    className="text-field-profile"
+                                    value={format(
+                                      new Date(
+                                        profile.dateOfBirth
+                                          ? profile.dateOfBirth
+                                          : null
+                                      ),
+                                      "MM/dd/yyyy"
+                                    )}
+                                    disabled
+                                  />
+                                  <label
+                                    for="firstName"
+                                    className="font-sm position-absolute"
+                                    style={{ left: "15px", top: "15%" }}
+                                  >
+                                    Date of birth (dd / mm / yyyy)
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="col-lg-6">
+                                <div className="form-group">
+                                  <div className="custom-select text-field-profile  p-0">
+                                    <select className="text-field px-0">
+                                      <option value="0">
+                                        State of residence
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="mt-3">
+                              <textarea
+                                className="textAreaProfile"
+                                placeholder="Residential Address"
+                              ></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row mt-4">
+                          <div className="col-lg-3">
+                            <h5 className="mb-0 text-blue">
+                              Upload a valid means of identification
+                              (international passport, voters card, drivers
+                              license, NIN).
+                            </h5>
+                          </div>
+                          <div className="col-lg-9">
+                            <div className="row">
+                              <div className="col-lg-12">
+                                <div className="form-group position-relative">
+                                  <input
+                                    type="file"
+                                    className="d-none"
+                                    id="fileUpload"
+                                  />
+                                  <a
+                                    href="#"
+                                    id="openFileUpload"
+                                    className="
+                                          upload-field-profile
+                                          d-flex
+                                          justify-content-between
+                                          align-items-center
+                                        "
+                                  >
+                                    <h6 className="mb-0">
+                                      Upload a means of identification
+                                    </h6>
+                                    <img
+                                      src={cloudUpload}
+                                      className="img-fluid"
+                                      alt="Upload Image"
+                                    />
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row mt-4">
+                          <div className="col-lg-3">
+                            <h5 className="mb-0 text-blue">
+                              Please enter your password for security purpose
+                            </h5>
+                          </div>
+                          <div className="col-lg-9">
+                            <div className="row">
+                              <div className="col-lg-12">
+                                <div className="form-group">
+                                  <input
+                                    type="password"
+                                    className="text-field-profile2"
+                                    placeholder="Password"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row mt-4 justify-content-end">
+                          <div className="col-lg-9">
+                            <div className="row">
+                              <div className="col-lg-12">
+                                <div className="form-group">
+                                  <button className="btn login-submit">
+                                    UPDATE PROFILE
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
                     </div>
-
-                    <div className="details">
-                      <p className="title1">Contact Details</p>
-                      <div className="input-bg">
-                        <p className="input-title">Email Address</p>
-                        <input type="text" value="raymond.adewale@gmail.com" />
-                      </div>
-
-                      <div className="input-bg">
-                        <p className="input-title">Phone Number</p>
-                        <input type="text" value="09055275774" />
-                      </div>
-                    </div>
-
-                    <div className="others">
-                      <p className="title1">
-                        Date of birth and Residential details
-                      </p>
-                      <div className="input-bg">
-                        <p className="input-title">
-                          Date of birth (dd / mm / yyyy)
-                        </p>
-                        <input type="date" value="12 / 12 / 1988" />
-                      </div>
-                      <div className="selects">
-                      <Select
-                        options={options}
-                        styles={customStyles}
-                        isSearchable={false}
-                        className="select-field input-bg"
-                        //   placeholder={""}
-                        //   // name="frequency"
-                        //   value={defaultValue(
-                        //     options,
-                        //     formik.values.frequency
-                        //   )}
-                        //   onChange={(value) =>
-                        //     formik.setFieldValue("frequency", value.value)
-                        //   }
-                        //   autoFocus={true}
-                      />
-                      </div>
-                    </div>
-                    <div className="input-textarea">
-                      {/* <div>xx</div> */}
-                      <div className="area-text">
-                        <textarea placeholder="Residential Address" />
-                      </div>
-                    </div>
-
-                    <div className="upload">
-                      <p className="title1 ">
-                        Upload a valid means of identification (international
-                        passport, voters card, drivers license, NIN).
-                      </p>
-                      <div className="input-bg file-upload">
-                        <p className="input-title">
-                          {/* Date of birth (dd / mm / yyyy) */}
-                        </p>
-                        <input type="file" className="" />
-                      </div>
-                    </div>
-
-                    <div className="upload">
-                      <p className="title1">
-                        Please enter your password for security purpose
-                      </p>
-                      <div className="input-bg input-password">
-                        <input
-                          type="text"
-                          value=""
-                          className="password"
-                          placeholder={"Password"}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="profile-btn">
-                      <button className="">UPDATE PROFILE</button>
+                    <div
+                      className="tab-pane fade"
+                      id="pills-profile"
+                      role="tabpanel"
+                      aria-labelledby="pills-profile-tab"
+                    >
+                      ...
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </ProfileStyle>
+          </div>
         </div>
       </div>
     </>
   );
 };
 
-const ProfileStyle = styled.div`
-  background-color: #fff;
-  /* .rounded{
-    border: 34px solid #fff;
-    border-radius: 50px !important;
-} */
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  // const loading = state.authentication.loading;
+  return { alert, username };
+};
 
-  .profile-details {
-    margin-top: 5rem;
-  }
-  .name,
-  .details,
-  .others,
-  .upload {
-    display: flex !important;
-    justify-content: space-between;
-    align-items: space-between;
-    font-size: 1rem;
-    margin: 1rem 0;
-  }
+const actionCreators = {
+  getData: usersActions.getInfo,
+};
 
-  .name input,
-  .details input,
-  .others input {
-    background: #f0f0f0;
-    width: 100%;
-    border-radius: 20px;
-  }
-
-  .input-bg {
-    flex-basis: 35%;
-    background: #f0f0f0;
-    border: 1px solid #f0f0f0;
-    border-radius: 5px;
-    padding: 0.5rem;
-  }
-
-  .input-title {
-    font-size: 0.8rem;
-  }
-
-  .title1 {
-    flex-basis: 20%;
-    color: #0553c8;
-    font-size: 0.8rem;
-    font-style: normal;
-    font-weight: bold;
-  }
-
-
-.select-field{
-    padding:0;
-    height: 100%;
-    /* background:red !important; */
-}
-
-.selects{
-    flex-basis: 35%;
-    height: 100%;
-}
-
-
-  .input-textarea {
-  }
-  .area-text {
-    float: right;
-  }
-
-  .area-text textarea {
-    width: 730px;
-    height: 100px;
-    border: 1px solid #f0f0f0;
-    border-radius: 0.5rem;
-  }
-
-  textarea::placeholder {
-    padding: 1rem;
-  }
-
-  .upload {
-    clear: both;
-  }
-  //file upload_alt
-
-  .file-upload {
-    flex-basis: 75%;
-  }
-
-  //password
-  .password {
-    width: 100%;
-    height: 100%;
-  }
-
-  .input-password {
-    flex-basis: 75%;
-    padding: 0rem;
-    border: 1px solid #f0f0f0;
-  }
-
-  .input-password input::placeholder {
-    padding-left: 1rem;
-  }
-
-  .profile-btn {
-    float: right;
-    width: 75%;
-    background: #08b29b;
-    border-radius: 5px;
-    /* margin: 0 auto; */
-    text-align: center;
-    padding: 0.5rem;
-
-    font-family: Comfortaa;
-
-    button {
-      color: #fff;
-    }
-  }
-`;
-
-export default Profile;
+export default connect(mapStateToProps, actionCreators)(Profile);

@@ -67,7 +67,6 @@ const Modal1 = ({
 
       confirmBvnReg(obj, "/api/v1/user/bvn", success);
     }
-    // alertType &&
     show();
     onSubmitProps.setSubmitting(false);
   };
@@ -84,7 +83,6 @@ const Modal1 = ({
       setShowError(false);
     }, 4000);
   };
-
 
   return ReactDom.createPortal(
     <>

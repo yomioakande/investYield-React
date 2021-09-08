@@ -6,43 +6,48 @@ import * as Yup from "yup";
 const MyPurse3 = () => {
   const initialValues = {
     autoWithdraw: "",
-    drFreq: "",
-    DrDate: "",
-    drPct: 0,
-    DrDateOpt: '',
-    //   isAutomated: "",
+    drFreq: "0",
+    drDate: "",
+    drPct: "",
   };
 
   const validationSchema = Yup.object({
-    autoWithdraw: Yup.string().required("A plan Name is Required"),
-    drFreq: Yup.string().required("A plan Name is Required"),
-    DrDate: Yup.string().required("A target amount is required"),
+    autoWithdraw: Yup.string().required("A Plan Name is Required"),
+    drFreq: Yup.string().required("a date please"),
+    drDate: Yup.string().when("drFreq", {
+      is: "001",
+      then: Yup.string().required("Choose a Date"),
+    }),
     drPct: Yup.string().required("Enter a Date"),
-    amount: Yup.string().required("Enter a Date"),
   });
 
   const onSubmit = (values, onSubmitProps) => {
     const obj = {
-    //   name: values.name,
-    //   ccyCode: values.ccyCode,
-    //   startDate: values.startDate,
-    //   crFreq: values.crFreq,
-    //   amount: values.amount,
+      autoWithdraw: values.autoWithdraw,
+      drFreq: values.drFreq,
+      drDate: values.drDate,
+      drDateOpt:
+        values.drFreq !== "001" ? false : values.drDate !== "" ? true : false,
+      drPct: values.drPct,
+      isAutomated: true,
     };
-    console.log(obj);
-    // localStorage.setItem("savingsInfo", JSON.stringify(obj));
-    // window.location.href = "/app/savings/create3";
-    // register(obj, "/api/v1/identity/register", "/auth/signup2");
-    // onSubmitProps.resetForm();
-    // onSubmitProps.setSubmitting(false);
+    const firstObj = JSON.parse(localStorage.getItem("purseObj1"));
+    const purseMainObj = { ...firstObj, ...obj };
+    console.log(purseMainObj);
+    localStorage.setItem("mainPurseObj", JSON.stringify(purseMainObj));
+    window.location.href = "/app/savings/pursestep3";
+    onSubmitProps.resetForm();
+    onSubmitProps.setSubmitting(false);
   };
 
   const formik = useFormik({
     initialValues,
     onSubmit,
-    // validationSchema,
+    validationSchema,
     validateOnMount: true,
   });
+
+  console.log(formik.values);
 
   return (
     <>
@@ -70,7 +75,7 @@ const MyPurse3 = () => {
                                     id="radio1"
                                     type="radio"
                                     name="autoWithdraw"
-                                    value={false}
+                                    value={true}
                                     onChange={formik.handleChange}
                                   />
                                   <label for="radio1">
@@ -108,13 +113,12 @@ const MyPurse3 = () => {
                                   <input
                                     id="radio3"
                                     name="drFreq"
-                                    value={false}
+                                    value={7}
                                     onChange={formik.handleChange}
                                     type="radio"
                                   />
                                   <label for="radio3">
                                     <span>Every week</span>
-                                    {/* 7 */}
                                   </label>
                                 </div>
                               </div>
@@ -123,38 +127,69 @@ const MyPurse3 = () => {
                               <div className="form-group">
                                 <div className="pay-method-radio">
                                   <input
-                                    //   14
                                     id="radio4"
                                     name="drFreq"
-                                    value={false}
+                                    value={14}
                                     onChange={formik.handleChange}
                                     type="radio"
                                   />
                                   <label for="radio4">
                                     <span>Every two weeks</span>
                                   </label>
-                                  {/* everymonth 30 */}
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <div className="row cg-3 px-3">
                             <div className="w-auto">
                               <div className="form-group">
                                 <div className="pay-method-radio">
                                   <input
-                                    id="radio5"
-                                    name=" drFreq"
-                                    value={false}
+                                    id="radio7"
+                                    name="drFreq"
+                                    value={30}
                                     onChange={formik.handleChange}
                                     type="radio"
                                   />
-                                 
-                                  <label for="radio5">
+                                  <label for="radio7">
+                                    <span>Every month</span>
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="w-auto">
+                              <div className="form-group">
+                                <div className="pay-method-radio">
+                                  <input
+                                    id="radiov7"
+                                    name="drFreq"
+                                    value={"001"}
+                                    onChange={formik.handleChange}
+                                    type="radio"
+                                  />
+                                  <label for="radiov7">
                                     <span>Let me chooses a date</span>
                                   </label>
-                                  {/* DrDate=choose a date */}
                                 </div>
+                                {formik.values.drFreq === "001" ? (
+                                  <div className="form-group">
+                                    <h5 className="text-blue">
+                                      Choose a start date
+                                    </h5>
+                                    <input
+                                      type="date"
+                                      className="text-field mt-2"
+                                      name={"drDate"}
+                                      value={formik.values.drDate}
+                                      onChange={formik.handleChange}
+                                    />
+                                    {formik.touched.drDate &&
+                                      formik.errors.drDate && (
+                                        <p className="text-danger font-sm error1 font-weight-bold">
+                                          {formik.errors.drDate}
+                                        </p>
+                                      )}
+                                  </div>
+                                ) : null}
                               </div>
                             </div>
                           </div>
@@ -168,11 +203,13 @@ const MyPurse3 = () => {
                               <div className="form-group">
                                 <div className="pay-method-radio">
                                   <input
-                                    id="radio3"
-                                    name="radio-frequency"
+                                    id="radio3a"
+                                    name="drPct"
                                     type="radio"
+                                    value={20}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="radio3">
+                                  <label for="radio3a">
                                     <span>20%</span>
                                   </label>
                                 </div>
@@ -182,11 +219,13 @@ const MyPurse3 = () => {
                               <div className="form-group">
                                 <div className="pay-method-radio">
                                   <input
-                                    id="radio3"
-                                    name="radio-frequency"
+                                    id="radio3b"
+                                    name="drPct"
                                     type="radio"
+                                    value={60}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="radio3">
+                                  <label for="radio3b">
                                     <span>60%</span>
                                   </label>
                                 </div>
@@ -198,11 +237,13 @@ const MyPurse3 = () => {
                               <div className="form-group">
                                 <div className="pay-method-radio">
                                   <input
-                                    id="radio3"
-                                    name="radio-frequency"
+                                    id="radio3c"
+                                    name="drPct"
                                     type="radio"
+                                    value={100}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="radio3">
+                                  <label for="radio3c">
                                     <span>100%(All at once)</span>
                                   </label>
                                 </div>
@@ -212,11 +253,13 @@ const MyPurse3 = () => {
                               <div className="form-group">
                                 <div className="pay-method-radio">
                                   <input
-                                    id="radio3"
-                                    name="radio-frequency"
+                                    id="radio3d"
+                                    name="drPct"
                                     type="radio"
+                                    value={"0"}
+                                    onChange={formik.handleChange}
                                   />
-                                  <label for="radio3">
+                                  <label for="radio3d">
                                     <span>Let me specify</span>
                                   </label>
                                 </div>
@@ -228,6 +271,8 @@ const MyPurse3 = () => {
                               type="text"
                               className="text-field"
                               placeholder="Specify the percentage"
+                              name="drPct"
+                              onChange={formik.handleChange}
                             />
                             <div
                               className="position-absolute"

@@ -6,16 +6,18 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import trashCan from "../../assets/images/trashCan.svg";
+
+import cloudUpload from "../../assets/images/upload-cloud1.svg";
+
+import trashCan from "../../assets/images/trashCan.svg";
 // import homeImg from "../../assets/images/homeImg 2.png";
 
 const CreateSavings3 = (props) => {
   const [targetNum, setTargetNum] = useState("");
-  const [file, setFile] = useState("");
   const [base64, setBase64] = useState();
   const [imgName, setImgName] = useState("");
   const [imageRef, setImageRef] = useState("");
-
+  const [imageName, setImageName] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const firstData = JSON.parse(localStorage.getItem("savingsInfo"));
 
@@ -60,6 +62,7 @@ const CreateSavings3 = (props) => {
     const reader = new FileReader();
     if (reader !== undefined && file !== undefined) {
       reader.onloadend = () => {
+        setImageName(file.name);
         //file.name,file.size,reader.result
         const baseObj = {
           name: file.name,
@@ -91,21 +94,23 @@ const CreateSavings3 = (props) => {
     console.log(obj);
     const mainObj = { ...obj, ...firstData };
     // console.log(mainObj)
-    props.createCore(mainObj, "/api/v1/user/coreaccount", "/app/savings/create4");
-    // console.log({ ...obj, ...firstData });
-    // localStorage.setItem("savingsInfo", JSON.stringify({ ...obj, ...firstData }));
-    // window.location.href = "/app/savings/create3";
-    // register(obj, "/api/v1/identity/register", "/auth/signup2");
-    // onSubmitProps.resetForm();
+    props.createCore(
+      mainObj,
+      "/api/v1/user/coreaccount",
+      "/app/savings/create4"
+    );
+     // onSubmitProps.resetForm();
   };
 
   const formik = useFormik({
-     enableReinitialize:true,
+    enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
   });
+
+  const [path, setPath] = useState(formik.values.earnInterest);
 
   const freq = formik.values.frequency;
   useEffect(() => {
@@ -122,7 +127,7 @@ const CreateSavings3 = (props) => {
   }, [freq]);
 
   console.log(formik.values);
-
+  console.log("retro", imageName);
   return (
     <>
       <ToastContainer autoClose={1000} hideProgressBar />
@@ -206,6 +211,12 @@ const CreateSavings3 = (props) => {
                             </div>
                           </div>
                         </div>
+                        {formik.touched.frequency &&
+                          formik.errors.frequency && (
+                            <p className="text-danger font-sm error1 font-weight-bold">
+                              {formik.errors.frequency}
+                            </p>
+                          )}
                       </div>
                       <div className="mt-4">
                         <label className="text-blue weight-500">
@@ -245,6 +256,12 @@ const CreateSavings3 = (props) => {
                             </div>
                           </div>
                         </div>
+                        {formik.touched.earnInterest &&
+                          formik.errors.earnInterest && (
+                            <p className="text-danger font-sm error1 font-weight-bold">
+                              {formik.errors.earnInterest}
+                            </p>
+                          )}
                       </div>
                       <div className="form-group mt-4">
                         <h5 className="text-blue weight-500">
@@ -255,12 +272,12 @@ const CreateSavings3 = (props) => {
                           type="text"
                           className="text-field mt-2"
                           name="amount"
-                          value={formik.values.amount +"(N)"}
-                      disabled
+                          value={formik.values.amount + "(N)"}
+                          disabled
                         />
                         <div className="d-flex justify-content-end mt-2">
                           <h6 className="text-danger weight-600">
-                            Target amount: ₦ 500,000.00 for 303 days.
+                            {/* Target amount: ₦ 500,000.00 for 303 days. */}
                           </h6>
                         </div>
                       </div>
@@ -269,17 +286,31 @@ const CreateSavings3 = (props) => {
                           Would you like to upload an image?
                         </label>
                         <div className="img-upload-div d-flex justify-content-between align-items-center px-3">
-                          <h6 className="text-green">dreamhouse.jpg</h6>
-                          {/* <a href="#">
-                            <img
-                              src={trashCan}
-                              className="img-fluid"
-                              alt="can"
-                            />
-                          </a> */}
-                          <label htmlFor="fileInput" className="form-label">
-                            <i className="icon fa fa-plus"></i> Upload Picture
-                          </label>
+                          <h6 className="text-green">{imageName}</h6>
+                          {imageFile ? (
+                            <a href="#" style={{ flexBasis: "10%" }}>
+                              <img
+                                src={trashCan}
+                                className="img-fluid"
+                                alt="can"
+                                style={{ cursor: "pointer", width: "50%" }}
+                              />
+                            </a>
+                          ) : (
+                            <label
+                              htmlFor="fileInput"
+                              className="form-label"
+                              style={{ flexBasis: "10%" }}
+                            >
+                              <img
+                                src={cloudUpload}
+                                alt="cloudupload"
+                                style={{ cursor: "pointer", width: "50%" }}
+                              />
+                              {/* <i className="icon fa fa-plus" ></i>  */}
+                            </label>
+                          )}
+
                           <input
                             type="file"
                             className="form-control"
@@ -313,11 +344,11 @@ const CreateSavings3 = (props) => {
                               <input
                                 type="submit"
                                 value="NEXT"
-                                // href={"/app/savings/create4"}
+                                disabled={
+                                  !formik.isValid || formik.isSubmitting
+                                }
                                 className="btn login-submit"
                               />
-                              {/* NEXT */}
-                              {/* </a> */}
                             </div>
                           </div>
                         </div>

@@ -45,6 +45,7 @@ const First = (props) => {
   const alert = props.alert;
   const onSubmit = (values, onSubmitProps) => {
     setloading(true);
+    setShowError(true);
     const obj = {
       firstName: formik.values.firstName,
       lastName: formik.values.lastName,
