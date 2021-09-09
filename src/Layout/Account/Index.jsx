@@ -1,14 +1,14 @@
 import React from "react";
+import {Link} from "react-router-dom"
 import savings from "../../assets/images/savingschallenge.svg";
-
 import userIcon from "../../assets/images/userIcon.svg";
 import supportIcon from "../../assets/images/supportIcon.svg";
 import settings from "../../assets/images/cardSettingsIcon.svg";
 import referIcon from "../../assets/images/referIcon.svg";
 import beneficiary from "../../assets/images/mgBeneficiariesIcon.svg";
 import securityIcon from "../../assets/images/securityIcon.svg";
-
 import MenuBar from "../Account/MenuBar";
+
 
 const Index = () => {
   return (
@@ -46,9 +46,10 @@ const Index = () => {
                 <div className="au-card-inner w-100">
                   <div className="row align-items-center justify-content-center">
                     <div className="col-lg-7 profile-cards col-md-6">
-                      <canvas id="myChart" width="800" height="550"></canvas>
+                      {/* <canvas id="myChart" width="800" height="550"></canvas> */}
                     </div>
                     <div className="col-lg-5 w-auto profile-cards col-md-4 mt-3">
+                      <Link to="/app/account/myportfolio" style={{color:"#0553C8", textDecoration:"underline",fontWeight:"bold"}}>View My Portfolio</Link>
                       <ul className="pie-text mt-3">
                         <li className="mb-3 text-green">
                           <p>Total Naira Savings</p>

@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 
 const First = (props) => {
-  const [loading, setloading] = useState(false);
+  // const [loading, setloading] = useState(false);
   const [showError, setShowError] = useState(true);
   const initialValues = {
     firstName: "",
@@ -42,9 +42,9 @@ const First = (props) => {
       "Password is too short - should be 5 chars minimum."
     ),
   });
-  const alert = props.alert;
+  // const alert = props.alert;
   const onSubmit = (values, onSubmitProps) => {
-    setloading(true);
+    // setloading(true);
     setShowError(true);
     const obj = {
       firstName: formik.values.firstName,

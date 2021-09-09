@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { dateConv } from "../../helpers";
-const CreateSavings4 = () => {
-  const coreDetails = JSON.parse(localStorage.getItem("core"));
-  const [core, setCore] = useState(coreDetails);
+
+import { connect } from "react-redux";
+import { usersActions } from "../../redux";
+const CreateSavings4 = (props) => {
+  const [finalVal, setFinalVal] = useState("");
+  const core = JSON.parse(localStorage.getItem("core"));
   console.log(core);
+
+  console.log(core.ccyCode);
+  useEffect(() => {
+    const get = async () => {
+      const getFinalValue = await props.getTargetValue(
+        "/api/v1/util/future_value",
+        core.target,
+        core.frequency,
+        "0201",
+        core.ccyCode
+      );
+      console.log(getFinalValue);
+      setFinalVal(getFinalValue.value);
+    };
+
+    get();
+  }, []);
 
   const main1 =
     new Date(core.endDate).getTime() - new Date(core.startDate).getTime();
@@ -15,6 +35,18 @@ const CreateSavings4 = () => {
       style: "currency",
       currency: core.ccyCode === "1" ? "NGN" : "USD",
     }).format(number);
+
+  const convertfreq = (freq) => {
+    if (freq === "1") {
+      return "daily";
+    } else if (freq === "7") {
+      return "weekly";
+    } else if (freq === "30") {
+      return "monthly";
+    } else if (freq === "0") {
+      return "once";
+    } else return null;
+  };
 
   return (
     <>
@@ -36,7 +68,8 @@ const CreateSavings4 = () => {
                             Your group is saving:
                           </td>
                           <td className="text-right no-border-top">
-                            ₦ 5,000.00 / daily
+                            {currencyVal(core.amount)}/
+                            {convertfreq(core.frequency)}
                           </td>
                         </tr>
                         <tr>
@@ -73,7 +106,7 @@ const CreateSavings4 = () => {
                           <tr>
                             <td>Proposed Total Earnings:</td>
                             <td className="text-right">
-                              {currencyVal(core.amount)}
+                              {currencyVal(finalVal)}
                             </td>
                           </tr>
                         </tbody>
@@ -144,4 +177,16 @@ const CreateSavings4 = () => {
   );
 };
 
-export default CreateSavings4;
+const mapStateToProps = (state) => {
+  const { loggingIn, loading, alertType, message } = state.registration;
+  const { alert } = state;
+  return { loggingIn, alert, loading, alertType, message };
+};
+
+const actionCreators = {
+  getTargetValue: usersActions.getTargetValue,
+};
+
+export default connect(mapStateToProps, actionCreators)(CreateSavings4);
+
+// export default

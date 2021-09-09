@@ -12,7 +12,7 @@ import Loader from "../../common/Loader";
 const Index = (props) => {
   // const alert = props.alert;
 
-  const [loading, setloading] = useState(false);
+  // eslint-disable-next-line
   const [showError, setShowError] = useState(true);
 
   const initialValues = {

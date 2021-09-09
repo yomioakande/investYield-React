@@ -73,6 +73,12 @@ const Main = ({ getData }) => {
     // eslint-disable-next-line
   }, []);
 
+  const addCard = async () => {
+    setloading(true);
+    const getCard = await getData("/api/v1/user/card_url").then()
+    window.location.href = getCard.authUrl;
+  };
+
   return (
     <>
       {loading && <Loader />}
@@ -159,6 +165,8 @@ const Main = ({ getData }) => {
                 <div className="au-card-inner">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">Create A Savings Plan</h3>
+                    {/* <button onClick={()=>addCard()}>Test</button> */}
+                    {/* <a href="www.google.com">sd</a> */}
                     <Link to="/app/savings/create" className="au-btn-link">
                       View more
                     </Link>
@@ -208,7 +216,10 @@ const Main = ({ getData }) => {
                   </div>
 
                   <div className="row px-3 cg-3 mt-4">
-                    <Link to="/app/savings/mypurse" className="card-box d-flex flex-column mb-4">
+                    <Link
+                      to="/app/savings/mypurse"
+                      className="card-box d-flex flex-column mb-4"
+                    >
                       <div className="au-card-purse au-card-bg-create-purse flex-grow-1">
                         <div className="au-card-elements">
                           <img src={stash} alt="new" />
@@ -216,7 +227,6 @@ const Main = ({ getData }) => {
                         </div>
                       </div>
                     </Link>
-    
 
                     <Purse
                       namePurse={"Vibe Cash"}
@@ -331,22 +341,24 @@ const Main = ({ getData }) => {
                             </span>
                           </div>
                         </div>
-                      )} 
+                      )}
                     </div>
 
                     <div className="au-message__item">
                       <div className="au-message__item-inner px-2 py-2">
                         <div className="au-message__item-text">
                           {!todoList.cardLinked && (
-                            <Link
-                              to="/app/account/linkcard"
+                            <button
+                              style={{ textAlign: "left" }}
+                              onClick={() => addCard()}
+                              // to="/app/account/linkcard"
                               className="text px-0 mx-0"
                             >
                               <h5 className="name">Link your card</h5>
                               <p>
                                 Link your debit card for faster saving options.
                               </p>
-                            </Link>
+                            </button>
                           )}
                         </div>
                         <div className="au-message__item-time mt-0">

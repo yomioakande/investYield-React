@@ -12,6 +12,8 @@ import Congrats from "../../Layout/Congrats";
 
 const Fourth = (props) => {
   const [congratsModal1, setCongratsModal1] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showError, setShowError] = useState(true);
 
   const modalToggle2 = () => {
     setCongratsModal1(true);
@@ -32,13 +34,9 @@ const Fourth = (props) => {
     }),
   });
 
-  // const success = () => {
-  //   toast.success("You have been successfully registered", {
-  //     position: toast.POSITION.TOP_CENTER,
-  //   });
-  // };
-
   const onSubmit = (values, onSubmitProps) => {
+    setLoading(true);
+    setShowError(true);
     const obj = {
       pin: values.pin,
       platform: {
@@ -49,6 +47,7 @@ const Fourth = (props) => {
     props.register4(obj, "/api/v1/user/pin", modalToggle2);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
+    setLoading(true);
   };
 
   const formik = useFormik({
@@ -60,6 +59,12 @@ const Fourth = (props) => {
 
   const later = () => {
     window.location.href = "/app/dashboard";
+  };
+
+  const show = () => {
+    setTimeout(() => {
+      setShowError(false);
+    }, 3000);
   };
 
   return (
@@ -86,11 +91,13 @@ const Fourth = (props) => {
                     <h6 class="reg-p mb-3">
                       Create a 4-digit PIN for transactions on investYield.
                     </h6>
-                    {props.alertType && (
-                      <div className={`font-sm alert ${props.alertType}`}>
-                        {props.message}
-                      </div>
-                    )}
+                    {showError
+                      ? props.alertType && (
+                          <div className={`font-sm alert ${props.alertType}`}>
+                            {props.message}
+                          </div>
+                        )
+                      : null}
                     <form onSubmit={formik.handleSubmit}>
                       <div class="form-group mt-3">
                         <input
@@ -158,12 +165,11 @@ const Fourth = (props) => {
   );
 };
 
-// export default
-
 const mapStateToProps = (state) => {
+  //
   const { loggingIn, loading, alertType, message } = state.registration;
   const { alert } = state;
-  return { loggingIn, alert };
+  return { loggingIn, alert, loading, alertType, message };
 };
 
 const actionCreators = {

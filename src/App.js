@@ -5,13 +5,12 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-// import './styles/output.css'
-// import "./index.css"
+
 import {AuthRoutes,CreatePin} from "./routes/AuthRoutes";
 import DashboardRoutes from "./routes/DashboardRoutes";
 import { HomePageRoutes } from "./routes/HomePageRoutes";
 import {PrivateRoute,PublicRoute} from "./routes/PrivateRoutes";
-import Congrats from "./Layout/Congrats"
+// import Congrats from "./Layout/Congrats"
 // import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (

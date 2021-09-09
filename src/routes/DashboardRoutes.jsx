@@ -1,4 +1,6 @@
-import React,{Suspense} from "react";
+import React,{
+  // Suspense
+} from "react";
 import {
   // Route,
   Switch,
@@ -22,8 +24,9 @@ import Beneficiary from "../Layout/Account/Beneficiary";
 import ChangePassword from "../Layout/Account/ChangePassword";
 import linkCard from "../Layout/Account/LinkCard";
 import Refer from "../Layout/Account/Refer"
-
+import MyPortfolio from "../Layout/Account/MyPorfolio"
 import myProfile from "../Layout/Account/Profile";
+
 import myPurse from "../Layout/myPurse/index";
 import myPurse2 from "../Layout/myPurse/MyPurse2"
 import myPurse3 from "../Layout/myPurse/MyPurse3"
@@ -63,16 +66,19 @@ const DashboardRoutes = () => {
         <PrivateRoute path="/app/savings/pursestep2" component={myPurse3} />
        <PrivateRoute path="/app/savings/pursestep3" component={myPurse4} />
         <PrivateRoute path="/app/savings/mypurse" component={myPurse} /> 
-
         <PrivateRoute path="/app/savings" component={Savings} />
-        <PrivateRoute path="/app/account/support" component={Support} />
-        <PrivateRoute path="/app/account/beneficiary" component={Beneficiary} />
-        <PrivateRoute path="/app/account/linkcard" component={linkCard} />
+
 
         <PrivateRoute path="/app/blog/:id" component={SingleBlog} />
         <PrivateRoute path="/app/blog" component={Blog} />
 
         <PrivateRoute exact path="/app/account" component={Account} />
+
+        <PrivateRoute exact path="/app/account/myportfolio" component={MyPortfolio} />
+
+        <PrivateRoute path="/app/account/support" component={Support} />
+        <PrivateRoute path="/app/account/beneficiary" component={Beneficiary} />
+        <PrivateRoute path="/app/account/linkcard" component={linkCard} />
         <PrivateRoute path="/app/account/profile" component={myProfile} />
         <PrivateRoute path="/app/account/changepassword" component={ChangePassword} />
         <PrivateRoute path="/app/account/refer" component={Refer} />

@@ -40,16 +40,9 @@ function login(body) {
       };
 
       localStorage.setItem("user", JSON.stringify(user));
-
-      function success(user) {
-        return { type: userConstants.LOGIN_SUCCESS, user };
-      }
-      // dispatch(success(data));
       window.location.href = "/app/dashboard";
     } else {
       dispatch(failure(messages[0]));
-      // dispatch(alertActions.errorLogIn(messages[0]));
-      // dispatch(failure(data));
     }
   };
 
@@ -165,7 +158,7 @@ function register4(obj, apiUrl, func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
-    const { data, success, messages } = register;
+    const { success, messages } = register;
     if (apiUrl === "/api/v1/user/pin" && success === true) {
       func();
       // window.location.href = nextRoute;
@@ -224,21 +217,22 @@ function confirmBvnReg(obj, apiUrl, func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.putData(obj, apiUrl);
-console.log(register)
+    console.log(register);
     const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/bvn" && success === true) {
       dispatch(successReg(data?.challenge));
       func();
-    } 
-    else if(success === true){
-      console.log(data)
-      
-      dispatch(successReg(messages));
-      func();
     }
-    
-    else {
+
+    if (apiUrl === "/api/v1/user/profile" && success === true) {
+      dispatch(successReg());
+      func();
+    } else if (success === true) {
+      console.log(data);
+      func();
+      dispatch(successReg(messages));
      
+    } else {
       dispatch(failure(messages));
       return;
     }
@@ -250,7 +244,7 @@ function createStash(obj1, obj2, apiUrl, nextRoute) {
     dispatch(request());
     const register = await userService.postData(obj1, apiUrl);
 
-    const { data, success, messages } = register;
+    const { success, messages } = register;
     if (apiUrl === "/api/v1/user/stash" && success === true) {
       // dispatch(successReg(data?.reference));
       localStorage.setItem("stash", JSON.stringify({ ...obj1, ...obj2 }));
@@ -290,6 +284,19 @@ function postFeedBack(obj, apiUrl, func) {
       dispatch(successReg(data));
 
       func();
+    } else if (
+      apiUrl === "/api/v1/user/resolve_beneficiary" &&
+      success === true
+    ) {
+      console.log(data);
+      localStorage.setItem("addBenef", JSON.stringify({ ...data, ...obj }));
+      dispatch(successReg(messages));
+      func(true);
+    } else if (apiUrl === "/api/v1/user/beneficiary" && success === true) {
+      console.log(data);
+      // dispatch(alertActions.success(messages));
+      dispatch(successReg());
+      func();
     } else {
       dispatch(failure(messages));
       return;
@@ -297,13 +304,12 @@ function postFeedBack(obj, apiUrl, func) {
   };
 }
 
-
 function getInfo(apiUrl) {
   return async (dispatch) => {
     const getAll = await userService.getData(apiUrl);
 
     const { data, success, messages } = getAll;
-    // apiUrl === "/api/v1/user/summary" && 
+    // apiUrl === "/api/v1/user/summary" &&
     if (success === true) {
       return data;
     } else {
@@ -333,7 +339,7 @@ function getFrequency(apiUrl, firstQ, secondQ) {
     }
 
     if (apiUrl && success === true) {
-      console.log(data)
+      console.log(data);
       return data;
     } else {
       dispatch(alertActions.error(messages));
@@ -367,14 +373,15 @@ function getTargetValue(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
   };
 }
 
-function deleteData(apiUrl, id) {
+function deleteData(apiUrl, obj, func) {
   return async (dispatch) => {
     dispatch(request());
 
-    const deleteId = await userService.deleteData(apiUrl, id);
+    const deleteId = await userService.deleteData(apiUrl, obj);
     const { data, success, messages } = deleteId;
-
+    console.log(deleteId);
     if (apiUrl && success === true) {
+      func();
       return data;
     } else {
       dispatch(alertActions.error(messages));

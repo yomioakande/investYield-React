@@ -1,15 +1,10 @@
 import React from "react";
-
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
 import mail from "../../assets/images/mail1.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-
-//
-
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 const Pin = (props) => {
@@ -178,7 +173,7 @@ const Pin = (props) => {
                   <span className="px-2">
                     <img src={mail} alt="Mail" />
                   </span>
-                  <a href="#">help@investyield.com</a>
+                  <a href="*">help@investyield.com</a>
                 </div>
               </div>
             </div>

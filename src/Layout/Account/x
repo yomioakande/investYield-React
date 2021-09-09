@@ -314,3 +314,52 @@ const ProfileStyle = styled.div`
 `;
 
 export default Profile;
+
+
+
+
+ // useEffect(() => {
+  //   // dataInfo()
+  //   // (async function dataInfo() {
+  //   //   const data = await userService.getEstimate(
+  //   //     "/api/v1/util/estimate",
+  //   //     savingTarget,
+  //   //     freq,
+  //   //     targetTime,
+  //   //     "0201"
+  //   //   );
+  //   //   setTargetNum(data?.data?.estimate);
+  //   // })();
+  // }, []);
+
+
+   // console.log(savingTarget);
+  // console.log(targetTime);
+  // const nowDate = new Date();
+  // let cap = new Date(targetTime);
+  // let timeDifference = cap.getTime() - nowDate.getTime();
+  // var days = Math.floor(timeDifference / (1000 * 3600 * 24));
+
+
+
+   // "name": "string",
+  // "ccyCode": 0,
+  // "isAutomated": true,
+  // "startDate": "2021-09-06T14:55:34.882Z",
+  // "crFreq": 0, how often will you like members to save
+  // "amount": 0, how much will you like to save daily
+  // "autoWithdraw": tr  ue,
+  // "drDateOpt": true,
+  // "drDate": "2021-09-06T14:55:34.882Z",
+  // "drFreq": 0,
+  // "drPct": 0
+
+  // const initialValues2 = {
+  //     autoWithdraw:"",
+  //     drFreq:"",
+  //     DrDate:"",
+  //     drPct: 0,
+  //     DrDateOpt:"",
+  //     isAutomated: "",
+
+  //   };

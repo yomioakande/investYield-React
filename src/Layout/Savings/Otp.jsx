@@ -4,6 +4,7 @@ import { addAsterik } from "../../helpers";
 import { useFormik } from "formik";
 const Otp = () => {
   const getNumber = JSON.parse(localStorage.getItem("number")) || null;
+  //eslint-disable-next-line
   const [number, setNumber] = useState(addAsterik(getNumber));
   const initialValues = {
     token: "",

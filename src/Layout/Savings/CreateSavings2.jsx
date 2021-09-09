@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import { useLocation } from "react-router-dom";
@@ -8,6 +9,9 @@ import "../../assets/css/style.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
+
+import Modal from "./DateModal";
+
 const CreateSavings2 = ({ username, register }) => {
   const location = useLocation();
   const link = location.pathname.split("/");
@@ -16,26 +20,32 @@ const CreateSavings2 = ({ username, register }) => {
   username = username.name.split(" ")[0];
 
   const initialValues = {
-    name: "",
+    name: `${username}'s ${name} plan`,
     ccyCode: "",
     target: "",
     startDate: "",
     endDate: "",
   };
 
-  // {
-  //   1"name": "string",
-  //   1"ccyCode": 0,
-  //   *"isAutomated": true,
-  //   2"earnInterest": true,
-  //   2"frequency": 0,
-  //   2"amount": 0,
-  //   1"target": 0,
-  //   1"endDate": "2021-08-30T23:27:32.168Z",
-  //   2"imageRef": "string"
-  // }
   const [loading, setloading] = useState(false);
+
+  //eslint-disable-next-line
   const [state, setState] = useState(initialValues);
+
+  const [modalInOpen4, setModalInOpen4] = useState(false);
+  const modalToggle = () => {
+    setModalInOpen4(true);
+  };
+
+  const close = () => {
+    setModalInOpen4(false);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setModalInOpen4(true);
+    }, 2000);
+  }, []);
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Enter a Plan name"),
@@ -99,7 +109,7 @@ const CreateSavings2 = ({ username, register }) => {
                               name="name"
                               onChange={formik.handleChange}
                               {...formik.getFieldProps("name")}
-                              placeholder={`e.g ${username}'s ${name} plan`}
+                              // placeholder={`e.g ${username}'s ${name} plan`}
                             />
                             <label
                               for="firstName"
@@ -187,11 +197,12 @@ const CreateSavings2 = ({ username, register }) => {
                             value={formik.values.startDate}
                             onChange={formik.handleChange}
                           />
-                          {formik.touched.startDate && formik.errors.startDate && (
-                            <p className="text-danger font-sm error1 font-weight-bold">
-                              {formik.errors.startDate}
-                            </p>
-                          )}
+                          {formik.touched.startDate &&
+                            formik.errors.startDate && (
+                              <p className="text-danger font-sm error1 font-weight-bold">
+                                {formik.errors.startDate}
+                              </p>
+                            )}
                         </div>
 
                         <div className="form-group">
@@ -213,14 +224,19 @@ const CreateSavings2 = ({ username, register }) => {
                           <div className="col-lg-8">
                             <div className="row">
                               <div className="col-lg-6">
-                                <button className="btn btn-previous text-green">
+                                <Link
+                                  to="/app/savings/create"
+                                  className="btn btn-previous text-green"
+                                >
                                   PREVIOUS
-                                </button>
+                                </Link>
                               </div>
                               <div className="col-lg-6">
                                 <input
                                   type="submit"
-                                  disabled={!formik.isValid || formik.isSubmitting}
+                                  disabled={
+                                    !formik.isValid || formik.isSubmitting
+                                  }
                                   className="btn login-submit"
                                   value="NEXT"
                                 />
@@ -237,6 +253,7 @@ const CreateSavings2 = ({ username, register }) => {
           </div>
         </div>
       </div>
+      {modalInOpen4 && <Modal close={close} />}
     </>
   );
 };
