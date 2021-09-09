@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import leftArrow from "../../assets/images/left-arrow.svg";
-import check from "../../assets/images/check.svg";
+// import leftArrow from "../../assets/images/left-arrow.svg";
+// import check from "../../assets/images/check.svg";
 import "../../assets/css/style.css";
 
 import { connect } from "react-redux";

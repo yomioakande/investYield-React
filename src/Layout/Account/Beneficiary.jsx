@@ -4,13 +4,29 @@ import search from "../../assets/images/search-icon.svg";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import ModalB from "./ModalBeneficiary";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Beneficiary = ({ getData, deleteData }) => {
   const [beneficiary, setBeneficiary] = useState([]);
   // const [loading, setloading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   //DELETE BENEFICIARY DATA
+
+  const success = () => {
+    toast.success("Beneficiary successfully deleted!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    close();
+  };
   const deleteBenef = (id) => {
-    deleteData(id);
+    const obj = {
+      id,
+    };
+    console.log(obj);
+    const data = deleteData("/api/v1/user/beneficiary", obj, success);
+    dataInfo();
   };
 
   const modalToggle = () => {
@@ -21,13 +37,15 @@ const Beneficiary = ({ getData, deleteData }) => {
     setModalOpen(false);
   };
 
+  const dataInfo = async () => {
+    const data = await getData("/api/v1/user/beneficiary").then();
+    setBeneficiary(data);
+    console.log("retor", data);
+  };
+
   useEffect(() => {
-    (async function dataInfo() {
-      // setloading(true);
-      const data = await getData("/api/v1/user/beneficiaries").then();
-      setBeneficiary(data);
-    })();
-  }, [getData]);
+    dataInfo();
+  }, []);
 
   return (
     <>
@@ -137,17 +155,19 @@ const Beneficiary = ({ getData, deleteData }) => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={1000} hideProgressBar />
 
-      {modalOpen && <ModalB close={close} />}
+      {modalOpen && <ModalB dataInfo={dataInfo} close={close} />}
     </>
   );
 };
 
 const mapStateToProps = (state) => {
-  const { alert } = state;
+  // const { alert } = state;
   const username = state.authentication.user;
+  const { type, message } = state.alert;
   // const loading = state.authentication.loading;
-  return { alert, username };
+  return { type, message, username };
 };
 
 const actionCreators = {

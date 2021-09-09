@@ -14,9 +14,6 @@ const Help = (props) => {
     setCongratsModal(true);
   };
 
-  const close = () => {
-    setCongratsModal(false);
-  };
   const initialValues = {
     frequency: "",
     mEarn: "",
@@ -61,6 +58,8 @@ const Help = (props) => {
     validateOnMount: true,
   });
 
+  console.log(formik.values);
+
   return (
     <>
       <div className="section__content section__content--p30">
@@ -73,7 +72,9 @@ const Help = (props) => {
                   <div className="small-red-line"></div>
                   <div className="mt-5">
                     <>
-                      <button onClick={() => modalToggle1()}>Test Here</button>
+                      <button type="button" onClick={() => modalToggle1()}>
+                        Test Here
+                      </button>
                       <form onSubmit={formik.handleSubmit}>
                         {active === "1" ? (
                           <>
@@ -108,6 +109,7 @@ const Help = (props) => {
                                     id="styled-checkbox-2"
                                     value={7}
                                     onChange={formik.handleChange}
+                                    // checked={formik.values.ccyCode === 7}
                                   />
                                   <label htmlFor="styled-checkbox-2">
                                     Weekly
@@ -121,6 +123,7 @@ const Help = (props) => {
                                     type="radio"
                                     value={30}
                                     onChange={formik.handleChange}
+                                    // checked={formik.values.ccyCode === 30}
                                   />
                                   <label htmlFor="styled-checkbox-3">
                                     Monthly
@@ -134,6 +137,7 @@ const Help = (props) => {
                                     type="radio"
                                     value={90}
                                     onChange={formik.handleChange}
+                                    // checked={formik.values.ccyCode ===90}
                                   />
                                   <label htmlFor="styled-checkbox-4">
                                     Quarterly
@@ -147,6 +151,7 @@ const Help = (props) => {
                                     type="radio"
                                     value={0}
                                     onChange={formik.handleChange}
+                                    // checked={formik.values.ccyCode === 0}
                                   />
                                   <label htmlFor="styled-checkbox-5">
                                     Never
@@ -157,6 +162,7 @@ const Help = (props) => {
                                 <div className="col-lg-5">
                                   <div className="">
                                     <button
+                                      type="button"
                                       onClick={() => setActive("2")}
                                       className="btn login-submit"
                                     >
@@ -261,6 +267,7 @@ const Help = (props) => {
                                   <div className="row align-items-center">
                                     <div className="col-lg-6">
                                       <button
+                                        type="button"
                                         onClick={() => setActive("1")}
                                         className="btn  text-green"
                                       >
@@ -269,6 +276,7 @@ const Help = (props) => {
                                     </div>
                                     <div className="col-lg-6">
                                       <button
+                                        type="button"
                                         onClick={() => setActive("3")}
                                         className="btn login-submit"
                                       >
@@ -369,6 +377,7 @@ const Help = (props) => {
                                   <div className="row align-items-center">
                                     <div className="col-lg-6">
                                       <button
+                                        type="button"
                                         onClick={() => setActive("2")}
                                         className="btn text-green"
                                       >
@@ -377,6 +386,7 @@ const Help = (props) => {
                                     </div>
                                     <div className="col-lg-6">
                                       <button
+                                        type="button"
                                         className="btn login-submit"
                                         onClick={() => setActive("4")}
                                       >
@@ -478,6 +488,7 @@ const Help = (props) => {
                                   <div className="row align-items-center">
                                     <div className="col-lg-6">
                                       <button
+                                        type="button"
                                         onClick={() => setActive("3")}
                                         className="btn  text-green"
                                       >
@@ -486,6 +497,7 @@ const Help = (props) => {
                                     </div>
                                     <div className="col-lg-6">
                                       <button
+                                        type="button"
                                         onClick={() => setActive("5")}
                                         className="btn login-submit"
                                       >
@@ -546,14 +558,16 @@ const Help = (props) => {
                                   <div className="row align-items-center">
                                     <div className="col-lg-6">
                                       <button
+                                        type="button"
                                         onClick={() => setActive("4")}
-                                        className="btn  text-green"
+                                        className="btn text-green"
                                       >
                                         PREVIOUS
                                       </button>
                                     </div>
                                     <div className="col-lg-6">
                                       <button
+                                        type="button"
                                         onClick={() => setActive("6")}
                                         className="btn login-submit"
                                       >
@@ -655,6 +669,7 @@ const Help = (props) => {
                                   <div className="row align-items-center">
                                     <div className="col-lg-6">
                                       <button
+                                        type="button"
                                         onClick={() => setActive("5")}
                                         className="btn  text-green"
                                       >

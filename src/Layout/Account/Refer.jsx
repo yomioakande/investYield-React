@@ -59,7 +59,7 @@ const Refer = () => {
                             AAA-00198
                           </div>
                           <a
-                            href="#"
+                            href="*"
                             className="copy-referal-link px-3 d-flex align-items-center"
                           >
                             <img src={copy} className="img-fluid" alt="" />
@@ -70,7 +70,7 @@ const Refer = () => {
                         </div>
                         <div className="mt-80">
                           <a
-                            href="#"
+                            href="*"
                             className="share-referral-link d-flex justify-content-center align-items-center"
                           >
                             <img

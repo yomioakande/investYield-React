@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import percentageIcon from "../../assets/images/percentageIcon.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Loader from "../../common/Loader";
 
 const MyPurse3 = () => {
+  const [loading, setLoading] = useState(false);
   const initialValues = {
     autoWithdraw: "",
     drFreq: "0",
@@ -22,6 +24,7 @@ const MyPurse3 = () => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
+    setLoading(true);
     const obj = {
       autoWithdraw: values.autoWithdraw,
       drFreq: values.drFreq,
@@ -33,11 +36,12 @@ const MyPurse3 = () => {
     };
     const firstObj = JSON.parse(localStorage.getItem("purseObj1"));
     const purseMainObj = { ...firstObj, ...obj };
-    console.log(purseMainObj);
+    // console.log(purseMainObj);
     localStorage.setItem("mainPurseObj", JSON.stringify(purseMainObj));
     window.location.href = "/app/savings/pursestep3";
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
+    setLoading(false);
   };
 
   const formik = useFormik({
@@ -51,6 +55,7 @@ const MyPurse3 = () => {
 
   return (
     <>
+     {loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row justify-content-center">

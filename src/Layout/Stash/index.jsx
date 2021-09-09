@@ -6,7 +6,6 @@ import Loader from "../../common/Loader";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 const Index = ({ getFrequency, createStash, loading }) => {
-  const [frequency, setFrequency] = useState("");
   const [freqOptions, setFreqOptions] = useState([]);
 
   const initialValues = {
@@ -53,9 +52,10 @@ const Index = ({ getFrequency, createStash, loading }) => {
         ccy
       ).then();
 
-      const { code, interest } = datas;
+      const { interest } = datas;
       setFreqOptions(interest);
     })();
+    //eslint-disable-next-line
   }, [ccy]);
 
   const options = freqOptions.map((single, index) => {
@@ -74,7 +74,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
       paddingTop: 14,
       paddingBottom: 14,
       hover: "#DDE9FB",
-      zIndex: 9999,
+      // zIndex: 9999,
     }),
 
     menuList: (provided, state) => ({
@@ -82,6 +82,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
       paddingBottom: 0,
       background: "#fff",
       hover: "#DDE9FB",
+      // zIndex: 9999,
     }),
 
     control: (base, state) => ({
@@ -183,8 +184,13 @@ const Index = ({ getFrequency, createStash, loading }) => {
                           <label for="Amount" className="text-blue weight-500">
                             How long do you want to fix the money for?
                           </label>
-                          <div className="custom-select text-field p-0">
+                          <div
+                            style={{ zIndex: 99999 }}
+                            className="custom-select text-field p-0"
+                          >
                             <Select
+                              maxMenuHeight={5}
+                              // menuPlacement="bottom"
                               options={options}
                               styles={customStyles}
                               isSearchable={false}
@@ -220,7 +226,9 @@ const Index = ({ getFrequency, createStash, loading }) => {
                                 <input
                                   type="submit"
                                   value={"NEXT"}
-                                  disabled={!formik.isValid || formik.isSubmitting}
+                                  disabled={
+                                    !formik.isValid || formik.isSubmitting
+                                  }
                                   className="btn login-submit"
                                 />
                               </div>

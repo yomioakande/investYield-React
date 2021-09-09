@@ -12,9 +12,10 @@ import Loader from "../../common/Loader";
 // const numOfCakes = useSelector((state) => state);
 
 const Second = (props) => {
-  const [loading, setloading] = useState(false);
+  // const [loading, setloading] = useState(false);
   const [showError, setShowError] = useState(true);
   const getNumber = JSON.parse(localStorage.getItem("number")) || null;
+  //eslint-disable-next-line
   const [number, setNumber] = useState(addAsterik(getNumber));
 
   const initialValues = {
@@ -26,7 +27,7 @@ const Second = (props) => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
-    setloading(true);
+    // setloading(true);
     const userID = JSON.parse(localStorage.getItem("userReg")).id || null;
 
     const obj = {
@@ -65,7 +66,7 @@ const Second = (props) => {
     console.log(resendObj);
     props.resend(resendObj, "/api/v1/util/resendotp");
   };
-
+// eslint-disable-next-line
   const show = () => {
     setTimeout(() => {
       setShowError(false);

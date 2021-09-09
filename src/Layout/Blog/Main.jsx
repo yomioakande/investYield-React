@@ -114,10 +114,10 @@ const Main = () => {
                       <div class="row mt-3">
                         <div class="col-xl-2 col-lg-4">
                           <div class="d-flex justify-content-between">
-                            <a href="#">
+                            <a href="*">
                               <img src={red} alt="" />
                             </a>
-                            <a href="#">
+                            <a href="*">
                               <img
                                 src={blueShare}
                                 alt=""
@@ -134,7 +134,7 @@ const Main = () => {
               <div class="mt-4">
                 <h5 class="text-dark">You may also like</h5>
                 <div class="row mt-4">
-                  <a
+                  <a href="*"
                     class="
                       col-xl-4 col-lg-4 col-md-6 col-12
                       d-flex
@@ -211,7 +211,7 @@ const Main = () => {
                       </div>
                     </div>
                   </a>
-                  <a
+                  <a href="*"
                     class="
                       col-xl-4 col-lg-4 col-md-6 col-12
                       d-flex
@@ -287,7 +287,7 @@ const Main = () => {
                       </div>
                     </div>
                   </a>
-                  <a
+                  <a href="*"
                     class="
                       col-xl-4 col-lg-4 col-md-6 col-12
                       d-flex

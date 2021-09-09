@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 
 const Breakdown = (props) => {
-  // const [list, setList] = useState("");
+ 
   const [targetValue, setTargetValue] = useState("");
   const stash = JSON.parse(localStorage.getItem("stash"));
 
@@ -27,6 +27,7 @@ const Breakdown = (props) => {
       );
       setTargetValue(getTargetValue);
     })();
+    //eslint-disable-next-line
   }, [stash.amount, stash.tenor.code, stash.ccyCode]);
 
 
@@ -117,7 +118,7 @@ const Breakdown = (props) => {
 
                       <div className="form-group mt-4">
                         <a
-                          href="#"
+                          href="*"
                           className="au-btn-outline d-flex justify-content-center align-items-center"
                         >
                           Add a Card
@@ -129,14 +130,14 @@ const Breakdown = (props) => {
                           <div className="d-flex justify-content-between">
                             <div className="col-lg-6 px-0">
                               <a
-                                href="#"
+                                href="*"
                                 className="au-btn iy-btn-secondary text-danger"
                               >
                                 Cancel
                               </a>
                             </div>
                             <div className="col-lg-6 px-0">
-                              <a href="#" className="au-btn iy-btn-primary">
+                              <a href="*" className="au-btn iy-btn-primary">
                                 NEXT
                               </a>
                             </div>

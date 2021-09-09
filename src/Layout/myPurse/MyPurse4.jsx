@@ -4,36 +4,47 @@ import "../../assets/css/theme.css";
 import "../../assets/css/style.css";
 import { dateConv } from "../../helpers";
 
-
 const MyPurse4 = () => {
+  const purse = JSON.parse(localStorage.getItem("mainPurseObj"));
 
+  const currencyVal = (number) =>
+    new Intl.NumberFormat(purse.ccyCode === "1" ? "en-NG" : "en-US", {
+      style: "currency",
+      currency: purse.ccyCode === "1" ? "NGN" : "USD",
+    }).format(number);
 
-const purse= JSON.parse(localStorage.getItem("mainPurseObj"))
+  // console.log(new Date("2021-09-22").getDay());
 
+  const convertDebitFreq = (freq) => {
+    if (freq === "7") {
+      return "Every Week";
+    } else if (freq === "14") {
+      return "Every Two Weeks";
+    } else if (freq === "30") {
+      return "Every Month";
+    } else return `on ${freq}`;
+  };
 
-// const currencyVal = (number) =>
-// new Intl.NumberFormat(purse.ccyCode === "1" ? "en-NG" : "en-US", {
-//   style: "currency",
-//   currency: purse.ccyCode === "1" ? "NGN" : "USD",
-// }).format(number);
+  const convertfreq = (freq) => {
+    if (freq === "1") {
+      return "daily";
+    } else if (freq === "7") {
+      return "weekly";
+    } else if (freq === "30") {
+      return "monthly";
+    } else if (freq === "0") {
+      return "once";
+    } else return null;
+  };
 
-// console.log()
-function daysToWeeks(percent,days){
-if(purse.drFreq!="001"){
-    return `${percent}% / Every ${Math.floor(days/7)} weeks`
-}
-    else{
-return `${percent}% / Every ${Math.floor(days/7)} weeks`
-
+  function daysToWeeks(percent, freq1, freq2) {
+    if (purse.drFreq !== "001") {
+      return `${percent}%/ ${convertDebitFreq(freq1)}`;
+    } else {
+      return `${percent}% ${convertDebitFreq(dateConv(freq2))}`;
     }
-
-     
-
-}
-
-console.log(new Date('2021-09-22').getDay())
-
-console.log(daysToWeeks(purse.drPct,purse.drFreq))
+  }
+  // console.log(daysToWeeks(purse.drPct, purse.drFreq, purse.drDate));
 
   return (
     <>
@@ -43,7 +54,7 @@ console.log(daysToWeeks(purse.drPct,purse.drFreq))
             <div className="col-lg-6">
               <div className="au-card">
                 <div className="au-card-inner">
-                  <a href="#" className="d-flex align-items-center">
+                  <a href="*" className="d-flex align-items-center">
                     <img
                       src={withdrawal}
                       className="img-fluid"
@@ -67,7 +78,9 @@ console.log(daysToWeeks(purse.drPct,purse.drFreq))
                   <div className="savings-breakdown p-4 px-lg-5">
                     <div className="savings-breakdown-row text-black">
                       <p>You are saving:</p>
-                      <p className="font-weight-bold">N1000/daily</p>
+                      <p className="font-weight-bold">
+                        {currencyVal(purse.amount)}/{convertfreq(purse.crFreq)}
+                      </p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
@@ -77,12 +90,16 @@ console.log(daysToWeeks(purse.drPct,purse.drFreq))
 
                     <div className="savings-breakdown-row text-black">
                       <p>Start Date</p>
-                      <p className="font-weight-bold">{dateConv(purse.startDate)}</p>
+                      <p className="font-weight-bold">
+                        {dateConv(purse.startDate)}
+                      </p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
                       <p>Autowithdrawal:</p>
-                      <p className="font-weight-bold"></p>
+                      <p className="font-weight-bold">
+                        {daysToWeeks(purse.drPct, purse.drFreq, purse.drDate)}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -117,7 +134,7 @@ console.log(daysToWeeks(purse.drPct,purse.drFreq))
 
                       <div className="form-group mt-4">
                         <a
-                          href="#"
+                          href="*"
                           className="au-btn-outline d-flex justify-content-center align-items-center"
                         >
                           Add a Card
@@ -129,14 +146,14 @@ console.log(daysToWeeks(purse.drPct,purse.drFreq))
                           <div className="d-flex justify-content-between">
                             <div className="col-lg-6 px-0">
                               <a
-                                href="#"
+                                href="*"
                                 className="au-btn iy-btn-secondary text-danger"
                               >
                                 Cancel
                               </a>
                             </div>
                             <div className="col-lg-6 px-0">
-                              <a href="#" className="au-btn iy-btn-primary">
+                              <a href="*" className="au-btn iy-btn-primary">
                                 NEXT
                               </a>
                             </div>

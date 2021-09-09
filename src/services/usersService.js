@@ -176,14 +176,18 @@ async function putData(user, apiUrl) {
   }
 }
 
-async function deleteData(apiUrl, id) {
+async function deleteData(apiUrl, obj) {
   const requestOptions = {
     method: "DELETE",
-    headers: authHeader(),
+    headers: {
+     Authorization: authHeader()?.Authorization,
+     "Content-Type": "application/json"
+    },
+    body: JSON.stringify(obj),
   };
   try {
     const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}/${id}`,
+      `https://api-staging.investyield.ng:44377${apiUrl}`,
       requestOptions
     );
     const getData = await datas.json();

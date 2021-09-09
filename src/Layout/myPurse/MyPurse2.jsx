@@ -1,30 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
+import Loader from "../../common/Loader";
 const MyPurse2 = () => {
-  // "name": "string",
-  // "ccyCode": 0,
-  // "isAutomated": true,
-  // "startDate": "2021-09-06T14:55:34.882Z",
-  // "crFreq": 0, how often will you like members to save
-  // "amount": 0, how much will you like to save daily
-  // "autoWithdraw": tr  ue,
-  // "drDateOpt": true,
-  // "drDate": "2021-09-06T14:55:34.882Z",
-  // "drFreq": 0,
-  // "drPct": 0
-
-  // const initialValues2 = {
-  //     autoWithdraw:"",
-  //     drFreq:"",
-  //     DrDate:"",
-  //     drPct: 0,
-  //     DrDateOpt:"",
-  //     isAutomated: "",
-
-  //   };
-
+  const [loading, setLoading] = useState(false);
   const initialValues = {
     name: "",
     ccyCode: "",
@@ -42,6 +21,7 @@ const MyPurse2 = () => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
+    setLoading(true);
     const obj = {
       name: values.name,
       ccyCode: values.ccyCode,
@@ -54,6 +34,7 @@ const MyPurse2 = () => {
     window.location.href = "/app/savings/pursestep2";
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
+    setLoading(false);
   };
 
   const formik = useFormik({
@@ -63,10 +44,9 @@ const MyPurse2 = () => {
     validateOnMount: true,
   });
 
-//   console.log(formik.values);
-
   return (
     <>
+      {loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row justify-content-center">

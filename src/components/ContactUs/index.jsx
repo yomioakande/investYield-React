@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -12,7 +12,6 @@ import IGIcon from "../../assets/images/IGIcon.svg";
 import twitterIcon from "../../assets/images/twitterIcon.svg";
 // import {}
 const Index = () => {
-  
   const success = () => {
     toast.success("Submitted Successfully!", {
       position: toast.POSITION.TOP_CENTER,
@@ -25,7 +24,7 @@ const Index = () => {
     message: "",
   };
 
-  const [state, setState] = useState(initialValues);
+  // const [state, setState] = useState(initialValues);
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is Required"),
     email: Yup.string().email("Invalid email").required("Email is Required"),
@@ -43,7 +42,7 @@ const Index = () => {
         data: reqBody,
       });
       let data = res.data;
-    
+      success();
       return data;
     } catch (error) {
       // console.log(error.response);
@@ -63,8 +62,6 @@ const Index = () => {
     validationSchema,
     validateOnMount: true,
   });
-
-
 
   return (
     <main>

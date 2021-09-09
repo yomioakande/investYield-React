@@ -5,29 +5,132 @@ import Style from "./style";
 import Loader from "../../common/Loader";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
-import { format, compareAsc } from "date-fns";
-const Profile = ({ getData }) => {
+import { format } from "date-fns";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const Profile = ({
+  postImageBase64,
+  loading,
+  alertType,
+  message,
+  post,
+  getData,
+}) => {
   const [profile, setProfile] = useState({});
-  const [loading, setloading] = useState(false);
+  const [loading1, setloading1] = useState(false);
+  const [showError, setShowError] = useState(true);
+  const [imageRef, setImageRef] = useState("");
+  const [imageName, setImageName] = useState("");
+  const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
     (async function dataInfo() {
-      setloading(true);
+      setloading1(true);
       const data = await getData("/api/v1/user/profile").then();
       setProfile(data);
-      console.log("profile", profile);
-      setloading(false);
+      setloading1(false);
     })();
     // eslint-disable-next-line
   }, []);
 
-  //   console.log(profile,"bobo")
-  //   console.log(new Date(profile.dateOfBirth))
+  const initialValues = {
+    address: profile.address,
+    password: "",
+  };
+  const Schema = Yup.object({
+    address: Yup.string().required("Enter your Address"),
+    password: Yup.string().required("Enter your Password"),
+  });
 
-  // console.log()
+  const success = () => {
+    toast.success("Address Updated!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    // setloading(false);
+  };
+
+  const onSubmit = (values, onSubmitProps) => {
+    setShowError(true);
+    // setloading(true);
+    const obj = {
+      address: values.address,
+      password: values.password,
+    };
+    console.log("reaper", obj);
+    // console.log(props.putPassword)
+    post(obj, "/api/v1/user/profile", success);
+    onSubmitProps.resetForm();
+    onSubmitProps.setSubmitting(false);
+    show();
+  };
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues,
+    onSubmit,
+    validationSchema: Schema,
+    validateOnMount: true,
+  });
+  //
+
+  const show = () => {
+    setTimeout(() => {
+      setShowError(false);
+    }, 3000);
+  };
+
+  //CHANGE TO BASE64
+
+  const success2 = () => {
+    toast.success("Upload Successful!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    // setloading(false);
+  };
+  const onChanger = (e) => {
+    setImageFile(e.target.files[0]);
+    let file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = _handleReaderLoaded;
+      reader.readAsBinaryString(file);
+    }
+
+    const reader = new FileReader();
+    if (reader !== undefined && file !== undefined) {
+      reader.onloadend = () => {
+        setImageName(file.name);
+        //file.name,file.size,reader.result
+        const baseObj = {
+          name: file.name,
+          content: reader.result,
+        };
+        console.log(baseObj);
+        //eslint-disable-next-line
+        const postImageRef = postImageBase64(
+          baseObj,
+          "/api/v1/util/fileupload",
+          success2
+        ).then((data) => setImageRef(data));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const _handleReaderLoaded = (readerEvt) => {
+    //eslint-disable-next-line
+    let binaryString = readerEvt.target.result;
+    // setBase64(btoa(binaryString));
+  };
+
   return (
     <>
-      {loading && <Loader />}
+      <ToastContainer autoClose={1000} hideProgressBar />
+
+      {(loading1 || loading) && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">
@@ -45,15 +148,7 @@ const Profile = ({ getData }) => {
                       My Portfolio / Profile Settings
                     </p>
                   </div>
-                  <div
-                    className="
-                          col-lg-5
-                          px-0
-                          d-flex
-                          justify-content-between
-                          cg-3
-                        "
-                  >
+                  <div className="col-lg-5 px-0 d-flex justify-content-between cg-3">
                     <div className="mt-2 flex-grow-1 w-auto">
                       <button className="btn btn-transfer">
                         Transfer Funds
@@ -114,24 +209,33 @@ const Profile = ({ getData }) => {
                       role="tabpanel"
                       aria-labelledby="pills-home-tab"
                     >
-                      <form action="">
+                      <form onSubmit={formik.handleSubmit}>
                         <div className="d-flex justify-content-center">
                           <div className="col-lg-6">
                             <div className="d-flex justify-content-center align-items-center">
                               <div>
+                                {/* <button type="button" id="openFileUpload"> */}
                                 <input
                                   type="file"
                                   className="d-none"
                                   id="fileUpload"
+                                  onChange={(e) => onChanger(e)}
                                 />
-                                <a href="#" id="openFileUpload">
+                                <label
+                                  htmlFor="fileUpload"
+                                  className="form-label"
+                                  style={{ flexBasis: "10%" }}
+                                >
                                   <img
                                     src={uploadImg}
                                     className="img-fluid"
-                                    alt="Upload Image"
+                                    alt="Upload"
+                                    id="fileUpload"
                                   />
-                                  <span>Tap to edit profile picture</span>
-                                </a>
+                                  Tap to edit profile picture
+                                </label>
+                                {/* <span>Tap to edit profile picture</span> */}
+                                {/* </button> */}
                               </div>
                             </div>
                           </div>
@@ -267,11 +371,35 @@ const Profile = ({ getData }) => {
                               </div>
                             </div>
                             <div className="mt-3">
+                              {showError
+                                ? message !== null
+                                  ? alertType && (
+                                      <div
+                                        className={`font-sm alert ${alertType}`}
+                                      >
+                                        {message}
+                                      </div>
+                                    )
+                                  : null
+                                : null}
                               <textarea
                                 className="textAreaProfile"
                                 placeholder="Residential Address"
+                                // defaultValue={profile.firstName}
+                                // onLoad={() => {
+                                //   formik.setFieldValue('address', profile.address)
+                                //  }}
+                                // value={profile.address}
+                                name="address"
+                                {...formik.getFieldProps("address")}
                               ></textarea>
                             </div>
+                            {formik.touched.address &&
+                              formik.errors.address && (
+                                <p className="text-danger font-sm error1 font-weight-bold">
+                                  {formik.errors.address}
+                                </p>
+                              )}
                           </div>
                         </div>
                         <div className="row mt-4">
@@ -290,16 +418,15 @@ const Profile = ({ getData }) => {
                                     type="file"
                                     className="d-none"
                                     id="fileUpload"
+                                    onChange={(e) => onChanger(e)}
                                   />
-                                  <a
-                                    href="#"
-                                    id="openFileUpload"
-                                    className="
-                                          upload-field-profile
-                                          d-flex
-                                          justify-content-between
-                                          align-items-center
-                                        "
+                                  <label
+                                    htmlFor="fileUpload"
+                                    // type="button"
+                                    // // href="#"
+                                    // id="openFileUpload"
+                                    style={{ flexBasis: "10%" }}
+                                    className="upload-field-profile d-flex justify-content-between align-items-center"
                                   >
                                     <h6 className="mb-0">
                                       Upload a means of identification
@@ -307,9 +434,11 @@ const Profile = ({ getData }) => {
                                     <img
                                       src={cloudUpload}
                                       className="img-fluid"
-                                      alt="Upload Image"
+                                      alt="Upload"
+                                      id="fileUpload"
+                                      style={{ cursor: "pointer", width: "5%" }}
                                     />
-                                  </a>
+                                  </label>
                                 </div>
                               </div>
                             </div>
@@ -329,8 +458,16 @@ const Profile = ({ getData }) => {
                                     type="password"
                                     className="text-field-profile2"
                                     placeholder="Password"
+                                    name="password"
+                                    {...formik.getFieldProps("password")}
                                   />
                                 </div>
+                                {formik.touched.password &&
+                                  formik.errors.password && (
+                                    <p className="text-danger font-sm error1 font-weight-bold">
+                                      {formik.errors.password}
+                                    </p>
+                                  )}
                               </div>
                             </div>
                           </div>
@@ -340,9 +477,17 @@ const Profile = ({ getData }) => {
                             <div className="row">
                               <div className="col-lg-12">
                                 <div className="form-group">
-                                  <button className="btn login-submit">
+                                  <input
+                                    type="submit"
+                                    disabled={
+                                      !formik.isValid || formik.isSubmitting
+                                    }
+                                    className="btn login-submit"
+                                    value="UPDATE PROFILE"
+                                  />
+                                  {/* <button className="btn login-submit">
                                     UPDATE PROFILE
-                                  </button>
+                                  </button> */}
                                 </div>
                               </div>
                             </div>
@@ -371,13 +516,15 @@ const Profile = ({ getData }) => {
 
 const mapStateToProps = (state) => {
   const { alert } = state;
-  const username = state.authentication.user;
+  const { loading, alertType, message } = state.registration;
   // const loading = state.authentication.loading;
-  return { alert, username };
+  return { alert, alertType, message, loading };
 };
 
 const actionCreators = {
   getData: usersActions.getInfo,
+  post: usersActions.confirmBvnReg,
+  postImageBase64: usersActions.postImageBase64,
 };
 
 export default connect(mapStateToProps, actionCreators)(Profile);
