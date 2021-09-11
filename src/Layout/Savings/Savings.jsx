@@ -69,11 +69,11 @@ const Savings = ({ getData }) => {
                       <ul className="pie-text mt-3">
                         <li className="mb-3 text-green">
                           <p>Total Naira Savings</p>
-                          <p>₦10,000.00</p>
+                          {/* <p>₦10,000.00</p> */}
                         </li>
                         <li className="mb-3 text-blue">
                           <p>Total Dollar Savings</p>
-                          <p>₦10,000.00</p>
+                          {/* <p>₦10,000.00</p> */}
                         </li>
                       </ul>
                     </div>
@@ -282,7 +282,7 @@ const Savings = ({ getData }) => {
                     </div>
                     <div className="col-lg-4 d-flex flex-column flex-grow-1">
                       <Link
-                        to="/app/savings/create"
+                        to="/app/groupsavings"
                         className="card-box d-flex flex-column mb-4 w-100"
                       >
                         <div className="au-card-purse au-card-bg-create-group flex-grow-1">
@@ -291,7 +291,7 @@ const Savings = ({ getData }) => {
                             <div className="row justify-content-between align-items-center">
                               <div className="col-lg-9">
                                 <p className="text-light mb-0">
-                                  Create new individual savings
+                                  Create new group savings
                                 </p>
                                 <h6 className="font-sm mt-2 text-light">
                                   Save together and plan group experiences.

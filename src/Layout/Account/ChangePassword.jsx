@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
@@ -81,14 +82,20 @@ const ChangePassword = (props) => {
                   </div>
                   <div className="col-lg-5 px-0 d-flex justify-content-between cg-3 ">
                     <div className="mt-2 flex-grow-1 w-auto">
-                      <button className="btn btn-transfer">
+                      <Link
+                        to="/app/account/transfer"
+                        className="btn btn-transfer"
+                      >
                         Transfer Funds
-                      </button>
+                      </Link>
                     </div>
                     <div className="mt-2 flex-grow-1 w-auto">
-                      <button className="btn btn-withdraw">
+                      <Link
+                        to="/app/account/withdraw"
+                        className="btn btn-withdraw"
+                      >
                         Withdraw Funds
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

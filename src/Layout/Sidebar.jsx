@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import { usersActions } from "../redux/actions";
 
 const Sidebar = (props) => {
-
   return (
     <>
       {/* // <!-- MENU SIDEBAR--> */}
@@ -21,32 +20,52 @@ const Sidebar = (props) => {
         <div className="menu-sidebar__content js-scrollbar1">
           <nav className="navbar-sidebar">
             <ul className="list-unstyled navbar__list">
-              <li className="active mt-2 mb-3">
-                <NavLink className="js-arrow active" to="/app/dashboard">
+              <li className="mt-2 mb-3">
+                <NavLink
+                  className="js-arrow"
+                  activeClassName="activelink"
+                  to="/app/dashboard"
+                >
                   <Home className="mr-3" />
                   Home
                 </NavLink>
               </li>
               <li className="has-sub mb-3">
-                <NavLink className="js-arrow" to="/app/savings">
+                <NavLink
+                  className="js-arrow"
+                  activeClassName="activelink"
+                  to="/app/savings"
+                >
                   <Shield className="mr-3" />
                   Savings
                 </NavLink>
               </li>
               <li className="has-sub mb-3">
-                <NavLink className="js-arrow" to="/app/investment">
+                <NavLink
+                  className="js-arrow"
+                  activeClassName="activelink"
+                  to="/app/investment"
+                >
                   <Activity className="mr-3" />
                   Invest
                 </NavLink>
               </li>
               <li className="has-sub mb-3">
-                <NavLink className="js-arrow" to="/app/blog">
+                <NavLink
+                  className="js-arrow"
+                  activeClassName="activelink"
+                  to="/app/blog"
+                >
                   <File className="mr-3" />
                   Blog
                 </NavLink>
               </li>
               <li className="has-sub mb-3">
-                <NavLink className="js-arrow" to="/app/account">
+                <NavLink
+                  className="js-arrow"
+                  activeClassName="activelink"
+                  to="/app/account"
+                >
                   <User className="mr-3" />
                   Account
                 </NavLink>

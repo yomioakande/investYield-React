@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Link} from "react-router-dom"
 const MyPorfolio = () => {
   return (
     <>
@@ -13,10 +13,10 @@ const MyPorfolio = () => {
             </div>
             <div className="col-lg-5 d-flex justify-content-between cg-3">
               <div className="mt-2 flex-grow-1 w-auto">
-                <button className="btn btn-transfer">Transfer Funds</button>
+                <Link to="/app/account/transfer" className="btn btn-transfer">Transfer Funds</Link>
               </div>
               <div className="mt-2 flex-grow-1 w-auto">
-                <button className="btn btn-withdraw">Withdraw Funds</button>
+                <Link to="/app/account/withdraw" className="btn btn-withdraw">Withdraw Funds</Link>
               </div>
             </div>
           </div>
