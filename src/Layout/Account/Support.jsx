@@ -4,7 +4,7 @@ import mailIcon from "../../assets/images/mailIconBlue.svg";
 import locationBlue from "../../assets/images/locationIconBlue.svg";
 import FAQ from "../../assets/images/FAQIcon.svg";
 import termIcon from "../../assets/images/termsIcon.svg";
-
+import { Link } from "react-router-dom";
 const Support = () => {
   return (
     <>
@@ -25,14 +25,20 @@ const Support = () => {
                   </div>
                   <div className="col-lg-7 px-0 d-flex justify-content-end flex-wrap">
                     <div className="col-lg-5 mt-2">
-                      <button className="btn btn-transfer">
+                      <Link
+                        to="/app/account/transfer"
+                        className="btn btn-transfer"
+                      >
                         Transfer Funds
-                      </button>
+                      </Link>
                     </div>
                     <div className="col-lg-5 mt-2">
-                      <button className="btn btn-withdraw">
+                      <Link
+                        to="/app/account/withdraw"
+                        className="btn btn-withdraw"
+                      >
                         Withdraw Funds
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

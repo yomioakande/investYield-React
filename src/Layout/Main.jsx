@@ -75,7 +75,7 @@ const Main = ({ getData }) => {
 
   const addCard = async () => {
     setloading(true);
-    const getCard = await getData("/api/v1/user/card_url").then()
+    const getCard = await getData("/api/v1/user/card_url").then();
     window.location.href = getCard.authUrl;
   };
 

@@ -2920,6 +2920,14 @@ section {
   color: #666;
 }
 
+.activelink{
+  color: #08b29b !important;
+  background: #f5f7f7;
+  border-radius: 0px 5px 5px 0px;
+  transform: translateX(5px);
+  transition: all 0.3s ease-in-out;
+}
+
 .search-dropdown .search-dropdown__icon {
   position: absolute;
   top: 0;
