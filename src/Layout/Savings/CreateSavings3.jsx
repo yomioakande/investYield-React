@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
@@ -118,11 +118,11 @@ const CreateSavings3 = (props) => {
     setTargetNum(data?.data?.estimate);
   };
 
-  const [state, setState] = useState(initialValues);
-  const [amount1, setAmount1] = useState(targetNum);
+  // const [state, setState] = useState(initialValues);
+  // const [amount1, setAmount1] = useState(targetNum);
 
   const onChangers = (e) => {
-    const { value, name } = e.target;
+    const { value} = e.target;
     dataInfo(value);
   };
 
@@ -251,7 +251,7 @@ const CreateSavings3 = (props) => {
                                   type="radio"
                                   name="earnInterest"
                                   value={false}
-                                  onChange={onChangers}
+                                  // onChange={onChangers}
                                   onChange={formik.handleChange}
                                 />
                                 <span className="text-center">
@@ -373,8 +373,9 @@ const CreateSavings3 = (props) => {
 };
 
 const mapStateToProps = (state) => {
+  // alertType, message
   const { alert } = state;
-  const { loading, alertType, message } = state.registration;
+  const { loading } = state.registration;
   const username = state.authentication.user;
   return { alert, username, loading };
 };

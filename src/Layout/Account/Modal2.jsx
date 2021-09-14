@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDom from "react-dom";
 import modalclose from "../../assets/images/modal-close.svg";
 import { OVERLAY, ModalBox } from "./ModalBeneficiary";

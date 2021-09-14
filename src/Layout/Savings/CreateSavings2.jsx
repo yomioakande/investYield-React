@@ -9,8 +9,7 @@ import "../../assets/css/style.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
-
-import Modal from "./DateModal";
+// import Modal from "./DateModal";
 
 const CreateSavings2 = ({ username, register }) => {
   const location = useLocation();
@@ -32,18 +31,18 @@ const CreateSavings2 = ({ username, register }) => {
   //eslint-disable-next-line
   const [state, setState] = useState(initialValues);
 
-  const [modalInOpen4, setModalInOpen4] = useState(false);
-  const modalToggle = () => {
-    setModalInOpen4(true);
-  };
+  // const [modalInOpen4, setModalInOpen4] = useState(false);
+  // const modalToggle = () => {
+  //   setModalInOpen4(true);
+  // };
 
-  const close = () => {
-    setModalInOpen4(false);
-  };
+  // const close = () => {
+  //   setModalInOpen4(false);
+  // };
 
   useEffect(() => {
     setTimeout(() => {
-      setModalInOpen4(true);
+      // setModalInOpen4(true);
     }, 2000);
   }, []);
 

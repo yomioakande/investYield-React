@@ -8,7 +8,7 @@ import referIcon from "../../assets/images/referIcon.svg";
 import beneficiary from "../../assets/images/mgBeneficiariesIcon.svg";
 import securityIcon from "../../assets/images/securityIcon.svg";
 import MenuBar from "../Account/MenuBar";
-import Charts from "../Charts"
+// import Charts from "../Charts"
 
 const Index = () => {
   return (

@@ -43,7 +43,7 @@ const Index = () => {
                     </div>
                     <div className="col-lg-6 mt-4">
                       <a
-                        href="#"
+                        href="/"
                         className="create-public-group d-flex align-items-center"
                       >
                         <div>
@@ -63,7 +63,7 @@ const Index = () => {
                   <div className="row">
                     <div className="col-lg-6 mt-4">
                       <a
-                        href="#"
+                        href="/"
                         className="join-savings-challenge d-flex align-items-center"
                       >
                         <div>

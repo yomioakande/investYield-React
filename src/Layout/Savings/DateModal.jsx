@@ -17,11 +17,11 @@ const DateModal = ({ getFrequency, close, ccy }) => {
         "0103",
         1
       ).then();
-
       const { interest } = datas;
       setFreqOptions(interest);
       setloading(false);
     })();
+    // eslint-disable-next-line
   }, []);
 
   return ReactDom.createPortal(

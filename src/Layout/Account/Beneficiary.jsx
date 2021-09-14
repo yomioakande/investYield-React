@@ -25,7 +25,7 @@ const Beneficiary = ({ getData, deleteData }) => {
       id,
     };
     console.log(obj);
-    const data = deleteData("/api/v1/user/beneficiary", obj, success);
+    deleteData("/api/v1/user/beneficiary", obj, success);
     dataInfo();
   };
 
@@ -45,6 +45,7 @@ const Beneficiary = ({ getData, deleteData }) => {
 
   useEffect(() => {
     dataInfo();
+   // eslint-disable-next-line
   }, []);
 
   return (

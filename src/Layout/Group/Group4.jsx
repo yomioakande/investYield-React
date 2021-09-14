@@ -75,7 +75,7 @@ const Group4 = () => {
 
                       <div className="form-group mt-4">
                         <a
-                          href="#"
+                          href="/app/groupsavings4"
                           className="au-btn-outline d-flex justify-content-center align-items-center"
                         >
                           Add a Card
@@ -87,16 +87,16 @@ const Group4 = () => {
                           <div className="d-flex justify-content-between">
                             <div className="col-lg-6 px-0">
                               <a
-                                href="#"
+                                href="/app/groupsavings"
                                 className="au-btn iy-btn-secondary text-danger"
                               >
                                 Cancel
                               </a>
                             </div>
                             <div className="col-lg-6 px-0">
-                              <a href="#" className="au-btn iy-btn-primary">
+                              <button className="au-btn iy-btn-primary">
                                 NEXT
-                              </a>
+                              </button>
                             </div>
                           </div>
                         </div>

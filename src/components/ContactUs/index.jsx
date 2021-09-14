@@ -11,7 +11,7 @@ import facebookIcon from "../../assets/images/facebookIcon.svg";
 import IGIcon from "../../assets/images/IGIcon.svg";
 import twitterIcon from "../../assets/images/twitterIcon.svg";
 import linkedinIcon from "../../assets/images/linkedin.svg";
-import { Linkedin } from "react-feather";
+// import { Linkedin } from "react-feather";
 // import {}
 const Index = () => {
   const success = () => {
@@ -117,6 +117,7 @@ const Index = () => {
                       <a
                         href="https://www.facebook.com/investYieldofficial"
                         target="_BLANK"
+                        rel="noreferrer"
                       >
                         <img
                           src={facebookIcon}
@@ -127,6 +128,7 @@ const Index = () => {
                       <a
                         href="https://www.instagram.com/investyield"
                         target="_BLANK"
+                        rel="noreferrer"
                       >
                         <img
                           src={IGIcon}
@@ -134,7 +136,11 @@ const Index = () => {
                           alt="Instagram"
                         />
                       </a>
-                      <a href="https://twitter.com/InvestYield" target="_BLANK">
+                      <a
+                        href="https://twitter.com/InvestYield"
+                        rel="noreferrer"
+                        target="_BLANK"
+                      >
                         <img
                           src={twitterIcon}
                           className="img-fluid"
@@ -144,6 +150,7 @@ const Index = () => {
                       <a
                         href="https://www.linkedin.com/company/investyieldng"
                         target="_BLANK"
+                        rel="noreferrer"
                       >
                         <img
                           src={linkedinIcon}
