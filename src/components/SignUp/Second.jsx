@@ -14,7 +14,7 @@ import Loader from "../../common/Loader";
 const Second = (props) => {
   // const [loading, setloading] = useState(false);
   const [showError, setShowError] = useState(true);
-  const getNumber = JSON.parse(localStorage.getItem("number")) || null;
+  const getNumber = JSON.parse(sessionStorage.getItem("number")) || null;
   //eslint-disable-next-line
   const [number, setNumber] = useState(addAsterik(getNumber));
 
@@ -28,7 +28,7 @@ const Second = (props) => {
 
   const onSubmit = (values, onSubmitProps) => {
     // setloading(true);
-    const userID = JSON.parse(localStorage.getItem("userReg")).id || null;
+    const userID = JSON.parse(sessionStorage.getItem("userReg")).id || null;
 
     const obj = {
       id: userID,
@@ -58,7 +58,7 @@ const Second = (props) => {
 
   // const alert = props.alert;
   const resendOtp = () => {
-    const userID = JSON.parse(localStorage.getItem("userReg")).id || null;
+    const userID = JSON.parse(sessionStorage.getItem("userReg")).id || null;
     const resendObj = {
       id: userID,
       operationType: 1,
@@ -66,7 +66,7 @@ const Second = (props) => {
     console.log(resendObj);
     props.resend(resendObj, "/api/v1/util/resendotp");
   };
-// eslint-disable-next-line
+  // eslint-disable-next-line
   const show = () => {
     setTimeout(() => {
       setShowError(false);

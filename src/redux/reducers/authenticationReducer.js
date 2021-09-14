@@ -1,6 +1,6 @@
 import { userConstants } from "../constants";
 
-let user = JSON.parse(localStorage.getItem("user")) || null;
+let user = JSON.parse(sessionStorage.getItem("user")) || null;
 const initialState = user ? { loggedIn: true, loading: false, user } : {};
 
 export function authentication(state = initialState, action) {
@@ -14,17 +14,16 @@ export function authentication(state = initialState, action) {
         loading: false,
         loggedIn: true,
         user: action.user,
-        alertType:"alert-danger",
-        message:action.payload
-        
+        alertType: "alert-danger",
+        message: action.payload,
       };
     case userConstants.LOGIN_FAILURE:
       return {
         loading: false,
         loggedIn: false,
         user: {},
-        alertType:"alert-danger",
-        message:action.payload
+        alertType: "alert-danger",
+        message: action.payload,
       };
     case userConstants.LOGOUT:
       return {};

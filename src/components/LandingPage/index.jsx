@@ -235,7 +235,7 @@ const index = () => {
         <section>
           <div className="container-fluid px-0">
             <div className="banner-img2">
-              <div className="overlay2 p-4 d-flex align-items-center">
+              <div className="overlay2 p-4 pb-5 d-flex align-items-center">
                 <div className="container">
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center pt-4">
@@ -345,6 +345,8 @@ const index = () => {
               <div className="col-lg-8 offset-lg-2">
                 <div className="youtube-embed">
                   <iframe
+                    width="560"
+                    height="315"
                     src="https://www.youtube.com/embed/videoseries?list=PLrYqnlqvIzcwzkBhWKB3DO1T7pqS-Bchm"
                     title="YouTube video player"
                     frameborder="0"

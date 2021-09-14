@@ -394,6 +394,28 @@ const Main = ({ getData }) => {
                         </div>
                       </div>
                     </div>
+
+                    <div className="au-message__item">
+                      {!todoList?.withdrawalAccount && (
+                        <div className="au-message__item-inner px-2 py-2">
+                          <Link to="/" className="au-message__item-text">
+                            <div className="text px-0 mx-0">
+                              <h5 className="name">Add withdrawal Account</h5>
+                              <p>
+                                Add a withdrawal account for faster withdrawal
+                                option.
+                              </p>
+                            </div>
+                          </Link>
+
+                          <div className="au-message__item-time mt-0">
+                            <span>
+                              <i data-feather="chevron-right"></i>
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -468,10 +490,7 @@ const Main = ({ getData }) => {
           <div className="row">
             <div className="col-md-12">
               <div className="copyright">
-                <p>
-                  Copyright © 2018 Colorlib. All rights reserved. Template by{" "}
-                  <a href="https://colorlib.com">Colorlib</a>.
-                </p>
+                <p>Copyright © 2021 investYield. All rights reserved.</p>
               </div>
             </div>
           </div>

@@ -53,7 +53,7 @@ const Index = () => {
                 <div className="col-lg-4 mt-4">
                   <h5 className="footer-bottom-header">Company</h5>
                   <div className="mt-3 d-flex flex-column">
-                    <a href="/" className="footer-bottom-links">
+                    <a href="/aboutus" className="footer-bottom-links">
                       About us
                     </a>
                     <a href="/" className="mt-3 footer-bottom-links">
@@ -93,15 +93,21 @@ const Index = () => {
                 <div className="col-lg-4 mt-4">
                   <h5 className="footer-bottom-header">Support</h5>
                   <div className="mt-3 d-flex flex-column">
-                    <a href="/" className="footer-bottom-links">
-                      +234 818 024 8942
+                    <a
+                      href="tel:+2348180248941"
+                      className="footer-bottom-links"
+                    >
+                      +234 818 024 8941
                     </a>
-                    <a href="/" className="mt-3 footer-bottom-links">
+                    <a
+                      href="mailto:support@investyield.ng"
+                      className="mt-3 footer-bottom-links"
+                    >
                       support@investyield.ng
                     </a>
                     <a href="/" className="mt-3 footer-bottom-links">
-                      No 1, Dr Adewale Oshin Street, Off Chief Collins, Off Fola
-                      Osibo Street, Lekki Phase 1, Lagos.
+                      No 1, Dr Adewale Oshin, Off Prince Bode Adewole, Off Fola
+                      Oshibo, Lekki phase 1, Lagos State.
                     </a>
                   </div>
                 </div>

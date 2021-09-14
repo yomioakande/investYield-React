@@ -30,7 +30,7 @@ const MyPurse2 = () => {
       amount: values.amount,
     };
     console.log(obj);
-    localStorage.setItem("purseObj1", JSON.stringify(obj));
+    sessionStorage.setItem("purseObj1", JSON.stringify(obj));
     window.location.href = "/app/savings/pursestep2";
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);

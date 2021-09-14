@@ -39,7 +39,7 @@ function login(body) {
         token: data.token,
       };
 
-      localStorage.setItem("user", JSON.stringify(user));
+      sessionStorage.setItem("user", JSON.stringify(user));
       window.location.href = "/app/dashboard";
     } else {
       dispatch(failure(messages[0]));
@@ -80,7 +80,7 @@ function register(user, apiUrl, nextRoute, func) {
         apiUrl === "/api/v1/identity/resetpasswordtoken" ||
         apiUrl === "/api/v1/identity/register"
       ) {
-        localStorage.setItem("userReg", JSON.stringify(data));
+        sessionStorage.setItem("userReg", JSON.stringify(data));
       }
 
       if (apiUrl === "/api/vi/identity/resetpassword") {
@@ -145,7 +145,7 @@ function register3(user, apiUrl, nextRoute) {
         refreshToken: data.refreshToken,
         token: data.token,
       };
-      localStorage.setItem("user", JSON.stringify(user));
+      sessionStorage.setItem("user", JSON.stringify(user));
       window.location.href = nextRoute;
       return;
     } else {
@@ -231,7 +231,6 @@ function confirmBvnReg(obj, apiUrl, func) {
       console.log(data);
       func();
       dispatch(successReg(messages));
-     
     } else {
       dispatch(failure(messages));
       return;
@@ -247,7 +246,7 @@ function createStash(obj1, obj2, apiUrl, nextRoute) {
     const { success, messages } = register;
     if (apiUrl === "/api/v1/user/stash" && success === true) {
       // dispatch(successReg(data?.reference));
-      localStorage.setItem("stash", JSON.stringify({ ...obj1, ...obj2 }));
+      sessionStorage.setItem("stash", JSON.stringify({ ...obj1, ...obj2 }));
       window.location.href = nextRoute;
       // func();
     } else {
@@ -265,7 +264,7 @@ function createCore(obj, apiUrl, nextRoute) {
     const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/coreaccount" && success === true) {
       dispatch(successReg(data?.reference));
-      localStorage.setItem("core", JSON.stringify(obj));
+      sessionStorage.setItem("core", JSON.stringify(obj));
       window.location.href = nextRoute;
     } else {
       dispatch(failure(messages));
@@ -289,7 +288,7 @@ function postFeedBack(obj, apiUrl, func) {
       success === true
     ) {
       console.log(data);
-      localStorage.setItem("addBenef", JSON.stringify({ ...data, ...obj }));
+      sessionStorage.setItem("addBenef", JSON.stringify({ ...data, ...obj }));
       dispatch(successReg(messages));
       func(true);
     } else if (apiUrl === "/api/v1/user/beneficiary" && success === true) {

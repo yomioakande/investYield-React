@@ -63,7 +63,7 @@ const Support = () => {
                           />
                         </div>
                         <div className="px-3 welcome-p font-rem1">
-                          +234 123 70986
+                          <a href="tel:+2348180248941">+234 818 024 8941</a>
                         </div>
                       </div>
                     </div>
@@ -83,7 +83,9 @@ const Support = () => {
                           />
                         </div>
                         <div className="px-3 welcome-p font-rem1">
-                          help@investyield.com
+                          <a href="mailto:support@investyield.ng">
+                            support@investyield.ng
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -103,7 +105,8 @@ const Support = () => {
                           />
                         </div>
                         <div className="px-3 welcome-p font-rem1">
-                          32, Adeola Odeku, Victoria Island, Lagos, Nigeria.
+                          No 1, Dr Adewale Oshin, Off Prince Bode Adewole, Off
+                          Fola Oshibo, Lekki phase 1, Lagos State.
                         </div>
                       </div>
                     </div>

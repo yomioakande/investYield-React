@@ -1,7 +1,7 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import invest from "../assets/media/investyieldLogo.svg";
-import johndoe from "../assets/images/icon/avatar-01.jpg";
+import uploadimg from "../assets/images/uploadImg.svg";
 import avatar from "../assets/images/icon/avatar-01.jpg";
 import leftArrow from "../assets/images/left-arrow.svg";
 import "../assets/css/theme.css";
@@ -10,7 +10,6 @@ import "../assets/css/theme.css";
 // import MenuBar from "./MenuBar"
 import { connect } from "react-redux";
 import { usersActions } from "../redux/actions";
-
 
 // const navigation = [
 //   { name: 'Dashboard', href: '#', current: true },
@@ -22,7 +21,6 @@ import { usersActions } from "../redux/actions";
 // function classNames(...classes) {
 //   return classes.filter(Boolean).join(' ')
 // }
-
 
 const Header = ({ username }) => {
   const location = useLocation().pathname.split("/")[2];
@@ -37,9 +35,6 @@ const Header = ({ username }) => {
     }
   };
   window.addEventListener("scroll", addShadow);
-
-
-
 
   return (
     // <!-- HEADER MOBILE-->
@@ -197,56 +192,19 @@ const Header = ({ username }) => {
               {/* <MenuBar/> */}
 
               <div className="header-button">
-                <div className="noti-wrap">
-                  <div className="noti__item js-item-menu">
-                    <i className="zmdi zmdi-notifications"></i>
-                    <span className="quantity">3</span>
-                    <div className="notifi-dropdown js-dropdown">
-                      <div className="notifi__title">
-                        <p>You have 3 Notifications</p>
-                      </div>
-                      <div className="notifi__item">
-                        <div className="bg-c1 img-cir img-40">
-                          <i className="zmdi zmdi-email-open"></i>
-                        </div>
-                        <div className="content">
-                          <p>You got a email notification</p>
-                          <span className="date">April 12, 2018 06:50</span>
-                        </div>
-                      </div>
-                      <div className="notifi__item">
-                        <div className="bg-c2 img-cir img-40">
-                          <i className="zmdi zmdi-account-box"></i>
-                        </div>
-                        <div className="content">
-                          <p>Your account has been blocked</p>
-                          <span className="date">April 12, 2018 06:50</span>
-                        </div>
-                      </div>
-                      <div className="notifi__item">
-                        <div className="bg-c3 img-cir img-40">
-                          <i className="zmdi zmdi-file-text"></i>
-                        </div>
-                        <div className="content">
-                          <p>You got a new file</p>
-                          <span className="date">April 12, 2018 06:50</span>
-                        </div>
-                      </div>
-                      <div className="notifi__footer">
-                        <a href="/">All notifications</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <div className="account-wrap">
                   <div className="account-item clearfix js-item-menu">
-                    <div className="image">
-                      <img src={johndoe} alt="John Doe" />
-                    </div>
                     <div className="content">
-                      <a className="py-12 js-acc-btn" href="/">
+                      <a
+                        className="py-12 js-acc-btn"
+                        href="/app/account/myportfolio"
+                      >
                         {username.name}
+                        <p>Click to view portfolio</p>
                       </a>
+                    </div>
+                    <div className="image">
+                      <img src={uploadimg} alt="John Doe" />
                     </div>
                     <div className="account-dropdown js-dropdown">
                       <div className="info clearfix">

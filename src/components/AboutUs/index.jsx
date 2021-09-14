@@ -39,12 +39,15 @@ const Index = () => {
                     <h5 className="aboutUs-header">Who We Are</h5>
                     <div className="small-red-line"></div>
                     <p className="mt-5 whoWeAre-p">
-                      A company that seeks to provide inclusive wealth
-                      management services to segments of the market currently
-                      neglected and underserved by the traditional wealth
-                      management companies connecting these segments of the
-                      market to these services through robust technology
-                      infrastructure.
+                      We are a licensed financial cooperative with registration
+                      number LSCS 17462 and in partnership with licensed wealth
+                      managers to provide inclusive wealth management solutions.
+                      We offer highest possible returns, security, speed,
+                      flexibility, investment insights and disciplined-instilled
+                      money management tools to help you achieve your big money
+                      goals. Our vision is to build Africa's biggest community
+                      of smart money savers through service and robust
+                      technology.
                     </p>
                   </div>
                 </div>
@@ -61,8 +64,14 @@ const Index = () => {
           <div className="container">
             <div className="row mt-60">
               <div className="col-lg-12">
-                <h5 className="aboutUs-header">Meet The Team</h5>
+                <h5 className="aboutUs-header pb-1">Meet The Team</h5>
                 <div className="small-red-line"></div>
+                <p className="py-3">
+                  The team is composed of seasoned professionals with diverse
+                  skills in finance, investment management, banking, software
+                  engineering and data sciences to ensure you get the best in
+                  class experience.
+                </p>
               </div>
             </div>
             <div className="row justify-content-between">

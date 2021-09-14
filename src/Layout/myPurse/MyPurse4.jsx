@@ -5,7 +5,7 @@ import "../../assets/css/style.css";
 import { dateConv } from "../../helpers";
 
 const MyPurse4 = () => {
-  const purse = JSON.parse(localStorage.getItem("mainPurseObj"));
+  const purse = JSON.parse(sessionStorage.getItem("mainPurseObj"));
 
   const currencyVal = (number) =>
     new Intl.NumberFormat(purse.ccyCode === "1" ? "en-NG" : "en-US", {

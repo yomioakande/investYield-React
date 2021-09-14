@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 const CreateSavings4 = (props) => {
   const [finalVal, setFinalVal] = useState("");
-  const core = JSON.parse(localStorage.getItem("core"));
+  const core = JSON.parse(sessionStorage.getItem("core"));
   console.log(core);
 
   console.log(core.ccyCode);
@@ -131,11 +131,11 @@ const CreateSavings4 = (props) => {
                       <input type="radio" name="select" id="option-3" />
                       <label for="option-1" className="option option-1">
                         <div className="dot"></div>
-                        <span className="px-2">5366 **** **** **09</span>
+                        <span className="px-2">Pay with Card</span>
                       </label>
                       <label for="option-2" className="option option-2">
                         <div className="dot"></div>
-                        <span className="px-2">Pay with Stash</span>
+                        <span className="px-2">Pay with myPurse</span>
                       </label>
                       <label for="option-3" className="option option-3">
                         <div className="dot"></div>

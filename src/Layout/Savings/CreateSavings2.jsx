@@ -64,7 +64,7 @@ const CreateSavings2 = ({ username, register }) => {
       startDate: formik.values.startDate,
       endDate: formik.values.endDate,
     };
-    localStorage.setItem("savingsInfo", JSON.stringify(obj));
+    sessionStorage.setItem("savingsInfo", JSON.stringify(obj));
     window.location.href = "/app/savings/create3";
     // register(obj, "/api/v1/identity/register", "/auth/signup2");
     onSubmitProps.resetForm();
@@ -253,7 +253,7 @@ const CreateSavings2 = ({ username, register }) => {
           </div>
         </div>
       </div>
-      {modalInOpen4 && <Modal close={close} />}
+      {/* {modalInOpen4 && <Modal close={close} />} */}
     </>
   );
 };

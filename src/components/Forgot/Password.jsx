@@ -38,13 +38,14 @@ const PasswordForgot = (props) => {
   };
 
   console.log("forward redirect");
-  const getID = JSON.parse(localStorage.getItem("userReg")) || null;
-  const forgotToken = JSON.parse(localStorage.getItem("forgotToken")) || null;
+  const getID = JSON.parse(sessionStorage.getItem("userReg")) || null;
+  const forgotToken = JSON.parse(sessionStorage.getItem("forgotToken")) || null;
   console.log(forgotToken);
   console.log(getID);
   const onSubmit = (values, onSubmitProps) => {
-    const getID = JSON.parse(localStorage.getItem("userReg")).id || null;
-    const forgotToken = JSON.parse(localStorage.getItem("forgotToken")) || null;
+    const getID = JSON.parse(sessionStorage.getItem("userReg")).id || null;
+    const forgotToken =
+      JSON.parse(sessionStorage.getItem("forgotToken")) || null;
     const obj = {
       id: getID,
       token: forgotToken,

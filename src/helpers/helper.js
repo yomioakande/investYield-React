@@ -3,21 +3,24 @@ import { userService } from "../services/usersService";
 
 export function authHeader() {
   // return authorization header with jwt token
-  let user = JSON.parse(localStorage.getItem("user"));
+  let user = JSON.parse(sessionStorage.getItem("user"));
   const d = new Date();
   const now = d.getTime();
   const isExpiry = now > user.expiresAt ? true : false;
 
   if (isExpiry) {
     const getRef = async () => {
-      let user = JSON.parse(localStorage.getItem("user"));
+      let user = JSON.parse(sessionStorage.getItem("user"));
 
       const refreshObj = {
-      token: user.token,
-      refreshToken: user.refreshToken,
-    };
+        token: user.token,
+        refreshToken: user.refreshToken,
+      };
 
-      const data = await userService.register1(refreshObj, "/api/v1/identity/refresh");
+      const data = await userService.register1(
+        refreshObj,
+        "/api/v1/identity/refresh"
+      );
       // console.log(data);
 
       const expires_at = d.getTime() + 1 * 60 * 60 * 1000;
@@ -27,7 +30,7 @@ export function authHeader() {
         refreshToken: data.data.refreshToken,
         token: data.data.token,
       };
-      localStorage.setItem("user", JSON.stringify(user));
+      sessionStorage.setItem("user", JSON.stringify(user));
       return { Authorization: "Bearer " + user.token };
     };
 
@@ -44,7 +47,7 @@ export const addAsterik = (strn) => {
 };
 
 export const isLogin = () => {
-  const token = JSON.parse(localStorage.getItem("user"));
+  const token = JSON.parse(sessionStorage.getItem("user"));
 
   if (token && token.token) {
     return true;

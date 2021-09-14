@@ -17,7 +17,7 @@ const CreateSavings3 = (props) => {
   const [imageRef, setImageRef] = useState("");
   const [imageName, setImageName] = useState("");
   const [imageFile, setImageFile] = useState(null);
-  const firstData = JSON.parse(localStorage.getItem("savingsInfo"));
+  const firstData = JSON.parse(sessionStorage.getItem("savingsInfo"));
   const main1 =
     new Date(firstData.endDate).getTime() -
     new Date(firstData.startDate).getTime();
@@ -126,7 +126,7 @@ const CreateSavings3 = (props) => {
     dataInfo(value);
   };
 
-  const ccyCode = JSON.parse(localStorage.getItem("savingsInfo")).ccyCode;
+  const ccyCode = JSON.parse(sessionStorage.getItem("savingsInfo")).ccyCode;
   const currencyVal = (number) =>
     new Intl.NumberFormat(ccyCode === "1" ? "en-NG" : "en-US", {
       style: "currency",

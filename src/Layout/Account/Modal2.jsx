@@ -8,13 +8,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../common/Loader";
 const Modal2 = ({ dataInfo, modalBenf2, close, loading }) => {
-  const addBeneficiary = JSON.parse(localStorage.getItem("addBenef"));
+  const addBeneficiary = JSON.parse(sessionStorage.getItem("addBenef"));
 
   const success = () => {
     toast.success("Beneficiary successfully added!", {
       position: toast.POSITION.TOP_CENTER,
     });
-    dataInfo()
+    dataInfo();
     close();
   };
 
@@ -73,7 +73,10 @@ const Modal2 = ({ dataInfo, modalBenf2, close, loading }) => {
                           <div className="col-lg-8">
                             <div className="row">
                               <div className="col-lg-6">
-                                <button onClick={() => close()} className="btn btn-cancel text-danger">
+                                <button
+                                  onClick={() => close()}
+                                  className="btn btn-cancel text-danger"
+                                >
                                   Cancel
                                 </button>
                               </div>

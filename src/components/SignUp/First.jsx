@@ -58,11 +58,11 @@ const First = (props) => {
       },
       referral: formik.values.referral,
     };
-    localStorage.setItem("number", JSON.stringify(obj.phoneNumber));
+    sessionStorage.setItem("number", JSON.stringify(obj.phoneNumber));
     props.register(obj, "/api/v1/identity/register", "/auth/signup2");
 
     // onSubmitProps.resetForm();
-    show()
+    show();
     onSubmitProps.setSubmitting(false);
   };
 
@@ -80,7 +80,6 @@ const First = (props) => {
       setShowError(false);
     }, 3000);
   };
-
 
   return (
     <>

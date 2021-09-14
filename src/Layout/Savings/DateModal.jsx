@@ -8,7 +8,7 @@ import { usersActions } from "../../redux";
 
 const DateModal = ({ getFrequency, close, ccy }) => {
   const [freqOptions, setFreqOptions] = useState([]);
-const [loading,setloading]=useState(false);
+  const [loading, setloading] = useState(false);
   useEffect(() => {
     (async function dataInfo() {
       setloading(true);
@@ -20,9 +20,8 @@ const [loading,setloading]=useState(false);
 
       const { interest } = datas;
       setFreqOptions(interest);
-      setloading(false)
+      setloading(false);
     })();
-    //eslint-disable-next-line
   }, []);
 
   return ReactDom.createPortal(
@@ -68,7 +67,6 @@ const [loading,setloading]=useState(false);
                               </div>
                             );
                           })}
-                         
                         </div>
                       </Style1>
                     </div>

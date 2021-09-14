@@ -10,7 +10,7 @@ export const userService = {
   deleteData,
   getFreq,
   getEstimate,
-  getTargetValue
+  getTargetValue,
 };
 
 async function register1(user, apiUrl) {
@@ -50,7 +50,7 @@ async function login(body) {
 }
 
 function logout() {
-  localStorage.removeItem("user");
+  sessionStorage.removeItem("user");
 }
 
 // function getData(id) {
@@ -180,8 +180,8 @@ async function deleteData(apiUrl, obj) {
   const requestOptions = {
     method: "DELETE",
     headers: {
-     Authorization: authHeader()?.Authorization,
-     "Content-Type": "application/json"
+      Authorization: authHeader()?.Authorization,
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(obj),
   };

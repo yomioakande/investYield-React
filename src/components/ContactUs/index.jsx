@@ -10,6 +10,8 @@ import locationIcon from "../../assets/images/locationIcon.svg";
 import facebookIcon from "../../assets/images/facebookIcon.svg";
 import IGIcon from "../../assets/images/IGIcon.svg";
 import twitterIcon from "../../assets/images/twitterIcon.svg";
+import linkedinIcon from "../../assets/images/linkedin.svg";
+import { Linkedin } from "react-feather";
 // import {}
 const Index = () => {
   const success = () => {
@@ -85,16 +87,18 @@ const Index = () => {
                       <div className="col-xl-1 col-lg-2">
                         <img src={callIcon} alt="Call" />
                       </div>
-                      <div className="col-xl-11 col-lg-10 welcome-p text-light">
-                        +234 818 024 8942
+                      <div className="col-xl-11 col-lg-10 welcome-p link-text text-light">
+                        <a href="tel:+2348180248941">+234 818 024 8941</a>
                       </div>
                     </div>
                     <div className="row align-items-center mt-5">
                       <div className="col-xl-1 col-lg-2">
                         <img src={mailIcon} alt="Mail" />
                       </div>
-                      <div className="col-xl-11 col-lg-10 welcome-p text-light">
-                        support@investyield.ng
+                      <div className="col-xl-11 col-lg-10 welcome-p link-text text-light">
+                        <a href="mailto:support@investyield.ng">
+                          support@investyield.ng
+                        </a>
                       </div>
                     </div>
                     <div className="row align-items-center mt-5">
@@ -102,33 +106,49 @@ const Index = () => {
                         <img src={locationIcon} alt="Location" />
                       </div>
                       <div className="col-lg-10 col-xl-11 welcome-p text-light">
-                        No 1, Dr Adewale Oshin Street, Off Chief Collins, Off
-                        Fola Osibo Street, Lekki Phase 1, Lagos.
+                        No 1, Dr Adewale Oshin, Off Prince Bode Adewole, Off
+                        Fola Oshibo, Lekki phase 1, Lagos State.
                       </div>
                     </div>
                   </div>
 
                   <div className="col-xl-4 col-lg-5 px-0 mt-4">
                     <div className="d-flex justify-content-between align-items-center">
-                      <a href="/">
+                      <a
+                        href="https://www.facebook.com/investYieldofficial"
+                        target="_BLANK"
+                      >
                         <img
                           src={facebookIcon}
                           className="img-fluid"
                           alt="Facebook"
                         />
                       </a>
-                      <a href="/">
+                      <a
+                        href="https://www.instagram.com/investyield"
+                        target="_BLANK"
+                      >
                         <img
                           src={IGIcon}
                           className="img-fluid"
                           alt="Instagram"
                         />
                       </a>
-                      <a href="/">
+                      <a href="https://twitter.com/InvestYield" target="_BLANK">
                         <img
                           src={twitterIcon}
                           className="img-fluid"
                           alt="Twitter"
+                        />
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/company/investyieldng"
+                        target="_BLANK"
+                      >
+                        <img
+                          src={linkedinIcon}
+                          className="img-fluid"
+                          alt="Linkedin"
                         />
                       </a>
                     </div>

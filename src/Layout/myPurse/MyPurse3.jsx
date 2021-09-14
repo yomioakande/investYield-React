@@ -34,10 +34,10 @@ const MyPurse3 = () => {
       drPct: values.drPct,
       isAutomated: true,
     };
-    const firstObj = JSON.parse(localStorage.getItem("purseObj1"));
+    const firstObj = JSON.parse(sessionStorage.getItem("purseObj1"));
     const purseMainObj = { ...firstObj, ...obj };
     // console.log(purseMainObj);
-    localStorage.setItem("mainPurseObj", JSON.stringify(purseMainObj));
+    sessionStorage.setItem("mainPurseObj", JSON.stringify(purseMainObj));
     window.location.href = "/app/savings/pursestep3";
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
@@ -55,7 +55,7 @@ const MyPurse3 = () => {
 
   return (
     <>
-     {loading && <Loader />}
+      {loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row justify-content-center">

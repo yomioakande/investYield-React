@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { addAsterik } from "../../helpers";
 import { useFormik } from "formik";
 const Otp = () => {
-  const getNumber = JSON.parse(localStorage.getItem("number")) || null;
+  const getNumber = JSON.parse(sessionStorage.getItem("number")) || null;
   //eslint-disable-next-line
   const [number, setNumber] = useState(addAsterik(getNumber));
   const initialValues = {

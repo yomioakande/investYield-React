@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 
 const Breakdown = (props) => {
- 
   const [targetValue, setTargetValue] = useState("");
-  const stash = JSON.parse(localStorage.getItem("stash"));
+  const stash = JSON.parse(sessionStorage.getItem("stash"));
 
   let date = new Date();
   //START DATE
@@ -29,7 +28,6 @@ const Breakdown = (props) => {
     })();
     //eslint-disable-next-line
   }, [stash.amount, stash.tenor.code, stash.ccyCode]);
-
 
   const currencyVal = (number) =>
     new Intl.NumberFormat(stash.ccyCode === "1" ? "en-NG" : "en-US", {
@@ -165,7 +163,6 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
-
   getTargetValue: usersActions.getTargetValue,
 };
 

@@ -15,7 +15,7 @@ const Token = (props) => {
   };
 
   const onSubmit = (values, onSubmitProps) => {
-    const getID = JSON.parse(localStorage.getItem("userReg")).id || null;
+    const getID = JSON.parse(sessionStorage.getItem("userReg")).id || null;
     const obj = {
       id: getID,
       token: values.token,
@@ -24,7 +24,7 @@ const Token = (props) => {
         id: "string",
       },
     };
-    localStorage.setItem("forgotToken", JSON.stringify(obj.token));
+    sessionStorage.setItem("forgotToken", JSON.stringify(obj.token));
 
     props.register(
       obj,
