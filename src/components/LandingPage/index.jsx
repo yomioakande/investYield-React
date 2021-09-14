@@ -31,7 +31,6 @@ const index = () => {
                 </div>
                 <div className="d-flex justify-content-end mt-5">
                   <a
-                  
                     href="/auth/signup1"
                     className="btn btn-get-started d-flex text-center justify-content-center align-items-center"
                   >
@@ -323,6 +322,35 @@ const index = () => {
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white pt-5">
+          <div className="container-fluid px-4">
+            <div className="row">
+              <div className="col-lg-12">
+                <h5 className="get-started-header text-center pt-5">
+                  Testimonial
+                </h5>
+                <div className="d-flex justify-content-center">
+                  <div className="small-red-line"></div>
+                </div>
+                <p className="text-center mt-5 text-black">
+                  See what people are saying about investYield
+                </p>
+              </div>
+              <div className="col-lg-8 offset-lg-2">
+                <div className="youtube-embed">
+                  <iframe
+                    src="https://www.youtube.com/embed/videoseries?list=PLrYqnlqvIzcwzkBhWKB3DO1T7pqS-Bchm"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
                 </div>
               </div>
             </div>
