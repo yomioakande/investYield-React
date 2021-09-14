@@ -12,7 +12,7 @@ import Congrats from "../../Layout/Congrats";
 
 const Fourth = (props) => {
   const [congratsModal1, setCongratsModal1] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [showError, setShowError] = useState(true);
 
   const modalToggle2 = () => {
@@ -35,7 +35,7 @@ const Fourth = (props) => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
-    setLoading(true);
+    // setLoading(true);
     setShowError(true);
     const obj = {
       pin: values.pin,
@@ -47,7 +47,7 @@ const Fourth = (props) => {
     props.register4(obj, "/api/v1/user/pin", modalToggle2);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
-    setLoading(true);
+    // setLoading(true);
   };
 
   const formik = useFormik({
@@ -61,11 +61,11 @@ const Fourth = (props) => {
     window.location.href = "/app/dashboard";
   };
 
-  const show = () => {
-    setTimeout(() => {
-      setShowError(false);
-    }, 3000);
-  };
+  // const show = () => {
+  //   setTimeout(() => {
+  //     setShowError(false);
+  //   }, 3000);
+  // };
 
   return (
     <>

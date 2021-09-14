@@ -9,7 +9,7 @@ const index = () => {
             <div className="col-lg-6">
               <div className="au-card">
                 <div className="au-card-inner">
-                  <a href="#" className="d-flex align-items-center">
+                  <a href="/app/account/withdraw" className="d-flex align-items-center">
                     <img
                       src={withdraw}
                       className="img-fluid"

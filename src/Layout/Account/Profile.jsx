@@ -24,8 +24,11 @@ const Profile = ({
   const [profile, setProfile] = useState({});
   const [loading1, setloading1] = useState(false);
   const [showError, setShowError] = useState(true);
+  // eslint-disable-next-line
   const [imageRef, setImageRef] = useState("");
+  // eslint-disable-next-line
   const [imageName, setImageName] = useState("");
+  // eslint-disable-next-line
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {

@@ -58,16 +58,14 @@ const Main = ({ getData }) => {
       const transactionsData = await getData("/api/v1/user/transaction").then();
       const todo = await getData("/api/v1/user/todo").then();
       // const getMyStash=await getData("api/v1/user/stash").then();
-      console.log(todo);
       setTodoList(todo);
       todo.bvnConfirmed !== true &&
         setTimeout(() => {
           setModalInOpen(true);
         }, 2000);
       setTransactions(transactionsData);
-      console.log(transactionsData);
       setSummaryInfo(data);
-      console.log(todo);
+      // console.log(todo);
       setloading(false);
     })();
     // eslint-disable-next-line

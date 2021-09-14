@@ -36,7 +36,7 @@ const Index = () => {
                               Who are you sending to?
                             </label>
                             <a
-                              href="#"
+                              href="/app/account"
                               className="col-lg-4 d-flex align-items-center justify-content-center font-sm btn btn-withdraw"
                             >
                               Select Beneficiary

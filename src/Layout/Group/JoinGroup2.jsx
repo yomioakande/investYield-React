@@ -75,7 +75,7 @@ const JoinGroup2 = () => {
 
                       <div className="form-group mt-4">
                         <a
-                          href="#"
+                          href="/app/groupsavings/joingroup2"
                           className="au-btn-outline d-flex justify-content-center align-items-center"
                         >
                           Add a Card
@@ -94,9 +94,9 @@ const JoinGroup2 = () => {
                               </Link>
                             </div>
                             <div className="col-lg-6 px-0">
-                              <a href="#" className="au-btn iy-btn-primary">
+                              <button className="au-btn iy-btn-primary">
                                 NEXT
-                              </a>
+                              </button>
                             </div>
                           </div>
                         </div>

@@ -34,11 +34,11 @@ import Refer from "../Layout/Account/Refer";
 import MyPortfolio from "../Layout/Account/MyPorfolio";
 import myProfile from "../Layout/Account/Profile";
 
-import Transfer from "../Layout/Account/Transfer/Index"
-import Transfer2 from "../Layout/Account/Transfer/Transfer2"
-import Transfer3 from "../Layout/Account/Transfer/Transfer3"
+import Transfer from "../Layout/Account/Transfer/Index";
+// import Transfer2 from "../Layout/Account/Transfer/Transfer2"
+// import Transfer3 from "../Layout/Account/Transfer/Transfer3"
 
-import Withdraw from "../Layout/Account/Withdraw/index"
+import Withdraw from "../Layout/Account/Withdraw/index";
 
 import myPurse from "../Layout/myPurse/index";
 import myPurse2 from "../Layout/myPurse/MyPurse2";
@@ -51,19 +51,12 @@ import Help from "../Layout/Help";
 
 import { PrivateRoute } from "./PrivateRoutes";
 
-// const myProfile = React.lazy(() => import('../Layout/Account/Profile')); // Lazy-loaded
 const DashboardRoutes = () => {
   return (
-    // <Suspense  fallback={<h1>Loading posts...</h1>}>
     <DashboardLayout>
       <Switch>
-        {/* <Suspense fallback={<h1>Loading posts...</h1>}>
-        <myProfile/>
-      </Suspense> */}
         <PrivateRoute exact path="/app/dashboard" component={Main} />
         <PrivateRoute exact path="/app/help" component={Help} />
-
-       
 
         <PrivateRoute path="/app/stash/breakdown" component={StashBreakdown} />
         <PrivateRoute path="/app/stash/confirmotp" component={StashOtp} />
@@ -84,22 +77,24 @@ const DashboardRoutes = () => {
         <PrivateRoute path="/app/savings/mypurse" component={myPurse} />
         <PrivateRoute path="/app/savings" component={Savings} />
 
-
-        <PrivateRoute path="/app/groupsavings/joingroup1" component={JoinGroup1} />
-        <PrivateRoute path="/app/groupsavings/joingroup2" component={JoinGroup2} />
+        <PrivateRoute
+          path="/app/groupsavings/joingroup1"
+          component={JoinGroup1}
+        />
+        <PrivateRoute
+          path="/app/groupsavings/joingroup2"
+          component={JoinGroup2}
+        />
         <PrivateRoute path="/app/groupsavings" component={GroupMainPage} />
         <PrivateRoute path="/app/groupsavings1" component={Group1} />
         <PrivateRoute path="/app/groupsavings2" component={Group2} />
         <PrivateRoute path="/app/groupsavings3" component={Group3} />
         <PrivateRoute path="/app/groupsavings4" component={Group4} />
-        
-
 
         <PrivateRoute path="/app/blog/:id" component={SingleBlog} />
         <PrivateRoute path="/app/blog" component={Blog} />
 
         <PrivateRoute exact path="/app/account" component={Account} />
-
 
         <PrivateRoute exact path="/app/account/transfer" component={Transfer} />
         {/* <PrivateRoute exact path="/app/account/transfer2" component={Transfer2} />
@@ -107,10 +102,11 @@ const DashboardRoutes = () => {
         <PrivateRoute exact path="/app/account/withdraw" component={Withdraw} />
         <PrivateRoute exact path="/app/help" component={Help} />
 
-
-
-
-        <PrivateRoute exact path="/app/account/myportfolio" component={MyPortfolio}/>
+        <PrivateRoute
+          exact
+          path="/app/account/myportfolio"
+          component={MyPortfolio}
+        />
         <PrivateRoute path="/app/account/support" component={Support} />
         <PrivateRoute path="/app/account/beneficiary" component={Beneficiary} />
         <PrivateRoute path="/app/account/linkcard" component={linkCard} />
