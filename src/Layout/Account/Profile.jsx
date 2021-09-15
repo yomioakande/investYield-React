@@ -4,6 +4,7 @@ import uploadImg from "../../assets/images/uploadImg.svg";
 import cloudUpload from "../../assets/images/upload-cloud1.svg";
 import Style from "./style";
 import Loader from "../../common/Loader";
+import NextofKin from "./NextOfKin";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import { format } from "date-fns";
@@ -154,12 +155,18 @@ const Profile = ({
                   </div>
                   <div className="col-lg-5 px-0 d-flex justify-content-between cg-3">
                     <div className="mt-2 flex-grow-1 w-auto">
-                      <Link to="/app/account/transfer" className="btn btn-transfer">
+                      <Link
+                        to="/app/account/transfer"
+                        className="btn btn-transfer"
+                      >
                         Transfer Funds
                       </Link>
                     </div>
                     <div className="mt-2 flex-grow-1 w-auto">
-                      <Link to="/app/account/withdraw" className="btn btn-withdraw">
+                      <Link
+                        to="/app/account/withdraw"
+                        className="btn btn-withdraw"
+                      >
                         Withdraw Funds
                       </Link>
                     </div>
@@ -181,11 +188,11 @@ const Profile = ({
                       <li className="nav-item">
                         <a
                           className="nav-link active"
-                          id="#pills-debitCard-tab"
+                          id="pills-home-tab"
                           data-toggle="pill"
-                          href="#pills-debitCard"
+                          href="#pills-home"
                           role="tab"
-                          aria-controls="#pills-debitCard"
+                          aria-controls="pills-home"
                           aria-selected="true"
                         >
                           My Profile
@@ -194,11 +201,11 @@ const Profile = ({
                       <li className="nav-item">
                         <a
                           className="nav-link"
-                          id="pills-pills-withdrawalAccount-tab"
+                          id="pills-profile-tab"
                           data-toggle="pill"
-                          href="#pills-withdrawalAccount"
+                          href="#pills-profile"
                           role="tab"
-                          aria-controls="pills-withdrawalAccount"
+                          aria-controls="pills-profile"
                           aria-selected="false"
                         >
                           Next of Kin
@@ -389,11 +396,6 @@ const Profile = ({
                               <textarea
                                 className="textAreaProfile"
                                 placeholder="Residential Address"
-                                // defaultValue={profile.firstName}
-                                // onLoad={() => {
-                                //   formik.setFieldValue('address', profile.address)
-                                //  }}
-                                // value={profile.address}
                                 name="address"
                                 {...formik.getFieldProps("address")}
                               ></textarea>
@@ -505,7 +507,7 @@ const Profile = ({
                       role="tabpanel"
                       aria-labelledby="pills-profile-tab"
                     >
-                      ...
+                      <NextofKin />
                     </div>
                   </div>
                 </div>

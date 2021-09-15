@@ -80,12 +80,12 @@ const index = () => {
                                 <p>
                                   Free and smart saving tools that enables you
                                   to achieve total financial wellness, while you
-                                  earn very impressive interest rates.{" "}
+                                  earn very impressive interest rates.
                                 </p>
                               </div>
                             </div>
                           </div>
-                          <div className="col-lg-6 mt-3">
+                          <div className="col-lg-8 mt-3">
                             <div className="invest-div">
                               <div className="d-flex justify-content-between align-items-center">
                                 <h5 className="invest-div-header text-green mb-0">
@@ -99,9 +99,10 @@ const index = () => {
                               </div>
                               <div className="mt-4">
                                 <p>
-                                  Free and smart saving tools that enables you
-                                  to achieve total financial wellness, while you
-                                  earn very impressive interest rates.{" "}
+                                  Invest in Mutual Funds, Treasury Bills and
+                                  Equities. Build your personal investment
+                                  portfolios, achieve capital growth and steady
+                                  income.
                                 </p>
                               </div>
                             </div>
@@ -124,9 +125,10 @@ const index = () => {
                               </div>
                               <div className="mt-4">
                                 <p>
-                                  Free and smart saving tools that enables you
-                                  to achieve total financial wellness, while you
-                                  earn very impressive interest rates.{" "}
+                                  Set money aside for emergency funds or other
+                                  recurring expenses such as TGIF or movie
+                                  tickets, while earning very impressive
+                                  interest rates.
                                 </p>
                               </div>
                             </div>
@@ -141,7 +143,7 @@ const index = () => {
                               <div className="mt-4">
                                 <p>
                                   Earn highest possible interest rates on your
-                                  savings.{" "}
+                                  savings.
                                 </p>
                               </div>
                             </div>

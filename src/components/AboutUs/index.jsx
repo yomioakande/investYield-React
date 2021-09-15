@@ -2,6 +2,9 @@ import React from "react";
 import BigImg from "../../assets/images/aboutUs-BigImg.png";
 import PhoneImg from "../../assets/images/aboutUs-PhoneImg.png";
 import teamImg from "../../assets/images/teamImg.png";
+import OlumideSosanmi from "../../assets/images/OlumideSosanmi.png";
+import JadesolaAdekoya from "../../assets/images/JadesolaAdekoya.png";
+import RaymondChen from "../../assets/images/RaymondChen.png";
 
 const Index = () => {
   return (
@@ -86,8 +89,12 @@ const Index = () => {
                   </div>
                   <div className="p-4 bg-white position-relative detail-div">
                     <div className="">
-                      <h5 className="text-center weight-600">Kayode Adegoke</h5>
-                      <p className="text-center mb-0">CEO</p>
+                      <h5 className="text-center weight-600 team-name">
+                        Olayemi Lasisi
+                      </h5>
+                      <p className="text-center mb-0 team-portfolio">
+                        Technology and Innovation
+                      </p>
                     </div>
                     <div className="border-decor position-absolute"></div>
                   </div>
@@ -97,15 +104,19 @@ const Index = () => {
                 <div className="team-div shadow d-flex flex-column">
                   <div>
                     <img
-                      src={teamImg}
+                      src={OlumideSosanmi}
                       className="img-fluid w-100"
                       alt="Team member pic"
                     />
                   </div>
                   <div className="p-4 bg-white position-relative detail-div">
                     <div className="">
-                      <h5 className="text-center weight-600">Kayode Adegoke</h5>
-                      <p className="text-center mb-0">CEO</p>
+                      <h5 className="text-center weight-600 team-name">
+                        Olumide Sosanmi
+                      </h5>
+                      <p className="text-center mb-0 team-portfolio">
+                        Communication and Community Management
+                      </p>
                     </div>
                     <div className="border-decor position-absolute"></div>
                   </div>
@@ -115,15 +126,19 @@ const Index = () => {
                 <div className="team-div shadow d-flex flex-column">
                   <div>
                     <img
-                      src={teamImg}
+                      src={JadesolaAdekoya}
                       className="img-fluid w-100"
                       alt="Team member pic"
                     />
                   </div>
                   <div className="p-4 bg-white position-relative detail-div">
                     <div className="">
-                      <h5 className="text-center weight-600">Kayode Adegoke</h5>
-                      <p className="text-center mb-0">CEO</p>
+                      <h5 className="text-center weight-600">
+                        Jadesola Adekoya
+                      </h5>
+                      <p className="text-center mb-0 team-portfolio">
+                        Product and Research Analyst
+                      </p>
                     </div>
                     <div className="border-decor position-absolute"></div>
                   </div>
@@ -133,51 +148,17 @@ const Index = () => {
                 <div className="team-div shadow d-flex flex-column">
                   <div>
                     <img
-                      src={teamImg}
+                      src={RaymondChen}
                       className="img-fluid w-100"
                       alt="Team member pic"
                     />
                   </div>
                   <div className="p-4 bg-white position-relative detail-div">
                     <div className="">
-                      <h5 className="text-center weight-600">Kayode Adegoke</h5>
-                      <p className="text-center mb-0">CEO</p>
-                    </div>
-                    <div className="border-decor position-absolute"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 mt-4">
-                <div className="team-div shadow d-flex flex-column">
-                  <div>
-                    <img
-                      src={teamImg}
-                      className="img-fluid w-100"
-                      alt="Team member pic"
-                    />
-                  </div>
-                  <div className="p-4 bg-white position-relative detail-div">
-                    <div className="">
-                      <h5 className="text-center weight-600">Kayode Adegoke</h5>
-                      <p className="text-center mb-0">CEO</p>
-                    </div>
-                    <div className="border-decor position-absolute"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 mt-4">
-                <div className="team-div shadow d-flex flex-column">
-                  <div>
-                    <img
-                      src={teamImg}
-                      className="img-fluid w-100"
-                      alt="Team member pic"
-                    />
-                  </div>
-                  <div className="p-4 bg-white position-relative detail-div">
-                    <div className="">
-                      <h5 className="text-center weight-600">Kayode Adegoke</h5>
-                      <p className="text-center mb-0">CEO</p>
+                      <h5 className="text-center weight-600">Raymond Chen</h5>
+                      <p className="text-center mb-0 team-portfolio">
+                        Data Science and Operations
+                      </p>
                     </div>
                     <div className="border-decor position-absolute"></div>
                   </div>

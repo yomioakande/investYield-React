@@ -9,6 +9,7 @@ import "../../assets/css/style.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
+
 import Modal from "./DateModal";
 
 const CreateSavings2 = ({ username, register }) => {
@@ -28,8 +29,8 @@ const CreateSavings2 = ({ username, register }) => {
 
   const [loading, setloading] = useState(false);
 
-  //eslint-disable-next-line
   const [state, setState] = useState(initialValues);
+
 
   const [modalInOpen4, setModalInOpen4] = useState(false);
   // const modalToggle = () => {
@@ -65,10 +66,8 @@ const CreateSavings2 = ({ username, register }) => {
     };
     sessionStorage.setItem("savingsInfo", JSON.stringify(obj));
     window.location.href = "/app/savings/create3";
-    // register(obj, "/api/v1/identity/register", "/auth/signup2");
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
-    // setloading(false);
   };
 
   const formik = useFormik({
@@ -84,9 +83,9 @@ const CreateSavings2 = ({ username, register }) => {
     <>
       {loading && <Loader />}
       <div className="section__content section__content--p30">
-        <div className="container-fluid">
-          <div className="row justify-content-center">
-            <div className="col-xl-6 col-lg-8">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6">
               <div className="au-card">
                 <div className="au-card-inner">
                   <h4 className="text-blue">
@@ -94,9 +93,9 @@ const CreateSavings2 = ({ username, register }) => {
                   </h4>
                   <div className="small-red-line"></div>
 
-                  <div className="mt-5">
+                  <div className="mt-4">
                     <form onSubmit={formik.handleSubmit}>
-                      <div className="mt-4">
+                      <div className="">
                         <div className="form-group">
                           <label className="text-blue font-sm">
                             Start your goal with a befitting name
@@ -219,6 +218,14 @@ const CreateSavings2 = ({ username, register }) => {
                             </p>
                           )}
                         </div>
+                        <p className="text-danger">
+                          Early termination is not possible once the plan is
+                          created. People that desire early termination option
+                          should use the stash option.
+                        </p>
+                        <p className="text-dark my-1">
+                          Would you like to proceed with the Savings?
+                        </p>
                         <div className="row mt-4 align-items-center justify-content-end">
                           <div className="col-lg-8">
                             <div className="row">
@@ -227,7 +234,7 @@ const CreateSavings2 = ({ username, register }) => {
                                   to="/app/savings/create"
                                   className="btn btn-previous text-green"
                                 >
-                                  PREVIOUS
+                                  Don’t Proceed
                                 </Link>
                               </div>
                               <div className="col-lg-6">
@@ -237,7 +244,7 @@ const CreateSavings2 = ({ username, register }) => {
                                     !formik.isValid || formik.isSubmitting
                                   }
                                   className="btn login-submit"
-                                  value="NEXT"
+                                  value="Yes, Proceed"
                                 />
                               </div>
                             </div>
@@ -249,10 +256,42 @@ const CreateSavings2 = ({ username, register }) => {
                 </div>
               </div>
             </div>
+            <div class="col-lg-6">
+              <div class="au-card h-100">
+                <div class="au-card-inner">
+                  <h4 class="text-blue">Choose a target date</h4>
+                  <div class="small-red-line"></div>
+
+                  <p class="mt-4">
+                    How long do you want to save your money for?
+                  </p>
+
+                  <div class="mt-30">
+                    <div class="tdate">
+                      30 - 60 days <span>at 5% per annum</span>
+                    </div>
+                    <div class="tdate">
+                      30 - 60 days <span>at 5% per annum</span>
+                    </div>
+                    <div class="tdate">
+                      30 - 60 days <span>at 5% per annum</span>
+                    </div>
+                    <div class="tdate">
+                      30 - 60 days <span>at 5% per annum</span>
+                    </div>
+                    <div class="tdate">
+                      30 - 60 days <span>at 5% per annum</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
       {modalInOpen4 && <Modal close={close} />}
+
     </>
   );
 };
@@ -269,4 +308,3 @@ const actionCreators = {
 
 export default connect(mapStateToProps, actionCreators)(CreateSavings2);
 
-// export default ;

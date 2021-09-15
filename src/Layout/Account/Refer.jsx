@@ -101,8 +101,15 @@ const Refer = () => {
                             </span>
                           </a>
                         </div>
-                        <div className="mt-3" style={{ width:"20%",margin: "0 auto" }}>
-                          <QRCode size={120} width={100} value="https://investyield.ng/" />
+                        <div
+                          className="mt-3"
+                          style={{ width: "20%", margin: "0 auto" }}
+                        >
+                          <QRCode
+                            size={120}
+                            width={100}
+                            value="https://investyield.ng/"
+                          />
                         </div>
                       </div>
                     </div>
