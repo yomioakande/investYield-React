@@ -10,6 +10,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
 
+import Modal from "./DateModal";
+
 const CreateSavings2 = ({ username, register }) => {
   const location = useLocation();
   const link = location.pathname.split("/");
@@ -28,6 +30,22 @@ const CreateSavings2 = ({ username, register }) => {
   const [loading, setloading] = useState(false);
 
   const [state, setState] = useState(initialValues);
+
+
+  const [modalInOpen4, setModalInOpen4] = useState(false);
+  // const modalToggle = () => {
+  //   setModalInOpen4(true);
+  // };
+
+  const close = () => {
+    setModalInOpen4(false);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setModalInOpen4(true);
+    }, 2000);
+  }, []);
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Enter a Plan name"),
@@ -271,6 +289,9 @@ const CreateSavings2 = ({ username, register }) => {
           </div>
         </div>
       </div>
+
+      {modalInOpen4 && <Modal close={close} />}
+
     </>
   );
 };
@@ -287,4 +308,3 @@ const actionCreators = {
 
 export default connect(mapStateToProps, actionCreators)(CreateSavings2);
 
-// export default ;

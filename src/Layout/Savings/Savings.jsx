@@ -20,8 +20,6 @@ const Savings = ({ getData }) => {
       setloading(true);
       const data = await getData("/api/v1/user/summary").then();
       setSummaryInfo(data);
-      // console.log(summaryInfo)
-      console.log(data);
       setloading(false);
     })();
     // eslint-disable-next-line
