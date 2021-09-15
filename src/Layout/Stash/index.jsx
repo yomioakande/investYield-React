@@ -30,7 +30,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
     const obj2 = freqOptions.find(
       (option) => option.tenor.code === formik.values.frequency
     );
-
     createStash(obj, obj2, "/api/v1/user/stash", "/app/stash/breakdown");
     // onSubmitProps.resetForm();
   };
@@ -190,13 +189,11 @@ const Index = ({ getFrequency, createStash, loading }) => {
                           >
                             <Select
                               maxMenuHeight={5}
-                              // menuPlacement="bottom"
                               options={options}
                               styles={customStyles}
                               isSearchable={false}
                               className="select-field"
                               placeholder={""}
-                              // name="frequency"
                               value={defaultValue(
                                 options,
                                 formik.values.frequency

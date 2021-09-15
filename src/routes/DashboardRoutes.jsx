@@ -33,7 +33,7 @@ import linkCard from "../Layout/Account/LinkCard";
 import Refer from "../Layout/Account/Refer";
 import MyPortfolio from "../Layout/Account/MyPorfolio";
 import myProfile from "../Layout/Account/Profile";
-
+import myCard from "../Layout/Account/Card/index";
 import Transfer from "../Layout/Account/Transfer/Index";
 // import Transfer2 from "../Layout/Account/Transfer/Transfer2"
 // import Transfer3 from "../Layout/Account/Transfer/Transfer3"
@@ -115,6 +115,7 @@ const DashboardRoutes = () => {
           path="/app/account/changepassword"
           component={ChangePassword}
         />
+        <PrivateRoute path="/app/account/mycard" component={myCard} />
         <PrivateRoute path="/app/account/refer" component={Refer} />
 
         <Redirect from="/app" to="/app/dashboard" />

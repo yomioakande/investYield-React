@@ -25,60 +25,67 @@ const DateModal = ({ getFrequency, close, ccy }) => {
   }, []);
 
   return ReactDom.createPortal(
-    <OVERLAY>
-      <ModalBox>
-        <>
-          {loading && <Loader />}
-          <div
-            className=""
-            tabindex="-1"
-            role="dialog"
-            data-backdrop="static"
-            data-keyboard="false"
-          >
-            <div className="modal-dialog modal-dialog-centered" role="document">
-              <div className="modal-content">
-                <button
-                  onClick={() => close()}
-                  className="d-flex modal-close-link"
-                  data-dismiss="modal"
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <OVERLAY>
+          <ModalBox>
+            <>
+              <div
+                className=""
+                tabindex="-1"
+                role="dialog"
+                data-backdrop="static"
+                data-keyboard="false"
+              >
+                <div
+                  className="modal-dialog modal-dialog-centered"
+                  role="document"
                 >
-                  <span className="px-2">close</span>
-                  <img src={modalclose} className="img-fluid" alt="close" />
-                </button>
-                <div className="modal-body p-4">
-                  <div className="row">
-                    <div className="col-lg-12">
-                      <h3 className="text-blue">Choose target Date</h3>
-                      <div className="small-red-line mt-3"></div>
-                      <Style1>
-                        <p className="title">
-                          How long do you want to save your money for?
-                        </p>
-                        <div className="flex">
-                          {freqOptions.map((single, index) => {
-                            return (
-                              <div key={index} className="flex1">
-                                <p className="circle"></p>
-                                <p className="days">{single.tenor.name} </p>
-                                <p className="annum">
-                                  {single.rate}% per annum
-                                </p>
-                              </div>
-                            );
-                          })}
+                  <div className="modal-content">
+                    <button
+                      onClick={() => close()}
+                      className="d-flex modal-close-link"
+                      data-dismiss="modal"
+                    >
+                      <span className="px-2">close</span>
+                      <img src={modalclose} className="img-fluid" alt="close" />
+                    </button>
+                    <div className="modal-body p-4">
+                      <div className="row">
+                        <div className="col-lg-12">
+                          <h3 className="text-blue">Choose target Date</h3>
+                          <div className="small-red-line mt-3"></div>
+                          <Style1>
+                            <p className="title">
+                              How long do you want to save your money for?
+                            </p>
+                            <div className="flex">
+                              {freqOptions.map((single, index) => {
+                                return (
+                                  <div key={index} className="flex1">
+                                    <p className="circle"></p>
+                                    <p className="days">{single.tenor.name} </p>
+                                    <p className="annum">
+                                      {single.rate}% per annum
+                                    </p>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </Style1>
                         </div>
-                      </Style1>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          {/* <ToastContainer autoClose={1000} hideProgressBar /> */}
-        </>
-      </ModalBox>
-    </OVERLAY>,
+            </>
+          </ModalBox>
+        </OVERLAY>
+      )}
+    </>,
     document.getElementById("portal")
   );
 };

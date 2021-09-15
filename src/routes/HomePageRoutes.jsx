@@ -17,21 +17,20 @@ export const HomePageRoutes = () => {
     <Router>
       <HomePageHeader />
       <Switch>
-        <Route exact path="/home">
+        {/* <Route exact path="/home">
           {<Redirect to="/" />}
+        </Route> */}
+        <Route exact path="/">
+          <HomePage />
         </Route>
         <Route exact path="/aboutus">
           <AboutUs />
         </Route>
-        <Route exact path="/faq">
+        <Route path="/faq">
           <Faq />
         </Route>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-
-        <Route exact path="/contactus">
-          <ContactUs/>
+        <Route path="/contactus">
+          <ContactUs />
         </Route>
         <Redirect from="*" to="/" />
       </Switch>

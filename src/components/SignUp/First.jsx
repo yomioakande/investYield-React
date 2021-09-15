@@ -33,9 +33,9 @@ const First = (props) => {
       .required("LastName is Required"),
     email: Yup.string().email("Invalid email").required("Email is Required"),
     phoneNumber: Yup.string()
-      .min(2, "UserName is too Short!")
-      .max(50, "UserName is too Long!")
-      .required("UserName is Required"),
+      .min(2, "Phone Number is too Short!")
+      .max(50, "Phone Number is too Long!")
+      .required("Phone Number is Required"),
     dob: Yup.string().required("Date of Birth Required"),
     referral: Yup.string().min(
       5,

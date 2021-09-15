@@ -52,7 +52,7 @@ const Index = () => {
                 <div className="au-card-inner w-100">
                   <div className="row align-items-center justify-content-center">
                     <div className="col-lg-7 profile-cards col-md-6">
-                     {/* <Charts/> */}
+                      {/* <Charts/> */}
                       {/* <canvas id="myChart" width="800" height="550"></canvas> */}
                     </div>
                     <div className="col-lg-5 w-auto profile-cards col-md-4 mt-3">
@@ -161,7 +161,7 @@ const Index = () => {
             <MenuBar
               image={settings}
               menuText={"My Card and Bank Settings"}
-              link={""}
+              link={"/app/account/mycard"}
             />
             <MenuBar
               image={referIcon}

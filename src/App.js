@@ -19,12 +19,13 @@ function App() {
         <Switch>
         {/* <Route exact path="/test"  component={Congrats} /> */}
           {/* <Route exact path="/contactus" component={ContactUs} /> */}
-          {/* <Route path="/auth" component={AuthRoutes} /> */}
-          <PublicRoute path="/auth" restricted={true} component={AuthRoutes} />
+          {/* <Route path="/auth" component={AuthRoutes} /> */}       
+         <PublicRoute path="/auth" restricted={true} component={AuthRoutes} />
           <PrivateRoute path="/app" component={DashboardRoutes} />
           <Route path="/createpin" component={CreatePin} />
-          <Route exact path="/" component={HomePageRoutes} />
-          <Redirect from="*" to="/" />
+          <Route path="/" component={HomePageRoutes} />
+          
+          {/* <Redirect from="*" to="/" /> */}
         </Switch>
       </Router>
     </>
