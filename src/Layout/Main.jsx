@@ -21,16 +21,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "./transitions.css";
 import "swiper/swiper-bundle.min.css";
 
-// import swiper from "swiper";
-// import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import "swiper/swiper-bundle.min.js";
-// import "../assets/js/swiper.min.js"
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-// import 'swiper/css/scrollbar';
-// import ScriptTag from "react-script-tag";
-
 const Main = ({ getData }) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [modalInOpen, setModalInOpen] = useState(false);
@@ -163,8 +153,6 @@ const Main = ({ getData }) => {
                 <div className="au-card-inner">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">Create A Savings Plan</h3>
-                    {/* <button onClick={()=>addCard()}>Test</button> */}
-                    {/* <a href="www.google.com">sd</a> */}
                     <Link to="/app/savings/create" className="au-btn-link">
                       View more
                     </Link>
@@ -184,7 +172,7 @@ const Main = ({ getData }) => {
 
                     <Plan
                       image={emergency}
-                      nameClass={"au-card-bg-emergency"}
+                      nameClass={"au-card-bg-emergency h-100"}
                       planName={"Emergency Savings Plan"}
                     />
 
@@ -193,13 +181,6 @@ const Main = ({ getData }) => {
                       nameClass={"au-card-personalplan"}
                       planName={"Create A Savings Plan"}
                     />
-
-                    {/* <a href="/" className="card-box d-flex flex-column mb-4">
-                      <div className="au-card-smaller au-card-personalplan flex-grow-1">
-                        <img src={personalplan} alt="your savings plan" />
-                        <p className="text-black">Create A Savings Plan</p>
-                      </div>
-                    </a> */}
                   </div>
                 </div>
               </div>
@@ -242,15 +223,6 @@ const Main = ({ getData }) => {
                       hide={hide}
                     />
 
-                    {/* <a href="/" className="card-box d-flex flex-column mb-4">
-                      <div className="au-card-purse au-card-bg-food-cash flex-grow-1">
-                        <div className="au-card-elements">
-                          <p className="mt-1">Food Cash</p>
-                          <p className="mt-1">₦ 0.00</p>
-                          <p className="mt-2 purse-link-btn">Hide Balance</p>
-                        </div>
-                      </div>
-                    </a> */}
                     <a href="/" className="card-box d-flex flex-column mb-4">
                       <div className="au-card-purse au-card-bg-tgif-cash flex-grow-1">
                         <div className="au-card-elements">
@@ -280,8 +252,6 @@ const Main = ({ getData }) => {
                         No transactions recorded yet
                       </p>
                     )}
-
-                    {/* <CardTransfer value={false} /> */}
                   </div>
                 </div>
               </div>
@@ -349,7 +319,6 @@ const Main = ({ getData }) => {
                             <button
                               style={{ textAlign: "left" }}
                               onClick={() => addCard()}
-                              // to="/app/account/linkcard"
                               className="text px-0 mx-0"
                             >
                               <h5 className="name">Link your card</h5>
@@ -396,7 +365,10 @@ const Main = ({ getData }) => {
                     <div className="au-message__item">
                       {!todoList?.withdrawalAccount && (
                         <div className="au-message__item-inner px-2 py-2">
-                          <Link to="/" className="au-message__item-text">
+                          <Link
+                            to="/app/account"
+                            className="au-message__item-text"
+                          >
                             <div className="text px-0 mx-0">
                               <h5 className="name">Add withdrawal Account</h5>
                               <p>

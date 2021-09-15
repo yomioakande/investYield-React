@@ -191,10 +191,11 @@ a.nav-link.active {
   font-size: 2.25rem;
 }
 .small-red-line {
-  width: 30px !important;
+  width: 50px !important;
   height: 5px;
   border-radius: 5px;
   background-color: #f20000;
+  margin-top: 5px;
 }
 .small-white-line {
   width: 30px !important;
@@ -935,4 +936,39 @@ input[type="radio"] {
 .link-text a {
   text-decoration: none;
   color: #ffffff;
+}
+.tdate {
+  padding: 20px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  color: #263238;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tdate span {
+  color: #08b29b;
+}
+.team-name {
+  font-size: 18px;
+}
+.team-portfolio {
+  font-size: 12px;
+}
+.bank-details {
+  margin-bottom: 10px;
+}
+.bank-details p {
+  margin-bottom: 5px;
+}
+.bank-details h3 {
+  background: #f3f8fe;
+  box-shadow: 0px 4px 11px rgba(5, 83, 200, 0.3);
+  border-radius: 5px;
+  color: #0553c8;
+  padding: 15px 5px;
+  text-align: center;
+  letter-spacing: 5px;
+  margin: 20px 0 0;
 }

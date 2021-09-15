@@ -31,49 +31,52 @@ const CreateSavings = () => {
 
                   <div className="row mt-4">
                     <Card
-                      link={"/"}
+                      link={"/app/savings/create2/Family"}
                       image={family}
                       text={"Family"}
                       nameClass={"au-card-bg-retirement"}
                     />
                     <Card
-                      link={"/"}
+                      link={"/app/savings/create2/Home"}
                       image={home}
                       text={"Home"}
                       nameClass={"au-card-bg-homeplan"}
                     />
                     <Card
-                      link={"/"}
+                      link={"/app/savings/create2/Emergency"}
                       image={emergency}
                       text={"Emergency"}
                       nameClass={"au-card-bg-emergency"}
                     />
                     <Card
-                      link={"/"}
+                      link={"/app/savings/create2/Vacation"}
                       image={vacation}
                       text={"Vacation"}
                       nameClass={"au-card-bg-movie"}
                     />
                     <Card
-                      link={"/"}
+                      link={"/app/savings/create2/Wedding"}
                       image={wedding}
                       text={"Wedding"}
                       nameClass={"au-card-bg-wedding"}
                     />
                     <Card
-                      link={"/"}
+                      link={"/app/savings/create2/Celebration"}
                       image={celebration}
                       text={"Celebration"}
                       nameClass={"au-card-bg-family"}
                     />
                     <Card
-                      link={"/"}
+                      link={"/app/savings/create2/Retirement"}
                       image={retirement}
                       text={"Retirement"}
                       nameClass={"au-card-bg-retirement"}
                     />
 
-                    <a href={"/app/savings/create2/Create"} className="col-xl-2 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
+                    <a
+                      href={"/app/savings/create2/Create"}
+                      className="col-xl-2 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                    >
                       <div className="au-card-smaller au-card-bg-create-savings-ind flex-grow-1 px-3">
                         <div className="d-flex justify-content-center">
                           <p className="text-create-stash">
