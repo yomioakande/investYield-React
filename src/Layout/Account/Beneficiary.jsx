@@ -4,7 +4,6 @@ import search from "../../assets/images/search-icon.svg";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import ModalB from "./ModalBeneficiary";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -40,7 +39,6 @@ const Beneficiary = ({ getData, deleteData }) => {
   const dataInfo = async () => {
     const data = await getData("/api/v1/user/beneficiary").then();
     setBeneficiary(data);
-    console.log("retor", data);
   };
 
   useEffect(() => {

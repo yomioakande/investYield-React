@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
@@ -9,8 +9,7 @@ import "../../assets/css/style.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
-
-import Modal from "./DateModal";
+import InterestList from "./InterestList";
 
 const CreateSavings2 = ({ username, register }) => {
   const location = useLocation();
@@ -28,24 +27,6 @@ const CreateSavings2 = ({ username, register }) => {
   };
 
   const [loading, setloading] = useState(false);
-
-  const [state, setState] = useState(initialValues);
-
-
-  const [modalInOpen4, setModalInOpen4] = useState(false);
-  // const modalToggle = () => {
-  //   setModalInOpen4(true);
-  // };
-
-  const close = () => {
-    setModalInOpen4(false);
-  };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setModalInOpen4(true);
-    }, 2000);
-  }, []);
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Enter a Plan name"),
@@ -79,6 +60,8 @@ const CreateSavings2 = ({ username, register }) => {
 
   console.log(formik.values);
 
+  // {modalInOpen4 && <Modal close={close} />}
+
   return (
     <>
       {loading && <Loader />}
@@ -107,7 +90,6 @@ const CreateSavings2 = ({ username, register }) => {
                               name="name"
                               onChange={formik.handleChange}
                               {...formik.getFieldProps("name")}
-                              // placeholder={`e.g ${username}'s ${name} plan`}
                             />
                             <label
                               for="firstName"
@@ -134,10 +116,8 @@ const CreateSavings2 = ({ username, register }) => {
                                   <input
                                     type="radio"
                                     name="ccyCode"
-                                    // checked={formik.values.ccyCode === 2}
                                     value={"2"}
                                     onChange={formik.handleChange}
-                                    // {...formik.getFieldProps("ccyCode")}
                                   />
                                   <span class="w-100 text-center">
                                     $US Dollars
@@ -153,7 +133,6 @@ const CreateSavings2 = ({ username, register }) => {
                                     name="ccyCode"
                                     value={"1"}
                                     onChange={formik.handleChange}
-                                    // {...formik.getFieldProps("ccyCode")}
                                   />
                                   <span class="text-center">₦ Naira</span>
                                 </label>
@@ -256,42 +235,10 @@ const CreateSavings2 = ({ username, register }) => {
                 </div>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="au-card h-100">
-                <div class="au-card-inner">
-                  <h4 class="text-blue">Choose a target date</h4>
-                  <div class="small-red-line"></div>
-
-                  <p class="mt-4">
-                    How long do you want to save your money for?
-                  </p>
-
-                  <div class="mt-30">
-                    <div class="tdate">
-                      30 - 60 days <span>at 5% per annum</span>
-                    </div>
-                    <div class="tdate">
-                      30 - 60 days <span>at 5% per annum</span>
-                    </div>
-                    <div class="tdate">
-                      30 - 60 days <span>at 5% per annum</span>
-                    </div>
-                    <div class="tdate">
-                      30 - 60 days <span>at 5% per annum</span>
-                    </div>
-                    <div class="tdate">
-                      30 - 60 days <span>at 5% per annum</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <InterestList />
           </div>
         </div>
       </div>
-
-      {modalInOpen4 && <Modal close={close} />}
-
     </>
   );
 };
@@ -307,4 +254,3 @@ const actionCreators = {
 };
 
 export default connect(mapStateToProps, actionCreators)(CreateSavings2);
-

@@ -5,22 +5,43 @@ import { usersActions } from "../../../redux/actions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
+import Loader from "../../../common/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const WithdrawalAccount = (props) => {
   const [bankOptions, setBankOptions] = useState([]);
+  const [bankDetails, setBankDetails] = useState([]);
+  const [update, setUpdate] = useState(false);
 
+  const updateToggle = () => {
+    setUpdate(!update);
+  };
+  const dataInfo = async () => {
+    const datas = await props.getBanks("/api/v1/util/bank").then();
+    const account = await props.getAccount("/api/v1/user/bankaccount").then();
+    setBankDetails(account);
+    setBankOptions(datas);
+  };
   useEffect(() => {
-    (async function dataInfo() {
-      const datas = await props.getBanks("/api/v1/util/bank").then();
-
-      console.log(datas);
-
-      //   const { interest } = datas;
-      setBankOptions(datas);
-    })();
+    dataInfo();
     //eslint-disable-next-line
   }, []);
 
-  console.log(bankOptions);
+  const delete1 = () => {
+    toast.success("Account successfully deleted", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    dataInfo();
+  };
+
+  const deleteId = (id) => {
+    const obj = {
+      id,
+    };
+
+    props.deleteId("/api/v1/user/bankaccount", obj, delete1);
+  };
 
   const options = bankOptions.map((single, index) => {
     return {
@@ -38,7 +59,6 @@ const WithdrawalAccount = (props) => {
       paddingTop: 14,
       paddingBottom: 14,
       hover: "#DDE9FB",
-      // zIndex: 9999,
     }),
 
     menuList: (provided, state) => ({
@@ -46,7 +66,8 @@ const WithdrawalAccount = (props) => {
       paddingBottom: 0,
       background: "#fff",
       hover: "#DDE9FB",
-      // zIndex: 9999,
+      height: "15rem",
+      overflowY: "scroll",
     }),
 
     control: (base, state) => ({
@@ -73,35 +94,31 @@ const WithdrawalAccount = (props) => {
 
   const validationSchema = Yup.object({
     accountNumber: Yup.string()
-      .min(2, "Account Number: is too short!")
-      .max(50, "Account Number:is too Long!")
-      .required("Account Number: is Required"),
-    lastName: Yup.string()
-      .min(2, "LastName is too Short!")
-      .max(50, "Last Name is too Long!")
-      .required("LastName is Required"),
-    email: Yup.string().email("Invalid email").required("Email is Required"),
+      .min(10, "Account Number is too short!")
+      .max(15, "Account Number is too Long!")
+      .required("Account Number is Required"),
+    bankCode: Yup.string().required("A Bank name is Required"),
+    pin: Yup.string()
+      .min(4, "Pin must be 4 digits")
+      .max(4, "Pin must be 4 digits")
+      .required("Pin is Required"),
   });
 
+  const success = () => {
+    toast.success("Account successfully added", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
+
   const onSubmit = (values, onSubmitProps) => {
-    // setloading(true);
     setShowError(true);
     const obj = {
-      firstName: formik.values.firstName,
-      lastName: formik.values.lastName,
-      email: formik.values.email,
-      phoneNumber: formik.values.phoneNumber,
-      dob: formik.values.dob,
-      platform: {
-        source: "string",
-        id: "string",
-      },
-      referral: formik.values.referral,
+      accountNumber: values.accountNumber,
+      bankCode: values.bankCode,
+      pin: values.pin,
     };
-    sessionStorage.setItem("number", JSON.stringify(obj.phoneNumber));
-    props.register(obj, "/api/v1/identity/register", "/auth/signup2");
-
-    // onSubmitProps.resetForm();
+    props.postAccount(obj, "/api/v1/user/bankaccount", success);
+    onSubmitProps.resetForm();
     show();
     onSubmitProps.setSubmitting(false);
   };
@@ -113,27 +130,51 @@ const WithdrawalAccount = (props) => {
     validateOnMount: true,
   });
 
+  console.log(formik.values);
+
   const show = () => {
     setTimeout(() => {
       setShowError(false);
-    }, 3000);
+    }, 5000);
   };
 
   return (
     <>
+      {props.loading && <Loader />}
       <div className="row justify-content-center">
         <div className="col-xl-6 col-lg-8 mt-4">
-          {/* //cvb */}
-          <WithdrawalCard />
+          {
+            bankDetails ? (
+              <WithdrawalCard bankDetails={bankDetails} />
+            ) : (
+              // showError ? (
+              props.alert.type && (
+                <div className={`font-sm alert mt-3 ${props.alert.type}`}>
+                  {props.alert.message}
+                </div>
+              )
+            )
+            // ) : null
+          }
+
           <div className="row">
             <div className="col-lg-6">
               <div className="mt-3">
-                <button className="btn login-submit">Update Account</button>
+                <button
+                  type="button"
+                  onClick={updateToggle}
+                  className="btn login-submit"
+                >
+                  Update Account
+                </button>
               </div>
             </div>
             <div className="col-lg-6">
               <div className="mt-3">
-                <button className="btn btn-delete-card text-danger">
+                <button
+                  onClick={() => deleteId(bankDetails.id)}
+                  className="btn btn-delete-card text-danger"
+                >
                   Delete Account
                 </button>
               </div>
@@ -141,73 +182,87 @@ const WithdrawalAccount = (props) => {
           </div>
         </div>
       </div>
-      <div className="row justify-content-center mt-5">
-        <div className="col-lg-7">
-          <div>
-            <h6 className="text-dark">
-              Please enter an account number linked with the BVN provided for
-              this investYield account.
-            </h6>
-            <form className="mt-4">
-              <div className="form-group">
-                <div className="custom-select text-field-profile p-0">
-                  {/* <select className="text-field px-0">
-                    <option value="0" selected>
-                      Select Bank
-                    </option>
-                    <option value="1">Access Bank</option>
- 
-                  </select> */}
-                  <Select
-                    maxMenuHeight={5}
-                    options={options}
-                    styles={customStyles}
-                    isSearchable={false}
-                    className="select-field"
-                    placeholder={""}
-                    value={defaultValue(options, formik.values.frequency)}
-                    onChange={(value) =>
-                      formik.setFieldValue("frequency", value.value)
-                    }
-                    autoFocus={true}
+
+      {update && (
+        <div className="row justify-content-center mt-5">
+          <div className="col-lg-7">
+            <div>
+              <h6 className="text-dark">
+                Please enter an account number linked with the BVN provided for
+                this investYield account.
+              </h6>
+              {showError && props.message
+                ? props.alertType && (
+                    <div className={`font-sm alert ${props.alertType}`}>
+                      {props.message}
+                    </div>
+                  )
+                : null}
+              <form onSubmit={formik.handleSubmit} className="mt-4">
+                <div className="form-group">
+                  <div className="custom-select text-field-profile p-0">
+                    <Select
+                      maxMenuHeight={5}
+                      options={options}
+                      styles={customStyles}
+                      isSearchable={false}
+                      className="select-field"
+                      placeholder={""}
+                      value={defaultValue(options, formik.values.bankCode)}
+                      onChange={(value) =>
+                        formik.setFieldValue("bankCode", value.value)
+                      }
+                      autoFocus={true}
+                    />
+                  </div>
+                </div>
+                <div className="form-group mt-4">
+                  <input
+                    type="text"
+                    className="text-field"
+                    placeholder="Enter Account Number"
+                    name="accountNumber"
+                    {...formik.getFieldProps("accountNumber")}
                   />
                 </div>
-              </div>
-              <div className="form-group mt-4">
-                <input
-                  type="text"
-                  className="text-field"
-                  placeholder="Enter Account Number"
-                />
-              </div>
 
-              <div className="form-group mt-4">
-                <input
-                  type="text"
-                  className="text-field"
-                  placeholder="Enter Pin"
-                />
-              </div>
-              <div className="form-group mt-4">
-                <div className="row">
-                  <div className="col-lg-6">
-                    <div className="mt-3">
-                      <button className=" btn btn-delete-card text-danger ">
-                        CANCEL
-                      </button>
+                <div className="form-group mt-4">
+                  <input
+                    type="password"
+                    className="text-field"
+                    name="pin"
+                    maxLength={4}
+                    {...formik.getFieldProps("pin")}
+                    placeholder="Enter Pin"
+                  />
+                </div>
+                <div className="form-group mt-4">
+                  <div className="row">
+                    <div className="col-lg-6">
+                      <div className="mt-3">
+                        <button className=" btn btn-delete-card text-danger ">
+                          CANCEL
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-lg-6">
-                    <div className="mt-3">
-                      <button className="btn login-submit">ADD ACCOUNT</button>
+                    <div className="col-lg-6">
+                      <div className="mt-3">
+                        <input
+                          type="submit"
+                          className="btn login-submit"
+                          disabled={!formik.isValid || formik.isSubmitting}
+                          value="ADD ACCOUNT"
+                        />
+                      </div>
+                      <ToastContainer autoClose={1000} hideProgressBar />
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
@@ -215,12 +270,15 @@ const WithdrawalAccount = (props) => {
 const mapStateToProps = (state) => {
   const { alert } = state;
   const username = state.authentication.user;
-  // const loading = state.authentication.loading;
-  return { alert, username };
+  const { loading, alertType, message } = state.registration;
+  return { alert, username, message, alertType, loading };
 };
 
 const actionCreators = {
   getBanks: usersActions.getInfo,
+  getAccount: usersActions.getInfo,
+  postAccount: usersActions.postFeedBack,
+  deleteId: usersActions.deleteData,
 };
 
 export default connect(mapStateToProps, actionCreators)(WithdrawalAccount);

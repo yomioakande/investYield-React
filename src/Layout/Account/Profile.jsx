@@ -42,6 +42,8 @@ const Profile = ({
     // eslint-disable-next-line
   }, []);
 
+  console.log(profile)
+
   const initialValues = {
     address: profile.address,
     password: "",

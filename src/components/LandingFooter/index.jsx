@@ -1,5 +1,5 @@
 import React from "react";
-import {Link,NavLink} from "react-router-dom"
+import { Link } from "react-router-dom";
 import "../../assets/css/style.css";
 import logoBig from "../../assets/images/logoBig.svg";
 import googlePlayIcon from "../../assets/images/googlePlayIcon.svg";
@@ -54,7 +54,7 @@ const Index = () => {
                 <div className="col-lg-4 mt-4">
                   <h5 className="footer-bottom-header">Company</h5>
                   <div className="mt-3 d-flex flex-column">
-                  <a href="/aboutus" className="footer-bottom-links">
+                    <a href="/aboutus" className="footer-bottom-links">
                       About us
                     </a>
                     <Link to="/" className="mt-3 footer-bottom-links">
@@ -63,7 +63,7 @@ const Index = () => {
                     <a href="/" className="mt-3 footer-bottom-links">
                       Careers
                     </a>
-                    <a href="/" className="mt-3 footer-bottom-links">
+                    <a href="/terms" className="mt-3 footer-bottom-links">
                       Terms and Conditions
                     </a>
                     <a href="/" className="mt-3 footer-bottom-links">

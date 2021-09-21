@@ -139,14 +139,13 @@ const Modal1 = ({
                               placeholder="Enter BVN"
                               name="bvn"
                               onChange={formik.handleChange}
-                              // value={bvnNum}
-                              // onChange={}
+                        
                             />
                           </div>
                           <div className="d-flex justify-content-center flex-column mt-4">
                             <button
                               onClick={() => dropdown()}
-                              //   href="#"
+                            
                               className="d-flex no-decor bvn-text align-self-center"
                               id="why-bvn-link"
                             >

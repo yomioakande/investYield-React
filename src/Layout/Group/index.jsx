@@ -28,7 +28,7 @@ const Index = () => {
                   <div className="row">
                     <div className="col-lg-6 mt-4">
                       <Link
-                        to="/app/groupsavings1"
+                        to={'/app/groupsavings1/private'}
                         className="create-private-group d-flex align-items-center"
                       >
                         <div>
@@ -42,8 +42,8 @@ const Index = () => {
                       </Link>
                     </div>
                     <div className="col-lg-6 mt-4">
-                      <a
-                        href="/"
+                      <Link
+                         to={'/app/groupsavings1/public'}
                         className="create-public-group d-flex align-items-center"
                       >
                         <div>
@@ -57,7 +57,7 @@ const Index = () => {
                           className="img-fluid"
                           alt="blackArrow"
                         />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="row">

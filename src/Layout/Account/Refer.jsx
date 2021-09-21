@@ -1,12 +1,25 @@
-import React, { useRef } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import { usersActions } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import refer from "../../assets/images/referImage.svg";
 import copy from "../../assets/images/copyIcon.svg";
 import link from "../../assets/images/share-linkIcon.svg";
 import QRCode from "qrcode.react";
-const Refer = () => {
+const Refer = (props) => {
   const Ref = useRef(null);
+
+  const [referCode, setReferCode] = useState("");
+
+  useEffect(() => {
+    (async function dataInfo() {
+      const datas = await props.getRefer("/api/v1/user/referral").then();
+      setReferCode(datas);
+    })();
+    //eslint-disable-next-line
+  }, []);
+
+  console.log("refercode", referCode);
 
   const copyText = (e) => {
     navigator.clipboard.writeText(Ref.current.value);
@@ -72,7 +85,7 @@ const Refer = () => {
                             type="text"
                             ref={Ref}
                             disabled
-                            value={"AAA-00198"}
+                            value={referCode}
                             className="referal-link-div shadow d-flex justify-content-center align-items-center px-4 w-100"
                           />
 
@@ -88,7 +101,7 @@ const Refer = () => {
                         </div>
                         <div className="mt-30">
                           <a
-                            href="*"
+                            href={`${process.env.REACT_APP_MAIN_URL}/signup1/${referCode}`}
                             className="share-referral-link d-flex justify-content-center align-items-center"
                           >
                             <img
@@ -108,7 +121,7 @@ const Refer = () => {
                           <QRCode
                             size={120}
                             width={100}
-                            value="https://investyield.ng/"
+                            value={`${process.env.REACT_APP_MAIN_URL}/signup1/${referCode}`}
                           />
                         </div>
                       </div>
@@ -124,4 +137,12 @@ const Refer = () => {
   );
 };
 
-export default Refer;
+const mapStateToProps = (state) => {
+  return null;
+};
+
+const actionCreators = {
+  getRefer: usersActions.getInfo,
+};
+
+export default connect(mapStateToProps, actionCreators)(Refer);

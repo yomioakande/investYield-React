@@ -4,11 +4,13 @@ import SingleCard from "./SingleCard";
 import WithdrawalAccount from "./WithdrawalAccount";
 import { connect } from "react-redux";
 import { usersActions } from "../../../redux/actions";
-// import Loader from "../../../common/Loader";
+import Loader from "../../../common/Loader";
 
 const Index = (props) => {
+  // console.log("spvuik", props.loading);
   return (
     <>
+      {props.loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">
@@ -26,14 +28,7 @@ const Index = (props) => {
                       My Portfolio / Security Settings
                     </p>
                   </div>
-                  <div
-                    className="col-lg-5
-                          px-0
-                          d-flex
-                          justify-content-between
-                          cg-3
-                        "
-                  >
+                  <div className="col-lg-5 px-0 d-flex justify-content-between cg-3">
                     <div className="mt-2 flex-grow-1 w-auto">
                       <button className="btn btn-transfer">
                         Transfer Funds
@@ -96,7 +91,10 @@ const Index = (props) => {
                     >
                       <div className="row">
                         <div className="col-xl-4 col-lg-6">
-                          <button className="btn login-submit">
+                          <button
+                            onClick={async () => await props.addCard().then()}
+                            className="btn login-submit"
+                          >
                             Add New Card
                           </button>
                         </div>
@@ -129,12 +127,13 @@ const Index = (props) => {
 const mapStateToProps = (state) => {
   const { alert } = state;
   const username = state.authentication.user;
-  // const loading = state.authentication.loading;
-  return { alert, username };
+  const { loading } = state.registration;
+  return { alert, username, loading };
 };
 
 const actionCreators = {
   getData: usersActions.getInfo,
+  addCard: usersActions.addCard,
 };
 
 export default connect(mapStateToProps, actionCreators)(Index);
