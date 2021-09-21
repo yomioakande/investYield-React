@@ -21,13 +21,13 @@ import "react-toastify/dist/ReactToastify.css";
 import "./transitions.css";
 import "swiper/swiper-bundle.min.css";
 
-const Main = ({ getData }) => {
+const Main = (props) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [modalInOpen, setModalInOpen] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [todoList, setTodoList] = useState({});
   const [hide, setHide] = useState(false);
-  const [loading, setloading] = useState(false);
+  // const [loading, setloading] = useState(false);
 
   const modalToggle = () => {
     setModalInOpen(true);
@@ -43,10 +43,12 @@ const Main = ({ getData }) => {
 
   useEffect(() => {
     (async function dataInfo() {
-      setloading(true);
-      const data = await getData("/api/v1/user/summary").then();
-      const transactionsData = await getData("/api/v1/user/transaction").then();
-      const todo = await getData("/api/v1/user/todo").then();
+      // setloading(true);
+      const data = await props.getData("/api/v1/user/summary").then();
+      const transactionsData = await props
+        .getData("/api/v1/user/transaction")
+        .then();
+      const todo = await props.getData("/api/v1/user/todo").then();
       // const getMyStash=await getData("api/v1/user/stash").then();
       setTodoList(todo);
       todo.bvnConfirmed !== true &&
@@ -55,21 +57,16 @@ const Main = ({ getData }) => {
         }, 2000);
       setTransactions(transactionsData);
       setSummaryInfo(data);
-      // console.log(todo);
-      setloading(false);
+      // setloading(false);
     })();
     // eslint-disable-next-line
   }, []);
 
-  const addCard = async () => {
-    setloading(true);
-    const getCard = await getData("/api/v1/user/card_url").then();
-    window.location.href = getCard.authUrl;
-  };
 
+  console.log("props", props.loading);
   return (
     <>
-      {loading && <Loader />}
+      {props.loading && <Loader />}
       {/*MAIN CONTENT */}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
@@ -246,7 +243,17 @@ const Main = ({ getData }) => {
                   </div>
                   <div className="au-message-list">
                     {transactions && transactions.length > 0 ? (
-                      <CardTransfer value={true} />
+                      transactions.map((single, index) => {
+                        return (
+                          <CardTransfer
+                            descr={single?.descr}
+                            transactionId={single?.reference}
+                            date={single?.date}
+                            amount={single?.value}
+                            value={single?.type}
+                          />
+                        );
+                      })
                     ) : (
                       <p className="text-danger py-3 text-3xl fw-bolder">
                         No transactions recorded yet
@@ -318,7 +325,7 @@ const Main = ({ getData }) => {
                           {!todoList.cardLinked && (
                             <button
                               style={{ textAlign: "left" }}
-                              onClick={() => addCard()}
+                              onClick={async () => await props.addCard().then()}
                               className="text px-0 mx-0"
                             >
                               <h5 className="name">Link your card</h5>
@@ -477,8 +484,6 @@ const Main = ({ getData }) => {
         <Modal1 close={close} />
       </CSSTransition>
       <ToastContainer autoClose={1000} hideProgressBar />
-      {/* <!-- END MAIN CONTENT-->; */}
-      {/* <script src=></script> */}
     </>
   );
 };
@@ -486,12 +491,13 @@ const Main = ({ getData }) => {
 const mapStateToProps = (state) => {
   const { alert } = state;
   const username = state.authentication.user;
-  // const loading = state.authentication.loading;
-  return { alert, username };
+  const { loading } = state.registration;
+  return { alert, username, loading };
 };
 
 const actionCreators = {
   getData: usersActions.getInfo,
+  addCard: usersActions.addCard,
 };
 
 export default connect(mapStateToProps, actionCreators)(Main);

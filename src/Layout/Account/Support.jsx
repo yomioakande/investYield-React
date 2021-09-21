@@ -115,16 +115,16 @@ const Support = () => {
                   <div className="row mt-4">
                     <div className="col-lg-4"></div>
                     <div className="col-lg-8">
-                      <div className="contactUs-div2 d-flex align-items-center px-4">
+                      <Link to="/faq" className="contactUs-div2 d-flex align-items-center px-4">
                         <div>
                           <img src={FAQ} className="img-fluid" alt="Location" />
                         </div>
                         <div className="px-3 font-rem1">
                           Frequently Asked Questions (FAQs)
                         </div>
-                      </div>
+                      </Link>
 
-                      <div className="contactUs-div2 d-flex align-items-center px-4 mt-4">
+                      <Link to="/terms" className="contactUs-div2 d-flex align-items-center px-4 mt-4">
                         <div>
                           <img
                             src={termIcon}
@@ -135,7 +135,7 @@ const Support = () => {
                         <div className="px-3 font-rem1">
                           Terms and Conditions
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 </div>

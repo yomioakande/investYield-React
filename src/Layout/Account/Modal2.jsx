@@ -7,6 +7,7 @@ import { usersActions } from "../../redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../common/Loader";
+
 const Modal2 = ({ dataInfo, modalBenf2, close, loading }) => {
   const addBeneficiary = JSON.parse(sessionStorage.getItem("addBenef"));
 

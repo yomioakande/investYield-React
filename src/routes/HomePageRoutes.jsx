@@ -9,6 +9,7 @@ import HomePageHeader from "../components/LandingHeader.jsx";
 import HomePage from "../components/LandingPage";
 import AboutUs from "../components/AboutUs";
 import ContactUs from "../components/ContactUs";
+import Terms from "../components/Terms"
 import Faq from "../components/Faq";
 import HomePageFooter from "../components/LandingFooter";
 import Footer from "../components/Footer";
@@ -31,6 +32,9 @@ export const HomePageRoutes = () => {
         </Route>
         <Route path="/contactus">
           <ContactUs />
+        </Route>
+        <Route path="/terms">
+          <Terms />
         </Route>
         <Redirect from="*" to="/" />
       </Switch>

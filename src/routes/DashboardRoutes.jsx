@@ -86,7 +86,7 @@ const DashboardRoutes = () => {
           component={JoinGroup2}
         />
         <PrivateRoute path="/app/groupsavings" component={GroupMainPage} />
-        <PrivateRoute path="/app/groupsavings1" component={Group1} />
+        <PrivateRoute path="/app/groupsavings1/:id" component={Group1} />
         <PrivateRoute path="/app/groupsavings2" component={Group2} />
         <PrivateRoute path="/app/groupsavings3" component={Group3} />
         <PrivateRoute path="/app/groupsavings4" component={Group4} />

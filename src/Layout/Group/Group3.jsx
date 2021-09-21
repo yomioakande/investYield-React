@@ -1,6 +1,47 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 const Group3 = () => {
+  const initialValues = {
+    start: "",
+    freq: "",
+    cntr_amt: "",
+    earn: "",
+  };
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required("Enter a Plan name"),
+    ccy: Yup.string().required("Select a Currrency Type"),
+    target: Yup.string().required("A target amount is required"),
+    tgtDate: Yup.string().required("Enter a Date"),
+    // endDate: Yup.string().required("Enter a Date"),
+  });
+
+  const onSubmit = (values, onSubmitProps) => {
+    // eslint-disable-next-line
+    const obj = {
+      start: values.name,
+      freq: values.ccyCode,
+      cntr_amt: values.target,
+      earn: values.startDate,
+    };
+    // sessionStorage.setItem("groupInfo", JSON.stringify(obj));
+    // window.location.href = "/app/savings/create3";
+    // onSubmitProps.resetForm();
+    // onSubmitProps.setSubmitting(false);
+  };
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues,
+    onSubmit,
+    validationSchema,
+    validateOnMount: true,
+  });
+
+  console.log(formik.values);
+
   return (
     <>
       <div className="section__content section__content--p30">
@@ -15,10 +56,15 @@ const Group3 = () => {
                   <div className="small-red-line"></div>
 
                   <div className="mt-5">
-                    <form action="">
+                    <form onSubmit={formik.handleSubmit}>
                       <div className="form-group mt-4">
                         <label className="text-blue">Choose a start date</label>
-                        <input type="date" className="text-field mt-2" />
+                        <input
+                          type="date"
+                          name="start"
+                          {...formik.getFieldProps("start")}
+                          className="text-field mt-2"
+                        />
                       </div>
                       <div className="mt-4">
                         <label className="text-blue weight-500">
@@ -30,8 +76,11 @@ const Group3 = () => {
                               <div className="pay-method-radio">
                                 <input
                                   id="radio1"
-                                  name="radio-frequency"
                                   type="radio"
+                                  name="freq"
+                                  value={1}
+                                  onChange={formik.handleChange}
+                                  // {...formik.getFieldProps("freq")}
                                 />
                                 <label for="radio1">
                                   <span>Daily</span>
@@ -44,8 +93,11 @@ const Group3 = () => {
                               <div className="pay-method-radio">
                                 <input
                                   id="radio2"
-                                  name="radio-frequency"
                                   type="radio"
+                                  name="freq"
+                                  value={7}
+                                  onChange={formik.handleChange}
+                                  // {...formik.getFieldProps("freq")}
                                 />
                                 <label for="radio2">
                                   <span>Weekly</span>
@@ -60,8 +112,11 @@ const Group3 = () => {
                               <div className="pay-method-radio">
                                 <input
                                   id="radio3"
-                                  name="radio-frequency"
                                   type="radio"
+                                  name="freq"
+                                  value={30}
+                                  onChange={formik.handleChange}
+                                  // {...formik.getFieldProps("freq")}
                                 />
                                 <label for="radio3">
                                   <span>Monthly</span>
@@ -74,8 +129,11 @@ const Group3 = () => {
                               <div className="pay-method-radio">
                                 <input
                                   id="radio4"
-                                  name="radio-frequency"
                                   type="radio"
+                                  name="freq"
+                                  value={0}
+                                  onChange={formik.handleChange}
+                                  // {...formik.getFieldProps("freq")}
                                 />
                                 <label for="radio4">
                                   <span>One Time</span>
@@ -95,7 +153,10 @@ const Group3 = () => {
                               <div className="pay-method-radio">
                                 <input
                                   id="radio-earn-yes"
-                                  name="radio-earn"
+                                  name="earn"
+                                  value={30}
+                                  onChange={formik.handleChange}
+                                  // {...formik.getFieldProps("earn")}
                                   type="radio"
                                 />
                                 <label for="radio-earn-yes">
@@ -109,8 +170,11 @@ const Group3 = () => {
                               <div className="pay-method-radio">
                                 <input
                                   id="radio-earn-no"
-                                  name="radio-earn"
                                   type="radio"
+                                  name="earn"
+                                  value={30}
+                                  onChange={formik.handleChange}
+                                  // {...formik.getFieldProps("earn")}
                                 />
                                 <label for="radio-earn-no">
                                   <span>No, I don’t want interest</span>
@@ -129,7 +193,9 @@ const Group3 = () => {
                           <input
                             type="text"
                             className="text-field-profile"
-                            value="₦ 5,000.00"
+                            name="freq"
+                            value="cntr_amt"
+                            {...formik.getFieldProps("cntr_amt")}
                             readonly
                           />
                           <label

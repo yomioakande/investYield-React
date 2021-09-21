@@ -1,14 +1,85 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
-import mail from "../../assets/images/mail1.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 const NextofKin = (props) => {
-  const formik = useFormik({});
+   // eslint-disable-next-line
+  const [showError, setShowError] = useState(true);
+  const [nokDetails, setNokDetails] = useState(true);
+
+  useEffect(() => {
+    (async function dataInfo() {
+      const data = await props.getNok("/api/v1/user/nextofkin").then();
+      console.log(data);
+      console.log("next of kin");
+      setNokDetails(data);
+    })();
+    // eslint-disable-next-line
+  }, []);
+
+  const initialValues = {
+    firstName: nokDetails?.firsttName,
+    lastName: nokDetails?.lastName,
+    email: nokDetails?.email,
+    phoneNumber: nokDetails?.phoneNumber,
+    state: nokDetails?.state,
+    address: nokDetails?.address,
+    pin: nokDetails?.pin,
+  };
+
+  const Schema = Yup.object({
+    firstName: Yup.string().required("Enter your firstName"),
+    lastName: Yup.string().required("Enter your  lastName"),
+    email: Yup.string().required("Enter your Email"),
+    phoneNumber: Yup.string().required("Enter your Phone Number"),
+    state: Yup.string().required("Enter your State"),
+    address: Yup.string().required("Enter your Address"),
+    pin: Yup.string().required("Enter your Pin"),
+  });
+
+  const onSubmit = (values, onSubmitProps) => {
+    setShowError(true);
+    const obj = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      phoneNumber: values.phoneNumber,
+      state: values.state,
+      address: values.address,
+      pin: values.pin,
+    };
+
+    console.log("reaper", obj);
+    // props.postNok(obj, "/api/v1/user/nextofkin", success);
+    onSubmitProps.resetForm();
+    onSubmitProps.setSubmitting(false);
+    show();
+  };
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues,
+    onSubmit,
+    validationSchema: Schema,
+    validateOnMount: true,
+  });
+
+  const show = () => {
+    setTimeout(() => {
+      setShowError(false);
+    }, 3000);
+  };
+   // eslint-disable-next-line
+  const success = () => {
+    toast.success("Next of Kin Updated!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    // setloading(false);
+  };
 
   console.log(formik.values);
 
@@ -25,6 +96,14 @@ const NextofKin = (props) => {
           )
         : null}
 
+      {props.alert.message !== null
+        ? props.alert.type && (
+            <div className={`font-sm alert mt-3 ${props.alert.type}`}>
+              {props.alert.message}
+            </div>
+          )
+        : null}
+
       <form onSubmit={formik.handleSubmit}>
         <div className="row mt-5">
           <div className="col-lg-3">
@@ -34,7 +113,12 @@ const NextofKin = (props) => {
             <div className="row">
               <div className="col-lg-6">
                 <div className="form-group position-relative">
-                  <input type="text" className="text-field-profile" value="" />
+                  <input
+                    type="text"
+                    className="text-field-profile"
+                    name="firstName"
+                    {...formik.getFieldProps("firstName")}
+                  />
                   <label
                     for="firstName"
                     className="font-sm position-absolute"
@@ -46,7 +130,12 @@ const NextofKin = (props) => {
               </div>
               <div className="col-lg-6">
                 <div className="form-group position-relative">
-                  <input type="text" className="text-field-profile" value="" />
+                  <input
+                    type="text"
+                    className="text-field-profile"
+                    name="lastName"
+                    {...formik.getFieldProps("lastName")}
+                  />
                   <label
                     for="firstName"
                     className="font-sm position-absolute"
@@ -67,7 +156,12 @@ const NextofKin = (props) => {
             <div className="row">
               <div className="col-lg-6">
                 <div className="form-group position-relative">
-                  <input type="text" className="text-field-profile" value="" />
+                  <input
+                    type="email"
+                    className="text-field-profile"
+                    name="email"
+                    {...formik.getFieldProps("email")}
+                  />
                   <label
                     for="firstName"
                     className="font-sm position-absolute"
@@ -79,7 +173,12 @@ const NextofKin = (props) => {
               </div>
               <div className="col-lg-6">
                 <div className="form-group position-relative">
-                  <input type="text" className="text-field-profile" value="" />
+                  <input
+                    type="text"
+                    className="text-field-profile"
+                    name="phoneNumber"
+                    {...formik.getFieldProps("phoneNumber")}
+                  />
                   <label
                     for="firstName"
                     className="font-sm position-absolute"
@@ -99,7 +198,12 @@ const NextofKin = (props) => {
           </div>
           <div className="col-lg-9">
             <div className="form-group position-relative">
-              <input type="text" className="text-field-profile" value="" />
+              <input
+                type="text"
+                className="text-field-profile"
+                name="state"
+                {...formik.getFieldProps("state")}
+              />
               <label
                 for="firstName"
                 className="font-sm position-absolute"
@@ -113,6 +217,7 @@ const NextofKin = (props) => {
                 className="textAreaProfile"
                 placeholder="Address"
                 name="address"
+                {...formik.getFieldProps("address")}
               ></textarea>
             </div>
           </div>
@@ -139,14 +244,14 @@ const NextofKin = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { loggingIn } = state.authentication;
   const { loading, alertType, message } = state.registration;
   const { alert } = state;
-  return { loggingIn, alert, loading, alertType, message };
+  return { alert, loading, alertType, message };
 };
 
 const actionCreators = {
-  putPassword: usersActions.confirmBvnReg,
+  getNok: usersActions.getInfo,
+  postNok: usersActions.postFeedBack,
 };
 
 export default connect(mapStateToProps, actionCreators)(NextofKin);

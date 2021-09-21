@@ -1,13 +1,23 @@
 import React from "react";
+// import { format } from "date-fns";
+const CardTransfer = ({ descr, transactionId, date, amount, value }) => {
+  let dates = date.toLocaleString("en-NG", {
+    weekday: "short", // long, short, narrow
+    day: "numeric", // numeric, 2-digit
+    year: "numeric", // numeric, 2-digit
+    month: "long", // numeric, 2-digit, long, short, narrow
+    hour: "numeric", // numeric, 2-digit
+    minute: "numeric", // numeric, 2-digit
+    second: "numeric", // numeric, 2-digit
+  });
 
-const CardTransfer = ({ name, transactionId, date, amount, value }) => {
   return (
     <>
       <div className="d-flex justify-content-between mt-4 align-items-start">
         <div className="au-message__item w-100">
           <div className="au-message__item-inner px-2 py-3 justify-content-between align-items-start">
             <div className="col-lg-1">
-              {value ? (
+              {value === 1 ? (
                 <i className="fas fa-caret-up text-green"></i>
               ) : (
                 <i className="fas fa-caret-down text-danger"></i>
@@ -16,12 +26,14 @@ const CardTransfer = ({ name, transactionId, date, amount, value }) => {
             <div className="au-message__item-text col-lg-8">
               <div className="text px-0 mx-0">
                 <h5 className="name">
-                  Transfer from RAYMOND ADEWOLE [******8907]. Transaction ID:
-                  XXXXXXXXXXXXXXX
+                  {descr} Transaction ID: {transactionId}
+                  {/* Transfer from RAYMOND ADEWOLE [******8907]. Transaction ID: */}
+                  {/* XXXXXXXXXXXXXXX */}
                 </h5>
                 <p className="mt-3">
                   <span className="mr-2">Date:</span>
-                  <span>Fri, 04 Sep 2020 15:34:20 GMT</span>{" "}
+                  <span>{dates}</span>
+                  {/* <span>Fri, 04 Sep 2020 15:34:20 GMT</span>{" "} */}
                 </p>
               </div>
             </div>
@@ -31,7 +43,8 @@ const CardTransfer = ({ name, transactionId, date, amount, value }) => {
                   value ? "text-green" : "text-danger"
                 }`}
               >
-                ₦ 5000.00
+                {amount}
+                {/* ₦ 5000.00 */}
               </h4>
             </div>
           </div>

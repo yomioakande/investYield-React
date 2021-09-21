@@ -2,6 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import cloudUpload from "../../assets/images/upload-cloud-grey.svg";
 const Group2 = () => {
+  
+
+// const initialValues = {
+  //   decide: "",
+  //   docId: "",
+  // };
+
+
+
   return (
     <>
       <div className="section__content section__content--p30">

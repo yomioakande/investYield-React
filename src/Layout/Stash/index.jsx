@@ -81,7 +81,8 @@ const Index = ({ getFrequency, createStash, loading }) => {
       paddingBottom: 0,
       background: "#fff",
       hover: "#DDE9FB",
-      // zIndex: 9999,
+      height: "15rem",
+      overflowY: "scroll",
     }),
 
     control: (base, state) => ({

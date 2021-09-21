@@ -13,6 +13,7 @@ export const usersActions = {
   getInfo,
   bvnReg,
   confirmBvnReg,
+  addCard,
   postFeedBack,
   deleteData,
   getFrequency,
@@ -228,7 +229,6 @@ function confirmBvnReg(obj, apiUrl, func) {
       dispatch(successReg());
       func();
     } else if (success === true) {
-      console.log(data);
       func();
       dispatch(successReg(messages));
     } else {
@@ -293,8 +293,10 @@ function postFeedBack(obj, apiUrl, func) {
       func(true);
     } else if (apiUrl === "/api/v1/user/beneficiary" && success === true) {
       console.log(data);
-      // dispatch(alertActions.success(messages));
       dispatch(successReg());
+      func();
+    } else if (apiUrl && success === true) {
+      console.log(data);
       func();
     } else {
       dispatch(failure(messages));
@@ -305,25 +307,25 @@ function postFeedBack(obj, apiUrl, func) {
 
 function getInfo(apiUrl) {
   return async (dispatch) => {
+    dispatch(request());
     const getAll = await userService.getData(apiUrl);
-
     const { data, success, messages } = getAll;
     // apiUrl === "/api/v1/user/summary" &&
     if (success === true) {
+      dispatch(successReg());
       return data;
     } else {
       dispatch(alertActions.error(messages));
     }
-
     if (apiUrl && success === true) {
+      dispatch(successReg());
       return data;
     } else {
+      dispatch(failure(""));
       dispatch(alertActions.error(messages));
     }
   };
 }
-
-//
 
 function getFrequency(apiUrl, firstQ, secondQ) {
   return async (dispatch) => {
@@ -399,12 +401,11 @@ function deleteData(apiUrl, obj, func) {
   }
 }
 
-// function request() {
-//   return { type: userConstants.GETALL_REQUEST };
-// }
-// function success(users) {
-//   return { type: userConstants.GETALL_SUCCESS, users };
-// }
-// function failure(error) {
-//   return { type: userConstants.GETALL_FAILURE, error };
-// }
+function addCard() {
+  return async (dispatch) => {
+    dispatch(request());
+    const getCard = await userService.getData("/api/v1/user/card_url").then();
+    console.log(getCard);
+    window.location.href = getCard?.data?.authUrl;
+  };
+}
