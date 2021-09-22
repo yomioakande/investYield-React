@@ -29,12 +29,10 @@ const InterestList = ({ getFrequency, close, ccy }) => {
         <div className="" style={{ width: "100%" }}>
           <div className="au-card h-100">
             <div className="au-card-inner">
-              <h4 className="text-blue">Rate Guide</h4>
+              <h4 className="text-blue">Interest Rate Guide</h4>
               <div className="small-red-line"></div>
 
-              <p className="mt-4">
-                How long do you want to save your money for?
-              </p>
+              <p className="mt-4">Know your interest rate by tenor</p>
 
               <div className="mt-30">
                 {freqOptions.map((single, index) => {

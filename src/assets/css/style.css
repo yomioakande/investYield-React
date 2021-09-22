@@ -3,6 +3,9 @@
 body {
   font-family: Comfortaa !important;
 }
+a {
+  text-decoration: none !important;
+}
 a.nav-link.active {
   color: #08b29b !important;
   border-bottom: 2px solid #08b29b;
@@ -979,5 +982,8 @@ input[type="radio"] {
   object-position: top;
 }
 .termination-warning {
+  font-size: 11px;
+}
+.tdisable {
   font-size: 11px;
 }

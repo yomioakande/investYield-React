@@ -235,7 +235,9 @@ const CreateSavings2 = ({ username, register }) => {
                 </div>
               </div>
             </div>
-            <InterestList />
+            <div className="col-lg-6">
+              <InterestList />
+            </div>
           </div>
         </div>
       </div>

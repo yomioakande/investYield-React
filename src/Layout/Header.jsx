@@ -164,7 +164,7 @@ const Header = ({ username }) => {
                   className="d-flex no-decor align-items-center"
                 >
                   <img src={leftArrow} className="img-fluid" alt="left-arrow" />
-                  <span className="px-2 text-dark">Back</span>
+                  <span className="px-2 text-dark">Home</span>
                 </Link>
               ) : (
                 <Link
