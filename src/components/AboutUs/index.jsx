@@ -44,13 +44,17 @@ const Index = () => {
                     <p className="mt-5 whoWeAre-p">
                       We are a licensed financial cooperative with registration
                       number LSCS 17462 and in partnership with licensed wealth
-                      managers to provide inclusive wealth management solutions.
-                      We offer highest possible returns, security, speed,
-                      flexibility, investment insights and disciplined-instilled
-                      money management tools to help you achieve your big money
-                      goals. Our vision is to build Africa's biggest community
-                      of smart money savers through service and robust
-                      technology.
+                      managers to provide you inclusive wealth management
+                      solutions that will enable you build, manage and preserve
+                      your wealth across multiple generations. <br />
+                      <br /> We offer the highest possible returns on your
+                      savings, security, speed, flexibility, investment insights
+                      and disciplined-instilled money management tools to help
+                      you achieve your big money goals. <br />
+                      <br />
+                      Our vision is to build Africa's biggest community of smart
+                      money savers through exceptional service and robust
+                      technology
                     </p>
                   </div>
                 </div>
@@ -78,7 +82,7 @@ const Index = () => {
               </div>
             </div>
             <div className="row justify-content-between">
-              <div className="col-lg-4 mt-4">
+              <div className="col-lg-3 mt-4">
                 <div className="team-div shadow d-flex flex-column">
                   <div>
                     <img
@@ -100,7 +104,7 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-4 mt-4">
+              <div className="col-lg-3 mt-4">
                 <div className="team-div shadow d-flex flex-column">
                   <div>
                     <img
@@ -122,7 +126,7 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-4 mt-4">
+              <div className="col-lg-3 mt-4">
                 <div className="team-div shadow d-flex flex-column">
                   <div>
                     <img
@@ -144,7 +148,7 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-4 mt-4">
+              <div className="col-lg-3 mt-4">
                 <div className="team-div shadow d-flex flex-column">
                   <div>
                     <img

@@ -136,7 +136,7 @@ const CreateSavings4 = (props) => {
                       </label>
                       <label for="option-2" className="option option-2">
                         <div className="dot"></div>
-                        <span className="px-2">Pay with myPurse</span>
+                        <span className="px-2">Pay with myPurse - Vibe Cash</span>
                       </label>
                       <label for="option-3" className="option option-3">
                         <div className="dot"></div>

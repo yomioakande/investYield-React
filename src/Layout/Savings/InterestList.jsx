@@ -12,7 +12,7 @@ const InterestList = ({ getFrequency, close, ccy }) => {
       setloading(true);
       const datas = await getFrequency(
         "/api/v1/util/productinterest",
-        "0103",
+        "0201",
         1
       ).then();
       const { interest } = datas;
@@ -24,28 +24,31 @@ const InterestList = ({ getFrequency, close, ccy }) => {
 
   return (
     <>
-    <Style>
-    {/* col-lg-6 */}
-      <div className="" style={{width:"100%"}}>
-        <div className="au-card h-100">
-          <div className="au-card-inner">
-            <h4 className="text-blue">Choose a target date</h4>
-            <div className="small-red-line"></div>
+      <Style>
+        {/* col-lg-6 */}
+        <div className="" style={{ width: "100%" }}>
+          <div className="au-card h-100">
+            <div className="au-card-inner">
+              <h4 className="text-blue">Rate Guide</h4>
+              <div className="small-red-line"></div>
 
-            <p className="mt-4">How long do you want to save your money for?</p>
+              <p className="mt-4">
+                How long do you want to save your money for?
+              </p>
 
-            <div className="mt-30">
-              {freqOptions.map((single, index) => {
-                return (
-                  <div className="tdate">
-                    {single.tenor.name} <span>at {single.rate}% per annum</span>
-                  </div>
-                );
-              })}
+              <div className="mt-30">
+                {freqOptions.map((single, index) => {
+                  return (
+                    <div className="tdate">
+                      {single.tenor.name}{" "}
+                      <span>at {single.rate}% per annum</span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </Style>
     </>
   );
@@ -64,10 +67,8 @@ const actionCreators = {
 
 export default connect(mapStateToProps, actionCreators)(InterestList);
 
-
-
-const Style=styled.div`
-max-width:100%;
-height: 100vh;
-overflow-y: scroll;
-`
+const Style = styled.div`
+  max-width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+`;

@@ -98,13 +98,13 @@ const Breakdown = (props) => {
                       <div className="pay-method-radio">
                         <input id="radio1" name="radio" type="radio" />
                         <label for="radio1">
-                          <span>5366 **** **** **09</span>
+                          <span>Pay with Card</span>
                         </label>
                       </div>
                       <div className="pay-method-radio mt-4">
                         <input id="radio2" name="radio" type="radio" />
                         <label for="radio2">
-                          <span>Pay with Stash</span>
+                          <span>Pay with myPurse - Vibe Cash</span>
                         </label>
                       </div>
                       <div className="pay-method-radio mt-4">

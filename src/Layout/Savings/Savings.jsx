@@ -221,6 +221,9 @@ const Savings = ({ getData }) => {
             <div className="col-lg-12">
               <div className="au-card">
                 <div className="au-card-inner">
+                  <div className="d-flex justify-content-between align-items-start">
+                    <div className="title-2">Create new savings</div>
+                  </div>
                   <div className="row mt-4">
                     <div className="col-lg-4 d-flex flex-column flex-grow-1">
                       <Link

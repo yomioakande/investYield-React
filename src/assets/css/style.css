@@ -938,7 +938,7 @@ input[type="radio"] {
   color: #ffffff;
 }
 .tdate {
-  padding: 20px;
+  padding: 10px 20px;
   border: 1px solid #dddddd;
   border-radius: 5px;
   color: #263238;
@@ -971,4 +971,13 @@ input[type="radio"] {
   text-align: center;
   letter-spacing: 5px;
   margin: 20px 0 0;
+}
+.team-div img {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.termination-warning {
+  font-size: 11px;
 }

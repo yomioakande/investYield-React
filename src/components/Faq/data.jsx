@@ -2,7 +2,7 @@ export const GeneralQuestions = [
   {
     question: "What is InvestYield?",
     answer1:
-      "Welcome to investYield, an urban digital platform that allows you to automate your savings and discover true money happiness. You can save small amounts periodically or save a lump sums one time by committing  to goals and also join interesting savings challenges to achieve financial freedom.",
+      "Welcome to investYield, an urban digital platform that allows you to automate your savings and discover true money happiness. You can save small amounts periodically or save a lump sum one time by committing  to goals and also join interesting savings challenges to achieve financial freedom.",
     answer2:
       "We offer security, speed, flexibility and discipline-instilled financial management tools to achieve your financial goals.",
   },
@@ -10,12 +10,12 @@ export const GeneralQuestions = [
   {
     question: "What are the Saving features on investYield?",
     answer1:
-      "The platform was designed in collaboration with sound financial advisers and behavioural scientists to help identify how to best help people save more securely and efficiently.",
+      "The platform was designed in collaboration with sound financial advisers and behavioural scientists to help identify how best to help people save more securely and efficiently.",
     answer2: "",
   },
   {
     question:
-      "There are three main saving features on investYield, carely curated to help to achieve maximum financial wellness:",
+      "There are three main main savings features on investYield, carefully curated to help you to achieve maximum financial wellness:",
     answer1:
       "Automated Goal-based savings plans: Here you will see that we carefully created ready-to-go savings plans to help you achieve specific financial goals. You also have the liberty to create customized plans if you desire. However, note that once plans are created they become locked and cannot be cancelled or terminated until maturity date.",
     answer2:

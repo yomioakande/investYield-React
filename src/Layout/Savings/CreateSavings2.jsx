@@ -197,12 +197,12 @@ const CreateSavings2 = ({ username, register }) => {
                             </p>
                           )}
                         </div>
-                        <p className="text-danger">
+                        <p className="text-danger termination-warning">
                           Early termination is not possible once the plan is
                           created. People that desire early termination option
                           should use the stash option.
                         </p>
-                        <p className="text-dark my-1">
+                        <p className="text-dark my-1 termination-warning">
                           Would you like to proceed with the Savings?
                         </p>
                         <div className="row mt-4 align-items-center justify-content-end">
