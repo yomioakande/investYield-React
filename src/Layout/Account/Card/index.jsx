@@ -1,16 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Style from "../style";
 import SingleCard from "./SingleCard";
 import WithdrawalAccount from "./WithdrawalAccount";
 import { connect } from "react-redux";
 import { usersActions } from "../../../redux/actions";
 import Loader from "../../../common/Loader";
+import styled from "styled-components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Index = (props) => {
-  // console.log("spvuik", props.loading);
+  const [cards, setCards] = useState([]);
+  const dataInfo = async () => {
+    const data = await props.getCards("/api/v1/user/card").then();
+    setCards(data);
+  };
+
+  useEffect(() => {
+    dataInfo();
+    // eslint-disable-next-line
+  }, []);
+
+  const success = () => {
+    toast.success("Debit Card deleted!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    dataInfo();
+  };
+
+  const deleteCard = (id) => {
+    const obj = {
+      id,
+    };
+    props.deleteCards("/api/v1/user/card", obj, success);
+  };
+
   return (
     <>
       {props.loading && <Loader />}
+
+      <ToastContainer autoClose={1000} hideProgressBar />
+
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">
@@ -99,11 +129,20 @@ const Index = (props) => {
                           </button>
                         </div>
                       </div>
-                      <div className="row">
-                        <SingleCard />
-                        <SingleCard />
-                        <SingleCard />
-                      </div>
+                      <>
+                        <Wrapper className="row">
+                          {cards && cards.length > 0
+                            ? cards.map((single, index) => {
+                                return (
+                                  <SingleCard key={index}
+                                    single={single}
+                                    deleteCard={deleteCard}
+                                  />
+                                );
+                              })
+                            : null}
+                        </Wrapper>
+                      </>
                     </div>
                     <div
                       className="tab-pane fade"
@@ -132,8 +171,16 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
-  getData: usersActions.getInfo,
+  getCards: usersActions.getInfo,
   addCard: usersActions.addCard,
+  deleteCards: usersActions.deleteData,
 };
 
 export default connect(mapStateToProps, actionCreators)(Index);
+
+const Wrapper = styled.div`
+  /* border: 1px solid red ; */
+  /* width: 110px !important; */
+  height: 30rem !important ;
+  overflow: scroll !important ;
+`;

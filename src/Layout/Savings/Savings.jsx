@@ -9,22 +9,38 @@ import blog from "../../assets/images/BlogImg.png";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import Loader from "../../common/Loader";
-
 import Charts from "../Charts";
-const Savings = ({ getData }) => {
+import { nairaCurrencyVal, dollarCurrencyVal } from "../../helpers/helper";
+
+const Savings = ({ getData, getAccounts }) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [loading, setloading] = useState(false);
+  const [coreAccounts, setCoreAccounts] = useState([]);
+  const [stashAccounts, setStashAccounts] = useState([]);
 
   useEffect(() => {
     (async function dataInfo() {
       setloading(true);
       const data = await getData("/api/v1/user/summary").then();
+      const stashAccounts = await getAccounts(
+        "/api/v1/user/accountbyproduct",
+        "0103"
+      ).then();
+      const coreAccounts = await getAccounts(
+        "/api/v1/user/accountbyproduct",
+        "0201"
+      ).then();
       setSummaryInfo(data);
+      setStashAccounts(stashAccounts);
+      setCoreAccounts(coreAccounts);
       setloading(false);
     })();
     // eslint-disable-next-line
   }, []);
 
+  console.log(stashAccounts, "stash");
+  console.log(coreAccounts, "cores");
+  // console.log("summaryInfo", summaryInfo);
   return (
     <>
       {loading && <Loader />}
@@ -61,17 +77,16 @@ const Savings = ({ getData }) => {
                       >
                         {/* ₦10,000,000.00 */}
                       </p>
-                      {/* <canvas id="myChart" width="800" height="550"></canvas> */}
-                    </div>
+                     </div>
                     <div className="col-lg-5 w-auto profile-cards col-md-4 mt-3">
                       <ul className="pie-text mt-3">
                         <li className="mb-3 text-green">
                           <p>Total Naira Savings</p>
-                          {/* <p>₦10,000.00</p> */}
+                          <p> {nairaCurrencyVal(summaryInfo.totNaira)}</p>
                         </li>
                         <li className="mb-3 text-blue">
                           <p>Total Dollar Savings</p>
-                          {/* <p>₦10,000.00</p> */}
+                          <p> {dollarCurrencyVal(summaryInfo.totDollar)}</p>
                         </li>
                       </ul>
                     </div>
@@ -517,12 +532,12 @@ const Savings = ({ getData }) => {
 const mapStateToProps = (state) => {
   const { alert } = state;
   const username = state.authentication.user;
-  // const loading = state.authentication.loading;
   return { alert, username };
 };
 
 const actionCreators = {
   getData: usersActions.getInfo,
+  getAccounts: usersActions.getAccounts,
 };
 
 export default connect(mapStateToProps, actionCreators)(Savings);

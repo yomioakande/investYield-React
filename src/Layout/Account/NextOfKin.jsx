@@ -7,28 +7,28 @@ import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 const NextofKin = (props) => {
-   // eslint-disable-next-line
+  // eslint-disable-next-line
   const [showError, setShowError] = useState(true);
   const [nokDetails, setNokDetails] = useState(true);
-
+  async function dataInfo() {
+    const data = await props.getNok("/api/v1/user/nextofkin").then();
+    console.log(data);
+    console.log("next of kin");
+    setNokDetails(data);
+  }
   useEffect(() => {
-    (async function dataInfo() {
-      const data = await props.getNok("/api/v1/user/nextofkin").then();
-      console.log(data);
-      console.log("next of kin");
-      setNokDetails(data);
-    })();
+    dataInfo();
     // eslint-disable-next-line
   }, []);
 
   const initialValues = {
-    firstName: nokDetails?.firsttName,
+    firstName: nokDetails?.firstName,
     lastName: nokDetails?.lastName,
     email: nokDetails?.email,
     phoneNumber: nokDetails?.phoneNumber,
     state: nokDetails?.state,
     address: nokDetails?.address,
-    pin: nokDetails?.pin,
+    password: nokDetails?.password,
   };
 
   const Schema = Yup.object({
@@ -38,7 +38,7 @@ const NextofKin = (props) => {
     phoneNumber: Yup.string().required("Enter your Phone Number"),
     state: Yup.string().required("Enter your State"),
     address: Yup.string().required("Enter your Address"),
-    pin: Yup.string().required("Enter your Pin"),
+    password: Yup.string().required("Enter your Password"),
   });
 
   const onSubmit = (values, onSubmitProps) => {
@@ -50,11 +50,11 @@ const NextofKin = (props) => {
       phoneNumber: values.phoneNumber,
       state: values.state,
       address: values.address,
-      pin: values.pin,
+      password: values.password,
     };
 
     console.log("reaper", obj);
-    // props.postNok(obj, "/api/v1/user/nextofkin", success);
+    props.postNok(obj, "/api/v1/user/nextofkin", success);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
     show();
@@ -73,12 +73,12 @@ const NextofKin = (props) => {
       setShowError(false);
     }, 3000);
   };
-   // eslint-disable-next-line
+  // eslint-disable-next-line
   const success = () => {
     toast.success("Next of Kin Updated!", {
       position: toast.POSITION.TOP_CENTER,
     });
-    // setloading(false);
+    dataInfo();
   };
 
   console.log(formik.values);
@@ -88,7 +88,7 @@ const NextofKin = (props) => {
       {props.loading && <Loader />}
 
       <ToastContainer autoClose={1000} hideProgressBar />
-      {props.message !== null
+      {props.message
         ? props.alertType && (
             <div className={`font-sm alert ${props.alertType}`}>
               {props.message}
@@ -219,6 +219,22 @@ const NextofKin = (props) => {
                 name="address"
                 {...formik.getFieldProps("address")}
               ></textarea>
+            </div>
+
+            <div className="form-group position-relative">
+              <input
+                type="password"
+                className="text-field-profile"
+                name="password"
+                {...formik.getFieldProps("password")}
+              />
+              <label
+                for="password"
+                className="font-sm position-absolute"
+                style={{ left: "15px", top: "15%" }}
+              >
+                Password
+              </label>
             </div>
           </div>
         </div>

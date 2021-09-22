@@ -99,3 +99,15 @@ export function dateConv(CurrentDate) {
 }
 
 //CURRENCY FORMATTER
+
+export const nairaCurrencyVal = (number = 0) =>
+  new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+  }).format(number);
+
+export const dollarCurrencyVal = (number = 0) =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(number);

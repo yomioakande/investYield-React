@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import "../../assets/css/style.css";
 import logoBig from "../../assets/images/logoBig.svg";
 import googlePlayIcon from "../../assets/images/googlePlayIcon.svg";
 import appleStoreIcon from "../../assets/images/appleStoreIcon.svg";
-
 const Index = () => {
   return (
     <footer>

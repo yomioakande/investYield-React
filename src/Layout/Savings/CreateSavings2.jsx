@@ -15,6 +15,7 @@ const CreateSavings2 = ({ username, register }) => {
   const location = useLocation();
   const link = location.pathname.split("/");
   let name = link[link.length - 1];
+  let useLink=name;
   name = name === "Create" ? "" : name;
   username = username.name.split(" ")[0];
 
@@ -25,6 +26,8 @@ const CreateSavings2 = ({ username, register }) => {
     startDate: "",
     endDate: "",
   };
+
+  console.log(name)
 
   const [loading, setloading] = useState(false);
 
@@ -46,7 +49,7 @@ const CreateSavings2 = ({ username, register }) => {
       endDate: formik.values.endDate,
     };
     sessionStorage.setItem("savingsInfo", JSON.stringify(obj));
-    window.location.href = "/app/savings/create3";
+    window.location.href = `/app/savings/create3/${useLink}`;
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };

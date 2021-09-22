@@ -66,7 +66,7 @@ const DashboardRoutes = () => {
           path="/app/savings/create2/:id"
           component={CreateSavings2}
         />
-        <PrivateRoute path="/app/savings/create3" component={CreateSavings3} />
+        <PrivateRoute path="/app/savings/create3/:id" component={CreateSavings3} />
         <PrivateRoute path="/app/savings/create4" component={CreateSavings4} />
         <PrivateRoute path="/app/savings/otp" component={CreateSavingsOTP} />
 

@@ -271,6 +271,8 @@ const Modal1 = ({
                               Did not get OTP?
                             </p>
                             <button
+
+                            // onClick={}
                               href="#"
                               className="text-green no-decor text-center mt-2"
                             >

@@ -20,6 +20,7 @@ export const usersActions = {
   createCore,
   createStash,
   getTargetValue,
+  getAccounts,
   postImageBase64,
 };
 
@@ -298,6 +299,7 @@ function postFeedBack(obj, apiUrl, func) {
     } else if (apiUrl && success === true) {
       console.log(data);
       func();
+      dispatch(successReg(messages));
     } else {
       dispatch(failure(messages));
       return;
@@ -327,10 +329,25 @@ function getInfo(apiUrl) {
   };
 }
 
+function getAccounts(apiUrl, accountCode) {
+  return async (dispatch) => {
+    dispatch(request());
+    const getAll = await userService.getAccounts(apiUrl, accountCode);
+    const { data, success, messages } = getAll;
+    console.log("data", getAll);
+    if (success === true) {
+      dispatch(successReg());
+      return data;
+    } else {
+      dispatch(failure(""));
+      dispatch(alertActions.error(messages));
+    }
+  };
+}
+
 function getFrequency(apiUrl, firstQ, secondQ) {
   return async (dispatch) => {
     const getAll = await userService.getFreq(apiUrl, firstQ, secondQ);
-
     const { data, success, messages } = getAll;
 
     if (apiUrl === "/api/v1/util/productinterest" && success === true) {
@@ -382,6 +399,7 @@ function deleteData(apiUrl, obj, func) {
     const { data, success, messages } = deleteId;
     console.log(deleteId);
     if (apiUrl && success === true) {
+      console.log(obj, apiUrl);
       func();
       return data;
     } else {
