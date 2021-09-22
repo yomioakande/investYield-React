@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import { userService } from "../../services/usersService";
@@ -13,6 +13,13 @@ import trashCan from "../../assets/images/trashCan.svg";
 // import homeImg from "../../assets/images/homeImg 2.png";
 
 const CreateSavings3 = (props) => {
+
+  const location = useLocation();
+  const link = location.pathname.split("/");
+  let name = link[link.length - 1];
+  name = name === "Create" ? "the future!" : name;
+
+
   const [targetNum, setTargetNum] = useState("");
   const [imageRef, setImageRef] = useState("");
   const [imageName, setImageName] = useState("");
@@ -145,7 +152,7 @@ const CreateSavings3 = (props) => {
               <div className="au-card">
                 <div className="au-card-inner">
                   <h4 className="text-blue">
-                    Let’s help you save for a new home or rent
+                    Let’s help you save for {name}
                   </h4>
                   <div className="small-red-line"></div>
 

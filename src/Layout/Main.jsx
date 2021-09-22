@@ -20,15 +20,17 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./transitions.css";
 import "swiper/swiper-bundle.min.css";
+import { nairaCurrencyVal, dollarCurrencyVal } from "../helpers/helper";
 
 const Main = (props) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [modalInOpen, setModalInOpen] = useState(false);
   const [transactions, setTransactions] = useState([]);
+  const [coreAccounts, setCoreAccounts] = useState([]);
+  const [purseAccounts, setPurseAccounts] = useState([]);
   const [todoList, setTodoList] = useState({});
   const [hide, setHide] = useState(false);
   // const [loading, setloading] = useState(false);
-
   const modalToggle = () => {
     setModalInOpen(true);
   };
@@ -40,30 +42,38 @@ const Main = (props) => {
   const hider = () => {
     setHide(!hide);
   };
+  
 
   useEffect(() => {
     (async function dataInfo() {
-      // setloading(true);
       const data = await props.getData("/api/v1/user/summary").then();
       const transactionsData = await props
         .getData("/api/v1/user/transaction")
         .then();
       const todo = await props.getData("/api/v1/user/todo").then();
-      // const getMyStash=await getData("api/v1/user/stash").then();
+      const myPurseAccounts = await props
+        .getAccounts("/api/v1/user/accountbyproduct", "0106")
+        .then();
+      const coreAccounts = await props
+        .getAccounts("/api/v1/user/accountbyproduct", "0201")
+        .then();
+        setSummaryInfo(data);
       setTodoList(todo);
+      setPurseAccounts(myPurseAccounts);
+      setCoreAccounts(coreAccounts);
       todo.bvnConfirmed !== true &&
         setTimeout(() => {
           setModalInOpen(true);
         }, 2000);
       setTransactions(transactionsData);
-      setSummaryInfo(data);
-      // setloading(false);
+    
     })();
     // eslint-disable-next-line
   }, []);
 
+  console.log(purseAccounts, "purse");
+  console.log(coreAccounts, "cores");
 
-  console.log("props", props.loading);
   return (
     <>
       {props.loading && <Loader />}
@@ -87,11 +97,8 @@ const Main = (props) => {
                   Total Balance
                 </h5>
                 <div className="d-flex align-items-start justify-content-center">
-                  <p className="text-white text-center money-card-sign mr-1">
-                    ₦
-                  </p>
                   <h3 className="text-white text-center money-card-body">
-                    {summaryInfo.totAmt}
+                    {nairaCurrencyVal(summaryInfo.totAmt)}
                   </h3>
                 </div>
               </div>
@@ -109,11 +116,8 @@ const Main = (props) => {
                   Total Dollars
                 </h5>
                 <div className="d-flex align-items-start justify-content-center">
-                  <p className="text-white text-center money-card-sign mr-1">
-                    $
-                  </p>
                   <h3 className="text-white text-center money-card-body">
-                    {summaryInfo.totDollar}
+                    {dollarCurrencyVal(summaryInfo.totDollar)}
                   </h3>
                 </div>
               </div>
@@ -134,11 +138,8 @@ const Main = (props) => {
                   Total Naira
                 </h5>
                 <div className="d-flex align-items-start justify-content-center">
-                  <p className="text-white text-center money-card-sign mr-1">
-                    ₦
-                  </p>
                   <h3 className="text-white text-center money-card-body">
-                    {summaryInfo.totNaira}
+                    {nairaCurrencyVal(summaryInfo.totNaira)}
                   </h3>
                 </div>
               </div>
@@ -373,7 +374,7 @@ const Main = (props) => {
                       {!todoList?.withdrawalAccount && (
                         <div className="au-message__item-inner px-2 py-2">
                           <Link
-                            to="/app/account"
+                            to="/app/account/mycard"
                             className="au-message__item-text"
                           >
                             <div className="text px-0 mx-0">
@@ -498,6 +499,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   getData: usersActions.getInfo,
   addCard: usersActions.addCard,
+  getAccounts: usersActions.getAccounts,
 };
 
 export default connect(mapStateToProps, actionCreators)(Main);

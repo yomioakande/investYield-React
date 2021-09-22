@@ -403,3 +403,8 @@ export default Profile;
 // function failure(error) {
 //   return { type: userConstants.GETALL_FAILURE, error };
 // }
+
+
+ {/* <p className="text-white text-center money-card-sign mr-1">
+                    ₦
+                  </p> */}

@@ -11,6 +11,7 @@ export const userService = {
   getFreq,
   getEstimate,
   getTargetValue,
+  getAccounts
 };
 
 async function register1(user, apiUrl) {
@@ -70,6 +71,23 @@ async function getData(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
   try {
     const datas = await fetch(
       `https://api-staging.investyield.ng:44377${apiUrl}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+    return error;
+  }
+}
+
+async function getAccounts(apiUrl,accountCode) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
+  try {
+    const datas = await fetch(
+      `https://api-staging.investyield.ng:44377${apiUrl}?productCode=${accountCode}`,
       requestOptions
     );
     const getData = await datas.json();

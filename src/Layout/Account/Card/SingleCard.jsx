@@ -1,6 +1,8 @@
 import React from "react";
-import circle1 from "../../../assets/images/check-circle1.svg"
-const SingleCard = () => {
+import circle1 from "../../../assets/images/check-circle1.svg";
+const SingleCard = ({ single, deleteCard, success }) => {
+  const card = [...single.pan];
+console.log(single)
   return (
     <>
       <div className="col-xl-4 col-lg-6 mt-4">
@@ -25,15 +27,20 @@ const SingleCard = () => {
                   </div>
                 </div>
                 <div className="col-lg-4 col-4 d-flex text-light">
-                  <div className="weight-600">9</div>
-                  <div className="weight-600">9</div>
-                  <div className="weight-600">6</div>
-                  <div className="weight-600">3</div>
+                  {/* {single.pan.split} */}
+
+                  {card.map((first, index) => {
+                    return (
+                      <div key={index} className="weight-600">
+                        {first}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <div className="mt-2">
                 <p className="text-light">
-                  Mastercard
+                  {single?.type.toUpperCase()}
                   <span className="mx-2">03 / 23</span>
                 </p>
               </div>
@@ -46,7 +53,11 @@ const SingleCard = () => {
           </div>
         </div>
         <div className="mt-3">
-          <button className="btn btn-delete-card text-danger">
+          <button
+            type="button"
+            onClick={() => deleteCard(single.id)}
+            className="btn btn-delete-card text-danger"
+          >
             Delete Card
           </button>
         </div>

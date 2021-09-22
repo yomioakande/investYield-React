@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import savings from "../../assets/images/savingschallenge.svg";
 import userIcon from "../../assets/images/userIcon.svg";
@@ -8,11 +8,29 @@ import referIcon from "../../assets/images/referIcon.svg";
 import beneficiary from "../../assets/images/mgBeneficiariesIcon.svg";
 import securityIcon from "../../assets/images/securityIcon.svg";
 import MenuBar from "../Account/MenuBar";
-// import Charts from "../Charts"
+import Charts from "../Charts"
+import { connect } from "react-redux";
+import { usersActions } from "../../redux/actions";
+import Loader from "../../common/Loader";
+import { nairaCurrencyVal, dollarCurrencyVal } from "../../helpers/helper";
 
-const Index = () => {
+const Index = ({ getData }) => {
+  const [summaryInfo, setSummaryInfo] = useState({});
+  const [loading, setloading] = useState(false);
+
+  useEffect(() => {
+    (async function dataInfo() {
+      setloading(true);
+      const data = await getData("/api/v1/user/summary").then();
+      setSummaryInfo(data);
+      setloading(false);
+    })();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <>
+     {loading && <Loader />}
       <div className="section__content section__content--p30 py-4">
         <div className="container-fluid">
           <div className="row">
@@ -52,7 +70,7 @@ const Index = () => {
                 <div className="au-card-inner w-100">
                   <div className="row align-items-center justify-content-center">
                     <div className="col-lg-7 profile-cards col-md-6">
-                      {/* <Charts/> */}
+                      <Charts summaryInfo={summaryInfo}/>
                       {/* <canvas id="myChart" width="800" height="550"></canvas> */}
                     </div>
                     <div className="col-lg-5 w-auto profile-cards col-md-4 mt-3">
@@ -69,11 +87,11 @@ const Index = () => {
                       <ul className="pie-text mt-3">
                         <li className="mb-3 text-green">
                           <p>Total Naira Savings</p>
-                          {/* <p>₦10,000.00</p> */}
+                          <p>{nairaCurrencyVal(summaryInfo.totNaira)}</p>
                         </li>
                         <li className="mb-3 text-blue">
                           <p>Total Dollar Savings</p>
-                          {/* <p>₦10,000.00</p> */}
+                          <p>{dollarCurrencyVal(summaryInfo.totDollar)}</p>
                         </li>
                         <li className="mb-3 text-yellow">
                           <p>Total Purse Cash</p>
@@ -185,4 +203,14 @@ const Index = () => {
   );
 };
 
-export default Index;
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  return { alert, username };
+};
+
+const actionCreators = {
+  getData: usersActions.getInfo,
+};
+
+export default connect(mapStateToProps, actionCreators)(Index);

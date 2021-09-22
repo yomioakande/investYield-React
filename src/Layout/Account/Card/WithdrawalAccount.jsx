@@ -130,8 +130,6 @@ const WithdrawalAccount = (props) => {
     validateOnMount: true,
   });
 
-  console.log(formik.values);
-
   const show = () => {
     setTimeout(() => {
       setShowError(false);
@@ -165,20 +163,23 @@ const WithdrawalAccount = (props) => {
                   onClick={updateToggle}
                   className="btn login-submit"
                 >
-                  Update Account
+                  {bankDetails ? " Update Account" : "Add Account"}
                 </button>
               </div>
             </div>
-            <div className="col-lg-6">
-              <div className="mt-3">
-                <button
-                  onClick={() => deleteId(bankDetails.id)}
-                  className="btn btn-delete-card text-danger"
-                >
-                  Delete Account
-                </button>
+
+            {bankDetails ? (
+              <div className="col-lg-6">
+                <div className="mt-3">
+                  <button
+                    onClick={() => deleteId(bankDetails.id)}
+                    className="btn btn-delete-card text-danger"
+                  >
+                    Delete Account
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
       </div>

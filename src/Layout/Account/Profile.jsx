@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import uploadImg from "../../assets/images/uploadImg.svg";
 import cloudUpload from "../../assets/images/upload-cloud1.svg";
 import Style from "./style";
@@ -42,7 +42,7 @@ const Profile = ({
     // eslint-disable-next-line
   }, []);
 
-  console.log(profile)
+  console.log(profile);
 
   const initialValues = {
     address: profile.address,
@@ -132,6 +132,8 @@ const Profile = ({
     let binaryString = readerEvt.target.result;
     // setBase64(btoa(binaryString));
   };
+
+  console.log(message);
 
   return (
     <>
@@ -384,8 +386,8 @@ const Profile = ({
                               </div>
                             </div>
                             <div className="mt-3">
-                              {showError
-                                ? message !== null
+                              {message
+                                ? showError
                                   ? alertType && (
                                       <div
                                         className={`font-sm alert ${alertType}`}
