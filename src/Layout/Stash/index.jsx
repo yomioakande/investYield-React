@@ -57,6 +57,8 @@ const Index = ({ getFrequency, createStash, loading }) => {
     //eslint-disable-next-line
   }, [ccy]);
 
+  // console.
+
   const options = freqOptions.map((single, index) => {
     return {
       value: single.tenor.code,
@@ -187,23 +189,23 @@ const Index = ({ getFrequency, createStash, loading }) => {
                           <div
                             style={{ zIndex: 99999 }}
                             className="custom-select text-field p-0"
-                          >
-                            <Select
-                              maxMenuHeight={5}
-                              options={options}
-                              styles={customStyles}
-                              isSearchable={false}
-                              className="select-field"
-                              placeholder={""}
-                              value={defaultValue(
-                                options,
-                                formik.values.frequency
-                              )}
-                              onChange={(value) =>
-                                formik.setFieldValue("frequency", value.value)
-                              }
-                              autoFocus={true}
-                            />
+                          >{freqOptions&&freqOptions.length>0?  <Select
+                            maxMenuHeight={5}
+                            options={options}
+                            styles={customStyles}
+                            isSearchable={false}
+                            className="select-field"
+                            placeholder={""}
+                            value={defaultValue(
+                              options,
+                              formik.values.frequency
+                            )}
+                            onChange={(value) =>
+                              formik.setFieldValue("frequency", value.value)
+                            }
+                            autoFocus={true}
+                          />:<p>No frequency at the moment</p>}
+                          
                           </div>
                           {formik.touched.frequency &&
                             formik.errors.frequency && (

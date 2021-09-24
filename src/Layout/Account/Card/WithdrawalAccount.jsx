@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const WithdrawalAccount = (props) => {
+  // props.resetAlerts()
   const [bankOptions, setBankOptions] = useState([]);
   const [bankDetails, setBankDetails] = useState([]);
   const [update, setUpdate] = useState(false);
@@ -280,6 +281,7 @@ const actionCreators = {
   getAccount: usersActions.getInfo,
   postAccount: usersActions.postFeedBack,
   deleteId: usersActions.deleteData,
+  resetAlerts:usersActions.resetAlerts
 };
 
 export default connect(mapStateToProps, actionCreators)(WithdrawalAccount);

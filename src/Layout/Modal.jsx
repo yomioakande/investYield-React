@@ -20,6 +20,7 @@ const Modal1 = ({
   message,
   loading,
   bvnReg,
+  resend,
   confirmBvnReg,
   close,
 }) => {
@@ -53,6 +54,7 @@ const Modal1 = ({
   });
 
   const onSubmit = (values, onSubmitProps) => {
+    setShowError(true);
     let obj;
     if (nextPage !== true) {
       obj = {
@@ -64,7 +66,6 @@ const Modal1 = ({
         id: values.bvn,
         token: values.otp,
       };
-
       confirmBvnReg(obj, "/api/v1/user/bvn", success);
     }
     show();
@@ -82,6 +83,16 @@ const Modal1 = ({
     setTimeout(() => {
       setShowError(false);
     }, 4000);
+  };
+
+  const resendOtp = () => {
+    setShowError(true);
+    const obj = {
+      id: formik.values.bvn,
+      operationType: 6,
+    };
+    resend(obj, "/api/v1/util/resendotp");
+    show()
   };
 
   return ReactDom.createPortal(
@@ -139,13 +150,11 @@ const Modal1 = ({
                               placeholder="Enter BVN"
                               name="bvn"
                               onChange={formik.handleChange}
-                        
                             />
                           </div>
                           <div className="d-flex justify-content-center flex-column mt-4">
                             <button
                               onClick={() => dropdown()}
-                            
                               className="d-flex no-decor bvn-text align-self-center"
                               id="why-bvn-link"
                             >
@@ -266,20 +275,19 @@ const Modal1 = ({
                             />
                             <ToastContainer autoClose={1000} hideProgressBar />
                           </div>
-                          <div className="mt-4 d-flex flex-column">
-                            <p className="text-center weight-600 dashboard-modal-p">
-                              Did not get OTP?
-                            </p>
-                            <button
-
-                            // onClick={}
-                              href="#"
-                              className="text-green no-decor text-center mt-2"
-                            >
-                              Resend OTP
-                            </button>
-                          </div>
                         </form>
+                        <div className="mt-4 d-flex flex-column">
+                          <p className="text-center weight-600 dashboard-modal-p">
+                            Did not get OTP?
+                          </p>
+                          <button
+                            onClick={() => resendOtp()}
+                            href="#"
+                            className="text-green no-decor text-center mt-2"
+                          >
+                            Resend OTP
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -306,6 +314,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   bvnReg: usersActions.bvnReg,
   confirmBvnReg: usersActions.confirmBvnReg,
+  resend: usersActions.resend,
 };
 
 export default connect(mapStateToProps, actionCreators)(Modal1);
