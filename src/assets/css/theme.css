@@ -798,7 +798,7 @@ section {
 
 .au-btn-link {
   color: #089985 !important;
-  text-decoration: underline !important;
+  text-decoration: none !important;
   font-weight: bold;
   font-size: 0.875rem;
   cursor: pointer;

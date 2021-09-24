@@ -47,7 +47,7 @@ const Sidebar = (props) => {
                   to="/app/investment"
                 >
                   <Activity className="mr-3" />
-                  Invest
+                  Invest &nbsp; <span className="tdisable"> Coming Soon</span>
                 </NavLink>
               </li>
               <li className="has-sub mb-3">

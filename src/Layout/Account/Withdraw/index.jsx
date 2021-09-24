@@ -9,7 +9,10 @@ const index = () => {
             <div className="col-lg-6">
               <div className="au-card">
                 <div className="au-card-inner">
-                  <a href="/app/account/withdraw" className="d-flex align-items-center">
+                  <a
+                    href="/app/account/withdraw"
+                    className="d-flex align-items-center"
+                  >
                     <img
                       src={withdraw}
                       className="img-fluid"
@@ -59,6 +62,19 @@ const index = () => {
                           <option value="purpose" selected="selected" disabled>
                             Purpose for withdrawal
                           </option>
+                          <option value="food">Food</option>
+                          <option value="entertainment">Entertainment</option>
+                          <option value="shopping">Shopping</option>
+                          <option value="children">Children</option>
+                          <option value="vacation">Vacation</option>
+                          <option value="rent">Rent</option>
+                          <option value="pay bills">Pay Bills/Fees</option>
+                          <option value="party">Party</option>
+                          <option value="emergency fund">Emergency Fund</option>
+                          <option value="transportation">Transportation</option>
+                          <option value="health care">Health Care</option>
+                          <option value="retirement">Retirement</option>
+                          <option value="education">Education</option>
                         </select>
                       </div>
                       <div className="form-group mt-4">
