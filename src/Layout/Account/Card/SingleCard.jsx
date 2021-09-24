@@ -2,7 +2,7 @@ import React from "react";
 import circle1 from "../../../assets/images/check-circle1.svg";
 const SingleCard = ({ single, deleteCard, success }) => {
   const card = [...single.pan];
-console.log(single)
+  // console.log(single);
   return (
     <>
       <div className="col-xl-4 col-lg-6 mt-4">
@@ -41,7 +41,7 @@ console.log(single)
               <div className="mt-2">
                 <p className="text-light">
                   {single?.type.toUpperCase()}
-                  <span className="mx-2">03 / 23</span>
+                  <span className="mx-2">{`${single?.expMnt}/${single?.expYr}`}</span>
                 </p>
               </div>
             </div>

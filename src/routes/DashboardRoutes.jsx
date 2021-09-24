@@ -47,7 +47,7 @@ import myPurse4 from "../Layout/myPurse/MyPurse4";
 
 import Blog from "../Layout/Blog/index";
 import SingleBlog from "../Layout/Blog/Main";
-import Help from "../Layout/Help";
+import Help from "../Layout/FeedBack";
 
 import { PrivateRoute } from "./PrivateRoutes";
 

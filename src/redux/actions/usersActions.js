@@ -22,6 +22,7 @@ export const usersActions = {
   getTargetValue,
   getAccounts,
   postImageBase64,
+  resetAlerts
 };
 
 function login(body) {
@@ -203,7 +204,7 @@ function bvnReg(obj, apiUrl, func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
-
+console.log("tems",register)
     const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/bvn" && success === true) {
       dispatch(successReg(data?.challenge));
@@ -425,5 +426,13 @@ function addCard() {
     const getCard = await userService.getData("/api/v1/user/card_url").then();
     console.log(getCard);
     window.location.href = getCard?.data?.authUrl;
+  };
+}
+
+function resetAlerts() {
+  return (dispatch) => {
+    dispatch(successReg(""));
+    dispatch(failure(""));
+    dispatch(alertActions.clear(""));
   };
 }
