@@ -31,9 +31,7 @@ const InterestList = ({ getFrequency, close, ccy }) => {
             <div className="au-card-inner">
               <h4 className="text-blue">Interest Rate Guide</h4>
               <div className="small-red-line"></div>
-
               <p className="mt-4">Know your interest rate by tenor</p>
-
               <div className="mt-30">
                 {freqOptions.map((single, index) => {
                   return (

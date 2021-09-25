@@ -41,7 +41,7 @@ const Sidebar = (props) => {
                 </NavLink>
               </li>
               <li className="mb-3 diasbled-nav">
-                <NavLink to="">
+                <NavLink to="/app">
                   <Activity className="mr-3" />
                   Invest &nbsp; <span className="tdisable"> Coming Soon</span>
                 </NavLink>

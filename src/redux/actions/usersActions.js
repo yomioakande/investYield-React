@@ -11,6 +11,7 @@ export const usersActions = {
   register4,
   resend,
   getInfo,
+  getDebitCards,
   bvnReg,
   confirmBvnReg,
   addCard,
@@ -22,7 +23,7 @@ export const usersActions = {
   getTargetValue,
   getAccounts,
   postImageBase64,
-  resetAlerts
+  resetAlerts,
 };
 
 function login(body) {
@@ -204,7 +205,7 @@ function bvnReg(obj, apiUrl, func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
-console.log("tems",register)
+    console.log("tems", register);
     const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/bvn" && success === true) {
       dispatch(successReg(data?.challenge));
@@ -308,18 +309,26 @@ function postFeedBack(obj, apiUrl, func) {
   };
 }
 
+function getDebitCards(apiUrl) {
+  return async (dispatch) => {
+    dispatch(request());
+    const getAll = await userService.getData(apiUrl);
+    const { data, success, messages } = getAll;
+    if (success === true) {
+      // dispatch(successReg());
+      return data;
+    } else {
+      dispatch(failure(messages));
+    }
+  };
+}
+
 function getInfo(apiUrl) {
   return async (dispatch) => {
     dispatch(request());
     const getAll = await userService.getData(apiUrl);
     const { data, success, messages } = getAll;
-    // apiUrl === "/api/v1/user/summary" &&
-    if (success === true) {
-      dispatch(successReg());
-      return data;
-    } else {
-      dispatch(alertActions.error(messages));
-    }
+
     if (apiUrl && success === true) {
       dispatch(successReg());
       return data;
