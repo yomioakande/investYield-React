@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 
-const PayModel = ({getDetails}) => {
+const PayModel = ({ getDetails }) => {
   const [active, setActive] = useState(1);
   const [details, setDetails] = useState({});
   useEffect(() => {
@@ -41,7 +41,7 @@ const PayModel = ({getDetails}) => {
                     <div className="pay-method-radio mt-4">
                       <input id="radio2" name="radio" type="radio" />
                       <label for="radio2">
-                        <span>Pay with Stash</span>
+                        <span>Pay with myPurse - Vibe Cash</span>
                       </label>
                     </div>
                     <div className="pay-method-radio mt-4">
