@@ -220,7 +220,7 @@ const WithdrawalAccount = (props) => {
                 </div>
                 <div className="form-group mt-4">
                   <input
-                    type="text"
+                    type="number"
                     className="text-field"
                     placeholder="Enter Account Number"
                     name="accountNumber"
@@ -281,7 +281,7 @@ const actionCreators = {
   getAccount: usersActions.getInfo,
   postAccount: usersActions.postFeedBack,
   deleteId: usersActions.deleteData,
-  resetAlerts:usersActions.resetAlerts
+  resetAlerts: usersActions.resetAlerts,
 };
 
 export default connect(mapStateToProps, actionCreators)(WithdrawalAccount);

@@ -72,9 +72,6 @@ const Help = (props) => {
                   <div className="small-red-line"></div>
                   <div className="mt-5">
                     <>
-                      <button type="button" onClick={() => modalToggle1()}>
-                        Test Here
-                      </button>
                       <form onSubmit={formik.handleSubmit}>
                         {active === "1" ? (
                           <>

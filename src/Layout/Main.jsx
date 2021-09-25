@@ -42,7 +42,6 @@ const Main = (props) => {
   const hider = () => {
     setHide(!hide);
   };
-  
 
   useEffect(() => {
     (async function dataInfo() {
@@ -57,7 +56,7 @@ const Main = (props) => {
       const coreAccounts = await props
         .getAccounts("/api/v1/user/accountbyproduct", "0201")
         .then();
-        setSummaryInfo(data);
+      setSummaryInfo(data);
       setTodoList(todo);
       setPurseAccounts(myPurseAccounts);
       setCoreAccounts(coreAccounts);
@@ -66,7 +65,6 @@ const Main = (props) => {
           setModalInOpen(true);
         }, 2000);
       setTransactions(transactionsData);
-    
     })();
     // eslint-disable-next-line
   }, []);
@@ -374,7 +372,7 @@ const Main = (props) => {
                       {!todoList?.withdrawalAccount && (
                         <div className="au-message__item-inner px-2 py-2">
                           <Link
-                            to="/app/account/mycard"
+                            to="/app/account/mycard#pills-withdrawalAccount"
                             className="au-message__item-text"
                           >
                             <div className="text px-0 mx-0">

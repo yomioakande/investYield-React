@@ -82,6 +82,20 @@ const index = () => {
                           for="Amount"
                           className="text-blue font-sm weight-500"
                         >
+                          Where would you like to withdraw from?
+                        </label>
+                        <select className="text-field">
+                          <option value="purpose" selected="selected" disabled>
+                            Withdraw from
+                          </option>
+                          <option value="vibe">Vibe cash</option>
+                        </select>
+                      </div>
+                      <div className="form-group mt-4">
+                        <label
+                          for="Amount"
+                          className="text-blue font-sm weight-500"
+                        >
                           Addtional note for investYield (optional)
                         </label>
                         <input

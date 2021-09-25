@@ -13,7 +13,7 @@ const MyPurse2 = () => {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("A Plan Name is Required"),
+    name: Yup.string().required("A Purse Name is Required"),
     ccyCode: Yup.string().required("Select your preferred Currency"),
     crFreq: Yup.string().required("Select your preferred Frequency options"),
     startDate: Yup.string().required("Enter a Date"),

@@ -40,12 +40,8 @@ const Sidebar = (props) => {
                   Savings
                 </NavLink>
               </li>
-              <li className="has-sub mb-3">
-                <NavLink
-                  className="js-arrow"
-                  activeClassName="activelink"
-                  to="/app/investment"
-                >
+              <li className="mb-3 diasbled-nav">
+                <NavLink to="">
                   <Activity className="mr-3" />
                   Invest &nbsp; <span className="tdisable"> Coming Soon</span>
                 </NavLink>

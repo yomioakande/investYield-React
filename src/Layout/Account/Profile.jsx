@@ -375,12 +375,20 @@ const Profile = ({
                               </div>
                               <div className="col-lg-6">
                                 <div className="form-group">
-                                  <div className="custom-select text-field-profile  p-0">
-                                    <select className="text-field px-0">
-                                      <option value="0">
-                                        State of residence
-                                      </option>
-                                    </select>
+                                  <div className="form-group position-relative">
+                                    <input
+                                      type="text"
+                                      className="text-field-profile"
+                                      name="state"
+                                      {...formik.getFieldProps("state")}
+                                    />
+                                    <label
+                                      for="firstName"
+                                      className="font-sm position-absolute"
+                                      style={{ left: "15px", top: "15%" }}
+                                    >
+                                      State of Residence
+                                    </label>
                                   </div>
                                 </div>
                               </div>

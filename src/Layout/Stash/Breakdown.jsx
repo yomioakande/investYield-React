@@ -115,9 +115,13 @@ const Breakdown = (props) => {
                           <span>Pay with Bank Transfer</span>
                         </label>
                       </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-
-            <PayModel/>
+            <PayModel />
             {/**/}
           </div>
         </div>

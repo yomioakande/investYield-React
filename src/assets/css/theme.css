@@ -14236,3 +14236,14 @@ a .au-card:hover {
   background: #f0f0f0;
   border-radius: 5px;
 }
+.navbar-sidebar .navbar__list li.diasbled-nav a:hover {
+  color: #a8a8a8;
+}
+
+.navbar-sidebar .navbar__list li.diasbled-nav {
+  transform: none;
+  background-color: inherit;
+}
+.navbar-sidebar .navbar__list li.diasbled-nav a {
+  cursor: not-allowed;
+}
