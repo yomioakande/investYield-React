@@ -15,7 +15,7 @@ const CreateSavings2 = ({ username, register }) => {
   const location = useLocation();
   const link = location.pathname.split("/");
   let name = link[link.length - 1];
-  let useLink=name;
+  let useLink = name;
   name = name === "Create" ? "" : name;
   username = username.name.split(" ")[0];
 
@@ -27,7 +27,15 @@ const CreateSavings2 = ({ username, register }) => {
     endDate: "",
   };
 
-  console.log(name)
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+  };
+
+  console.log(name);
 
   const [loading, setloading] = useState(false);
 
@@ -172,6 +180,7 @@ const CreateSavings2 = ({ username, register }) => {
                           <h5 className="text-blue">Choose a start date</h5>
                           <input
                             type="date"
+                            min={disablePastDate()}
                             className="text-field mt-2"
                             name={"startDate"}
                             value={formik.values.startDate}
@@ -189,6 +198,7 @@ const CreateSavings2 = ({ username, register }) => {
                           <h5 className="text-blue">Choose a target date</h5>
                           <input
                             type="date"
+                            min={disablePastDate()}
                             className="text-field mt-2"
                             value={formik.values.endDate}
                             name={"endDate"}

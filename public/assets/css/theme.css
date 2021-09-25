@@ -297,8 +297,8 @@ strong {
 .text-black {
   color: #000;
 }
-.text-yellow{
-  color:#F8DF59;
+.text-yellow {
+  color: #f8df59;
 }
 
 .icon-custom-size1 {
@@ -842,8 +842,8 @@ section {
 }
 .btn-request-fund {
   background-color: #edfffd;
-  color: #0553C8;
-  border: 1px solid #0553C8;
+  color: #0553c8;
+  border: 1px solid #0553c8;
   height: 50px;
   width: 100%;
   border-radius: 5px;
@@ -3849,8 +3849,8 @@ a .au-card:hover {
 }
 
 .purse-link-btn {
-  text-decoration: underline;
-  font-size: 12px;
+  text-decoration: none;
+  font-size: 11px !important;
   color: #000000;
 }
 
@@ -14197,35 +14197,35 @@ a .au-card:hover {
 .pay-method-radio input:checked ~ label span {
   font-weight: bold !important;
 }
-.btn-hide-balance{
-  color:#000000;
-  font-size:12px;
-  margin-top:15px;
+.btn-hide-balance {
+  color: #000000;
+  font-size: 12px;
+  margin-top: 15px;
   font-weight: 700;
   cursor: pointer;
   text-decoration: underline;
 }
-.create-private-group{
-  width:100%;
-  padding:25px;
-  background:  rgba(5, 83, 200, 0.06);
+.create-private-group {
+  width: 100%;
+  padding: 25px;
+  background: rgba(5, 83, 200, 0.06);
   border-radius: 5px;
 }
-.create-public-group{
-  width:100%;
-  padding:25px;
-  background:  rgba(8, 178, 155, 0.06);
+.create-public-group {
+  width: 100%;
+  padding: 25px;
+  background: rgba(8, 178, 155, 0.06);
   border-radius: 5px;
 }
-.join-savings-challenge{
-  width:100%;
-  padding:25px;
-  background:  #333333;
+.join-savings-challenge {
+  width: 100%;
+  padding: 25px;
+  background: #333333;
   border-radius: 5px;
 }
-.join-private-group{
-  width:100%;
-  padding:25px;
-  background:  #F0F0F0;
+.join-private-group {
+  width: 100%;
+  padding: 25px;
+  background: #f0f0f0;
   border-radius: 5px;
 }
