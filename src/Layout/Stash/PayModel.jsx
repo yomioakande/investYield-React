@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 
-const PayModel = ({ getDetails }) => {
+const PayModel = ({ getDetails, addCard }) => {
   const [active, setActive] = useState(1);
   const [details, setDetails] = useState({});
   useEffect(() => {
     (async function () {
       const data = await getDetails("/api/v1/user/virtual_acct");
-      console.log("tems orange", data);
       setDetails(data);
     })();
     // eslint-disable-next-line
@@ -32,7 +32,7 @@ const PayModel = ({ getDetails }) => {
                         id="radio1"
                         name="radio"
                         type="radio"
-                        onChange={() => setActive(2)}
+                        onClick={() => setActive(3)}
                       />
                       <label for="radio1">
                         <span>Pay with Card</span>
@@ -45,19 +45,25 @@ const PayModel = ({ getDetails }) => {
                       </label>
                     </div>
                     <div className="pay-method-radio mt-4">
-                      <input id="radio3" name="radio" type="radio" />
+                      <input
+                        id="radio3"
+                        name="radio"
+                        type="radio"
+                        onChange={() => setActive(2)}
+                      />
                       <label for="radio3">
                         <span>Pay with Bank Transfer</span>
                       </label>
                     </div>
 
                     <div className="form-group mt-4">
-                      <a
-                        href="*"
+                      <button
+                        type="button"
+                        onClick={() => addCard()}
                         className="au-btn-outline d-flex justify-content-center align-items-center"
                       >
                         Add a Card
-                      </a>
+                      </button>
                     </div>
 
                     <div className="row justify-content-end">
@@ -131,6 +137,59 @@ const PayModel = ({ getDetails }) => {
             </div>
           </div>
         </>
+      ) : active === 3 ? (
+        <>
+          <div className="col-lg-6 flex-column flex-grow-1">
+            <div className="au-card h-100">
+              <div className="au-card-inner">
+                <h4 className="text-blue">Choose a Card to Pay with</h4>
+                <div className="small-red-line"></div>
+
+                <div className="mt-50">
+                  <div className="payment-selection">
+                    <input type="radio" name="select" id="option-1" />
+                    <input type="radio" name="select" id="option-2" />
+                    <input type="radio" name="select" id="option-3" />
+                    <label for="option-1" className="option option-1">
+                      <div className="dot"></div>
+                      <span className="px-2">536785******5678</span>
+                    </label>
+                    <label for="option-2" className="option option-2">
+                      <div className="dot"></div>
+                      <span className="px-2">536785******5678</span>
+                    </label>
+                    <label for="option-3" className="option option-3">
+                      <div className="dot"></div>
+                      <span className="px-2">536785******5678</span>
+                    </label>
+                    <div className="row mt-50 align-items-center justify-content-end">
+                      <div className="col-lg-8">
+                        <div className="row">
+                          <div className="col-lg-6">
+                            <button
+                              onClick={() => setActive(1)}
+                              className="btn btn-cancel text-danger"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                          <div className="col-lg-6">
+                            <Link
+                              to="/app/savings/otp"
+                              className="btn login-submit"
+                            >
+                              NEXT
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
       ) : null}
     </>
   );
@@ -145,7 +204,7 @@ const mapStateToProps = (state) => {
 
 const actionCreators = {
   getDetails: usersActions.getInfo,
-  // addCard: usersActions.addCard,
+  addCard: usersActions.addCard,
   // getAccounts: usersActions.getAccounts,
 };
 

@@ -11,9 +11,11 @@ export const usersActions = {
   register4,
   resend,
   getInfo,
+  getDebitCards,
   bvnReg,
   confirmBvnReg,
   addCard,
+  getPaginateTransact,
   postFeedBack,
   deleteData,
   getFrequency,
@@ -22,7 +24,7 @@ export const usersActions = {
   getTargetValue,
   getAccounts,
   postImageBase64,
-  resetAlerts
+  resetAlerts,
 };
 
 function login(body) {
@@ -204,7 +206,7 @@ function bvnReg(obj, apiUrl, func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
-console.log("tems",register)
+    console.log("tems", register);
     const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/bvn" && success === true) {
       dispatch(successReg(data?.challenge));
@@ -308,18 +310,42 @@ function postFeedBack(obj, apiUrl, func) {
   };
 }
 
+function getDebitCards(apiUrl) {
+  return async (dispatch) => {
+    dispatch(request());
+    const getAll = await userService.getData(apiUrl);
+    const { data, success, messages } = getAll;
+    if (success === true) {
+      // dispatch(successReg());
+      return data;
+    } else {
+      dispatch(failure(messages));
+    }
+  };
+}
+
 function getInfo(apiUrl) {
   return async (dispatch) => {
     dispatch(request());
     const getAll = await userService.getData(apiUrl);
     const { data, success, messages } = getAll;
-    // apiUrl === "/api/v1/user/summary" &&
-    if (success === true) {
+
+    if (apiUrl && success === true) {
       dispatch(successReg());
       return data;
     } else {
+      dispatch(failure(""));
       dispatch(alertActions.error(messages));
     }
+  };
+}
+
+function getPaginateTransact(apiUrl,pageNumber,pageSize) {
+  return async (dispatch) => {
+    dispatch(request());
+    const getAll = await userService.getPaginateTransact(apiUrl,pageNumber,pageSize);
+    const { data, success, messages } = getAll;
+
     if (apiUrl && success === true) {
       dispatch(successReg());
       return data;
@@ -409,22 +435,21 @@ function deleteData(apiUrl, obj, func) {
     }
   };
 
-  function request(id) {
-    return { type: userConstants.DELETE_REQUEST, id };
-  }
-  // function success(id) {
-  //   return { type: userConstants.DELETE_SUCCESS, id };
+  // function request(id) {
+  //   return { type: userConstants.DELETE_REQUEST, id };
   // }
-  function failure(id, error) {
-    return { type: userConstants.DELETE_FAILURE, id, error };
-  }
+  // // function success(id) {
+  // //   return { type: userConstants.DELETE_SUCCESS, id };
+  // // }
+  // function failure(id, error) {
+  //   return { type: userConstants.DELETE_FAILURE, id, error };
+  // }
 }
 
 function addCard() {
   return async (dispatch) => {
     dispatch(request());
     const getCard = await userService.getData("/api/v1/user/card_url").then();
-    console.log(getCard);
     window.location.href = getCard?.data?.authUrl;
   };
 }

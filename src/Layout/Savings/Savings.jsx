@@ -11,12 +11,17 @@ import { usersActions } from "../../redux/actions";
 import Loader from "../../common/Loader";
 import Charts from "../Charts";
 import { nairaCurrencyVal, dollarCurrencyVal } from "../../helpers/helper";
+import Purse from "../common/myPurse";
 
 const Savings = ({ getData, getAccounts }) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [loading, setloading] = useState(false);
   const [coreAccounts, setCoreAccounts] = useState([]);
   const [stashAccounts, setStashAccounts] = useState([]);
+  const [hidden, setHidden] = useState({});
+  const toggleHide = (index) => {
+    setHidden({ ...hidden, [index]: !hidden[index] });
+  };
 
   useEffect(() => {
     (async function dataInfo() {
@@ -77,7 +82,7 @@ const Savings = ({ getData, getAccounts }) => {
                       >
                         {/* ₦10,000,000.00 */}
                       </p>
-                     </div>
+                    </div>
                     <div className="col-lg-5 w-auto profile-cards col-md-4 mt-3">
                       <ul className="pie-text mt-3">
                         <li className="mb-3 text-green">
@@ -182,7 +187,46 @@ const Savings = ({ getData, getAccounts }) => {
                         </div>
                       </div>
                     </Link>
-                    <a href="/" className="card-box d-flex flex-column mb-4">
+                    {[
+                      {
+                        name: "Vibe Cash",
+                        purseAmount: "5024.12",
+                        nameClass: "au-card-bg-vibe-cash",
+                      },
+                      {
+                        name: "Food Cash",
+                        purseAmount: "50.00",
+                        nameClass: "au-card-bg-food-cash",
+                      },
+                      {
+                        name: "TGIF Cash",
+                        purseAmount: "0.00",
+                        nameClass: "au-card-bg-tgif-cash",
+                      },
+                      {
+                        name: "Food Cash",
+                        purseAmount: "50.00",
+                        nameClass: "au-card-bg-food-cash",
+                      },
+                      {
+                        name: "TGIF Cash",
+                        purseAmount: "0.00",
+                        nameClass: "au-card-bg-tgif-cash",
+                      },
+                    ].map((single, index) => {
+                      return (
+                        <Purse
+                          key={index}
+                          index={index}
+                          namePurse={single.name}
+                          purseAmount={single.purseAmount}
+                          nameClass={single.nameClass}
+                          toggleHide={toggleHide}
+                          hidden={hidden}
+                        />
+                      );
+                    })}
+                    {/* <a href="/" className="card-box d-flex flex-column mb-4">
                       <div className="au-card-purse au-card-bg-vibe-cash flex-grow-1">
                         <div className="au-card-elements">
                           <p className="mt-1">Vibe Cash</p>
@@ -226,7 +270,7 @@ const Savings = ({ getData, getAccounts }) => {
                           <p className="mt-2 purse-link-btn">Hide Balance</p>
                         </div>
                       </div>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>

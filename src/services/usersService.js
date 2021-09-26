@@ -11,7 +11,8 @@ export const userService = {
   getFreq,
   getEstimate,
   getTargetValue,
-  getAccounts
+  getAccounts,
+  getPaginateTransact
 };
 
 async function register1(user, apiUrl) {
@@ -63,7 +64,7 @@ function logout() {
 //   // return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
 // }
 
-async function getData(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
+async function getData(apiUrl) {
   const requestOptions = {
     method: "GET",
     headers: authHeader(),
@@ -80,7 +81,24 @@ async function getData(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
   }
 }
 
-async function getAccounts(apiUrl,accountCode) {
+async function getPaginateTransact(apiUrl, first, second) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
+  try {
+    const datas = await fetch(
+      `https://api-staging.investyield.ng:44377${apiUrl}?pageNumber=${first}&pageSize=${second}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+    return error;
+  }
+}
+
+async function getAccounts(apiUrl, accountCode) {
   const requestOptions = {
     method: "GET",
     headers: authHeader(),
