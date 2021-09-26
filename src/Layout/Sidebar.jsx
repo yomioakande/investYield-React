@@ -10,7 +10,6 @@ const Sidebar = (props) => {
   const handleClick = (e) => {
     e.preventDefault();
   };
-
   return (
     <>
       {/* // <!-- MENU SIDEBAR--> */}
@@ -45,11 +44,7 @@ const Sidebar = (props) => {
                 </NavLink>
               </li>
               <li className="mb-3 diasbled-nav">
-<<<<<<< HEAD
-                <NavLink onClick={handleClick} to="">
-=======
-                <NavLink to="/app">
->>>>>>> dab07223ebe423e7076511ffea90966693ecb9c1
+                <NavLink to="/" onClick={handleClick}>
                   <Activity className="mr-3" />
                   Invest &nbsp; <span className="tdisable"> Coming Soon</span>
                 </NavLink>
