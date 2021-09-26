@@ -6,6 +6,8 @@ import refer from "../../assets/images/referImage.svg";
 import copy from "../../assets/images/copyIcon.svg";
 import link from "../../assets/images/share-linkIcon.svg";
 import QRCode from "qrcode.react";
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Refer = (props) => {
   const Ref = useRef(null);
 
@@ -18,14 +20,20 @@ const Refer = (props) => {
     })();
     //eslint-disable-next-line
   }, []);
-
+  const success = () => {
+    toast.success("Referral Code copied!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    
+  };
   const copyText = (e) => {
     navigator.clipboard.writeText(referCode);
-    alert("Referral Code copied to clipboard");
+    success()
   };
 
   return (
     <>
+    <ToastContainer autoClose={1000} hideProgressBar />
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">

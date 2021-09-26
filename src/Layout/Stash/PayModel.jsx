@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 
-const PayModel = ({ getDetails }) => {
+const PayModel = ({ getDetails, addCard }) => {
   const [active, setActive] = useState(1);
   const [details, setDetails] = useState({});
   useEffect(() => {
     (async function () {
       const data = await getDetails("/api/v1/user/virtual_acct");
-      console.log("tems orange", data);
       setDetails(data);
     })();
     // eslint-disable-next-line
@@ -28,12 +27,7 @@ const PayModel = ({ getDetails }) => {
                 <div className="px-4 px-lg-5 mt-5">
                   <form action="">
                     <div className="pay-method-radio">
-                      <input
-                        id="radio1"
-                        name="radio"
-                        type="radio"
-                        onChange={() => setActive(2)}
-                      />
+                      <input id="radio1" name="radio" type="radio" />
                       <label for="radio1">
                         <span>Pay with Card</span>
                       </label>
@@ -45,19 +39,25 @@ const PayModel = ({ getDetails }) => {
                       </label>
                     </div>
                     <div className="pay-method-radio mt-4">
-                      <input id="radio3" name="radio" type="radio" />
+                      <input
+                        id="radio3"
+                        name="radio"
+                        type="radio"
+                        onChange={() => setActive(2)}
+                      />
                       <label for="radio3">
                         <span>Pay with Bank Transfer</span>
                       </label>
                     </div>
 
                     <div className="form-group mt-4">
-                      <a
-                        href="*"
+                      <button
+                        type="button"
+                        onClick={() => addCard()}
                         className="au-btn-outline d-flex justify-content-center align-items-center"
                       >
                         Add a Card
-                      </a>
+                      </button>
                     </div>
 
                     <div className="row justify-content-end">
@@ -145,7 +145,7 @@ const mapStateToProps = (state) => {
 
 const actionCreators = {
   getDetails: usersActions.getInfo,
-  // addCard: usersActions.addCard,
+  addCard: usersActions.addCard,
   // getAccounts: usersActions.getAccounts,
 };
 
