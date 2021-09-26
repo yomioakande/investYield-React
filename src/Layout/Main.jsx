@@ -43,11 +43,16 @@ const Main = (props) => {
     setHide(!hide);
   };
 
+  const getTransactions = async () => {
+    const data = await props.getData("/api/v1/user/transaction").then();
+    setTransactions(data);
+  };
+
   useEffect(() => {
     (async function dataInfo() {
       const data = await props.getData("/api/v1/user/summary").then();
       const transactionsData = await props
-        .getData("/api/v1/user/transaction")
+        .getPaginateTransact("/api/v1/user/transaction", "1", "5")
         .then();
       const todo = await props.getData("/api/v1/user/todo").then();
       const myPurseAccounts = await props
@@ -236,11 +241,17 @@ const Main = (props) => {
                 <div className="au-card-inner recent-activities">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">Recent Activities</h3>
-                    <a href="/app" className="au-btn-link">
-                      View more
-                    </a>
+                    <button
+                      onClick={() => getTransactions()}
+                      className="au-btn-link"
+                    >
+                      View All
+                    </button>
                   </div>
-                  <div className="au-message-list">
+                  <div
+                    className="au-message-list"
+                    style={{ height: "50vh", overflowY: "scroll" }}
+                  >
                     {transactions && transactions.length > 0 ? (
                       transactions.map((single, index) => {
                         return (
@@ -498,6 +509,7 @@ const actionCreators = {
   getData: usersActions.getInfo,
   addCard: usersActions.addCard,
   getAccounts: usersActions.getAccounts,
+  getPaginateTransact: usersActions.getPaginateTransact,
 };
 
 export default connect(mapStateToProps, actionCreators)(Main);

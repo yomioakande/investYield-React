@@ -15,6 +15,7 @@ export const usersActions = {
   bvnReg,
   confirmBvnReg,
   addCard,
+  getPaginateTransact,
   postFeedBack,
   deleteData,
   getFrequency,
@@ -327,6 +328,22 @@ function getInfo(apiUrl) {
   return async (dispatch) => {
     dispatch(request());
     const getAll = await userService.getData(apiUrl);
+    const { data, success, messages } = getAll;
+
+    if (apiUrl && success === true) {
+      dispatch(successReg());
+      return data;
+    } else {
+      dispatch(failure(""));
+      dispatch(alertActions.error(messages));
+    }
+  };
+}
+
+function getPaginateTransact(apiUrl,pageNumber,pageSize) {
+  return async (dispatch) => {
+    dispatch(request());
+    const getAll = await userService.getPaginateTransact(apiUrl,pageNumber,pageSize);
     const { data, success, messages } = getAll;
 
     if (apiUrl && success === true) {
