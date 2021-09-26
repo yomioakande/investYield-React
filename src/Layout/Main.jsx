@@ -29,7 +29,7 @@ const Main = (props) => {
   const [coreAccounts, setCoreAccounts] = useState([]);
   const [purseAccounts, setPurseAccounts] = useState([]);
   const [todoList, setTodoList] = useState({});
-  const [hide, setHide] = useState(false);
+  const [hidden, setHidden] = useState({});
   // const [loading, setloading] = useState(false);
   const modalToggle = () => {
     setModalInOpen(true);
@@ -39,8 +39,9 @@ const Main = (props) => {
     setModalInOpen(false);
   };
 
-  const hider = () => {
-    setHide(!hide);
+  const toggleHide = (index) => {
+  
+    setHidden({ ...hidden, [index]: !hidden[index] });
   };
 
   const getTransactions = async () => {
@@ -208,23 +209,53 @@ const Main = (props) => {
                       </div>
                     </Link>
 
-                    <Purse
+                    {[
+                      {
+                        name: "Vibe Cash",
+                        purseAmount: "5024.12",
+                        nameClass: "au-card-bg-vibe-cash",
+                      },
+                      {
+                        name: "Food Cash",
+                        purseAmount: "50.00",
+                        nameClass: "au-card-bg-food-cash",
+                      },
+                      {
+                        name: "TGIF Cash",
+                        purseAmount: "0.00",
+                        nameClass: "au-card-bg-tgif-cash",
+                      },
+                    ].map((single, index) => {
+                      return (
+                        <Purse
+                          key={index}
+                          index={index}
+                          namePurse={single.name}
+                          purseAmount={single.purseAmount}
+                          nameClass={single.nameClass}
+                          toggleHide={toggleHide}
+                          hidden={hidden}
+                        />
+                      );
+                    })}
+
+                    {/* <Purse
                       namePurse={"Vibe Cash"}
                       purseAmount={"5,024.12"}
                       nameClass={"au-card-bg-vibe-cash"}
                       hider={hider}
                       hide={hide}
-                    />
+                    /> */}
 
-                    <Purse
+                    {/* <Purse
                       namePurse={"Food Cash"}
                       purseAmount={"50.00"}
                       nameClass={"au-card-bg-food-cash"}
                       hider={hider}
                       hide={hide}
-                    />
+                    /> */}
 
-                    <a href="/" className="card-box d-flex flex-column mb-4">
+                    {/* <a href="/" className="card-box d-flex flex-column mb-4">
                       <div className="au-card-purse au-card-bg-tgif-cash flex-grow-1">
                         <div className="au-card-elements">
                           <p className="mt-1">TGIF Cash</p>
@@ -232,7 +263,7 @@ const Main = (props) => {
                           <p className="mt-2 purse-link-btn">Hide Balance</p>
                         </div>
                       </div>
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
