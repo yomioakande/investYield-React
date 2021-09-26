@@ -30,7 +30,6 @@ const Main = (props) => {
   const [purseAccounts, setPurseAccounts] = useState([]);
   const [todoList, setTodoList] = useState({});
   const [hidden, setHidden] = useState({});
-  // const [loading, setloading] = useState(false);
   const modalToggle = () => {
     setModalInOpen(true);
   };
@@ -40,7 +39,6 @@ const Main = (props) => {
   };
 
   const toggleHide = (index) => {
-  
     setHidden({ ...hidden, [index]: !hidden[index] });
   };
 

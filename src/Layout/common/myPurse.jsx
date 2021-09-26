@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { nairaCurrencyVal } from "../../helpers/helper";
 const myPurse = ({
   namePurse,
@@ -13,12 +14,12 @@ const myPurse = ({
       <div className="card-box d-flex flex-column mb-4">
         <div className={`au-card-purse ${nameClass} flex-grow-1`}>
           <div className="au-card-elements">
-            <a href="/app">
+            <Link to="/app">
               <p className="mt-1">{namePurse}</p>
               <p className={`mt-1 ${!hidden[index] ? `select-hide` : null}`}>
                 {nairaCurrencyVal(purseAmount)}
               </p>
-            </a>
+            </Link>
             <p
               onClick={() => toggleHide(index)}
               className="mt-2 purse-link-btn"

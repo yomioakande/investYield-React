@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import NumberFormat from "react-number-format";
 import Select from "react-select";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -7,9 +8,13 @@ import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 const Index = ({ getFrequency, createStash, loading }) => {
   const [freqOptions, setFreqOptions] = useState([]);
+  const [num, setNum] = useState("");
 
+  // const changeVal=(values)=>{
+  //   setNum(values)
+  // }
   const initialValues = {
-    amount: "",
+    amount: num?.value,
     frequency: "",
     ccyCode: "1",
   };
@@ -35,6 +40,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
   };
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
@@ -100,7 +106,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
   const defaultValue = (options, value) => {
     return options ? options.find((option) => option.value === value) : "";
   };
-
+  console.log(formik.values);
   return (
     <>
       {loading && <Loader />}
@@ -128,7 +134,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
                                     id="radio1"
                                     name="ccyCode"
                                     type="radio"
-                                    // checked={formik.values.ccyCode === 2}
                                     value={"2"}
                                     onChange={formik.handleChange}
                                   />
@@ -163,16 +168,19 @@ const Index = ({ getFrequency, createStash, loading }) => {
                             </div>
                           </div>
                         </div>
-
                         <div className="form-group mt-4">
                           <label for="Amount" className="text-blue weight-500">
                             How much will you like to stash daily?
                           </label>
-                          <input
-                            type="number"
+                          <NumberFormat
+                            isNumericString={true}
+                            thousandSeparator={true}
                             className="text-field"
                             placeholder="Amount"
                             name="amount"
+                            onValueChange={(values) => {
+                              setNum({ value: values.value });
+                            }}
                             onChange={formik.handleChange}
                           />
                           {formik.touched.amount && formik.errors.amount && (
@@ -189,23 +197,27 @@ const Index = ({ getFrequency, createStash, loading }) => {
                           <div
                             style={{ zIndex: 99999 }}
                             className="custom-select text-field p-0"
-                          >{freqOptions&&freqOptions.length>0?  <Select
-                            maxMenuHeight={5}
-                            options={options}
-                            styles={customStyles}
-                            isSearchable={false}
-                            className="select-field"
-                            placeholder={""}
-                            value={defaultValue(
-                              options,
-                              formik.values.frequency
+                          >
+                            {freqOptions && freqOptions.length > 0 ? (
+                              <Select
+                                maxMenuHeight={5}
+                                options={options}
+                                styles={customStyles}
+                                isSearchable={false}
+                                className="select-field"
+                                placeholder={""}
+                                value={defaultValue(
+                                  options,
+                                  formik.values.frequency
+                                )}
+                                onChange={(value) =>
+                                  formik.setFieldValue("frequency", value.value)
+                                }
+                                autoFocus={true}
+                              />
+                            ) : (
+                              <p>No frequency at the moment</p>
                             )}
-                            onChange={(value) =>
-                              formik.setFieldValue("frequency", value.value)
-                            }
-                            autoFocus={true}
-                          />:<p>No frequency at the moment</p>}
-                          
                           </div>
                           {formik.touched.frequency &&
                             formik.errors.frequency && (

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import { useLocation } from "react-router-dom";
+import NumberFormat from "react-number-format";
 import "../../assets/css/theme.css";
 import "../../assets/css/checkBox.css";
 import "../../assets/css/style.css";
@@ -18,11 +19,11 @@ const CreateSavings2 = ({ username, register }) => {
   let useLink = name;
   name = name === "Create" ? "" : name;
   username = username.name.split(" ")[0];
-
+  const [num, setNum] = useState("");
   const initialValues = {
     name: `${username}'s ${name} plan`,
     ccyCode: "",
-    target: "",
+    target: num?.value,
     startDate: "",
     endDate: "",
   };
@@ -63,6 +64,7 @@ const CreateSavings2 = ({ username, register }) => {
   };
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
@@ -161,10 +163,14 @@ const CreateSavings2 = ({ username, register }) => {
                           <label for="Amount" className="text-blue weight-500">
                             Set a target amount for your {name} goal
                           </label>
-                          <input
-                            type="number"
+                          <NumberFormat
+                            isNumericString={true}
+                            thousandSeparator={true}
                             className="text-field"
                             name="target"
+                            onValueChange={(values) => {
+                              setNum({ value: values.value });
+                            }}
                             onChange={formik.handleChange}
                             {...formik.getFieldProps("target")}
                             placeholder="Target Amount"
