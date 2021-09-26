@@ -43,8 +43,8 @@ const Savings = ({ getData, getAccounts }) => {
     // eslint-disable-next-line
   }, []);
 
-  // console.log(stashAccounts, "stash");
-  // console.log(coreAccounts, "cores");
+  console.log(stashAccounts, "stash");
+  console.log(coreAccounts, "cores");
   return (
     <>
       {loading && <Loader />}
