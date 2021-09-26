@@ -450,6 +450,7 @@ function addCard() {
   return async (dispatch) => {
     dispatch(request());
     const getCard = await userService.getData("/api/v1/user/card_url").then();
+    console.log(getCard)
     window.location.href = getCard?.data?.authUrl;
   };
 }

@@ -14,7 +14,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
   //   setNum(values)
   // }
   const initialValues = {
-    amount: num?.value,
+    amount: "",
     frequency: "",
     ccyCode: "1",
   };
@@ -40,13 +40,17 @@ const Index = ({ getFrequency, createStash, loading }) => {
   };
 
   const formik = useFormik({
-    enableReinitialize: true,
+    // enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
   });
-  console.log(formik.values);
+
+  useEffect(() => {
+    formik.setFieldValue("amount", num?.value);
+    // eslint-disable-next-line
+  }, [num?.value]);
 
   const ccy = formik.values.ccyCode;
   useEffect(() => {

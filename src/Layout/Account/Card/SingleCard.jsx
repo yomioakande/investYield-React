@@ -2,7 +2,7 @@ import React from "react";
 import circle1 from "../../../assets/images/check-circle1.svg";
 const SingleCard = ({ single, deleteCard, success }) => {
   const card = [...single.pan];
-  // console.log(single);
+
   return (
     <>
       <div className="col-xl-4 col-lg-6 mt-4">

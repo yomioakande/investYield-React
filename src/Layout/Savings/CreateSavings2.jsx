@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
@@ -23,7 +23,7 @@ const CreateSavings2 = ({ username, register }) => {
   const initialValues = {
     name: `${username}'s ${name} plan`,
     ccyCode: "",
-    target: num?.value,
+    target: "",
     startDate: "",
     endDate: "",
   };
@@ -64,17 +64,19 @@ const CreateSavings2 = ({ username, register }) => {
   };
 
   const formik = useFormik({
-    enableReinitialize: true,
+    // enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
   });
 
+  useEffect(() => {
+    formik.setFieldValue("target", num?.value);
+    // eslint-disable-next-line
+  }, [num?.value]);
+
   console.log(formik.values);
-
-  // {modalInOpen4 && <Modal close={close} />}
-
   return (
     <>
       {loading && <Loader />}

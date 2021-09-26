@@ -3,6 +3,7 @@ import withdrawal from "../../assets/images/withdrawFundIcon.svg";
 import "../../assets/css/theme.css";
 import "../../assets/css/style.css";
 import { dateConv } from "../../helpers";
+import PayModel from "../Stash/PayModel";
 
 const MyPurse4 = () => {
   const purse = JSON.parse(sessionStorage.getItem("mainPurseObj"));
@@ -98,14 +99,20 @@ const MyPurse4 = () => {
                     <div className="savings-breakdown-row text-black">
                       <p>Autowithdrawal:</p>
                       <p className="font-weight-bold">
-                        {daysToWeeks(purse.drPct, purse.drFreq, purse.drDate)}
+                        {purse.autoWithdraw === "true"
+                          ? daysToWeeks(purse.drPct, purse.drFreq, purse.drDate)
+                          : "False"}
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6 d-flex flex-column">
+
+            <>
+              <PayModel />
+            </>
+            {/* <div className="col-lg-6 col-md-6 d-flex flex-column">
               <div className="au-card position-relative px-0 flex-grow-1">
                 <div className="au-card-inner">
                   <div className="px-4 px-lg-5">
@@ -164,7 +171,7 @@ const MyPurse4 = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

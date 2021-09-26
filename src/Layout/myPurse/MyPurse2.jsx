@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import NumberFormat from "react-number-format";
 import { useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -10,6 +11,8 @@ const MyPurse2 = () => {
   name = name === "Custom" ? "" : name;
 
   const [loading, setLoading] = useState(false);
+  const [num, setNum] = useState("");
+
   const initialValues = {
     name: `${name} Cash`,
     ccyCode: "",
@@ -52,11 +55,18 @@ const MyPurse2 = () => {
   };
 
   const formik = useFormik({
+    // enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
   });
+  useEffect(() => {
+    formik.setFieldValue("amount", num?.value);
+    // eslint-disable-next-line
+  }, [num?.value]);
+
+  console.log("reform", formik.values);
 
   return (
     <>
@@ -245,12 +255,17 @@ const MyPurse2 = () => {
                           <label for="Amount" className="text-blue weight-500">
                             How much will you like to save daily?
                           </label>
-                          <input
-                            type="number"
+                          <NumberFormat
+                            isNumericString={true}
+                            thousandSeparator={true}
+                            // type="number"
                             className="text-field"
                             placeholder="Amount (N)"
                             name="amount"
-                            value={formik.values.amount}
+                            // value={formik.values.amount}
+                            onValueChange={(values) => {
+                              setNum({ value: values.value });
+                            }}
                             onChange={formik.handleChange}
                             {...formik.getFieldProps("amount")}
                           />
