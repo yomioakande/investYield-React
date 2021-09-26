@@ -435,22 +435,21 @@ function deleteData(apiUrl, obj, func) {
     }
   };
 
-  function request(id) {
-    return { type: userConstants.DELETE_REQUEST, id };
-  }
-  // function success(id) {
-  //   return { type: userConstants.DELETE_SUCCESS, id };
+  // function request(id) {
+  //   return { type: userConstants.DELETE_REQUEST, id };
   // }
-  function failure(id, error) {
-    return { type: userConstants.DELETE_FAILURE, id, error };
-  }
+  // // function success(id) {
+  // //   return { type: userConstants.DELETE_SUCCESS, id };
+  // // }
+  // function failure(id, error) {
+  //   return { type: userConstants.DELETE_FAILURE, id, error };
+  // }
 }
 
 function addCard() {
   return async (dispatch) => {
     dispatch(request());
     const getCard = await userService.getData("/api/v1/user/card_url").then();
-    console.log(getCard);
     window.location.href = getCard?.data?.authUrl;
   };
 }
