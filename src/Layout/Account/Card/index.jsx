@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Style from "../style";
 import SingleCard from "./SingleCard";
 import WithdrawalAccount from "./WithdrawalAccount";
@@ -60,14 +61,20 @@ const Index = (props) => {
                   </div>
                   <div className="col-lg-5 px-0 d-flex justify-content-between cg-3">
                     <div className="mt-2 flex-grow-1 w-auto">
-                      <button className="btn btn-transfer">
+                      <Link
+                        to="/app/account/transfer"
+                        className="btn btn-transfer"
+                      >
                         Transfer Funds
-                      </button>
+                      </Link>
                     </div>
                     <div className="mt-2 flex-grow-1 w-auto">
-                      <button className="btn btn-withdraw">
+                      <Link
+                        to="/app/account/withdraw"
+                        className="btn btn-withdraw"
+                      >
                         Withdraw Funds
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -84,37 +91,37 @@ const Index = (props) => {
                       id="pills-tab"
                       role="tablist"
                     >
-                      <li className="nav-item">
+                      <li className="nav-item ">
                         <a
                           className="nav-link active"
-                          id="#pills-debitCard-tab"
-                          data-toggle="pill"
-                          href="#pills-debitCard"
-                          role="tab"
-                          aria-controls="#pills-debitCard"
-                          aria-selected="true"
-                        >
-                          My Debit Cards
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a
-                          className="nav-link"
                           id="pills-pills-withdrawalAccount-tab"
                           data-toggle="pill"
                           href="#pills-withdrawalAccount"
                           role="tab"
                           aria-controls="pills-withdrawalAccount"
-                          aria-selected="false"
+                          aria-selected="true"
                         >
                           Withdrawal account
+                        </a>
+                      </li>
+                      <li className="nav-item">
+                        <a
+                          className="nav-link"
+                          id="#pills-debitCard-tab"
+                          data-toggle="pill"
+                          href="#pills-debitCard"
+                          role="tab"
+                          aria-controls="#pills-debitCard"
+                          aria-selected="false"
+                        >
+                          My Debit Cards
                         </a>
                       </li>
                     </ul>
                   </Style>
                   <div className="tab-content" id="pills-tabContent">
                     <div
-                      className="tab-pane fade show active"
+                      className="tab-pane fade"
                       id="pills-debitCard"
                       role="tabpanel"
                       aria-labelledby="pills-home-tab"
@@ -134,7 +141,8 @@ const Index = (props) => {
                           {cards && cards.length > 0
                             ? cards.map((single, index) => {
                                 return (
-                                  <SingleCard key={index}
+                                  <SingleCard
+                                    key={index}
                                     single={single}
                                     deleteCard={deleteCard}
                                   />
@@ -145,7 +153,7 @@ const Index = (props) => {
                       </>
                     </div>
                     <div
-                      className="tab-pane fade"
+                      className="tab-pane fade show active"
                       id="pills-withdrawalAccount"
                       role="tabpanel"
                       aria-labelledby="pills-profile-tab"
