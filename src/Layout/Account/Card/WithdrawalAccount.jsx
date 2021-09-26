@@ -220,7 +220,7 @@ const WithdrawalAccount = (props) => {
                 </div>
                 <div className="form-group mt-4">
                   <input
-                    type="number"
+                    type="text"
                     className="text-field"
                     placeholder="Enter Account Number"
                     name="accountNumber"

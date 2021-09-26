@@ -173,7 +173,9 @@ const Pin = (props) => {
                   <span className="px-2">
                     <img src={mail} alt="Mail" />
                   </span>
-                  <a href="*">help@investyield.com</a>
+                  <a href="mailto:support@investyield.ng">
+                    support@investyield.ng
+                  </a>
                 </div>
               </div>
             </div>

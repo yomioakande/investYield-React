@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 const Group1 = () => {
   const location = useLocation();
   let groupType = location.pathname.split("/");
-  groupType= groupType[groupType.length - 1];
+  groupType = groupType[groupType.length - 1];
   // console.log(groupType)
   //   "docId": "string",
   //   "isPublic": true
@@ -16,6 +16,14 @@ const Group1 = () => {
     ccy: "",
     target: "",
     tgtDate: "",
+  };
+
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
   };
 
   const validationSchema = Yup.object({
@@ -161,6 +169,7 @@ const Group1 = () => {
                           </label>
                           <input
                             type="date"
+                            min={disablePastDate()}
                             name={"tgtDate"}
                             {...formik.getFieldProps("tgtDate")}
                             className="text-field mt-2"

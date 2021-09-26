@@ -7,6 +7,10 @@ import { connect } from "react-redux";
 import { usersActions } from "../redux/actions";
 
 const Sidebar = (props) => {
+  const handleClick = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       {/* // <!-- MENU SIDEBAR--> */}
@@ -41,7 +45,7 @@ const Sidebar = (props) => {
                 </NavLink>
               </li>
               <li className="mb-3 diasbled-nav">
-                <NavLink to="">
+                <NavLink onClick={handleClick} to="">
                   <Activity className="mr-3" />
                   Invest &nbsp; <span className="tdisable"> Coming Soon</span>
                 </NavLink>

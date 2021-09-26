@@ -10,6 +10,14 @@ const Group3 = () => {
     earn: "",
   };
 
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+  };
+
   const validationSchema = Yup.object({
     name: Yup.string().required("Enter a Plan name"),
     ccy: Yup.string().required("Select a Currrency Type"),
@@ -61,6 +69,7 @@ const Group3 = () => {
                         <label className="text-blue">Choose a start date</label>
                         <input
                           type="date"
+                          min={disablePastDate()}
                           name="start"
                           {...formik.getFieldProps("start")}
                           className="text-field mt-2"

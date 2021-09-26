@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import percentageIcon from "../../assets/images/percentageIcon.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
 
 const MyPurse3 = () => {
+  const location = useLocation();
+  const link = location.pathname.split("/");
+  let name = link[link.length - 1];
+  name = name === "Custom" ? "" : name;
+
   const [loading, setLoading] = useState(false);
   const initialValues = {
     autoWithdraw: "",
@@ -62,7 +68,7 @@ const MyPurse3 = () => {
             <div className="col-xl-6 col-lg-8">
               <div className="au-card">
                 <div className="au-card-inner">
-                  <h4 className="text-blue">Let’s get your Purse set up</h4>
+                  <h4 className="text-blue">{`Let’s get your ${name} Purse set up`}</h4>
                   <div className="small-red-line"></div>
 
                   <div className="mt-5">

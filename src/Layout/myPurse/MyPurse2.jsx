@@ -1,15 +1,29 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
 const MyPurse2 = () => {
+  const location = useLocation();
+  const link = location.pathname.split("/");
+  let name = link[link.length - 1];
+  name = name === "Custom" ? "" : name;
+
   const [loading, setLoading] = useState(false);
   const initialValues = {
-    name: "",
+    name: `${name} Cash`,
     ccyCode: "",
     startDate: "",
     crFreq: "",
     amount: "",
+  };
+
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
   };
 
   const validationSchema = Yup.object({
@@ -31,7 +45,7 @@ const MyPurse2 = () => {
     };
     console.log(obj);
     sessionStorage.setItem("purseObj1", JSON.stringify(obj));
-    window.location.href = "/app/savings/pursestep2";
+    window.location.href = `/app/savings/pursestep2/${name}`;
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
     setLoading(false);
@@ -53,7 +67,7 @@ const MyPurse2 = () => {
             <div className="col-xl-6 col-lg-8">
               <div className="au-card">
                 <div className="au-card-inner">
-                  <h4 className="text-blue">Let’s get your Purse set up</h4>
+                  <h4 className="text-blue">{`Let’s get your ${name} Purse set up`}</h4>
                   <div className="small-red-line"></div>
 
                   <div className="mt-5">
@@ -136,6 +150,7 @@ const MyPurse2 = () => {
                           </label>
                           <input
                             type="date"
+                            min={disablePastDate()}
                             className="text-field mt-2"
                             name={"startDate"}
                             value={formik.values.startDate}
@@ -150,7 +165,7 @@ const MyPurse2 = () => {
                           )}
                         <div className="mt-4">
                           <label className="text-blue weight-500">
-                            How often would you like members to save?
+                            How often would you like to save in this purse?
                           </label>
                           <div className="row cg-3 px-3">
                             <div className="w-auto">

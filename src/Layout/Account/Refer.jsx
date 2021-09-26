@@ -19,7 +19,9 @@ const Refer = (props) => {
     //eslint-disable-next-line
   }, []);
 
-  const copyText = (e) => {
+  // console.log("refercode", referCode);
+
+  const copyText = () => {
     navigator.clipboard.writeText(referCode);
     alert("Referral Code copied to clipboard");
   };
