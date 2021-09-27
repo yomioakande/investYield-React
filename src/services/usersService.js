@@ -132,14 +132,14 @@ async function getFreq(apiUrl, firstQ, secondQ) {
   }
 }
 
-async function getEstimate(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
+async function getEstimate(apiUrl, firstQ, secondQ, thirdQ, fourthQ,fifthQ) {
   const requestOptions = {
     method: "GET",
     headers: authHeader(),
   };
   try {
     const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}?ExpectedReturn=${firstQ}&Frequency=${secondQ}&TargetDate=${thirdQ}&Product=${fourthQ}`,
+      `https://api-staging.investyield.ng:44377${apiUrl}?ExpectedReturn=${firstQ}&Frequency=${secondQ}&TargetDate=${thirdQ}&StartDate=${fourthQ}&Product=${fifthQ}`,
       requestOptions
     );
     const getData = await datas.json();

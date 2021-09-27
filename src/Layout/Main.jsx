@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import { Link } from "react-router-dom";
 import dashboard from "../assets/images/dashboard_card_bg.jpg";
 import retirement from "../assets/images/Savingsplan/retirementplan.svg";
@@ -21,6 +22,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "./transitions.css";
 import "swiper/swiper-bundle.min.css";
 import { nairaCurrencyVal, dollarCurrencyVal } from "../helpers/helper";
+import { ErrorBoundary } from "react-error-boundary";
+
+import FallBack from "./FallBack";
 
 const Main = (props) => {
   const [summaryInfo, setSummaryInfo] = useState({});
@@ -60,6 +64,10 @@ const Main = (props) => {
       const coreAccounts = await props
         .getAccounts("/api/v1/user/accountbyproduct", "0201")
         .then();
+      // const df = () => {
+      //   throw Error("The error is crazy mehn");
+      // };
+      console.log("reerse", data);
       setSummaryInfo(data);
       setTodoList(todo);
       setPurseAccounts(myPurseAccounts);
@@ -76,6 +84,10 @@ const Main = (props) => {
   console.log(purseAccounts, "purse");
   console.log(coreAccounts, "cores");
 
+  const errorHandler = (error, errorInfo) => {
+    console.log("logging", error, errorInfo);
+  };
+
   return (
     <>
       {props.loading && <Loader />}
@@ -83,69 +95,71 @@ const Main = (props) => {
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">
-            <a
-              href="/app"
-              className="col-lg-4 col-md-6 d-flex flex-column mb-4"
-            >
-              <div className="au-card au-card--bg-blue flex-grow-1">
-                <div className="bg-card-img">
-                  <img
-                    className="h-100 w-100"
-                    src={dashboard}
-                    alt="dashboard"
-                  />
+            <ErrorBoundary FallbackComponent={FallBack} onError={errorHandler}>
+              <a
+                href="/app"
+                className="col-lg-4 col-md-6 d-flex flex-column mb-4"
+              >
+                <div className="au-card au-card--bg-blue flex-grow-1">
+                  <div className="bg-card-img">
+                    <img
+                      className="h-100 w-100"
+                      src={dashboard}
+                      alt="dashboard"
+                    />
+                  </div>
+                  <h5 className="text-white text-center mb-2 money-card-header">
+                    Total Balance
+                  </h5>
+                  <div className="d-flex align-items-start justify-content-center">
+                    <h3 className="text-white text-center money-card-body">
+                      {nairaCurrencyVal(summaryInfo?.totAmt)}
+                    </h3>
+                  </div>
                 </div>
-                <h5 className="text-white text-center mb-2 money-card-header">
-                  Total Balance
-                </h5>
-                <div className="d-flex align-items-start justify-content-center">
-                  <h3 className="text-white text-center money-card-body">
-                    {nairaCurrencyVal(summaryInfo.totAmt)}
-                  </h3>
+              </a>
+              <a href="/" className="col-lg-4 col-md-6 d-flex flex-column mb-4">
+                <div className="au-card au-card--bg-savings flex-grow-1">
+                  <div className="bg-card-img">
+                    <img
+                      className="h-100 w-100"
+                      src={dashboard}
+                      alt="dashboard"
+                    />
+                  </div>
+                  <h5 className="text-white text-center mb-2 money-card-header">
+                    Total Dollars
+                  </h5>
+                  <div className="d-flex align-items-start justify-content-center">
+                    <h3 className="text-white text-center money-card-body">
+                      {dollarCurrencyVal(summaryInfo.totDollar)}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-            </a>
-            <a href="/" className="col-lg-4 col-md-6 d-flex flex-column mb-4">
-              <div className="au-card au-card--bg-savings flex-grow-1">
-                <div className="bg-card-img">
-                  <img
-                    className="h-100 w-100"
-                    src={dashboard}
-                    alt="dashboard"
-                  />
+              </a>
+              <a
+                href="/app"
+                className="col-lg-4 col-md-6 d-flex flex-column mb-4"
+              >
+                <div className="au-card au-card--bg-investment flex-grow-1">
+                  <div className="bg-card-img">
+                    <img
+                      className="h-100 w-100"
+                      src={dashboard}
+                      alt="dashboard"
+                    />
+                  </div>
+                  <h5 className="text-white text-center mb-2 money-card-header">
+                    Total Naira
+                  </h5>
+                  <div className="d-flex align-items-start justify-content-center">
+                    <h3 className="text-white text-center money-card-body">
+                      {nairaCurrencyVal(summaryInfo.totNaira)}
+                    </h3>
+                  </div>
                 </div>
-                <h5 className="text-white text-center mb-2 money-card-header">
-                  Total Dollars
-                </h5>
-                <div className="d-flex align-items-start justify-content-center">
-                  <h3 className="text-white text-center money-card-body">
-                    {dollarCurrencyVal(summaryInfo.totDollar)}
-                  </h3>
-                </div>
-              </div>
-            </a>
-            <a
-              href="/app"
-              className="col-lg-4 col-md-6 d-flex flex-column mb-4"
-            >
-              <div className="au-card au-card--bg-investment flex-grow-1">
-                <div className="bg-card-img">
-                  <img
-                    className="h-100 w-100"
-                    src={dashboard}
-                    alt="dashboard"
-                  />
-                </div>
-                <h5 className="text-white text-center mb-2 money-card-header">
-                  Total Naira
-                </h5>
-                <div className="d-flex align-items-start justify-content-center">
-                  <h3 className="text-white text-center money-card-body">
-                    {nairaCurrencyVal(summaryInfo.totNaira)}
-                  </h3>
-                </div>
-              </div>
-            </a>
+              </a>
+            </ErrorBoundary>
           </div>
           <div className="row mt-4">
             <div className="col-lg-8">

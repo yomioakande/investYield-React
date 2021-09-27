@@ -4,13 +4,29 @@ import { usersActions } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import refer from "../../assets/images/referImage.svg";
 import copy from "../../assets/images/copyIcon.svg";
-import link from "../../assets/images/share-linkIcon.svg";
+// import link from "../../assets/images/share-linkIcon.svg";
 import QRCode from "qrcode.react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import {
+  TwitterShareButton,
+  WhatsappShareButton,
+  WhatsappIcon,
+  EmailIcon,
+  EmailShareButton,
+  TwitterIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  // InstapaperShareButton,
+  // InstapaperIcon,
+  // ShareButtons,
+  // ShareCounts,
+  // generateShareIcon,
+} from "react-share";
+
 const Refer = (props) => {
   const Ref = useRef(null);
-
   const [referCode, setReferCode] = useState("");
 
   useEffect(() => {
@@ -30,6 +46,8 @@ const Refer = (props) => {
     success();
   };
 
+  const referral = `${process.env.REACT_APP_FRONTEND_URL}/signup1/${referCode}`;
+  console.log(referral);
   return (
     <>
       <ToastContainer autoClose={1000} hideProgressBar />
@@ -111,11 +129,54 @@ const Refer = (props) => {
                             href={`${process.env.REACT_APP_MAIN_URL}/signup1/${referCode}`}
                             className="share-referral-link d-flex justify-content-center align-items-center"
                           >
-                            <img
+                            {" "}
+                            <div style={{ display: "flex" }}>
+                              <TwitterShareButton
+                                url={referral}
+                                quota={
+                                  "Are you ready for the next generation financial investments, register on InvestYield using my Referral link"
+                                }
+                                className="Demo__some-network__share-button"
+                              >
+                                <TwitterIcon size={32} round />
+                              </TwitterShareButton>
+
+                              <EmailShareButton
+                                url={referral}
+                                quota={
+                                  "Are you ready for the next generation financial investments, register on InvestYield using my Referral link"
+                                }
+                                className="Demo__some-network__share-button"
+                              >
+                                <EmailIcon size={32} round />
+                              </EmailShareButton>
+                              <WhatsappShareButton
+                                url={referral}
+                                quota={
+                                  "Are you ready for the next generation financial investments, register on InvestYield using my Referral link"
+                                }
+                                className="Demo__some-network__share-button"
+                              >
+                                <WhatsappIcon size={32} round />
+                              </WhatsappShareButton>
+
+                              <FacebookShareButton
+                                url={referral}
+                                quota={
+                                  "Are you ready for the next generation financial investments, register on InvestYield using my Referral link"
+                                }
+                                className="Demo__some-network__share-button"
+                              >
+                                <FacebookIcon size={32} round />
+                              </FacebookShareButton>
+
+                             
+                            </div>
+                            {/* <img
                               src={link}
                               className="img-fluid"
                               alt="Share Link"
-                            />
+                            /> */}
                             <span className="px-2 text-blue">
                               Share referral link
                             </span>

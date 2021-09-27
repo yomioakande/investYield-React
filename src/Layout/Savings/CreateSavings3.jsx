@@ -29,7 +29,10 @@ const CreateSavings3 = (props) => {
   const numOfDays = main1 / (1000 * 3600 * 24);
 
   const savingTarget = firstData.target;
-  let targetTime = firstData.endDate;
+  const targetDate = firstData.endDate;
+  const startDate=firstData.startDate
+
+  console.log(startDate,"frgwg")
 
   const initialValues = {
     earnInterest: "",
@@ -117,7 +120,8 @@ const CreateSavings3 = (props) => {
       "/api/v1/util/estimate",
       savingTarget,
       freq,
-      targetTime,
+      targetDate,
+      startDate,
       "0201"
     );
     setTargetNum(data?.data?.estimate);

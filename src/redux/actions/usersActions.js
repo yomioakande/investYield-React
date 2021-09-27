@@ -1,6 +1,7 @@
 import { userConstants } from "../constants";
 import { userService } from "../../services";
 import { alertActions } from "./alertActions";
+// import { useErrorHandler } from "react-error-boundary";
 
 export const usersActions = {
   login,
@@ -326,12 +327,14 @@ function getDebitCards(apiUrl) {
 
 function getInfo(apiUrl) {
   return async (dispatch) => {
+    // const handleError=useErrorHandler();
     dispatch(request());
     const getAll = await userService.getData(apiUrl);
     const { data, success, messages } = getAll;
 
     if (apiUrl && success === true) {
       dispatch(successReg());
+      // handleError(messages)
       return data;
     } else {
       dispatch(failure(""));
@@ -340,10 +343,14 @@ function getInfo(apiUrl) {
   };
 }
 
-function getPaginateTransact(apiUrl,pageNumber,pageSize) {
+function getPaginateTransact(apiUrl, pageNumber, pageSize) {
   return async (dispatch) => {
     dispatch(request());
-    const getAll = await userService.getPaginateTransact(apiUrl,pageNumber,pageSize);
+    const getAll = await userService.getPaginateTransact(
+      apiUrl,
+      pageNumber,
+      pageSize
+    );
     const { data, success, messages } = getAll;
 
     if (apiUrl && success === true) {
@@ -450,7 +457,7 @@ function addCard() {
   return async (dispatch) => {
     dispatch(request());
     const getCard = await userService.getData("/api/v1/user/card_url").then();
-    console.log(getCard)
+    console.log(getCard);
     window.location.href = getCard?.data?.authUrl;
   };
 }
