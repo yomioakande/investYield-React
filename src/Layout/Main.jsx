@@ -88,6 +88,8 @@ const Main = (props) => {
     console.log("logging", error, errorInfo);
   };
 
+  console.log(hidden);
+
   return (
     <>
       {props.loading && <Loader />}
@@ -97,7 +99,7 @@ const Main = (props) => {
           <div className="row">
             <ErrorBoundary FallbackComponent={FallBack} onError={errorHandler}>
               <a
-                href="/app"
+                href="#0"
                 className="col-lg-4 col-md-6 d-flex flex-column mb-4"
               >
                 <div className="au-card au-card--bg-blue flex-grow-1">
@@ -118,7 +120,10 @@ const Main = (props) => {
                   </div>
                 </div>
               </a>
-              <a href="/" className="col-lg-4 col-md-6 d-flex flex-column mb-4">
+              <a
+                href="#0"
+                className="col-lg-4 col-md-6 d-flex flex-column mb-4"
+              >
                 <div className="au-card au-card--bg-savings flex-grow-1">
                   <div className="bg-card-img">
                     <img
@@ -138,7 +143,7 @@ const Main = (props) => {
                 </div>
               </a>
               <a
-                href="/app"
+                href="#0"
                 className="col-lg-4 col-md-6 d-flex flex-column mb-4"
               >
                 <div className="au-card au-card--bg-investment flex-grow-1">
@@ -221,7 +226,7 @@ const Main = (props) => {
                       </div>
                     </Link>
 
-                    {[
+                    {/* [
                       {
                         name: "Vibe Cash",
                         purseAmount: "5024.12",
@@ -237,45 +242,21 @@ const Main = (props) => {
                         purseAmount: "0.00",
                         nameClass: "au-card-bg-tgif-cash",
                       },
-                    ].map((single, index) => {
+                    ] */}
+                    {purseAccounts.map((single, index) => {
                       return (
                         <Purse
                           key={index}
                           index={index}
+                          currency={single.currency?.code}
                           namePurse={single.name}
-                          purseAmount={single.purseAmount}
+                          purseAmount={single.contribution}
                           nameClass={single.nameClass}
                           toggleHide={toggleHide}
                           hidden={hidden}
                         />
                       );
                     })}
-
-                    {/* <Purse
-                      namePurse={"Vibe Cash"}
-                      purseAmount={"5,024.12"}
-                      nameClass={"au-card-bg-vibe-cash"}
-                      hider={hider}
-                      hide={hide}
-                    /> */}
-
-                    {/* <Purse
-                      namePurse={"Food Cash"}
-                      purseAmount={"50.00"}
-                      nameClass={"au-card-bg-food-cash"}
-                      hider={hider}
-                      hide={hide}
-                    /> */}
-
-                    {/* <a href="/" className="card-box d-flex flex-column mb-4">
-                      <div className="au-card-purse au-card-bg-tgif-cash flex-grow-1">
-                        <div className="au-card-elements">
-                          <p className="mt-1">TGIF Cash</p>
-                          <p className="mt-1">₦ 0.00</p>
-                          <p className="mt-2 purse-link-btn">Hide Balance</p>
-                        </div>
-                      </div>
-                    </a> */}
                   </div>
                 </div>
               </div>

@@ -4,8 +4,10 @@ import percentageIcon from "../../assets/images/percentageIcon.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
+import { connect } from "react-redux";
+import { usersActions } from "../../redux/actions";
 
-const MyPurse3 = () => {
+const MyPurse3 = ({ createPurse }) => {
   const location = useLocation();
   const link = location.pathname.split("/");
   let name = link[link.length - 1];
@@ -46,11 +48,19 @@ const MyPurse3 = () => {
       drPct: values.drPct,
       isAutomated: true,
     };
+
     const firstObj = JSON.parse(sessionStorage.getItem("purseObj1"));
-    const purseMainObj = { ...firstObj, ...obj };
+    createPurse(
+      firstObj,
+      obj,
+      "/api/v1/user/my_purse",
+      "/app/savings/pursestep3"
+    );
+
+    // const purseMainObj = { ...firstObj, ...obj };
     // console.log(purseMainObj);
-    sessionStorage.setItem("mainPurseObj", JSON.stringify(purseMainObj));
-    window.location.href = "/app/savings/pursestep3";
+    // sessionStorage.setItem("mainPurseObj", JSON.stringify(purseMainObj));
+    // window.location.href = "/app/savings/pursestep3";
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
     setLoading(false);
@@ -190,7 +200,7 @@ const MyPurse3 = () => {
                                         type="radio"
                                       />
                                       <label for="radiov7">
-                                        <span>Let me chooses a date</span>
+                                        <span>Let me choose a date</span>
                                       </label>
                                     </div>
                                     {formik.values.drFreq === "001" ? (
@@ -267,7 +277,7 @@ const MyPurse3 = () => {
                                         onChange={formik.handleChange}
                                       />
                                       <label for="radio3c">
-                                        <span>100%(All at once)</span>
+                                        <span>100% (All at once)</span>
                                       </label>
                                     </div>
                                   </div>
@@ -289,25 +299,28 @@ const MyPurse3 = () => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="form-group mt-4 position-relative">
-                                <input
-                                  type="text"
-                                  className="text-field"
-                                  placeholder="Specify the percentage"
-                                  name="drPct"
-                                  onChange={formik.handleChange}
-                                />
-                                <div
-                                  className="position-absolute"
-                                  style={{ right: "5%", top: "20%" }}
-                                >
-                                  <img
-                                    src={percentageIcon}
-                                    className="img-fluid"
-                                    alt="percent"
+
+                              {formik.values.drPct === "0" ? (
+                                <div className="form-group mt-4 position-relative">
+                                  <input
+                                    type="text"
+                                    className="text-field"
+                                    placeholder="Specify the percentage"
+                                    name="drPct"
+                                    onChange={formik.handleChange}
                                   />
+                                  <div
+                                    className="position-absolute"
+                                    style={{ right: "5%", top: "20%" }}
+                                  >
+                                    <img
+                                      src={percentageIcon}
+                                      className="img-fluid"
+                                      alt="percent"
+                                    />
+                                  </div>
                                 </div>
-                              </div>
+                              ) : null}
                             </div>
                           </>
                         ) : null}
@@ -341,4 +354,19 @@ const MyPurse3 = () => {
   );
 };
 
-export default MyPurse3;
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  const { loading } = state.registration;
+  return { alert, username, loading };
+};
+
+const actionCreators = {
+  createPurse: usersActions.createStash,
+  // payPurse: usersActions.payPurse,
+  // addCard: usersActions.addCard,
+  // getAccounts: usersActions.getAccounts,
+};
+
+// export default
+export default connect(mapStateToProps, actionCreators)(MyPurse3);

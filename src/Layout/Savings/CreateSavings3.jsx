@@ -30,9 +30,9 @@ const CreateSavings3 = (props) => {
 
   const savingTarget = firstData.target;
   const targetDate = firstData.endDate;
-  const startDate=firstData.startDate
+  const startDate = firstData.startDate;
 
-  console.log(startDate,"frgwg")
+  console.log(startDate, "frgwg");
 
   const initialValues = {
     earnInterest: "",
@@ -98,13 +98,14 @@ const CreateSavings3 = (props) => {
     };
 
     const mainObj = { ...obj, ...firstData };
-
+    // console.log(mainObj);
     props.createCore(
       mainObj,
       "/api/v1/user/coreaccount",
       "/app/savings/create4"
     );
-    // onSubmitProps.resetForm();
+    onSubmitProps.resetForm();
+    onSubmitProps.setSubmitting(false);
   };
 
   const formik = useFormik({
@@ -114,6 +115,8 @@ const CreateSavings3 = (props) => {
     validationSchema,
     validateOnMount: true,
   });
+
+  console.log(formik.values);
 
   const dataInfo = async (freq) => {
     const data = await userService.getEstimate(

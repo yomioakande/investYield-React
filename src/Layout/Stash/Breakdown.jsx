@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { dateConv } from "../../helpers";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
-import PayModel from "./PayModel"
+import PayModel from "./PayModel";
 const Breakdown = (props) => {
   const [targetValue, setTargetValue] = useState("");
   const stash = JSON.parse(sessionStorage.getItem("stash"));
- 
+  console.log("stash", stash);
 
   let date = new Date();
   //START DATE
@@ -15,7 +15,7 @@ const Breakdown = (props) => {
   let df = date.setDate(date.getDate() + stash.frequency);
   const nxt = new Date(df);
   const nextDate = dateConv(nxt);
-
+  // console.log(props.message)
   useEffect(() => {
     (async function dataInfo() {
       const getTargetValue = await props.getTargetValue(
@@ -88,17 +88,13 @@ const Breakdown = (props) => {
                 </div>
               </div>
             </div>
-
-            <PayModel />
-            {/**/}
+            <PayModel transId={stash?.stashRef} />
           </div>
         </div>
       </div>
     </>
   );
 };
-
-// export default /;
 
 const mapStateToProps = (state) => {
   const { loggingIn, loading, alertType, message } = state.registration;

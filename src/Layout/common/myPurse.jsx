@@ -1,14 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { nairaCurrencyVal } from "../../helpers/helper";
+// import { nairaCurrencyVal } from "../../helpers/helper";
 const myPurse = ({
   namePurse,
   purseAmount,
+  currency,
   nameClass,
   toggleHide,
   hidden,
   index,
 }) => {
+  const currencyVal = (number) =>
+    new Intl.NumberFormat(currency === "NGN" ? "en-NG" : "en-US", {
+      style: "currency",
+      currency: currency === "NGN" ? "NGN" : "USD",
+    }).format(number);
   return (
     <>
       <div className="card-box d-flex flex-column mb-4">
@@ -17,7 +23,7 @@ const myPurse = ({
             <Link to="/app">
               <p className="mt-1">{namePurse}</p>
               <p className={`mt-1 ${!hidden[index] ? `select-hide` : null}`}>
-                {nairaCurrencyVal(purseAmount)}
+                {currencyVal(purseAmount)}
               </p>
             </Link>
             <p

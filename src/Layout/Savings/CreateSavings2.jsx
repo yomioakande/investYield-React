@@ -59,7 +59,7 @@ const CreateSavings2 = ({ username, register }) => {
     };
     sessionStorage.setItem("savingsInfo", JSON.stringify(obj));
     window.location.href = `/app/savings/create3/${useLink}`;
-    onSubmitProps.resetForm();
+    // onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };
 
@@ -135,7 +135,7 @@ const CreateSavings2 = ({ username, register }) => {
                                     onChange={formik.handleChange}
                                   />
                                   <span class="w-100 text-center">
-                                    $US Dollars
+                                    $ US Dollars
                                   </span>
                                 </label>
                               </div>
@@ -149,7 +149,7 @@ const CreateSavings2 = ({ username, register }) => {
                                     value={"1"}
                                     onChange={formik.handleChange}
                                   />
-                                  <span class="text-center">₦ Naira</span>
+                                  <span class="w-100 text-center">₦ Naira</span>
                                 </label>
                                 {formik.touched.ccyCode &&
                                   formik.errors.ccyCode && (

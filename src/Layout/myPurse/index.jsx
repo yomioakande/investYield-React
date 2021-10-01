@@ -89,11 +89,11 @@ const Index = () => {
                     </a>
                     <a
                       href="/app/savings/pursestep1/Entertaiment"
-                      className="col-xl-2 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                      className="col-xl-2 col-lg-4 col-md-6 d-flex flex-column mb-4"
                     >
                       <div className="au-card-smaller au-card-bg-family flex-grow-1 px-3">
                         <img src={entertainIcon} alt="Celebration" />
-                        <p className="text-stash3">Entertaiment</p>
+                        <p className="text-stash3">Entertainment</p>
                       </div>
                     </a>
                   </div>

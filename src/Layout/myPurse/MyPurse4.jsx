@@ -110,6 +110,7 @@ const MyPurse4 = () => {
             </div>
 
             <>
+            {/* transId={} */}
               <PayModel />
             </>
             {/* <div className="col-lg-6 col-md-6 d-flex flex-column">

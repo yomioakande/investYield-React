@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import NumberFormat from "react-number-format";
+// import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useLocation } from "react-router-dom";
@@ -7,9 +8,8 @@ const Group1 = () => {
   const location = useLocation();
   let groupType = location.pathname.split("/");
   groupType = groupType[groupType.length - 1];
-  // console.log(groupType)
-  //   "docId": "string",
-  //   "isPublic": true
+  // console.log(groupType);
+  const [num, setNum] = useState("");
 
   const initialValues = {
     name: "",
@@ -34,29 +34,33 @@ const Group1 = () => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
-    // setloading(true);
-    // eslint-disable-next-line
     const obj = {
       name: values.name,
-      ccy: values.ccyCode,
+      ccy: values.ccy,
       target: values.target,
-      tgtDate: values.startDate,
-      // endDate: values.endDate,
+      tgtDate: values.tgtDate,
+      isPublic: groupType === "public" ? true : false,
     };
 
-    // sessionStorage.setItem("groupInfo", JSON.stringify(obj));
-    // window.location.href = "/app/savings/create3";
-    // onSubmitProps.resetForm();
-    // onSubmitProps.setSubmitting(false);
+    console.log(obj);
+
+    sessionStorage.setItem("groupInfo", JSON.stringify(obj));
+    window.location.href = "/app/groupsavings2";
+    onSubmitProps.resetForm();
+    onSubmitProps.setSubmitting(false);
   };
 
   const formik = useFormik({
-    enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
   });
+
+  useEffect(() => {
+    formik.setFieldValue("target", num?.value);
+    // eslint-disable-next-line
+  }, [num?.value]);
 
   console.log(formik.values);
 
@@ -74,7 +78,7 @@ const Group1 = () => {
                   <div className="small-red-line"></div>
 
                   <div className="mt-5">
-                    <form action="">
+                    <form onSubmit={formik.handleSubmit}>
                       <div className="mt-4">
                         <div className="form-group">
                           <label className="text-blue">
@@ -150,12 +154,18 @@ const Group1 = () => {
                           <label className="text-blue">
                             Set a target amount for your home goal
                           </label>
-                          <input
-                            type="text"
+                          <NumberFormat
+                            // type="text"
+                            isNumericString={true}
+                            thousandSeparator={true}
                             className="text-field"
                             placeholder="Target amount"
                             name={"target"}
-                            {...formik.getFieldProps("target")}
+                            onValueChange={(values) => {
+                              setNum({ value: values.value });
+                            }}
+                            onChange={formik.handleChange}
+                            // {...formik.getFieldProps("target")}
                           />
                           {formik.touched.target && formik.errors.target && (
                             <p className="text-danger font-sm error1 font-weight-bold">
@@ -183,13 +193,13 @@ const Group1 = () => {
                         <div className="row mt-4 align-items-center justify-content-end">
                           <div className="col-lg-4">
                             <div className="">
-                              <Link
+                              {/* <Link
                                 to="/app/groupsavings2"
                                 className="btn login-submit"
                               >
                                 NEXT
-                              </Link>
-                              {/* <button className="btn login-submit">NEXT</button> */}
+                              </Link> */}
+                              <button className="btn login-submit">NEXT</button>
                             </div>
                           </div>
                         </div>

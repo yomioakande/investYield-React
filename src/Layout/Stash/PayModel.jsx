@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
-
-const PayModel = ({ getDetails, addCard }) => {
+import PayBank from "./PayBank";
+import PayCard from "./PayCard";
+const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
   const [active, setActive] = useState(1);
   const [details, setDetails] = useState({});
   useEffect(() => {
@@ -13,6 +14,15 @@ const PayModel = ({ getDetails, addCard }) => {
     })();
     // eslint-disable-next-line
   }, []);
+
+  const payPurses = async () => {
+    const obj = {
+      transId,
+    };
+
+    // const data =
+     await payPurse(obj, "/api/v1/transfer/fundbypurse");
+  };
 
   return (
     <>
@@ -39,7 +49,12 @@ const PayModel = ({ getDetails, addCard }) => {
                       </label>
                     </div>
                     <div className="pay-method-radio mt-4">
-                      <input id="radio2" name="radio" type="radio" />
+                      <input
+                        id="radio2"
+                        name="radio"
+                        type="radio"
+                        onClick={() => payPurses()}
+                      />
                       <label for="radio2">
                         <span>Pay with myPurse - Vibe Cash</span>
                       </label>
@@ -94,101 +109,11 @@ const PayModel = ({ getDetails, addCard }) => {
         </>
       ) : active === 2 ? (
         <>
-          <div className="col-lg-6 flex-column flex-grow-1">
-            <div className="au-card h-100">
-              <div className="au-card-inner">
-                <h4 className="text-blue">Pay with bank transfer</h4>
-                <div className="small-red-line"></div>
-
-                <div className="mt-50">
-                  <div className="payment-selection">
-                    <div className="bank-details">
-                      <p>Account Name:</p>
-                      <h4>{details.accountName}</h4>
-                    </div>
-                    <div className="bank-details">
-                      <p>Account Number:</p>
-                      <h3>{details.accountNo}</h3>
-                    </div>
-                    <div className="bank-details">
-                      <p>Bank:</p>
-                      <h4>{details.bank}</h4>
-                    </div>
-                    <div className="row mt-50 align-items-center justify-content-end">
-                      <div className="col-lg-8">
-                        <div className="row">
-                          <div className="col-lg-6">
-                            <button
-                              className="btn btn-cancel text-danger"
-                              onClick={() => setActive(1)}
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                          <div className="col-lg-6">
-                            <button className="btn login-submit">NEXT</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <PayBank details={details} setActive={setActive} />
         </>
       ) : active === 3 ? (
         <>
-          <div className="col-lg-6 flex-column flex-grow-1">
-            <div className="au-card h-100">
-              <div className="au-card-inner">
-                <h4 className="text-blue">Choose a Card to Pay with</h4>
-                <div className="small-red-line"></div>
-
-                <div className="mt-50">
-                  <div className="payment-selection">
-                    <input type="radio" name="select" id="option-1" />
-                    <input type="radio" name="select" id="option-2" />
-                    <input type="radio" name="select" id="option-3" />
-                    <label for="option-1" className="option option-1">
-                      <div className="dot"></div>
-                      <span className="px-2">536785******5678</span>
-                    </label>
-                    <label for="option-2" className="option option-2">
-                      <div className="dot"></div>
-                      <span className="px-2">536785******5678</span>
-                    </label>
-                    <label for="option-3" className="option option-3">
-                      <div className="dot"></div>
-                      <span className="px-2">536785******5678</span>
-                    </label>
-                    <div className="row mt-50 align-items-center justify-content-end">
-                      <div className="col-lg-8">
-                        <div className="row">
-                          <div className="col-lg-6">
-                            <button
-                              onClick={() => setActive(1)}
-                              className="btn btn-cancel text-danger"
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                          <div className="col-lg-6">
-                            <Link
-                              to="/app/savings/otp"
-                              className="btn login-submit"
-                            >
-                              NEXT
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <PayCard setActive={setActive} transId={transId} />
         </>
       ) : null}
     </>
@@ -204,7 +129,8 @@ const mapStateToProps = (state) => {
 
 const actionCreators = {
   getDetails: usersActions.getInfo,
-  addCard: usersActions.addCard,
+  payPurse: usersActions.payPurse,
+  // addCard: usersActions.addCard,
   // getAccounts: usersActions.getAccounts,
 };
 
