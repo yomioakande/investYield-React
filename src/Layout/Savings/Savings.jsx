@@ -18,6 +18,7 @@ const Savings = ({ getData, getAccounts }) => {
   const [loading, setloading] = useState(false);
   const [coreAccounts, setCoreAccounts] = useState([]);
   const [stashAccounts, setStashAccounts] = useState([]);
+  const [myPurse, setMyPurse] = useState([]);
   const [hidden, setHidden] = useState({});
   const toggleHide = (index) => {
     setHidden({ ...hidden, [index]: !hidden[index] });
@@ -35,9 +36,14 @@ const Savings = ({ getData, getAccounts }) => {
         "/api/v1/user/accountbyproduct",
         "0201"
       ).then();
+      const myPurseAccounts = await getAccounts(
+        "/api/v1/user/accountbyproduct",
+        "0106"
+      ).then();
       setSummaryInfo(data);
       setStashAccounts(stashAccounts);
       setCoreAccounts(coreAccounts);
+      setMyPurse(myPurseAccounts);
       setloading(false);
     })();
     // eslint-disable-next-line
@@ -45,6 +51,7 @@ const Savings = ({ getData, getAccounts }) => {
 
   console.log(stashAccounts, "stash");
   console.log(coreAccounts, "cores");
+  console.log(myPurse, "myPurse")
   return (
     <>
       {loading && <Loader />}

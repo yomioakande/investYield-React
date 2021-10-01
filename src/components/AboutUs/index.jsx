@@ -44,17 +44,17 @@ const Index = () => {
                     <p className="mt-5 whoWeAre-p">
                       We are a licensed financial cooperative with registration
                       number LSCS 17462 and in partnership with licensed wealth
-                      managers to provide you inclusive wealth management
+                      managers to provide you with inclusive wealth management
                       solutions that will enable you build, manage and preserve
                       your wealth across multiple generations. <br />
-                      <br /> We offer the highest possible returns on your
+                      {/* <br /> We offer the highest possible returns on your
                       savings, security, speed, flexibility, investment insights
                       and disciplined-instilled money management tools to help
-                      you achieve your big money goals. <br />
+                      you achieve your big money goals. <br /> */}
                       <br />
                       Our vision is to build Africa's biggest community of smart
                       money savers through exceptional service and robust
-                      technology
+                      technology.
                     </p>
                   </div>
                 </div>

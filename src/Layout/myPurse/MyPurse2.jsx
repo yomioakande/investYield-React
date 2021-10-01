@@ -253,7 +253,7 @@ const MyPurse2 = () => {
                         )}
                         <div className="form-group mt-4">
                           <label for="Amount" className="text-blue weight-500">
-                            How much will you like to save daily?
+                            How much will you like to save?
                           </label>
                           <NumberFormat
                             isNumericString={true}

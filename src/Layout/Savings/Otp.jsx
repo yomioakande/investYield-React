@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import {Link} from "react-router-dom"
 import * as Yup from "yup";
 import { addAsterik } from "../../helpers";
 import { useFormik } from "formik";
@@ -23,13 +24,15 @@ const Otp = () => {
     validateOnMount: true,
   });
 
+  console.log(formik.values)
+
   return (
     <>
       <main>
         <section className="reg-section">
           <div className="container-fluid">
             <div className="row justify-content-center">
-              <div className="col-lg-5 col-xl-4">
+              <div className="col-lg-5 col-xl-4" style={{maxWidth:"50%", flex:"0%"}}>
                 <div className="bg-white login-div p-5 shadow mt-5">
                   {/* <div className="d-flex justify-content-between">
                   <Link
@@ -37,7 +40,7 @@ const Otp = () => {
                     className="d-flex no-decor align-items-center"
                   >
                     <img
-                      src={leftArrow}
+                      // src={leftArrow}
                       className="img-fluid"
                       alt="left-arrow"
                     />
@@ -49,8 +52,8 @@ const Otp = () => {
                   <div className="mt-5">
                     <h6 className="reg-p mb-3">
                       Please enter the One-Time Password (OTP) that has been
-                      sent to the phone number
-                      <span className="reg-p-number"> {number} </span>
+                      sent to your phone number
+                      {/* <span className="reg-p-number"> {number} </span> */}
                     </h6>
                     <form onSubmit={formik.handleSubmit}>
                       <div className="form-group mt-4">

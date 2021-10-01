@@ -28,7 +28,7 @@ const Index = () => {
                   <div className="row">
                     <div className="col-lg-6 mt-4">
                       <Link
-                        to={'/app/groupsavings1/private'}
+                        to={"/app/groupsavings1/private"}
                         className="create-private-group d-flex align-items-center"
                       >
                         <div>
@@ -43,7 +43,7 @@ const Index = () => {
                     </div>
                     <div className="col-lg-6 mt-4">
                       <Link
-                         to={'/app/groupsavings1/public'}
+                        to={"/app/groupsavings1/public"}
                         className="create-public-group d-flex align-items-center"
                       >
                         <div>

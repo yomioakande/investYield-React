@@ -51,7 +51,7 @@ const index = () => {
                   </div>
                   <div className="col-lg-3 px-0">
                     <p className="text-center welcome-p">
-                      The money app that makes it easy to fund your future –
+                      The money app that makes it easy to fund your future;
                       while taking care of your now.
                     </p>
                   </div>
@@ -173,21 +173,21 @@ const index = () => {
               <div className="col-lg-5 col-xl-5">
                 <div className="mt-50 p-4 get-started-info-div">
                   <div className="d-flex align-items-baseline">
-                    <h6 className="mb-0 get-started-numbers text-blue">01</h6>
+                    <h6 className="mb-0 get-started-numbers text-blue font-rem1">01</h6>
                     <div className="px-3">
                       <h5 className="get-started-header-sm">
                         Create an account
                       </h5>
                       <div className="col-lg-8 px-0">
                         <p className="get-started-p mb-0">
-                          Sign up for an account with your name, email and phone
+                          Sign up with your name, email and phone
                           number.
                         </p>
                       </div>
                     </div>
                   </div>
                   <div className="d-flex align-items-baseline mt-80">
-                    <h6 className="mb-0 text-green">02</h6>
+                    <h6 className="mb-0 text-green font-rem1">02</h6>
                     <div className="px-3">
                       <h5 className="get-started-header-sm">
                         Link a payment method
@@ -201,7 +201,7 @@ const index = () => {
                     </div>
                   </div>
                   <div className="d-flex align-items-baseline mt-80">
-                    <h6 className="mb-0 text-orange">03</h6>
+                    <h6 className="mb-0 text-orange font-rem1">03</h6>
                     <div className="px-3">
                       <h5 className="get-started-header-sm">
                         Experience awesome yields
@@ -259,7 +259,7 @@ const index = () => {
                                 Automated, Goal-Based Financial Tools that
                                 Foster Strong Saving, Spending and Investing
                                 Habits. Earn yields up to 12%pa on your Savings
-                                Plans
+                                Plans.
                               </p>
                             </div>
                           </div>
@@ -295,7 +295,7 @@ const index = () => {
                                 We use only the highest levels of Banking
                                 Security, secured by 256 bits SSL security
                                 encryption, to ensure that your information is
-                                completely protected and at all times. Also, we
+                                completely protected at all times. Also, we
                                 use state-of-the-art data encryption when
                                 handling your financial information and
                                 two-factor authentication (2FA) protection.
@@ -335,7 +335,7 @@ const index = () => {
             <div className="row">
               <div className="col-lg-12">
                 <h5 className="get-started-header text-center pt-5">
-                  Testimonial
+                  Testimonials
                 </h5>
                 <div className="d-flex justify-content-center">
                   <div className="small-red-line"></div>

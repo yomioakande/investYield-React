@@ -1,12 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import NumberFormat from "react-number-format";
+// import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-const Group3 = () => {
+import { connect } from "react-redux";
+import { usersActions } from "../../redux/actions";
+import { userService } from "../../services/usersService";
+const Group3 = (props) => {
+  // eslint-disable-next-line
+  const [num, setNum] = useState("");
+  const [targetNum, setTargetNum] = useState("");
   const initialValues = {
     start: "",
     freq: "",
-    cntr_amt: "",
+    // cntr_amt: "",
     earn: "",
   };
 
@@ -19,35 +26,79 @@ const Group3 = () => {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Enter a Plan name"),
-    ccy: Yup.string().required("Select a Currrency Type"),
-    target: Yup.string().required("A target amount is required"),
-    tgtDate: Yup.string().required("Enter a Date"),
-    // endDate: Yup.string().required("Enter a Date"),
+    start: Yup.string().required("Enter a Start Date"),
+    freq: Yup.string().required("Select a Frequency"),
+    // cntr_amt: Yup.string().required("A target amount is required"),
+    earn: Yup.boolean().required("Enter an Amount"),
   });
 
   const onSubmit = (values, onSubmitProps) => {
     // eslint-disable-next-line
     const obj = {
-      start: values.name,
-      freq: values.ccyCode,
-      cntr_amt: values.target,
-      earn: values.startDate,
+      start: values.start,
+      freq: values.freq,
+      // cntr_amt: values.cntr_amt,
+      cntr_amt: targetNum,
+      earn: values.earn,
     };
-    // sessionStorage.setItem("groupInfo", JSON.stringify(obj));
-    // window.location.href = "/app/savings/create3";
-    // onSubmitProps.resetForm();
-    // onSubmitProps.setSubmitting(false);
+    // console.log("cvb", obj);
+    const groupInfo1 = JSON.parse(sessionStorage.getItem("groupInfo"));
+    const groupInfo2 = JSON.parse(sessionStorage.getItem("groupInfo2"));
+    let mainGroupInfo = { ...groupInfo1, ...groupInfo2,...obj };
+    // console.log(mainGroupInfo);
+
+    props.createGroup(
+      mainGroupInfo,
+      // obj,
+      "/api/v1/user/group_savings",
+      "/app/groupsavings4"
+    );
+    // sessionStorage.setItem("mainGroupInfo", JSON.stringify(mainGroupInfo));
+    // window.location.href = "/app/groupsavings4";
+    onSubmitProps.resetForm();
+    onSubmitProps.setSubmitting(false);
   };
 
   const formik = useFormik({
-    enableReinitialize: true,
+    // enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
   });
 
+  useEffect(() => {
+    formik.setFieldValue("cntr_amt", num?.value);
+    // eslint-disable-next-line
+  }, [num?.value]);
+
+  const groupData = JSON.parse(sessionStorage.getItem("groupInfo"));
+  // const ccyCode = JSON.parse(sessionStorage.getItem("savingsInfo")).ccyCode;
+  const currencyVal = (number) =>
+    new Intl.NumberFormat(groupData.ccy === "1" ? "en-NG" : "en-US", {
+      style: "currency",
+      currency: groupData.ccy === "1" ? "NGN" : "USD",
+    }).format(number);
+
+  // console.log( groupData.tgtDate,
+  //   formik.values.start,)
+
+  const dataInfo = async (freq) => {
+    const data = await userService.getEstimate(
+      "/api/v1/util/estimate",
+      groupData.target,
+      freq,
+      groupData.tgtDate,
+      formik.values.start,
+      "0201"
+    );
+    setTargetNum(data?.data?.estimate);
+  };
+
+  const onChangers = (e) => {
+    const { value } = e.target;
+    dataInfo(value);
+  };
   console.log(formik.values);
 
   return (
@@ -88,6 +139,7 @@ const Group3 = () => {
                                   type="radio"
                                   name="freq"
                                   value={1}
+                                  onClick={onChangers}
                                   onChange={formik.handleChange}
                                   // {...formik.getFieldProps("freq")}
                                 />
@@ -105,7 +157,9 @@ const Group3 = () => {
                                   type="radio"
                                   name="freq"
                                   value={7}
+                                  onClick={onChangers}
                                   onChange={formik.handleChange}
+                                  // onChange={formik.handleChange}
                                   // {...formik.getFieldProps("freq")}
                                 />
                                 <label for="radio2">
@@ -124,6 +178,7 @@ const Group3 = () => {
                                   type="radio"
                                   name="freq"
                                   value={30}
+                                  onClick={onChangers}
                                   onChange={formik.handleChange}
                                   // {...formik.getFieldProps("freq")}
                                 />
@@ -141,6 +196,7 @@ const Group3 = () => {
                                   type="radio"
                                   name="freq"
                                   value={0}
+                                  onClick={onChangers}
                                   onChange={formik.handleChange}
                                   // {...formik.getFieldProps("freq")}
                                 />
@@ -163,7 +219,7 @@ const Group3 = () => {
                                 <input
                                   id="radio-earn-yes"
                                   name="earn"
-                                  value={30}
+                                  value={true}
                                   onChange={formik.handleChange}
                                   // {...formik.getFieldProps("earn")}
                                   type="radio"
@@ -181,7 +237,7 @@ const Group3 = () => {
                                   id="radio-earn-no"
                                   type="radio"
                                   name="earn"
-                                  value={30}
+                                  value={false}
                                   onChange={formik.handleChange}
                                   // {...formik.getFieldProps("earn")}
                                 />
@@ -199,13 +255,20 @@ const Group3 = () => {
                           target amount at the target date is:
                         </label>
                         <div className="form-group position-relative">
-                          <input
-                            type="text"
+                          <NumberFormat
+                            // type="text"
+                            isNumericString={true}
+                            thousandSeparator={true}
                             className="text-field-profile"
-                            name="freq"
-                            value="cntr_amt"
-                            {...formik.getFieldProps("cntr_amt")}
-                            readonly
+                            name="cntr_amt"
+                            // value="cntr_amt"
+                            value={currencyVal(targetNum)}
+                            // onValueChange={(values) => {
+                            //   setNum({ value: values.value });
+                            // }}
+                            // onChange={formik.handleChange}
+                            // {...formik.getFieldProps("cntr_amt")}
+                            // readonly
                           />
                           <label
                             for="firstName"
@@ -225,13 +288,18 @@ const Group3 = () => {
                               </button>
                             </div>
                             <div className="col-lg-6">
-                              <Link
+                              {/* <Link
                                 to="/app/groupsavings4"
                                 className="btn login-submit"
                               >
                                 NEXT
-                              </Link>
-                              {/* <button className="btn login-submit">NEXT</button> */}
+                              </Link> */}
+                              <button
+                                type="submit"
+                                className="btn login-submit"
+                              >
+                                NEXT
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -248,4 +316,19 @@ const Group3 = () => {
   );
 };
 
-export default Group3;
+const mapStateToProps = (state) => {
+  const { loggingIn } = state.authentication;
+  const { loading, alertType, message } = state.registration;
+  const { alert } = state;
+  return { loggingIn, alert, loading, alertType, message };
+};
+
+const actionCreators = {
+  // bvnReg: usersActions.bvnReg,
+  // getFrequency: usersActions.getFrequency,
+  createGroup: usersActions.createStash,
+};
+
+export default connect(mapStateToProps, actionCreators)(Group3);
+
+// export default ;

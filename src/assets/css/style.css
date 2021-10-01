@@ -480,6 +480,11 @@ a.nav-link.active {
 .font-rem1 {
   font-size: 0.9rem;
 }
+
+.font-rem2 {
+  font-size: 1.59rem;
+}
+
 .base-color {
   color: rgba(38, 50, 56, 0.8);
 }
@@ -491,7 +496,7 @@ a.nav-link.active {
 .text-field {
   height: 50px;
   width: 100%;
-  border: 1px solid #dddddd;
+  border: 1.5px solid #cecece;
   border-radius: 5px;
   padding-left: 15px;
   padding-right: 15px;
@@ -838,6 +843,21 @@ input[type="radio"] {
   border-color: #0069d9;
   background: linear-gradient(267.72deg, #08b29b -6.36%, #0553c8 118.2%);
 }
+
+.checker1 input[type="radio"]:checked + label {
+  border-color: #0069d9 !important;
+  background: linear-gradient(
+    267.72deg,
+    #08b29b -6.36%,
+    #0553c8 118.2%
+  ) !important;
+}
+
+.checker1 input[type="radio"]:checked ~ .option .dot::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
 #option-1:checked:checked ~ .option-1 .dot,
 #option-2:checked:checked ~ .option-2 .dot,
 #option-3:checked:checked ~ .option-3 .dot {

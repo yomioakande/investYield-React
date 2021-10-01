@@ -16,6 +16,8 @@ export const usersActions = {
   bvnReg,
   confirmBvnReg,
   addCard,
+  payPurse,
+  payCard,
   getPaginateTransact,
   postFeedBack,
   deleteData,
@@ -243,18 +245,43 @@ function confirmBvnReg(obj, apiUrl, func) {
   };
 }
 
-function createStash(obj1, obj2, apiUrl, nextRoute) {
+function createStash(obj1, apiUrl, nextRoute) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.postData(obj1, apiUrl);
 
-    const { success, messages } = register;
+    const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/stash" && success === true) {
-      // dispatch(successReg(data?.reference));
-      sessionStorage.setItem("stash", JSON.stringify({ ...obj1, ...obj2 }));
+      dispatch(successReg(data?.reference));
+      console.log(register);
+      sessionStorage.setItem(
+        "stash",
+        JSON.stringify({ ...obj1, stashRef: data?.reference })
+      );
+      window.locaon.href = nextRoute;
+    }
+
+    if (apiUrl === "/api/v1/user/my_purse" && success === true) {
+      dispatch(successReg(data?.reference));
+      console.log(register,"purse");
+      sessionStorage.setItem(
+        "mainPurseObj",
+        JSON.stringify({ ...obj1,  myPurseRef: data?.reference })
+      );
       window.location.href = nextRoute;
-      // func();
-    } else {
+    } 
+    
+    if (apiUrl === "/api/v1/user/group_savings" && success === true) {
+      dispatch(successReg(data?.reference));
+      console.log(register,"groupsavingsRef");
+      sessionStorage.setItem(
+        "mainGroupObj",
+        JSON.stringify({ ...obj1, groupRef: data?.reference })
+      );
+      window.location.href = nextRoute;
+    }
+    
+    else {
       dispatch(failure(messages));
       return;
     }
@@ -271,6 +298,40 @@ function createCore(obj, apiUrl, nextRoute) {
       dispatch(successReg(data?.reference));
       sessionStorage.setItem("core", JSON.stringify(obj));
       window.location.href = nextRoute;
+    } else {
+      dispatch(failure(messages));
+      return;
+    }
+  };
+}
+
+function payPurse(obj, apiUrl) {
+  return async (dispatch) => {
+    dispatch(request());
+    const register = await userService.postData(obj, apiUrl);
+    const { data, success, messages } = register;
+    if (success === true) {
+      dispatch(successReg(data?.reference));
+      // sessionStorage.setItem("core", JSON.stringify(obj));
+      // window.location.href = nextRoute;
+    } else {
+      dispatch(failure(messages));
+      return;
+    }
+  };
+}
+
+function payCard(obj, apiUrl, nextRoute) {
+  return async (dispatch) => {
+    dispatch(request());
+    const register = await userService.postData(obj, apiUrl);
+    const { data, success, messages } = register;
+
+    console.log(register);
+    if (success === true) {
+      // dispatch(successReg(data?.reference));
+      sessionStorage.setItem("stashCID", JSON.stringify(obj));
+      window.location.href = `${nextRoute}/${data.id}`;
     } else {
       dispatch(failure(messages));
       return;

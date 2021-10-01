@@ -8,14 +8,14 @@ import DashboardLayout from "../Layout/index";
 import Main from "../Layout/Main";
 import StashIndexPage from "../Layout/Stash/index";
 import StashBreakdown from "../Layout/Stash/Breakdown";
-import StashOtp from "../Layout/Stash/Otp";
+// import StashOtp from "../Layout/Stash/Otp";
 
 import Savings from "../Layout/Savings/Savings";
 import CreateSavings from "../Layout/Savings/CreateSavings";
 import CreateSavings2 from "../Layout/Savings/CreateSavings2";
 import CreateSavings3 from "../Layout/Savings/CreateSavings3";
 import CreateSavings4 from "../Layout/Savings/CreateSavings4";
-import CreateSavingsOTP from "../Layout/Savings/Otp";
+import CardOTP from "../Layout/Savings/Otp";
 
 import GroupMainPage from "../Layout/Group/index";
 import Group1 from "../Layout/Group/Group1";
@@ -57,9 +57,8 @@ const DashboardRoutes = () => {
       <Switch>
         <PrivateRoute exact path="/app/dashboard" component={Main} />
         <PrivateRoute exact path="/app/help" component={Help} />
-
         <PrivateRoute path="/app/stash/breakdown" component={StashBreakdown} />
-        <PrivateRoute path="/app/stash/confirmotp" component={StashOtp} />
+        <PrivateRoute path="/app/stash/otp/:id" component={CardOTP} />
         <PrivateRoute path="/app/stash" component={StashIndexPage} />
         <PrivateRoute path="/app/savings/create" component={CreateSavings} />
         <PrivateRoute
@@ -68,7 +67,7 @@ const DashboardRoutes = () => {
         />
         <PrivateRoute path="/app/savings/create3/:id" component={CreateSavings3} />
         <PrivateRoute path="/app/savings/create4" component={CreateSavings4} />
-        <PrivateRoute path="/app/savings/otp" component={CreateSavingsOTP} />
+        <PrivateRoute path="/app/savings/otp/id" component={CardOTP} />
 
         <PrivateRoute path="/app/savings/mypurse" component={myPurse} />
         <PrivateRoute path="/app/savings/pursestep1" component={myPurse2} />

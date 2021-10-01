@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
+import PayModel from "../Stash/PayModel";
+import { dateConv } from "../../helpers";
 const Group4 = () => {
+  const mainGroupInfo = JSON.parse(sessionStorage.getItem("mainGroupInfo"));
+  // eslint-disable-next-line 
+  const [main, setMain] = useState(mainGroupInfo);
+  const currencyVal = (number) =>
+    new Intl.NumberFormat(main.ccy === "1" ? "en-NG" : "en-US", {
+      style: "currency",
+      currency: main.ccy === "1" ? "NGN" : "USD",
+    }).format(number);
+
+  const convertfreq = (freq) => {
+    if (freq === "1") {
+      return "daily";
+    } else if (freq === "7") {
+      return "weekly";
+    } else if (freq === "30") {
+      return "monthly";
+    } else if (freq === "0") {
+      return "once";
+    } else return null;
+  };
   return (
     <>
       <div className="section__content section__content--p30 pb-4">
@@ -16,12 +38,14 @@ const Group4 = () => {
                   <div className="savings-breakdown p-4 px-lg-5">
                     <div className="savings-breakdown-row text-black">
                       <p>Group Name</p>
-                      <p className="font-weight-bold">Abuja Hikers July 2021</p>
+                      <p className="font-weight-bold">{main?.name}</p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
                       <p>Group members save:</p>
-                      <p className="font-weight-bold">₦ 5,000.00 / daily</p>
+                      <p className="font-weight-bold">
+                        {currencyVal(main.cntr_amt)}/{convertfreq(main.freq)}
+                      </p>
                     </div>
                     <div className="savings-breakdown-row text-black">
                       <p>Interest rate:</p>
@@ -30,23 +54,31 @@ const Group4 = () => {
 
                     <div className="savings-breakdown-row text-black">
                       <p>Start Date</p>
-                      <p className="font-weight-bold">12 - February - 2021</p>
+                      <p className="font-weight-bold">
+                        {dateConv(main?.start)}
+                      </p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
                       <p>End Date:</p>
-                      <p className="font-weight-bold">12 - December - 2021</p>
+                      <p className="font-weight-bold">
+                        {dateConv(main?.tgtDate)}
+                      </p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
                       <p>Target Amount:</p>
-                      <p className="font-weight-bold">₦ 1,515,000.00</p>
+                      <p className="font-weight-bold">
+                        {currencyVal(main?.target)}
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6 d-flex flex-column">
+
+            <PayModel />
+            {/* <div className="col-lg-6 col-md-6 d-flex flex-column">
               <div className="au-card position-relative px-0 flex-grow-1">
                 <div className="au-card-inner">
                   <div className="px-4 px-lg-5">
@@ -105,7 +137,7 @@ const Group4 = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

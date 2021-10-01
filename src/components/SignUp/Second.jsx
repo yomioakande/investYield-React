@@ -72,7 +72,7 @@ const Second = (props) => {
       setShowError(false);
     }, 2500);
   };
-
+// console.log(number)
   return (
     <>
       {props.loading && <Loader />}

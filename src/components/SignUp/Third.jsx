@@ -139,7 +139,7 @@ const Third = (props) => {
                           type="submit"
                           disabled={!formik.isValid || formik.isSubmitting}
                           className="btn login-submit"
-                          value="NEXT"
+                          value="SIGN UP"
                         />
                       </div>
                     </form>

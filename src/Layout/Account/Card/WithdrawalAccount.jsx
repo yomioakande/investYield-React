@@ -22,7 +22,7 @@ const WithdrawalAccount = (props) => {
     const datas = await props.getBanks("/api/v1/util/bank").then();
     const account = await props.getAccount("/api/v1/user/bankaccount").then();
     setBankDetails(account);
-    console.log("accouunntt",account)
+    console.log("accouunntt", account);
     setBankOptions(datas);
   };
   useEffect(() => {
@@ -61,6 +61,15 @@ const WithdrawalAccount = (props) => {
       paddingTop: 14,
       paddingBottom: 14,
       hover: "#DDE9FB",
+    }),
+    placeholder: (provided, state) => ({
+      // ...provided,
+      // width: state.selectProps.width,
+      // borderBottom: "1px solid #DDE9FB",
+      color: state.selectProps.menuColor,
+      paddingTop: 14,
+      // paddingBottom: 14,
+      // hover: "#DDE9FB",
     }),
 
     menuList: (provided, state) => ({
@@ -210,7 +219,7 @@ const WithdrawalAccount = (props) => {
                       styles={customStyles}
                       isSearchable={false}
                       className="select-field"
-                      placeholder={""}
+                      placeholder={"Select your Bank"}
                       value={defaultValue(options, formik.values.bankCode)}
                       onChange={(value) =>
                         formik.setFieldValue("bankCode", value.value)

@@ -18,11 +18,6 @@ import {
   TwitterIcon,
   FacebookShareButton,
   FacebookIcon,
-  // InstapaperShareButton,
-  // InstapaperIcon,
-  // ShareButtons,
-  // ShareCounts,
-  // generateShareIcon,
 } from "react-share";
 
 const Refer = (props) => {
@@ -47,7 +42,7 @@ const Refer = (props) => {
   };
 
   const referral = `${process.env.REACT_APP_FRONTEND_URL}/signup1/${referCode}`;
-  console.log(referral);
+  // console.log(referral);
   return (
     <>
       <ToastContainer autoClose={1000} hideProgressBar />
@@ -169,8 +164,6 @@ const Refer = (props) => {
                               >
                                 <FacebookIcon size={32} round />
                               </FacebookShareButton>
-
-                             
                             </div>
                             {/* <img
                               src={link}

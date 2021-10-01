@@ -1,5 +1,5 @@
 import React from "react";
-import { Link} from "react-router-dom";
+// import { Link} from "react-router-dom";
 import "../../assets/css/style.css";
 import logoBig from "../../assets/images/logoBig.svg";
 import googlePlayIcon from "../../assets/images/googlePlayIcon.svg";
@@ -56,9 +56,9 @@ const Index = () => {
                     <a href="/aboutus" className="footer-bottom-links">
                       About us
                     </a>
-                    <Link to="/" className="mt-3 footer-bottom-links">
+                    <a href="/app/blog" className="mt-3 footer-bottom-links">
                       Blog
-                    </Link>
+                    </a>
                     <a href="/" className="mt-3 footer-bottom-links">
                       Careers
                     </a>
@@ -73,16 +73,16 @@ const Index = () => {
                 <div className="col-lg-4 mt-4">
                   <h5 className="footer-bottom-header">Products</h5>
                   <div className="mt-3 d-flex flex-column">
-                    <a href="/" className="footer-bottom-links">
+                    <a href="/app/savings" className="footer-bottom-links">
                       Savings
                     </a>
-                    <a href="/" className="mt-3 footer-bottom-links">
+                    <a href="/app" className="mt-3 footer-bottom-links">
                       Investment
                     </a>
-                    <a href="/" className="mt-3 footer-bottom-links">
+                    <a href="/app/groupsavings" className="mt-3 footer-bottom-links">
                       Group Savings
                     </a>
-                    <a href="/" className="mt-3 footer-bottom-links">
+                    <a href="/app/stash" className="mt-3 footer-bottom-links">
                       Stash
                     </a>
                     <a href="/" className="mt-3 footer-bottom-links">
@@ -122,7 +122,7 @@ const Index = () => {
               <p className="font-x-sm mt-2 base-color">
                 InvestYield is a property of RevenueBull Technologies Limited, a
                 company duly registered with CAC with RC Number 1691483.
-                investYield provides financial services under a Cooperative
+                investYield provides financial services under a cooperative
                 license with a registration number LSCS 17462. Both investYield
                 and RevenueBull Technologies Limited are legal entities in
                 Nigeria.

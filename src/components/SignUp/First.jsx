@@ -166,7 +166,7 @@ const First = (props) => {
                           name="phoneNumber"
                           {...formik.getFieldProps("phoneNumber")}
                           className="text-field"
-                          placeholder="Phone Number"
+                          placeholder="+234**********"
                         />
                         {formik.touched.phoneNumber &&
                           formik.errors.phoneNumber && (

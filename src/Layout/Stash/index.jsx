@@ -28,15 +28,20 @@ const Index = ({ getFrequency, createStash, loading }) => {
   const onSubmit = (values, onSubmitProps) => {
     const obj = {
       amount: values.amount,
-      frequency: values.frequency,
+      frequency: `${values.frequency}`,
       ccyCode: values.ccyCode,
     };
 
     const obj2 = freqOptions.find(
       (option) => option.tenor.code === formik.values.frequency
     );
-    createStash(obj, obj2, "/api/v1/user/stash", "/app/stash/breakdown");
-    // onSubmitProps.resetForm();
+    sessionStorage.setItem(
+      "stashfreq",
+      JSON.stringify(obj2)
+    );
+    createStash(obj, "/api/v1/user/stash", "/app/stash/breakdown");
+    onSubmitProps.resetForm();
+    onSubmitProps.setSubmitting(false);
   };
 
   const formik = useFormik({
@@ -234,9 +239,9 @@ const Index = ({ getFrequency, createStash, loading }) => {
                           <div className="col-lg-8">
                             <div className="row">
                               <div className="col-lg-6">
-                                <button className="btn btn-previous text-green">
+                                {/* <button className="btn btn-previous text-green">
                                   PREVIOUS
-                                </button>
+                                </button> */}
                               </div>
                               <div className="col-lg-6">
                                 <input
