@@ -6,6 +6,7 @@ import PayModel from "./PayModel";
 const Breakdown = (props) => {
   const [targetValue, setTargetValue] = useState("");
   const stash = JSON.parse(sessionStorage.getItem("stash"));
+  const stashfreq = JSON.parse(sessionStorage.getItem("stashfreq"));
   console.log("stash", stash);
 
   let date = new Date();
@@ -21,14 +22,14 @@ const Breakdown = (props) => {
       const getTargetValue = await props.getTargetValue(
         "/api/v1/util/future_value",
         stash.amount,
-        stash.tenor.code,
+        stashfreq.tenor.code,
         "0103",
         stash.ccyCode
       );
       setTargetValue(getTargetValue);
     })();
     //eslint-disable-next-line
-  }, [stash.amount, stash.tenor.code, stash.ccyCode]);
+  }, [stash.amount, stashfreq.tenor.code, stash.ccyCode]);
 
   const currencyVal = (number) =>
     new Intl.NumberFormat(stash.ccyCode === "1" ? "en-NG" : "en-US", {
@@ -59,7 +60,7 @@ const Breakdown = (props) => {
                     <div className="savings-breakdown-row text-black">
                       <p>Interest Rate</p>
                       <p className="font-weight-bold">
-                        {stash.rate}% per annum
+                        {stashfreq.rate}% per annum
                       </p>
                     </div>
 
@@ -75,7 +76,7 @@ const Breakdown = (props) => {
 
                     <div className="savings-breakdown-row text-black">
                       <p>Amount of Days:</p>
-                      <p className="font-weight-bold">{stash.tenor.name}</p>
+                      <p className="font-weight-bold">{stashfreq.tenor.name}</p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">

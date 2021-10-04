@@ -1,15 +1,13 @@
 import React from "react";
 // import { format } from "date-fns";
 const CardTransfer = ({ descr, transactionId, date, amount, value }) => {
-  let dates = date.toLocaleString("en-NG", {
-    weekday: "short", // long, short, narrow
-    day: "numeric", // numeric, 2-digit
-    year: "numeric", // numeric, 2-digit
-    month: "long", // numeric, 2-digit, long, short, narrow
-    hour: "numeric", // numeric, 2-digit
-    minute: "numeric", // numeric, 2-digit
-    second: "numeric", // numeric, 2-digit
-  });
+  
+
+  const dates1=new Date(date).toUTCString()
+
+  console.log(dates1,'fgg')
+
+
 
   return (
     <>
@@ -32,7 +30,7 @@ const CardTransfer = ({ descr, transactionId, date, amount, value }) => {
                 </h5>
                 <p className="mt-3">
                   <span className="mr-2">Date:</span>
-                  <span>{dates}</span>
+                  <span>{dates1}</span>
                   {/* <span>Fri, 04 Sep 2020 15:34:20 GMT</span>{" "} */}
                 </p>
               </div>

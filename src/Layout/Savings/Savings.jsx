@@ -28,9 +28,9 @@ const Savings = ({ getData, getAccounts }) => {
     (async function dataInfo() {
       setloading(true);
       const data = await getData("/api/v1/user/summary").then();
-      const stashAccounts = await getAccounts(
-        "/api/v1/user/accountbyproduct",
-        "0103"
+      const stashAccounts = await getData(
+        "/api/v1/user/stash"
+        // "0103"
       ).then();
       const coreAccounts = await getAccounts(
         "/api/v1/user/accountbyproduct",
@@ -51,7 +51,7 @@ const Savings = ({ getData, getAccounts }) => {
 
   console.log(stashAccounts, "stash");
   console.log(coreAccounts, "cores");
-  console.log(myPurse, "myPurse")
+  console.log(myPurse, "myPurse");
   return (
     <>
       {loading && <Loader />}

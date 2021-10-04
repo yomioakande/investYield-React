@@ -81,6 +81,8 @@ const Main = (props) => {
     // eslint-disable-next-line
   }, []);
 
+  console.log(transactions, "dj");
+
   console.log(purseAccounts, "purse");
   console.log(coreAccounts, "cores");
 
@@ -280,6 +282,7 @@ const Main = (props) => {
                       transactions.map((single, index) => {
                         return (
                           <CardTransfer
+                            key={index}
                             descr={single?.descr}
                             transactionId={single?.reference}
                             date={single?.date}
@@ -355,8 +358,8 @@ const Main = (props) => {
 
                     <div className="au-message__item">
                       <div className="au-message__item-inner px-2 py-2">
-                        <div className="au-message__item-text">
-                          {!todoList.cardLinked && (
+                        {!todoList.cardLinked && (
+                          <div className="au-message__item-text">
                             <button
                               style={{ textAlign: "left" }}
                               onClick={async () => await props.addCard().then()}
@@ -367,8 +370,8 @@ const Main = (props) => {
                                 Link your debit card for faster saving options.
                               </p>
                             </button>
-                          )}
-                        </div>
+                          </div>
+                        )}
                         <div className="au-message__item-time mt-0">
                           <span>
                             <i data-feather="chevron-right"></i>

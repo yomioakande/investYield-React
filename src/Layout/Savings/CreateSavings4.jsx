@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { dateConv } from "../../helpers";
 
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
+import PayModel from "../Stash/PayModel";
 const CreateSavings4 = (props) => {
   const [finalVal, setFinalVal] = useState("");
   const core = JSON.parse(sessionStorage.getItem("core"));
@@ -20,7 +21,7 @@ const CreateSavings4 = (props) => {
         core.ccyCode
       );
       console.log(getFinalValue);
-      setFinalVal(getFinalValue.value);
+      setFinalVal(getFinalValue?.value || null);
     };
 
     get();
@@ -117,60 +118,8 @@ const CreateSavings4 = (props) => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 flex-column flex-grow-1">
-              <div className="au-card h-100">
-                <div className="au-card-inner">
-                  <h4 className="text-blue">
-                    Select a payment method to proceed
-                  </h4>
-                  <div className="small-red-line"></div>
 
-                  <div className="mt-50">
-                    <div className="payment-selection">
-                      <input type="radio" name="select" id="option-1" />
-                      <input type="radio" name="select" id="option-2" />
-                      <input type="radio" name="select" id="option-3" />
-                      <label for="option-1" className="option option-1">
-                        <div className="dot"></div>
-                        <span className="px-2">Pay with Card</span>
-                      </label>
-                      <label for="option-2" className="option option-2">
-                        <div className="dot"></div>
-                        <span className="px-2">Pay with myPurse - Vibe Cash</span>
-                      </label>
-                      <label for="option-3" className="option option-3">
-                        <div className="dot"></div>
-                        <span className="px-2">Pay with bank transfer</span>
-                      </label>
-                      <div className="mt-4">
-                        <button className="btn btn-resend-otp">
-                          ADD A NEW CARD
-                        </button>
-                      </div>
-                      <div className="row mt-50 align-items-center justify-content-end">
-                        <div className="col-lg-8">
-                          <div className="row">
-                            <div className="col-lg-6">
-                              <button className="btn btn-cancel text-danger">
-                                Cancel
-                              </button>
-                            </div>
-                            <div className="col-lg-6">
-                              <Link
-                                to="/app/savings/otp"
-                                className="btn login-submit"
-                              >
-                                NEXT
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <PayModel transId={core?.coreRef} />
           </div>
         </div>
       </div>

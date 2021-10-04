@@ -50,14 +50,15 @@ const MyPurse3 = ({ createPurse }) => {
     };
 
     const firstObj = JSON.parse(sessionStorage.getItem("purseObj1"));
+
+    const purseMainObj = { ...firstObj, ...obj };
+    console.log("retro");
+    console.log(purseMainObj);
     createPurse(
-      firstObj,
-      obj,
+      purseMainObj,
       "/api/v1/user/my_purse",
       "/app/savings/pursestep3"
     );
-
-    // const purseMainObj = { ...firstObj, ...obj };
     // console.log(purseMainObj);
     // sessionStorage.setItem("mainPurseObj", JSON.stringify(purseMainObj));
     // window.location.href = "/app/savings/pursestep3";
@@ -334,9 +335,20 @@ const MyPurse3 = ({ createPurse }) => {
                                 </button>
                               </div>
                               <div className="col-lg-6">
-                                <button className="btn login-submit">
+                                <input
+                                  type="submit"
+                                  value={"NEXT"}
+                                  disabled={
+                                    !formik.isValid || formik.isSubmitting
+                                  }
+                                  className="btn login-submit"
+                                />
+                                {/* <button
+                                  type="button"
+                                  className="btn login-submit"
+                                >
                                   NEXT
-                                </button>
+                                </button> */}
                               </div>
                             </div>
                           </div>
