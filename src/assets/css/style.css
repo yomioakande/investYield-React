@@ -1007,3 +1007,10 @@ input[type="radio"] {
 .tdisable {
   font-size: 11px;
 }
+.new-header {
+  color: #000000;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 80px 0 30px;
+  text-align: center;
+}

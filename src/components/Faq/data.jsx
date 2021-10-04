@@ -225,7 +225,7 @@ export const FeesCharges = [
   {
     question:
       "Are there any charges when I withdraw my savings before the maturity date?",
-    answer1: "Savings Plans: you cannot break the plans before they matures",
+    answer1: "Savings Plans: you cannot break the plans before they mature",
     answer2:
       "Stash: there is a small breakage fee for breaking before maturity date",
     answer3: "myPurse: free withdrawals all day, every day!",

@@ -173,15 +173,16 @@ const index = () => {
               <div className="col-lg-5 col-xl-5">
                 <div className="mt-50 p-4 get-started-info-div">
                   <div className="d-flex align-items-baseline">
-                    <h6 className="mb-0 get-started-numbers text-blue font-rem1">01</h6>
+                    <h6 className="mb-0 get-started-numbers text-blue font-rem1">
+                      01
+                    </h6>
                     <div className="px-3">
                       <h5 className="get-started-header-sm">
                         Create an account
                       </h5>
                       <div className="col-lg-8 px-0">
                         <p className="get-started-p mb-0">
-                          Sign up with your name, email and phone
-                          number.
+                          Sign up with your name, email and phone number.
                         </p>
                       </div>
                     </div>
@@ -221,8 +222,13 @@ const index = () => {
               </div>
             </div>
             <div className="row justify-content-center">
+              <div className="col-xl-5 col-10 new-header">
+                The smartest financial decision you’ll ever make
+              </div>
+            </div>
+            <div className="row justify-content-center">
               <div className="col-xl-4 col-lg-6">
-                <div className="d-flex justify-content-center mt-80">
+                <div className="d-flex justify-content-center">
                   <a
                     href="/auth/signup1"
                     className="btn btn-get-started d-flex text-center justify-content-center align-items-center w-100"
@@ -258,7 +264,7 @@ const index = () => {
                               <p className="why-p mb-0">
                                 Automated, Goal-Based Financial Tools that
                                 Foster Strong Saving, Spending and Investing
-                                Habits. Earn yields up to 12%pa on your Savings
+                                Habits. Earn yields up to 15%pa on your Savings
                                 Plans.
                               </p>
                             </div>
@@ -295,10 +301,10 @@ const index = () => {
                                 We use only the highest levels of Banking
                                 Security, secured by 256 bits SSL security
                                 encryption, to ensure that your information is
-                                completely protected at all times. Also, we
-                                use state-of-the-art data encryption when
-                                handling your financial information and
-                                two-factor authentication (2FA) protection.
+                                completely protected at all times. Also, we use
+                                state-of-the-art data encryption when handling
+                                your financial information and two-factor
+                                authentication (2FA) protection.
                               </p>
                             </div>
                           </div>
@@ -335,13 +341,13 @@ const index = () => {
             <div className="row">
               <div className="col-lg-12">
                 <h5 className="get-started-header text-center pt-5">
-                  Testimonials
+                  What matters to you?
                 </h5>
                 <div className="d-flex justify-content-center">
                   <div className="small-red-line"></div>
                 </div>
                 <p className="text-center mt-5 text-black">
-                  See what people are saying about investYield
+                  why people love investYield
                 </p>
               </div>
               <div className="col-lg-8 offset-lg-2">

@@ -190,7 +190,12 @@ const Header = ({ username }) => {
                       </a>
                     </div>
                     <div className="image">
-                      <img src={uploadimg} alt="John Doe" />
+                      <a
+                        className="py-12 js-acc-btn"
+                        href="/app/account/myportfolio"
+                      >
+                        <img src={uploadimg} alt="John Doe" />
+                      </a>
                     </div>
                     <div className="account-dropdown js-dropdown">
                       <div className="info clearfix">

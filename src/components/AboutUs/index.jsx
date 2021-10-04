@@ -47,10 +47,11 @@ const Index = () => {
                       managers to provide you with inclusive wealth management
                       solutions that will enable you build, manage and preserve
                       your wealth across multiple generations. <br />
-                      {/* <br /> We offer the highest possible returns on your
-                      savings, security, speed, flexibility, investment insights
-                      and disciplined-instilled money management tools to help
-                      you achieve your big money goals. <br /> */}
+                      <br /> You earn the highest possible returns when you save
+                      on investYield. We offer security, speed, flexibility,
+                      financial education and a disciplined approach towards a
+                      smarter money saving behavior that will enable you to
+                      achieve your big goals. <br />
                       <br />
                       Our vision is to build Africa's biggest community of smart
                       money savers through exceptional service and robust
