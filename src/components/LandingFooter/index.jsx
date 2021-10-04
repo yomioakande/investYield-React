@@ -59,7 +59,7 @@ const Index = () => {
                     <a href="/app/blog" className="mt-3 footer-bottom-links">
                       Blog
                     </a>
-                    <a href="/" className="mt-3 footer-bottom-links">
+                    <a href="/#" className="mt-3 footer-bottom-links">
                       Careers
                     </a>
                     <a href="/terms" className="mt-3 footer-bottom-links">

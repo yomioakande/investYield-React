@@ -41,7 +41,7 @@ const Unique= () => {
                             What currency would you like to save in?
                           </label>
                           <div className="row">
-                            <div className="col-lg-6 col-xl-4">
+                            {/* <div className="col-lg-6 col-xl-4">
                               <div className="form-group">
                                 <label className="radio">
                                   <input
@@ -54,7 +54,7 @@ const Unique= () => {
                                   </span>
                                 </label>
                               </div>
-                            </div>
+                            </div> */}
                             <div className="col-lg-6 col-xl-4">
                               <div className="form-group">
                                 <label className="radio">

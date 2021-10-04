@@ -110,13 +110,10 @@ const Index = (props) => {
                       <form onSubmit={formik.handleSubmit}>
                         <div className="form-group">
                           {props.alertType && (
-                                <div
-                                  className={`font-sm alert ${props.alertType}`}
-                                >
-                                  {props.message}
-                                </div>
-                              )
-                            }
+                            <div className={`font-sm alert ${props.alertType}`}>
+                              {props.message}
+                            </div>
+                          )}
                           <input
                             type="email"
                             name="email"
@@ -146,7 +143,7 @@ const Index = (props) => {
                             )}
                         </div>
                         <div className="d-flex justify-content-between align-items-center">
-                          <div className="d-flex align-items-center">
+                          {/* <div className="d-flex align-items-center">
                             <input
                               className="styled-checkbox"
                               type="checkbox"
@@ -155,7 +152,7 @@ const Index = (props) => {
                             <div className="px-2">
                               <p className="mb-0 login-pp">Remember me</p>
                             </div>
-                          </div>
+                          </div> */}
                           <div>
                             <Link
                               to="/auth/forgotpassword"
@@ -201,7 +198,7 @@ const mapStateToProps = (state) => {
   // const { alert } = state;
   const loading = state.authentication.loading;
 
-  return { loggingIn,message, alertType, loading };
+  return { loggingIn, message, alertType, loading };
 };
 
 const actionCreators = {

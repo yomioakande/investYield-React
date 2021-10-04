@@ -111,7 +111,7 @@ const Group1 = () => {
                             What currency would you like to save in?
                           </label>
                           <div className="row cg-3 px-3">
-                            <div className="w-auto">
+                            {/* <div className="w-auto">
                               <div className="form-group">
                                 <div className="pay-method-radio">
                                   <input
@@ -126,7 +126,7 @@ const Group1 = () => {
                                   </label>
                                 </div>
                               </div>
-                            </div>
+                            </div> */}
                             <div className="w-auto">
                               <div className="form-group">
                                 <div className="pay-method-radio">

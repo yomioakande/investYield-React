@@ -125,7 +125,7 @@ const CreateSavings2 = ({ username, register }) => {
                             What currency would you like to save in?
                           </label>
                           <div class="row">
-                            <div class="col-lg-6 col-xl-4">
+                            {/* <div class="col-lg-6 col-xl-4">
                               <div class="form-group">
                                 <label class="radio">
                                   <input
@@ -139,7 +139,7 @@ const CreateSavings2 = ({ username, register }) => {
                                   </span>
                                 </label>
                               </div>
-                            </div>
+                            </div> */}
                             <div class="col-lg-6 col-xl-4">
                               <div class="form-group">
                                 <label class="radio">

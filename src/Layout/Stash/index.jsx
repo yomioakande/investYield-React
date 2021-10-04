@@ -35,10 +35,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
     const obj2 = freqOptions.find(
       (option) => option.tenor.code === formik.values.frequency
     );
-    sessionStorage.setItem(
-      "stashfreq",
-      JSON.stringify(obj2)
-    );
+    sessionStorage.setItem("stashfreq", JSON.stringify(obj2));
     createStash(obj, "/api/v1/user/stash", "/app/stash/breakdown");
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
@@ -136,7 +133,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
                             What currency would you like to save in?
                           </label>
                           <div className="row cg-3 px-3">
-                            <div className="w-auto">
+                            {/* <div className="w-auto">
                               <div className="form-group">
                                 <div className="pay-method-radio">
                                   <input
@@ -151,7 +148,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
                                   </label>
                                 </div>
                               </div>
-                            </div>
+                            </div> */}
                             <div className="w-auto">
                               <div className="form-group">
                                 <div className="pay-method-radio">
@@ -235,6 +232,14 @@ const Index = ({ getFrequency, createStash, loading }) => {
                               </p>
                             )}
                         </div>
+                        <p className="text-danger termination-warning">
+                          Early termination of stash ahead of maturity date
+                          would attract 50% breakage fee on the accrued
+                          interest.
+                        </p>
+                        <p className="text-dark my-1 termination-warning">
+                          Would you like to proceed with the Savings?
+                        </p>
                         <div className="row mt-5 align-items-center justify-content-end">
                           <div className="col-lg-8">
                             <div className="row">
@@ -246,7 +251,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
                               <div className="col-lg-6">
                                 <input
                                   type="submit"
-                                  value={"NEXT"}
+                                  value={"PROCEED"}
                                   disabled={
                                     !formik.isValid || formik.isSubmitting
                                   }

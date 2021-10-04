@@ -488,9 +488,9 @@ const Main = (props) => {
                         <div className="swiper-button-next"></div>
                         <div className="swiper-button-prev"></div>
                       </div>
-                      <a href="/" className="au-btn-link">
+                      {/* <a href="/" className="au-btn-link">
                         View more
-                      </a>
+                      </a> */}
                     </div>
                   </div>
                 </div>
