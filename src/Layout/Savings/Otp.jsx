@@ -1,17 +1,35 @@
 import React, { useState } from "react";
 // import {Link} from "react-router-dom"
 import * as Yup from "yup";
-import { addAsterik } from "../../helpers";
+// import { addAsterik } from "../../helpers";
 import { useFormik } from "formik";
-const Otp = () => {
-  const getNumber = JSON.parse(sessionStorage.getItem("number")) || null;
-  //eslint-disable-next-line
-  const [number, setNumber] = useState(addAsterik(getNumber));
+import Congrats from "../Congrats";
+import { connect } from "react-redux";
+import { usersActions } from "../../redux/actions";
+const Otp = (props) => {
+  const [congratsModal, setCongratsModal] = useState(false);
+
+  const modalToggle1 = () => {
+    setCongratsModal(true);
+  };
   const initialValues = {
     token: "",
   };
+  const getTransfer1 =
+    JSON.parse(sessionStorage.getItem("transferObj")) || null;
+  console.log(getTransfer1);
+  const onSubmit = (values, onSubmitProps) => {
+    const getTransfer =
+      JSON.parse(sessionStorage.getItem("transferObj")) || null;
+    const obj = {
+      token: values.token,
+      transId: getTransfer.transId,
+      challengeId: getTransfer.challengeId,
+    };
 
-  const onSubmit = (values, onSubmitProps) => {};
+    console.log(obj);
+    props.confirmToken(obj, "/api/v1/transfer/accountbycard", modalToggle1);
+  };
 
   const validationSchema = Yup.object({
     token: Yup.string().required("OTP is required"),
@@ -24,7 +42,7 @@ const Otp = () => {
     validateOnMount: true,
   });
 
-  console.log(formik.values)
+  console.log(formik.values);
 
   return (
     <>
@@ -32,7 +50,10 @@ const Otp = () => {
         <section className="reg-section">
           <div className="container-fluid">
             <div className="row justify-content-center">
-              <div className="col-lg-5 col-xl-4" style={{maxWidth:"50%", flex:"0%"}}>
+              <div
+                className="col-lg-5 col-xl-4"
+                style={{ maxWidth: "50%", flex: "0%" }}
+              >
                 <div className="bg-white login-div p-5 shadow mt-5">
                   {/* <div className="d-flex justify-content-between">
                   <Link
@@ -101,8 +122,26 @@ const Otp = () => {
           </div>
         </section>
       </main>
+      {congratsModal && (
+        <Congrats
+          headline1={"Fantastic!"}
+          headline2={"A 30 day Stash has been created."}
+        />
+      )}
     </>
   );
 };
 
-export default Otp;
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  // const loading = state.authentication.loading;
+  return { alert, username };
+};
+
+const actionCreators = {
+  confirmToken: usersActions.confirmBvnReg,
+  resend: usersActions.resend,
+};
+
+export default connect(mapStateToProps, actionCreators)(Otp);

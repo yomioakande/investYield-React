@@ -7,8 +7,8 @@ import { usersActions } from "../../redux/actions";
 
 const PayCard = ({ transId, getCards, payCard, setActive }) => {
   const [cards, setCards] = useState([]);
-  // eslint-disable-next-line 
-//   const [rad, setRad] = useState("");
+  // eslint-disable-next-line
+  //   const [rad, setRad] = useState("");
   const [state, setState] = useState({ rad: "" });
   const dataInfo = async () => {
     const data = await getCards("/api/v1/user/card").then();
@@ -20,33 +20,32 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
     // eslint-disable-next-line
   }, []);
 
- 
-//   const initialValues = {
-//     cardId: "",
-//   };
+  //   const initialValues = {
+  //     cardId: "",
+  //   };
 
-//   const validationSchema = Yup.object({
-//     cardId: Yup.string().required("Enter a Plan name"),
-//   });
+  //   const validationSchema = Yup.object({
+  //     cardId: Yup.string().required("Enter a Plan name"),
+  //   });
 
-//   const onSubmit = (values, onSubmitProps) => {
-//     // setloading(true);
-//     // eslint-disable-next-line 
-//     const obj = {
-//       cardId: values.cardId,
-//     };
-//     // sessionStorage.setItem("savingsInfo", JSON.stringify(obj));
-//     // window.location.href = `/app/savings/create3/${useLink}`;
-//     onSubmitProps.resetForm();
-//     onSubmitProps.setSubmitting(false);
-//   };
+  //   const onSubmit = (values, onSubmitProps) => {
+  //     // setloading(true);
+  //     // eslint-disable-next-line
+  //     const obj = {
+  //       cardId: values.cardId,
+  //     };
+  //     // sessionStorage.setItem("savingsInfo", JSON.stringify(obj));
+  //     // window.location.href = `/app/savings/create3/${useLink}`;
+  //     onSubmitProps.resetForm();
+  //     onSubmitProps.setSubmitting(false);
+  //   };
 
-//   const formik = useFormik({
-//     initialValues,
-//     onSubmit,
-//     validationSchema,
-//     validateOnMount: true,
-//   });
+  //   const formik = useFormik({
+  //     initialValues,
+  //     onSubmit,
+  //     validationSchema,
+  //     validateOnMount: true,
+  //   });
   //   console.log(formik.values);
   //   console.log(rad, "rad");
   //   console.log("STATE", state);
@@ -59,8 +58,8 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
       cardId: state.rad,
       transId,
     };
-    // const data = 
-    await payCard(obj, "/api/v1/transfer/accountbycard", "/app/stash/otp/");
+    // const data =
+    await payCard(obj, "/api/v1/transfer/accountbycard", "/app/stash/otp");
     // console.log("submit", obj);
     // console.log("reverse", data);
   };

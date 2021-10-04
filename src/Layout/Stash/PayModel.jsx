@@ -130,7 +130,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   getDetails: usersActions.getInfo,
   payPurse: usersActions.payPurse,
-  // addCard: usersActions.addCard,
+  addCard: usersActions.addCard,
   // getAccounts: usersActions.getAccounts,
 };
 

@@ -258,30 +258,29 @@ function createStash(obj1, apiUrl, nextRoute) {
         "stash",
         JSON.stringify({ ...obj1, stashRef: data?.reference })
       );
-      window.locaon.href = nextRoute;
+      window.location.href = nextRoute;
     }
 
     if (apiUrl === "/api/v1/user/my_purse" && success === true) {
       dispatch(successReg(data?.reference));
-      console.log(register,"purse");
+      console.log(data, "purse");
+      console.log(messages);
       sessionStorage.setItem(
         "mainPurseObj",
-        JSON.stringify({ ...obj1,  myPurseRef: data?.reference })
+        JSON.stringify({ ...obj1, myPurseRef: data?.reference })
       );
       window.location.href = nextRoute;
-    } 
-    
+    }
+
     if (apiUrl === "/api/v1/user/group_savings" && success === true) {
       dispatch(successReg(data?.reference));
-      console.log(register,"groupsavingsRef");
+      console.log(register, "groupsavingsRef");
       sessionStorage.setItem(
         "mainGroupObj",
         JSON.stringify({ ...obj1, groupRef: data?.reference })
       );
       window.location.href = nextRoute;
-    }
-    
-    else {
+    } else {
       dispatch(failure(messages));
       return;
     }
@@ -296,7 +295,10 @@ function createCore(obj, apiUrl, nextRoute) {
     const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/coreaccount" && success === true) {
       dispatch(successReg(data?.reference));
-      sessionStorage.setItem("core", JSON.stringify(obj));
+      sessionStorage.setItem(
+        "core",
+        JSON.stringify({ ...obj, coreRef: data?.reference })
+      );
       window.location.href = nextRoute;
     } else {
       dispatch(failure(messages));
@@ -329,8 +331,12 @@ function payCard(obj, apiUrl, nextRoute) {
 
     console.log(register);
     if (success === true) {
+      console.log("df", data);
       // dispatch(successReg(data?.reference));
-      sessionStorage.setItem("stashCID", JSON.stringify(obj));
+      sessionStorage.setItem(
+        "transferObj",
+        JSON.stringify({ ...obj, challengeId: data.id })
+      );
       window.location.href = `${nextRoute}/${data.id}`;
     } else {
       dispatch(failure(messages));
@@ -392,7 +398,7 @@ function getInfo(apiUrl) {
     dispatch(request());
     const getAll = await userService.getData(apiUrl);
     const { data, success, messages } = getAll;
-
+    console.log("accounts", data);
     if (apiUrl && success === true) {
       dispatch(successReg());
       // handleError(messages)

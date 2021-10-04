@@ -16,7 +16,7 @@ const Congrats = ({ headline1, headline2, content }) => {
             <h2 className="congrats-title">{headline1}</h2>
             <p className="signup">{headline2}</p>
 
-            <p className="welcome">{content} </p>
+            <p className="welcome">{content||null} </p>
 
             <div className="main-btn">
               <a href="/app">GO TO DASHBOARD</a>
