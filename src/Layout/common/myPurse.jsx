@@ -17,7 +17,7 @@ const myPurse = ({
     }).format(number);
   return (
     <>
-      <div className="card-box d-flex flex-column mb-4">
+      <div className="card-box d-flex flex-column mb-4 ml-4" style={{flexBasis:"100px"}}>
         <div className={`au-card-purse ${nameClass} flex-grow-1`}>
           <div className="au-card-elements">
             <Link to="/app">

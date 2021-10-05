@@ -307,13 +307,14 @@ function createCore(obj, apiUrl, nextRoute) {
   };
 }
 
-function payPurse(obj, apiUrl) {
+function payPurse(obj, apiUrl,func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
     const { data, success, messages } = register;
     if (success === true) {
       dispatch(successReg(data?.reference));
+      func()
       // sessionStorage.setItem("core", JSON.stringify(obj));
       // window.location.href = nextRoute;
     } else {
