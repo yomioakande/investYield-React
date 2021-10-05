@@ -4,13 +4,20 @@ import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import PayBank from "./PayBank";
 import PayCard from "./PayCard";
+import Congrats from "../Congrats";
+import Swal from "sweetalert2";
 const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
   const [active, setActive] = useState(1);
   const [details, setDetails] = useState({});
+  const [congratsModal, setCongratsModal] = useState(false);
+
+  const modalToggle1 = () => {
+    setCongratsModal(true);
+  };
   useEffect(() => {
     (async function () {
       const data = await getDetails("/api/v1/user/virtual_acct");
-      setDetails(data);
+      setDetails({ ...data });
     })();
     // eslint-disable-next-line
   }, []);
@@ -20,8 +27,26 @@ const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
       transId,
     };
 
-    // const data =
-     await payPurse(obj, "/api/v1/transfer/fundbypurse");
+    Swal.fire({
+      title:
+        "Continue to confirm payment by myPurse",
+      showDenyButton: true,
+      // showCancelButton: true,
+      confirmButtonText: "Continue",
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        payPurse(obj, "/api/v1/transfer/fundbypurse", modalToggle1);
+ 
+        // setShowInput(true);
+        // Swal.fire('Saved!', '', 'success')
+      } else if (result.isDenied) {
+        // setShowInput(false);
+        // Swal.fire('Changes are not saved', '', 'info')
+      }
+    });
+
+
   };
 
   return (
@@ -106,6 +131,12 @@ const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
               </div>
             </div>
           </div>
+          {congratsModal && (
+            <Congrats
+              headline1={"Fantastic!"}
+              headline2={"A 30 day Stash has been created."}
+            />
+          )}
         </>
       ) : active === 2 ? (
         <>

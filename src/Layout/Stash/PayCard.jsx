@@ -2,17 +2,21 @@ import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 // import { useFormik } from "formik";
 // import * as Yup from "yup";
+import Loader from "../../common/Loader";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 
 const PayCard = ({ transId, getCards, payCard, setActive }) => {
   const [cards, setCards] = useState([]);
+  const[loading,setloading]=useState(false)
   // eslint-disable-next-line
   //   const [rad, setRad] = useState("");
   const [state, setState] = useState({ rad: "" });
   const dataInfo = async () => {
+    setloading(true)
     const data = await getCards("/api/v1/user/card").then();
     setCards(data);
+    setloading(false)
   };
 
   useEffect(() => {
@@ -65,6 +69,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
   };
   return (
     <>
+    {loading && <Loader />}
       <div className="col-lg-6 flex-column flex-grow-1">
         <div className="au-card h-100">
           <div className="au-card-inner">
