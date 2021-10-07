@@ -17,6 +17,7 @@ const Index = (props) => {
   };
 
   const selectModalToggle = () => {
+    setSingle('')
     setSelectModalOpen(!selectModalOpen);
   };
 
@@ -29,7 +30,7 @@ const Index = (props) => {
   };
 
   const initialValues = {
-    email: single,
+    email: "",
     amount: "",
     save:""
   };
@@ -53,7 +54,7 @@ const Index = (props) => {
   };
 
   const formik = useFormik({
-    enableReinitialize: true,
+    // enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
@@ -65,14 +66,16 @@ const Index = (props) => {
     setBeneficiary(data);
     console.log(data);
   };
-  console.log("papr", beneficiary);
+  // console.log("papr", beneficiary);
 
   useEffect(() => {
+    formik.setFieldValue("email",single);
     dataInfo();
     // eslint-disable-next-line
-  }, []);
+  }, [single]);
 
   console.log("repository", single);
+  console.log(formik.values)
 
   return (
     <>
@@ -127,6 +130,7 @@ const Index = (props) => {
                           type="text"
                           className="text-field mt-2"
                           placeholder="Amount (N)"
+                          {...formik.getFieldProps("amount")}
                         />
                       </div>
                       <div className="text-field mt-4 d-flex align-items-center justify-content-between">

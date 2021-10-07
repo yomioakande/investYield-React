@@ -24,36 +24,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
     // eslint-disable-next-line
   }, []);
 
-  //   const initialValues = {
-  //     cardId: "",
-  //   };
 
-  //   const validationSchema = Yup.object({
-  //     cardId: Yup.string().required("Enter a Plan name"),
-  //   });
-
-  //   const onSubmit = (values, onSubmitProps) => {
-  //     // setloading(true);
-  //     // eslint-disable-next-line
-  //     const obj = {
-  //       cardId: values.cardId,
-  //     };
-  //     // sessionStorage.setItem("savingsInfo", JSON.stringify(obj));
-  //     // window.location.href = `/app/savings/create3/${useLink}`;
-  //     onSubmitProps.resetForm();
-  //     onSubmitProps.setSubmitting(false);
-  //   };
-
-  //   const formik = useFormik({
-  //     initialValues,
-  //     onSubmit,
-  //     validationSchema,
-  //     validateOnMount: true,
-  //   });
-  //   console.log(formik.values);
-  //   console.log(rad, "rad");
-  //   console.log("STATE", state);
-  //   console.log("transcorp", cards);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,11 +33,10 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
       cardId: state.rad,
       transId,
     };
-    // const data =
+
     await payCard(obj, "/api/v1/transfer/accountbycard", "/app/stash/otp");
-    // console.log("submit", obj);
-    // console.log("reverse", data);
   };
+  console.log(state);
   return (
     <>
       {loading && <Loader />}
@@ -121,7 +91,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
                         </button>
                       </div>
 
-                      {Object.keys(state).length > 0 ? (
+                      {state?.rad.length > 0 ? (
                         <>
                           <div className="col-lg-6">
                             <button

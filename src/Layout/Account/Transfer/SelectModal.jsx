@@ -8,6 +8,7 @@ import Select from "react-select";
 
 const SelectModal = ({ beneficiary, close, setSingle, single, loading }) => {
   console.log(beneficiary);
+ 
   const options = beneficiary.map((single, index) => {
     return {
       value: single.email,

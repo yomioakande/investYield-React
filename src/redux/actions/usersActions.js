@@ -273,11 +273,11 @@ function createStash(obj1, apiUrl, nextRoute) {
     }
 
     if (apiUrl === "/api/v1/user/group_savings" && success === true) {
-      dispatch(successReg(data?.reference));
-      console.log(register, "groupsavingsRef");
+      dispatch(successReg(data?.transId));
+      // console.log(register, "groupsavingsRef");
       sessionStorage.setItem(
         "mainGroupObj",
-        JSON.stringify({ ...obj1, groupRef: data?.reference })
+        JSON.stringify({ ...obj1, groupRef: data?.transId})
       );
       window.location.href = nextRoute;
     } else {
