@@ -79,7 +79,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
               <form onSubmit={handleSubmit}>
                 <div
                   className="payment-selection"
-                  style={{ height: "100vh", overflowY: "scroll" }}
+                  style={{ overflowY: "scroll" }}
                 >
                   {cards && cards.length > 0
                     ? cards.map((single, index) => {
