@@ -8,15 +8,15 @@ import { usersActions } from "../../redux/actions";
 
 const PayCard = ({ transId, getCards, payCard, setActive }) => {
   const [cards, setCards] = useState([]);
-  const[loading,setloading]=useState(false)
+  const [loading, setloading] = useState(false);
   // eslint-disable-next-line
   //   const [rad, setRad] = useState("");
   const [state, setState] = useState({ rad: "" });
   const dataInfo = async () => {
-    setloading(true)
+    setloading(true);
     const data = await getCards("/api/v1/user/card").then();
     setCards(data);
-    setloading(false)
+    setloading(false);
   };
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
   };
   return (
     <>
-    {loading && <Loader />}
+      {loading && <Loader />}
       <div className="col-lg-6 flex-column flex-grow-1">
         <div className="au-card h-100">
           <div className="au-card-inner">
@@ -79,7 +79,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
               <form onSubmit={handleSubmit}>
                 <div
                   className="payment-selection"
-                  style={{ overflowY: "scroll" }}
+                  style={{ height: "100%", overflowY: "scroll" }}
                 >
                   {cards && cards.length > 0
                     ? cards.map((single, index) => {
