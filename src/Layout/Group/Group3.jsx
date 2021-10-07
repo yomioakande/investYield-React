@@ -33,34 +33,27 @@ const Group3 = (props) => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
-    // eslint-disable-next-line
     const obj = {
       start: values.start,
       freq: values.freq,
-      // cntr_amt: values.cntr_amt,
       cntr_amt: targetNum,
       earn: values.earn,
     };
-    // console.log("cvb", obj);
+
     const groupInfo1 = JSON.parse(sessionStorage.getItem("groupInfo"));
     const groupInfo2 = JSON.parse(sessionStorage.getItem("groupInfo2"));
-    let mainGroupInfo = { ...groupInfo1, ...groupInfo2,...obj };
-    // console.log(mainGroupInfo);
+    let mainGroupInfo = { ...groupInfo1, ...groupInfo2, ...obj };
 
     props.createGroup(
       mainGroupInfo,
-      // obj,
       "/api/v1/user/group_savings",
       "/app/groupsavings4"
     );
-    // sessionStorage.setItem("mainGroupInfo", JSON.stringify(mainGroupInfo));
-    // window.location.href = "/app/groupsavings4";
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };
 
   const formik = useFormik({
-    // enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
@@ -79,9 +72,6 @@ const Group3 = (props) => {
       style: "currency",
       currency: groupData.ccy === "1" ? "NGN" : "USD",
     }).format(number);
-
-  // console.log( groupData.tgtDate,
-  //   formik.values.start,)
 
   const dataInfo = async (freq) => {
     const data = await userService.getEstimate(

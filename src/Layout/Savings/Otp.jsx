@@ -15,9 +15,7 @@ const Otp = (props) => {
   const initialValues = {
     token: "",
   };
-  const getTransfer1 =
-    JSON.parse(sessionStorage.getItem("transferObj")) || null;
-  console.log(getTransfer1);
+
   const onSubmit = (values, onSubmitProps) => {
     const getTransfer =
       JSON.parse(sessionStorage.getItem("transferObj")) || null;
@@ -27,7 +25,7 @@ const Otp = (props) => {
       challengeId: getTransfer.challengeId,
     };
 
-    console.log(obj);
+    // console.log(obj);
     props.confirmToken(obj, "/api/v1/transfer/accountbycard", modalToggle1);
   };
 
@@ -42,7 +40,15 @@ const Otp = (props) => {
     validateOnMount: true,
   });
 
-  console.log(formik.values);
+  const resendOtp = () => {
+    const obj = {
+      // id: formik.values.bvn,
+      // operationType: 6,
+    };
+    props.resend(obj, "/api/v1/util/resendotp");
+  };
+
+  // console.log(formik.values);
 
   return (
     <>
@@ -55,21 +61,6 @@ const Otp = (props) => {
                 style={{ maxWidth: "50%", flex: "0%" }}
               >
                 <div className="bg-white login-div p-5 shadow mt-5">
-                  {/* <div className="d-flex justify-content-between">
-                  <Link
-                    to="/auth/signup1"
-                    className="d-flex no-decor align-items-center"
-                  >
-                    <img
-                      // src={leftArrow}
-                      className="img-fluid"
-                      alt="left-arrow"
-                    />
-                    <span className="px-2 text-dark">Back</span>
-                  </Link>
-                  <h5 className="login-div-header">Get Started</h5>
-                  <h5 className="step-text">2/4</h5>
-                </div> */}
                   <div className="mt-5">
                     <h6 className="reg-p mb-3">
                       Please enter the One-Time Password (OTP) that has been
@@ -110,7 +101,10 @@ const Otp = (props) => {
                         </h6>
                       </div>
                       <div className="mt-4">
-                        <button className="btn btn-resend-otp">
+                        <button
+                          onClick={() => resendOtp()}
+                          className="btn btn-resend-otp"
+                        >
                           Resend OTP
                         </button>
                       </div>

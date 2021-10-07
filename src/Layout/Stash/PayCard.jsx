@@ -8,15 +8,15 @@ import { usersActions } from "../../redux/actions";
 
 const PayCard = ({ transId, getCards, payCard, setActive }) => {
   const [cards, setCards] = useState([]);
-  const[loading,setloading]=useState(false)
+  const [loading, setloading] = useState(false);
   // eslint-disable-next-line
   //   const [rad, setRad] = useState("");
   const [state, setState] = useState({ rad: "" });
   const dataInfo = async () => {
-    setloading(true)
+    setloading(true);
     const data = await getCards("/api/v1/user/card").then();
     setCards(data);
-    setloading(false)
+    setloading(false);
   };
 
   useEffect(() => {
@@ -24,36 +24,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
     // eslint-disable-next-line
   }, []);
 
-  //   const initialValues = {
-  //     cardId: "",
-  //   };
 
-  //   const validationSchema = Yup.object({
-  //     cardId: Yup.string().required("Enter a Plan name"),
-  //   });
-
-  //   const onSubmit = (values, onSubmitProps) => {
-  //     // setloading(true);
-  //     // eslint-disable-next-line
-  //     const obj = {
-  //       cardId: values.cardId,
-  //     };
-  //     // sessionStorage.setItem("savingsInfo", JSON.stringify(obj));
-  //     // window.location.href = `/app/savings/create3/${useLink}`;
-  //     onSubmitProps.resetForm();
-  //     onSubmitProps.setSubmitting(false);
-  //   };
-
-  //   const formik = useFormik({
-  //     initialValues,
-  //     onSubmit,
-  //     validationSchema,
-  //     validateOnMount: true,
-  //   });
-  //   console.log(formik.values);
-  //   console.log(rad, "rad");
-  //   console.log("STATE", state);
-  //   console.log("transcorp", cards);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,14 +33,13 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
       cardId: state.rad,
       transId,
     };
-    // const data =
+
     await payCard(obj, "/api/v1/transfer/accountbycard", "/app/stash/otp");
-    // console.log("submit", obj);
-    // console.log("reverse", data);
   };
+  console.log(state);
   return (
     <>
-    {loading && <Loader />}
+      {loading && <Loader />}
       <div className="col-lg-6 flex-column flex-grow-1">
         <div className="au-card h-100">
           <div className="au-card-inner">
@@ -121,7 +91,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
                         </button>
                       </div>
 
-                      {Object.keys(state).length > 0 ? (
+                      {state?.rad.length > 0 ? (
                         <>
                           <div className="col-lg-6">
                             <button
