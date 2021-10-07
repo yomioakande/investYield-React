@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import withdrawal from "../../assets/images/withdrawFundIcon.svg";
 import "../../assets/css/theme.css";
 import "../../assets/css/style.css";
 import { dateConv } from "../../helpers";
 import PayModel from "../Stash/PayModel";
+import { connect } from "react-redux";
+import { usersActions } from "../../redux/actions";
+import Loader from "../../common/Loader";
+const MyPurse4 = (props) => {
+  const [bankDetails, setBankDetails] = useState({});
+  const [loading, setloading] = useState(false);
+  const dataInfo = async () => {
+    setloading(true);
+    const account = await props.getAccount("/api/v1/user/bankaccount").then();
+    setBankDetails({ ...account });
+    setloading(false);
+  };
+  useEffect(() => {
+    dataInfo();
+    //eslint-disable-next-line
+  }, []);
 
-const MyPurse4 = () => {
   const purse = JSON.parse(sessionStorage.getItem("mainPurseObj"));
 
   const currencyVal = (number) =>
@@ -49,25 +65,37 @@ const MyPurse4 = () => {
 
   return (
     <>
+      {loading && <Loader />}
       <div className="section__content section__content--p30 pb-4">
         <div className="container-fluid">
           <div className="row mt-4">
             <div className="col-lg-6">
               <div className="au-card">
                 <div className="au-card-inner">
-                  <a href="*" className="d-flex align-items-center">
+                  <Link
+                    to="/app/account/mycard"
+                    className="d-flex align-items-center"
+                  >
                     <img
                       src={withdrawal}
                       className="img-fluid"
                       alt="Funds Withdrawal"
                     />
                     <div className="px-2">
-                      <p className="text-blue weight-600">
-                        Your funds will be withdrawn into your Access bank
-                        account (0765325698). Tap to change
-                      </p>
+                      {Object.keys(bankDetails).length > 0 ? (
+                        <p className="text-blue weight-600">
+                          {`Your funds will be withdrawn into your
+                          ${bankDetails?.bName}
+                          account (${bankDetails?.number}). Tap to change
+                          `}
+                        </p>
+                      ) : (
+                        <p>
+                          Tap this tab to add your Account details for Withdrawl
+                        </p>
+                      )}
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="au-card px-0 mt-4 flex-grow-1">
@@ -118,4 +146,15 @@ const MyPurse4 = () => {
   );
 };
 
-export default MyPurse4;
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  const { loading, alertType, message } = state.registration;
+  return { alert, username, message, alertType, loading };
+};
+
+const actionCreators = {
+  getAccount: usersActions.getInfo,
+};
+
+export default connect(mapStateToProps, actionCreators)(MyPurse4);
