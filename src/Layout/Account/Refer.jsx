@@ -129,7 +129,7 @@ const Refer = (props) => {
                               <TwitterShareButton
                                 url={referral}
                                 quota={
-                                  "Are you ready for the next generation financial investments, register on InvestYield using my Referral link"
+                                  "Are you ready for the next generation financial investments, register on investYield using my Referral link"
                                 }
                                 className="Demo__some-network__share-button"
                               >
@@ -139,7 +139,7 @@ const Refer = (props) => {
                               <EmailShareButton
                                 url={referral}
                                 quota={
-                                  "Are you ready for the next generation financial investments, register on InvestYield using my Referral link"
+                                  "Are you ready for the next generation financial investments, register on investYield using my Referral link"
                                 }
                                 className="Demo__some-network__share-button"
                               >
@@ -148,7 +148,7 @@ const Refer = (props) => {
                               <WhatsappShareButton
                                 url={referral}
                                 quota={
-                                  "Are you ready for the next generation financial investments, register on InvestYield using my Referral link"
+                                  "Are you ready for the next generation financial investments, register on investYield using my Referral link"
                                 }
                                 className="Demo__some-network__share-button"
                               >
@@ -158,7 +158,7 @@ const Refer = (props) => {
                               <FacebookShareButton
                                 url={referral}
                                 quota={
-                                  "Are you ready for the next generation financial investments, register on InvestYield using my Referral link"
+                                  "Are you ready for the next generation financial investments, register on investYield using my Referral link"
                                 }
                                 className="Demo__some-network__share-button"
                               >

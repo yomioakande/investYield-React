@@ -51,7 +51,7 @@ const Index = () => {
                       on investYield. We offer security, speed, flexibility,
                       financial education and a disciplined approach towards a
                       smarter money saving behavior that will enable you to
-                      achieve your big goals. <br />
+                      achieve life goals. <br />
                       <br />
                       Our vision is to build Africa's biggest community of smart
                       money savers through exceptional service and robust

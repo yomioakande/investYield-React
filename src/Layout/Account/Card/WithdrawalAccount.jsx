@@ -232,6 +232,7 @@ const WithdrawalAccount = (props) => {
                   <input
                     type="text"
                     className="text-field"
+                    autoComplete="off"
                     placeholder="Enter Account Number"
                     name="accountNumber"
                     {...formik.getFieldProps("accountNumber")}

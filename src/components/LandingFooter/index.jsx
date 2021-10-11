@@ -16,7 +16,8 @@ const Index = () => {
             <p className="footer-topDiv-p text-center mt-3">
               Download the app on your mobile device now.
             </p>
-            <div className="d-flex justify-content-center mt-4">
+            <p className="text-center mt-4">Coming Soon</p>
+            <div className="d-flex justify-content-center">
               <div className="col-lg-4">
                 <div className="d-flex justify-content-between align-items-center">
                   <div>
@@ -79,7 +80,10 @@ const Index = () => {
                     <a href="/app" className="mt-3 footer-bottom-links">
                       Investment
                     </a>
-                    <a href="/app/groupsavings" className="mt-3 footer-bottom-links">
+                    <a
+                      href="/app/groupsavings"
+                      className="mt-3 footer-bottom-links"
+                    >
                       Group Savings
                     </a>
                     <a href="/app/stash" className="mt-3 footer-bottom-links">
@@ -120,7 +124,7 @@ const Index = () => {
                 2020 investYield All Rights Reserved
               </p>
               <p className="font-x-sm mt-2 base-color">
-                InvestYield is a property of RevenueBull Technologies Limited, a
+                investYield is a property of RevenueBull Technologies Limited, a
                 company duly registered with CAC with RC Number 1691483.
                 investYield provides financial services under a cooperative
                 license with a registration number LSCS 17462. Both investYield

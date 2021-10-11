@@ -30,7 +30,7 @@ const Header = ({ username }) => {
           <div className="container-fluid">
             <div className="header-mobile-inner">
               <a className="logo" href="/index.html">
-                <img src={invest} alt="InvestYield" />
+                <img src={invest} alt="investYield" />
               </a>
               <button className="hamburger hamburger--slider" type="button">
                 <span className="hamburger-box">

@@ -41,7 +41,7 @@ const Group2 = (props) => {
           name: file.name,
           content: reader.result,
         };
-       
+
         //eslint-disable-next-line
         const postImageRef = props
           .postImageBase64(baseObj, "/api/v1/util/fileupload", success)
@@ -139,7 +139,7 @@ const Group2 = (props) => {
                       <div className="mt-4">
                         <div className="form-group">
                           <label className="text-blue">
-                            Would you like to upload an image?
+                            Would you like to upload an image? (optional)
                           </label>
                           <div className="img-upload-div d-flex justify-content-between align-items-center px-3">
                             <h6 className="text-green">{imageName}</h6>

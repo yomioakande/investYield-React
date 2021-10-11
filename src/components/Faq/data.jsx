@@ -1,6 +1,6 @@
 export const GeneralQuestions = [
   {
-    question: "What is InvestYield?",
+    question: "What is investYield?",
     answer1:
       "Welcome to investYield, an urban digital platform that allows you to automate your savings and discover true money happiness. You can save small amounts periodically or save a lump sum one time by committing  to goals and also join interesting savings challenges to achieve financial freedom.",
     answer2:
@@ -40,7 +40,7 @@ export const GeneralQuestions = [
 
 export const SafetySecurity = [
   {
-    question: "How safe is my financial information on InvestYield?",
+    question: "How safe is my financial information on investYield?",
     answer1:
       "The platform was designed and built by a team of experienced bankers, data scientists, behavioral scientists and software engineers. We understand the safety of your financial information is critical. investYield does not store personal financial information, these are retained by our payment partners with PCI-DSS compliance certificate.  Your savings record on our platform is encrypted and secured by 256 bits SSL security encryption to ensure that your information is completely protected.",
   },
@@ -48,11 +48,11 @@ export const SafetySecurity = [
   {
     question: "What is OTP?",
     answer1:
-      "This is a One Time Password used for initiating transfers and withdrawals on your InvestYield account.",
+      "This is a One Time Password used for initiating transfers and withdrawals on your investYield account.",
     answer2: "",
   },
   {
-    question: "2FA Authentication on InvestYield?",
+    question: "2FA Authentication on investYield?",
     answer1:
       "This means there are two layers of security for transactions on your investYield account.",
   },
@@ -62,7 +62,7 @@ export const SafetySecurity = [
     answer1:
       "Our physical office is located at No1, Adewale Oshin street, Off Chief Collins, Lekki Phase1, Lagos, Nigeria",
 
-    answer2: "Email: support@InvestYield.com",
+    answer2: "Email: support@investYield.com",
     answer3: "website: https://investyield.ng",
   },
 
@@ -155,7 +155,7 @@ export const TargetGroup = [
 
 export const Interest = [
   {
-    question: "Do I get interest on my savings with InvestYield?",
+    question: "Do I get interest on my savings with investYield?",
     answer1:
       "Yes you can choose to earn interest if you want, and you can also view the progress of your savings every day.",
   },

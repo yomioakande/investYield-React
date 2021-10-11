@@ -46,13 +46,13 @@ const index = () => {
                 <div className="d-flex flex-column align-items-center mt-5">
                   <div>
                     <h5 className="text-center welcomeText text-blue">
-                      Welcome to InvestYield
+                      Feel happy about money
                     </h5>
                   </div>
                   <div className="col-lg-3 px-0">
                     <p className="text-center welcome-p">
-                      The money app that makes it easy to fund your future;
-                      while taking care of your now.
+                      You aren't bad with money... It was just never this easy
+                      to be good. Welcome to a better way to do personal finance
                     </p>
                   </div>
                   <div className="d-flex justify-content-center">
@@ -85,24 +85,17 @@ const index = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-lg-8 mt-3">
-                            <div className="invest-div">
+                          <div className="col-lg-10 mt-3">
+                            <div className="earnInterest-div">
                               <div className="d-flex justify-content-between align-items-center">
-                                <h5 className="invest-div-header text-green mb-0">
-                                  Invest
+                                <h5 className="earnInterest-header text-earn-red mb-0">
+                                  Earn Interests
                                 </h5>
-                                <img
-                                  src={investIcon}
-                                  className="img-fluid"
-                                  alt="invest"
-                                />
                               </div>
                               <div className="mt-4">
                                 <p>
-                                  Invest in Mutual Funds, Treasury Bills and
-                                  Equities. Build your personal investment
-                                  portfolios, achieve capital growth and steady
-                                  income.
+                                  Earn highest possible interest rates on your
+                                  savings.
                                 </p>
                               </div>
                             </div>
@@ -133,17 +126,24 @@ const index = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-lg-10 mt-3">
-                            <div className="earnInterest-div">
+                          <div className="col-lg-8 mt-3">
+                            <div className="invest-div">
                               <div className="d-flex justify-content-between align-items-center">
-                                <h5 className="earnInterest-header text-earn-red mb-0">
-                                  Earn Interests
+                                <h5 className="invest-div-header text-green mb-0">
+                                  Invest
                                 </h5>
+                                <img
+                                  src={investIcon}
+                                  className="img-fluid"
+                                  alt="invest"
+                                />
                               </div>
                               <div className="mt-4">
                                 <p>
-                                  Earn highest possible interest rates on your
-                                  savings.
+                                  Invest in Mutual Funds, Treasury Bills and
+                                  Equities. Build your personal investment
+                                  portfolios, achieve capital growth and steady
+                                  income.
                                 </p>
                               </div>
                             </div>
@@ -247,7 +247,7 @@ const index = () => {
                 <div className="container">
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center pt-4">
-                      <h5 className="why-header">Why InvestYield?</h5>
+                      <h5 className="why-header">Why investYield?</h5>
                     </div>
                     <div className="d-flex justify-content-center">
                       <div className="small-white-line"></div>
@@ -322,7 +322,8 @@ const index = () => {
                                 All funds in your saving plans are invested in
                                 low risk, high quality and capital guaranteed
                                 investment portfolios managed by our
-                                professional fund managers regulated by the SEC.
+                                professional fund managers regulated by the
+                                Securities and Exchange Commission.
                               </p>
                             </div>
                           </div>

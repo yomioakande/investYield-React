@@ -96,7 +96,7 @@ const ModalBeneficiary = ({
                           <div className="small-red-line"></div>
                           <form onSubmit={formik.handleSubmit} className="mt-5">
                             {showError
-                              ?( message !== null
+                              ? message !== null
                                 ? alertType && (
                                     <div
                                       className={`font-sm alert ${alertType}`}
@@ -104,7 +104,7 @@ const ModalBeneficiary = ({
                                       {message}
                                     </div>
                                   )
-                                : null)
+                                : null
                               : null}
                             {active === "0" ? (
                               <>
@@ -133,8 +133,9 @@ const ModalBeneficiary = ({
                               <>
                                 <div className="form-group">
                                   <input
-                                    type="text"
+                                    type="tel"
                                     className="text-field"
+                                    autoComplete="off"
                                     name="identifier"
                                     {...formik.getFieldProps("identifier")}
                                     placeholder="Enter beneficiary phone number"
