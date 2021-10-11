@@ -56,10 +56,7 @@ const Otp = (props) => {
         <section className="reg-section">
           <div className="container-fluid">
             <div className="row justify-content-center">
-              <div
-                className="col-lg-5 col-xl-4"
-                style={{ maxWidth: "50%", flex: "0%" }}
-              >
+              <div className="col-lg-5 col-xl-4" style={{ flex: "0%" }}>
                 <div className="bg-white login-div p-5 shadow mt-5">
                   <div className="mt-5">
                     <h6 className="reg-p mb-3">

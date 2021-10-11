@@ -181,7 +181,7 @@ const First = (props) => {
                           name="dob"
                           {...formik.getFieldProps("dob")}
                           className="text-field"
-                          placeholder="Email Address"
+                          placeholder="Date of Birth"
                         />
                         {formik.touched.dob && formik.errors.dob && (
                           <p className="text-danger font-sm error1 font-weight-bold">
