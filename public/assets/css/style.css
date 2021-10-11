@@ -4,31 +4,31 @@ body {
   font-family: Comfortaa !important;
 }
 a.nav-link.active {
-  color: #08B29B !important;
-  border-bottom: 2px solid #08B29B;
+  color: #08b29b !important;
+  border-bottom: 2px solid #08b29b;
 }
-.nav-edit{
+.nav-edit {
   box-shadow: 0px -1px 15px rgba(0, 0, 0, 0.39);
 }
-.section-custom-height{
-  height:1350px;
+.section-custom-height {
+  height: 1350px;
 }
-.reg-section{
-  height:83vh;
+.reg-section {
+  height: 83vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
-.reg-section-pin{
-  height:90vh;
+.reg-section-pin {
+  height: 90vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
-.div-shaped{
-  bottom:0;
+.div-shaped {
+  bottom: 0;
   clip-path: polygon(0 20%, 100% 0, 100% 100%, 0% 100%);
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
-.login-bg{
+.login-bg {
   height: 100vh;
   width: 100%;
   position: relative;
@@ -36,11 +36,11 @@ a.nav-link.active {
   background-position: 70% 30%;
   background-image: url("../images/login-bg.png");
 }
-.logo-custom-size1{
-  height:50px;
-  width:300px;
+.logo-custom-size1 {
+  height: 50px;
+  width: 300px;
 }
-.login-bg-overlay{
+.login-bg-overlay {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -62,7 +62,7 @@ a.nav-link.active {
   background-position: 70% 30%;
   background-image: url("../images/whyInvestImg.png");
 }
-.fantastic-overlay{
+.fantastic-overlay {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -84,44 +84,43 @@ a.nav-link.active {
   background-position: 70% 30%;
   background-image: url("../images/whyInvestImg.png");
 }
-.contactUsForm-resp{
-  top:15%;
-  right:15%;
+.contactUsForm-resp {
+  top: 15%;
+  right: 15%;
 }
-@media (max-width:350px) {
-  .banner-img2{
-    height:1850px!important;
-  }
-}
-@media (max-width:1000px) {
-  .div-shaped{
-    position:relative!important;
-    clip-path: unset!important;
-  }
-  .section-custom-height{
-    height: auto!important;
-  }
-  .m-custom-sm{
-    margin-top:50px!important;
-    margin-bottom:50px!important;
-  }
-  .contactUsForm-resp{
-    position:relative!important;
-    top:0!important;
-    right:0!important;
-  }
-  .p-resp{
-    padding-left:1rem!important;
-    padding-right:1rem!important;
+@media (max-width: 350px) {
+  .banner-img2 {
+    height: 1850px !important;
   }
 }
-
-@media (max-width:991px) {
-  .mt-resp-sm{
-    margin-top:20px!important;
+@media (max-width: 1000px) {
+  .div-shaped {
+    position: relative !important;
+    clip-path: unset !important;
+  }
+  .section-custom-height {
+    height: auto !important;
+  }
+  .m-custom-sm {
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+  }
+  .contactUsForm-resp {
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
+  }
+  .p-resp {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 }
 
+@media (max-width: 991px) {
+  .mt-resp-sm {
+    margin-top: 20px !important;
+  }
+}
 
 .overlay {
   position: absolute;
@@ -165,7 +164,7 @@ a.nav-link.active {
 }
 /* backgrounds */
 .bg-lightBlue {
-  background-color: #F5F7F7 !important;
+  background-color: #f5f7f7 !important;
 }
 .bg-white {
   background-color: #fff !important;
@@ -247,11 +246,11 @@ a.nav-link.active {
   font-size: 0.875rem;
   font-weight: 400;
 }
-.div-contact-us{
-  border-radius:5px;
+.div-contact-us {
+  border-radius: 5px;
 }
 .contactUs-div {
-  background-color: #F3F8FE;
+  background-color: #f3f8fe;
   height: 50px;
   font-size: 1rem !important;
 }
@@ -298,52 +297,58 @@ a.nav-link.active {
 }
 /* Everything about fonts */
 .welcomeText {
-  font-size: 1.5rem;
+  font-size: 2.6rem;
 }
 .welcome-p {
   font-size: 1rem;
   color: #0553c8;
   font-weight: 400;
 }
-.save-div{
+.save-div {
   background-color: rgba(5, 83, 200, 0.06);
-  width:100%;
-  border-radius:5px;
-  padding:20px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 20px;
   min-height: 180px;
 }
-.invest-div{
-  background-color:rgba(8, 178, 155, 0.06);
-  width:100%;
-  border-radius:5px;
-  padding:20px;
+.invest-div {
+  background-color: rgba(8, 178, 155, 0.06);
+  width: 100%;
+  border-radius: 5px;
+  padding: 20px;
   min-height: 230px;
 }
-.myPurse-div{
+.myPurse-div {
   background-color: rgba(255, 199, 39, 0.4);
-  width:100%;
-  border-radius:5px;
-  padding:20px;
-  min-height:230px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 20px;
+  min-height: 230px;
 }
-.earnInterest-div{
+.earnInterest-div {
   background-color: rgba(255, 195, 189, 0.3);
-  width:100%;
-  border-radius:5px;
-  padding:20px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 20px;
   min-height: 180px;
 }
-.save-div, .invest-div, .myPurse-div, .earnInterest-div p{
-  font-size:0.825rem;
+.save-div,
+.invest-div,
+.myPurse-div,
+.earnInterest-div p {
+  font-size: 0.825rem;
 }
-.save-div-header, .invest-div-header, .earnInterest-header, .myPurse-div-header{
-  font-size:1.5rem;
+.save-div-header,
+.invest-div-header,
+.earnInterest-header,
+.myPurse-div-header {
+  font-size: 1.5rem;
 }
-.text-brown{
-  color:#B80909;
+.text-brown {
+  color: #b80909;
 }
-.text-earn-red{
- color:#F20000;
+.text-earn-red {
+  color: #f20000;
 }
 .landing-page-header {
   font-size: 2.6rem;
@@ -354,12 +359,12 @@ a.nav-link.active {
   font-size: 1.3rem;
 }
 .get-started-header {
-  font-size: 1.5rem;
+  font-size: 2.6rem;
   color: #0553c8;
   font-weight: 700;
 }
-.get-started-numbers{
-  font-size:1.125rem;
+.get-started-numbers {
+  font-size: 1.125rem;
 }
 .get-started-header-sm {
   font-size: 1.375rem;
@@ -370,9 +375,9 @@ a.nav-link.active {
   font-size: 1rem;
   color: #707070;
 }
-.get-started-info-div{
-  background-color:#FAFAFA;
-  border-radius:5px;
+.get-started-info-div {
+  background-color: #fafafa;
+  border-radius: 5px;
 }
 .why-header {
   font-size: 2.25rem;
@@ -450,8 +455,8 @@ a.nav-link.active {
 .text-blue {
   color: #0553c8;
 }
-.text-orange{
-  color:#EA940B;
+.text-orange {
+  color: #ea940b;
 }
 .b-radius-5 {
   border-radius: 5px;
@@ -462,8 +467,8 @@ a.nav-link.active {
 .font-sm-sm {
   font-size: 0.625rem !important;
 }
-.font-x-sm{
-  font-size:0.75rem;
+.font-x-sm {
+  font-size: 0.75rem;
 }
 .font-sm {
   font-size: 0.825rem;
@@ -471,8 +476,8 @@ a.nav-link.active {
 .font-rem1 {
   font-size: 0.9rem;
 }
-.base-color{
-  color:rgba(38, 50, 56, 0.8);
+.base-color {
+  color: rgba(38, 50, 56, 0.8);
 }
 .text-field::placeholder {
   font-size: 0.75rem !important;
@@ -589,16 +594,16 @@ a.btn {
   margin-top: 130px;
   margin-bottom: 130px;
 }
-.my-150{
-  margin-top:200px;
-  margin-bottom:150px;
+.my-150 {
+  margin-top: 200px;
+  margin-bottom: 150px;
 }
-.my-80{
+.my-80 {
   margin-top: 80px;
   margin-bottom: 80px;
 }
-.mt-100{
-  margin-top:100px;
+.mt-100 {
+  margin-top: 100px;
 }
 .mt-150 {
   margin-top: 150px;
@@ -688,11 +693,11 @@ a.btn {
   font-size: 3rem;
   color: #ffffff;
 }
-.text-fantastic-p{
-  font-size:1rem;
+.text-fantastic-p {
+  font-size: 1rem;
 }
-.text-fantastic-p2{
-  font-size:0.9rem;
+.text-fantastic-p2 {
+  font-size: 0.9rem;
 }
 .light-green-div {
   background-color: #edfffd;
