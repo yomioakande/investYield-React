@@ -130,8 +130,8 @@ const Third = (props) => {
                       <div className="mt-4">
                         <p className="agree-text">
                           By clicking on “Sign Up”, you agree to investYield’s{" "}
-                          <a href="/">Terms & Conditions</a> and{" "}
-                          <a href="/">Privacy Policy</a>
+                          <a href="/terms">Terms & Conditions</a> and{" "}
+                          <a href="/privacy">Privacy Policy</a>
                         </p>
                       </div>
                       <div className="form-group mt-5">

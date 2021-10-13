@@ -66,7 +66,7 @@ const Index = () => {
                     <a href="/terms" className="mt-3 footer-bottom-links">
                       Terms and Conditions
                     </a>
-                    <a href="/" className="mt-3 footer-bottom-links">
+                    <a href="/privacy" className="mt-3 footer-bottom-links">
                       Privacy Policy
                     </a>
                   </div>

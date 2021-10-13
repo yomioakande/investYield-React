@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/css/style.css"
+import "../../assets/css/style.css";
 // import "../../index.css";
 const index = () => {
   return (
@@ -12,12 +12,12 @@ const index = () => {
             </p>
           </div>
           <div class="px-5 px-resp">
-            <a href="/" class="loginpage-footer-p">
+            <a href="/terms" class="loginpage-footer-p">
               Terms and Conditions
             </a>
           </div>
           <div class="px-5 px-resp">
-            <a href="/" class="loginpage-footer-p">
+            <a href="/privacy" class="loginpage-footer-p">
               Privacy Policy
             </a>
           </div>
