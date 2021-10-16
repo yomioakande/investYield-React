@@ -20,10 +20,13 @@ import { CSSTransition } from "react-transition-group";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./transitions.css";
+import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/swiper-bundle.min.css";
+// import 'swiper/css';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
 import { nairaCurrencyVal, dollarCurrencyVal } from "../helpers/helper";
 import { ErrorBoundary } from "react-error-boundary";
-
 import FallBack from "./FallBack";
 
 const Main = (props) => {
@@ -64,9 +67,7 @@ const Main = (props) => {
       const coreAccounts = await props
         .getAccounts("/api/v1/user/accountbyproduct", "0201")
         .then();
-      // const df = () => {
-      //   throw Error("The error is crazy mehn");
-      // };
+
       console.log("reerse", data);
       setSummaryInfo(data);
       setTodoList(todo);
@@ -433,8 +434,10 @@ const Main = (props) => {
                     <h3 className="title-2 tm-b-5">Join a savings challenge</h3>
                   </div>
                   <div className="position-relative wecare-sec mx-4">
+                    <Swiper>
                     <div className="swiper-container position-relative wecare-slider">
                       <div className="swiper-wrapper py-2">
+                        <SwiperSlide>
                         <div className="swiper-slide">
                           <div className="w-100 h-100">
                             <div className="container h-100">
@@ -454,8 +457,9 @@ const Main = (props) => {
                           </div>
                           {/* <!-- .hero-content-overlay --> */}
                         </div>
+                        </SwiperSlide>
                         {/* <!-- .hero-content-wrap --> */}
-
+                        <SwiperSlide>
                         <div className="swiper-slide">
                           <div className="w-100 h-100">
                             <div className="container h-100">
@@ -475,10 +479,12 @@ const Main = (props) => {
                           </div>
                           {/* <!-- .hero-content-overlay --> */}
                         </div>
+                        </SwiperSlide>
                         {/* <!-- .hero-content-wrap --> */}
                       </div>
                       {/* <!-- .swiper-wrapper --> */}
                     </div>
+                    </Swiper>
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
                         <div className="swiper-button-next"></div>
