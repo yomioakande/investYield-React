@@ -18,6 +18,7 @@ const Savings = ({ getData, getAccounts }) => {
   const [loading, setloading] = useState(false);
   const [coreAccounts, setCoreAccounts] = useState([]);
   const [stashAccounts, setStashAccounts] = useState([]);
+  const [purseAccounts, setPurseAccounts] = useState([]);
   const [myPurse, setMyPurse] = useState([]);
   const [hidden, setHidden] = useState({});
   const toggleHide = (index) => {
@@ -42,6 +43,7 @@ const Savings = ({ getData, getAccounts }) => {
       ).then();
       setSummaryInfo(data);
       setStashAccounts(stashAccounts);
+      setPurseAccounts(myPurseAccounts);
       setCoreAccounts(coreAccounts);
       setMyPurse(myPurseAccounts);
       setloading(false);
@@ -173,110 +175,46 @@ const Savings = ({ getData, getAccounts }) => {
                 <div className="au-card-inner">
                   <div className="d-flex justify-content-between align-items-start">
                     <div className="title-2">myPurse</div>
-                    <a href="/app/view" className="au-btn-link">
+                    {/* <a href="/app/view" className="au-btn-link">
                       View All Purses
-                    </a>
+                    </a> */}
                   </div>
 
-                  <div
-                    className="row px-3 cg-3 mt-4"
-                    style={{ overflowX: "hidden" }}
-                  >
-                    <Link
-                      to="/app/savings/mypurse"
-                      className="card-box d-flex flex-column mb-4"
+                  <div className="row px-3 cg-3 mt-4">
+                    <div
+                      style={{
+                        width: "100vw",
+                        overflowX: "scroll",
+                        display: "flex",
+                        flexWrap: "nowrap",
+                      }}
                     >
-                      <div className="au-card-purse au-card-bg-create-purse flex-grow-1">
-                        <div className="au-card-elements">
-                          <img src={plus2} alt="new" />
-                          <p className="text-green">Create A New Purse</p>
+                      <Link
+                        to="/app/savings/mypurse"
+                        className="card-box d-flex flex-column mb-4"
+                      >
+                        <div className="au-card-purse au-card-bg-create-purse flex-grow-1">
+                          <div className="au-card-elements">
+                            <img src={plus2} alt="new" />
+                            <p className="text-green">Create A New Purse</p>
+                          </div>
                         </div>
-                      </div>
-                    </Link>
-                    {[
-                      {
-                        name: "Vibe Cash",
-                        purseAmount: "5024.12",
-                        nameClass: "au-card-bg-vibe-cash",
-                      },
-                      {
-                        name: "Food Cash",
-                        purseAmount: "50.00",
-                        nameClass: "au-card-bg-food-cash",
-                      },
-                      {
-                        name: "TGIF Cash",
-                        purseAmount: "0.00",
-                        nameClass: "au-card-bg-tgif-cash",
-                      },
-                      {
-                        name: "Food Cash",
-                        purseAmount: "50.00",
-                        nameClass: "au-card-bg-food-cash",
-                      },
-                      {
-                        name: "TGIF Cash",
-                        purseAmount: "0.00",
-                        nameClass: "au-card-bg-tgif-cash",
-                      },
-                    ].map((single, index) => {
-                      return (
-                        <Purse
-                          key={index}
-                          index={index}
-                          namePurse={single.name}
-                          purseAmount={single.purseAmount}
-                          nameClass={single.nameClass}
-                          toggleHide={toggleHide}
-                          hidden={hidden}
-                        />
-                      );
-                    })}
-                    {/* <a href="/" className="card-box d-flex flex-column mb-4">
-                      <div className="au-card-purse au-card-bg-vibe-cash flex-grow-1">
-                        <div className="au-card-elements">
-                          <p className="mt-1">Vibe Cash</p>
-                          <p className="mt-1">₦ 5,024.12</p>
-                          <p className="mt-2 purse-link-btn">Hide Balance</p>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="/" className="card-box d-flex flex-column mb-4">
-                      <div className="au-card-purse au-card-bg-food-cash flex-grow-1">
-                        <div className="au-card-elements">
-                          <p className="mt-1">Food Cash</p>
-                          <p className="mt-1">₦ 0.00</p>
-                          <p className="mt-2 purse-link-btn">Hide Balance</p>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="/" className="card-box d-flex flex-column mb-4">
-                      <div className="au-card-purse au-card-bg-tgif-cash flex-grow-1">
-                        <div className="au-card-elements">
-                          <p className="mt-1">TGIF Cash</p>
-                          <p className="mt-1">₦ 0.00</p>
-                          <p className="mt-2 purse-link-btn">Hide Balance</p>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="/" className="card-box d-flex flex-column mb-4">
-                      <div className="au-card-purse au-card-bg-food-cash flex-grow-1">
-                        <div className="au-card-elements">
-                          <p className="mt-1">Food Cash</p>
-                          <p className="mt-1">₦ 0.00</p>
-                          <p className="mt-2 purse-link-btn">Hide Balance</p>
-                        </div>
-                      </div>
-                    </a>
-                    <a href="/" className="card-box d-flex flex-column mb-4">
-                      <div className="au-card-purse au-card-bg-tgif-cash flex-grow-1">
-                        <div className="au-card-elements">
-                          <p className="mt-1">TGIF Cash</p>
-                          <p className="mt-1">₦ 0.00</p>
-                          <p className="mt-2 purse-link-btn">Hide Balance</p>
-                        </div>
-                      </div>
-                    </a> */}
+                      </Link>
+
+                      {purseAccounts.map((single, index) => {
+                        return (
+                          <Purse
+                            key={index}
+                            index={index}
+                            namePurse={single.name}
+                            purseAmount={single.purseAmount}
+                            nameClass={single.nameClass}
+                            toggleHide={toggleHide}
+                            hidden={hidden}
+                          />
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -8,7 +8,7 @@ import referIcon from "../../assets/images/referIcon.svg";
 import beneficiary from "../../assets/images/mgBeneficiariesIcon.svg";
 import securityIcon from "../../assets/images/securityIcon.svg";
 import MenuBar from "../Account/MenuBar";
-import Charts from "../Charts"
+import Charts from "../Charts";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import Loader from "../../common/Loader";
@@ -30,7 +30,7 @@ const Index = ({ getData }) => {
 
   return (
     <>
-     {loading && <Loader />}
+      {loading && <Loader />}
       <div className="section__content section__content--p30 py-4">
         <div className="container-fluid">
           <div className="row">
@@ -70,7 +70,7 @@ const Index = ({ getData }) => {
                 <div className="au-card-inner w-100">
                   <div className="row align-items-center justify-content-center">
                     <div className="col-lg-7 profile-cards col-md-6">
-                      <Charts summaryInfo={summaryInfo}/>
+                      <Charts summaryInfo={summaryInfo} />
                       {/* <canvas id="myChart" width="800" height="550"></canvas> */}
                     </div>
                     <div className="col-lg-5 w-auto profile-cards col-md-4 mt-3">
@@ -93,10 +93,10 @@ const Index = ({ getData }) => {
                           <p>Total Dollar Savings</p>
                           <p>{dollarCurrencyVal(summaryInfo.totDollar)}</p>
                         </li>
-                        <li className="mb-3 text-yellow">
+                        {/* <li className="mb-3 text-yellow">
                           <p>Total Purse Cash</p>
-                          {/* <p>₦10,000.00</p> */}
-                        </li>
+                          <p>₦10,000.00</p>
+                        </li> */}
                       </ul>
                     </div>
                   </div>

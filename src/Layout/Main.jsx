@@ -210,9 +210,9 @@ const Main = (props) => {
                 <div className="au-card-inner">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">myPurse</h3>
-                    <Link to="/app/savings/mypurse" className="au-btn-link">
+                    {/* <Link to="/app/savings/mypurse" className="au-btn-link">
                       View more
-                    </Link>
+                    </Link> */}
                   </div>
                   <div>
                     <div className="row px-3 cg-3 mt-4">
