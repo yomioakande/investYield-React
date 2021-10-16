@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import Select from "react-select";
+import { Persist } from "formik-persist";
+// import FormikStore from 'formik-store'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
@@ -10,14 +12,20 @@ const Index = ({ getFrequency, createStash, loading }) => {
   const [freqOptions, setFreqOptions] = useState([]);
   const [num, setNum] = useState("");
 
-  // const changeVal=(values)=>{
-  //   setNum(values)
-  // }
   const initialValues = {
     amount: "",
     frequency: "",
     ccyCode: "1",
   };
+  // const [state, setState] = useState(initialValues);
+
+  // let data;
+  // useEffect(() => {
+  let data = JSON.parse(sessionStorage.getItem("stash"));
+  // setState(data);
+  // }, []);
+
+  console.log(data);
 
   const validationSchema = Yup.object({
     amount: Yup.number().required("An Amount is Required"),
@@ -50,7 +58,8 @@ const Index = ({ getFrequency, createStash, loading }) => {
   });
 
   useEffect(() => {
-    formik.setFieldValue("amount", num?.value);
+    formik.setFieldValue("amount", data?.amount || num?.value);
+    // formik.setFieldValue("frequency",JSON.parse(sessionStorage.getItem("stash")).frequency)
     // eslint-disable-next-line
   }, [num?.value]);
 
@@ -68,8 +77,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
     })();
     //eslint-disable-next-line
   }, [ccy]);
-
-  // console.
 
   const options = freqOptions.map((single, index) => {
     return {
@@ -184,6 +191,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
                             className="text-field"
                             placeholder="Amount"
                             name="amount"
+                            value={formik.values.amount}
                             onValueChange={(values) => {
                               setNum({ value: values.value });
                             }}
@@ -217,7 +225,10 @@ const Index = ({ getFrequency, createStash, loading }) => {
                                   formik.values.frequency
                                 )}
                                 onChange={(value) =>
-                                  formik.setFieldValue("frequency", value.value)
+                                  formik.setFieldValue(
+                                    "frequency",
+                                    data?.frequency || value.value
+                                  )
                                 }
                                 autoFocus={true}
                               />
@@ -257,12 +268,18 @@ const Index = ({ getFrequency, createStash, loading }) => {
                                   }
                                   className="btn login-submit"
                                 />
+                                <Persist
+                                  // isSessionStorage={true}
+                                  name="first-form"
+                                />
+                                {/* <FormikStore name="signup" storage={window.sessionStorage} /> */}
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </form>
+                    {/* </Formik> */}
                   </div>
                 </div>
               </div>
@@ -270,6 +287,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
           </div>
         </div>
       </div>
+      {/* </Formik> */}
     </>
   );
 };
