@@ -152,7 +152,7 @@ const Group1 = () => {
                         </div>
                         <div className="form-group mt-4">
                           <label className="text-blue">
-                            Set a target amount for your home goal
+                            Set a target amount for your group savings
                           </label>
                           <NumberFormat
                             // type="text"
