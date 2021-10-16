@@ -5,6 +5,7 @@ import uploadimg from "../assets/images/uploadImg.svg";
 import avatar from "../assets/images/icon/avatar-01.jpg";
 import leftArrow from "../assets/images/left-arrow.svg";
 import "../assets/css/theme.css";
+import "../assets/vendor/css-hamburgers/hamburgers.css";
 import { connect } from "react-redux";
 import { usersActions } from "../redux/actions";
 
@@ -40,108 +41,42 @@ const Header = ({ username }) => {
             </div>
           </div>
         </div>
+
         <nav className="navbar-mobile">
           <div className="container-fluid">
             <ul className="navbar-mobile__list list-unstyled">
               <li className="has-sub">
-                <a className="js-arrow" href="/">
-                  <i className="fas fa-tachometer-alt"></i>Dashboard
-                </a>
-                <ul className="navbar-mobile-sub__list list-unstyled js-sub-list">
-                  <li>
-                    <a href="index.html">Dashboard 1</a>
-                  </li>
-                  <li>
-                    <a href="index2.html">Dashboard 2</a>
-                  </li>
-                  <li>
-                    <a href="index3.html">Dashboard 3</a>
-                  </li>
-                  <li>
-                    <a href="index4.html">Dashboard 4</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="chart.html">
-                  <i className="fas fa-chart-bar"></i>Charts
+                <a
+                  class="js-arrow d-flex align-items-center active"
+                  href="/app"
+                >
+                  <i data-feather="home" class="mr-3"></i>Home
                 </a>
               </li>
               <li>
-                <a href="table.html">
-                  <i className="fas fa-table"></i>Tables
+                <a href="" class="js-arrow d-flex align-items-center">
+                  <i data-feather="shield" class="mr-3"></i>Savings
                 </a>
               </li>
               <li>
-                <a href="form.html">
-                  <i className="far fa-check-square"></i>Forms
+                <a href="" class="js-arrow d-flex align-items-center">
+                  <i data-feather="activity" class="mr-3"></i>Investments
                 </a>
               </li>
               <li>
-                <a href="calendar.html">
-                  <i className="fas fa-calendar-alt"></i>Calendar
+                <a href="" class="js-arrow d-flex align-items-center">
+                  <i data-feather="file" class="mr-3"></i>Blog
                 </a>
               </li>
               <li>
-                <a href="map.html">
-                  <i className="fas fa-map-marker-alt"></i>Maps
+                <a href="" class="js-arrow d-flex align-items-center">
+                  <i data-feather="user" class="mr-3"></i>Account
                 </a>
               </li>
-              <li className="has-sub">
-                <a className="js-arrow" href="/">
-                  <i className="fas fa-copy"></i>Pages
+              <li>
+                <a href="" class="text-danger d-flex align-items-center">
+                  <i data-feather="log-out" class="mr-3"></i>Logout
                 </a>
-                <ul className="navbar-mobile-sub__list list-unstyled js-sub-list">
-                  <li>
-                    <a href="login.html">Login</a>
-                  </li>
-                  <li>
-                    <a href="register.html">Register</a>
-                  </li>
-                  <li>
-                    <a href="forget-pass.html">Forget Password</a>
-                  </li>
-                </ul>
-              </li>
-              <li className="has-sub">
-                <a className="js-arrow" href="/">
-                  <i className="fas fa-desktop"></i>UI Elements
-                </a>
-                <ul className="navbar-mobile-sub__list list-unstyled js-sub-list">
-                  <li>
-                    <a href="button.html">Button</a>
-                  </li>
-                  <li>
-                    <a href="badge.html">Badges</a>
-                  </li>
-                  <li>
-                    <a href="tab.html">Tabs</a>
-                  </li>
-                  <li>
-                    <a href="card.html">Cards</a>
-                  </li>
-                  <li>
-                    <a href="alert.html">Alerts</a>
-                  </li>
-                  <li>
-                    <a href="progress-bar.html">Progress Bars</a>
-                  </li>
-                  <li>
-                    <a href="modal.html">Modals</a>
-                  </li>
-                  <li>
-                    <a href="switch.html">Switchs</a>
-                  </li>
-                  <li>
-                    <a href="grid.html">Grids</a>
-                  </li>
-                  <li>
-                    <a href="fontawesome.html">Fontawesome Icon</a>
-                  </li>
-                  <li>
-                    <a href="typo.html">Typography</a>
-                  </li>
-                </ul>
               </li>
             </ul>
           </div>
@@ -236,60 +171,6 @@ const Header = ({ username }) => {
                     </div>
                   </div>
                 </div>
-                {/* <Menu as="div" className="ml-3 relative">
-                  <div>
-                    <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu> */}
               </div>
             </div>
           </div>

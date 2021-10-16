@@ -2110,8 +2110,12 @@ section {
   line-height: inherit;
 }
 
+.header-mobile .navbar-mobile .navbar-mobile__list li a.active {
+  color: #08b29b !important;
+}
+
 .header-mobile .navbar-mobile .navbar-mobile__list li a:hover {
-  color: #4272d7;
+  color: #08b29b !important;
 }
 
 .header-mobile .navbar-mobile .navbar-mobile__list li a > i {

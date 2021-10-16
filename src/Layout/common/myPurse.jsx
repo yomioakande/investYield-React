@@ -17,7 +17,10 @@ const myPurse = ({
     }).format(number);
   return (
     <>
-      <div className="card-box d-flex flex-column mb-4 ml-4" style={{flexBasis:"100px"}}>
+      <div
+        className="card-box d-flex flex-column mb-4 ml-4"
+        style={{ flexBasis: "100px" }}
+      >
         <div className={`au-card-purse ${nameClass} flex-grow-1`}>
           <div className="au-card-elements">
             <Link to="/app">
@@ -32,6 +35,7 @@ const myPurse = ({
             >
               {!hidden[index] ? "Show" : "Hide"} Balance
             </p>
+            <p className="mt-2 purse-link-btn">Fund Purse</p>
           </div>
         </div>
       </div>
