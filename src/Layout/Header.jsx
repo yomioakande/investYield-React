@@ -54,27 +54,27 @@ const Header = ({ username }) => {
                 </a>
               </li>
               <li>
-                <a href="" class="js-arrow d-flex align-items-center">
+                <a href="/app" class="js-arrow d-flex align-items-center">
                   <i data-feather="shield" class="mr-3"></i>Savings
                 </a>
               </li>
               <li>
-                <a href="" class="js-arrow d-flex align-items-center">
+                <a href="/app" class="js-arrow d-flex align-items-center">
                   <i data-feather="activity" class="mr-3"></i>Investments
                 </a>
               </li>
               <li>
-                <a href="" class="js-arrow d-flex align-items-center">
+                <a href="/app" class="js-arrow d-flex align-items-center">
                   <i data-feather="file" class="mr-3"></i>Blog
                 </a>
               </li>
               <li>
-                <a href="" class="js-arrow d-flex align-items-center">
+                <a href="/app" class="js-arrow d-flex align-items-center">
                   <i data-feather="user" class="mr-3"></i>Account
                 </a>
               </li>
               <li>
-                <a href="" class="text-danger d-flex align-items-center">
+                <a href="/app" class="text-danger d-flex align-items-center">
                   <i data-feather="log-out" class="mr-3"></i>Logout
                 </a>
               </li>
