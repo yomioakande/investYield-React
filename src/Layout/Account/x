@@ -417,3 +417,63 @@ export default Profile;
                   //   minute: "numeric", // numeric, 2-digit
                   //   second: "numeric", // numeric, 2-digit
                   // });
+
+                    {/* {[
+                          {
+                            name: "Vibe Cash",
+                            purseAmount: "5024.12",
+                            nameClass: "au-card-bg-vibe-cash",
+                          },
+                          {
+                            name: "Food Cash",
+                            purseAmount: "50.00",
+                            nameClass: "au-card-bg-food-cash",
+                          },
+                          {
+                            name: "TGIF Cash",
+                            purseAmount: "0.00",
+                            nameClass: "au-card-bg-tgif-cash",
+                          },
+                          {
+                            name: "TGIF Cash",
+                            purseAmount: "0.00",
+                            nameClass: "au-card-bg-tgif-cash",
+                          },
+                          {
+                            name: "TGIF Cash",
+                            purseAmount: "0.00",
+                            nameClass: "au-card-bg-tgif-cash",
+                          },
+
+                          {
+                            name: "TGIF Cash",
+                            purseAmount: "0.00",
+                            nameClass: "au-card-bg-tgif-cash",
+                          },
+                          {
+                            name: "TGIF Cash",
+                            purseAmount: "0.00",
+                            nameClass: "au-card-bg-tgif-cash",
+                          },
+                          {
+                            name: "TGIF Cash",
+                            purseAmount: "0.00",
+                            nameClass: "au-card-bg-tgif-cash",
+                          },
+                          {
+                            name: "TGIF Cash",
+                            purseAmount: "0.00",
+                            nameClass: "au-card-bg-tgif-cash",
+                          },
+                          {
+                            name: "TGIF Cash",
+                            purseAmount: "0.00",
+                            nameClass: "au-card-bg-tgif-cash",
+                          },
+                          {
+                            name: "TGIF Cash",
+                            purseAmount: "0.00",
+                            nameClass: "au-card-bg-tgif-cash",
+                          },
+                        ].map((single, index) => { */}
+                          
