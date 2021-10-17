@@ -39,7 +39,6 @@ const Index = () => {
               <li className="nav-item nav-menu-padding">
                 <NavLink
                   to="/contactus"
-                  // onClick={() => (window.location.href = "/contactus")}
                   className="nav-link menus text-dark"
                 >
                   Contact us

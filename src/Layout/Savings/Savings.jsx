@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../assets/css/theme.css";
-import challenge from "../../assets/images/savingschallenge.svg";
+// import challenge from "../../assets/images/savingschallenge.svg";
 import plus2 from "../../assets/images/Stash/plus2.svg";
 import savings from "../../assets/images/individual-savings-icon.svg";
 import group from "../../assets/images/create-new-group-icon.svg";
@@ -12,7 +12,7 @@ import Loader from "../../common/Loader";
 import Charts from "../Charts";
 import { nairaCurrencyVal, dollarCurrencyVal } from "../../helpers/helper";
 import Purse from "../common/myPurse";
-
+import JoinSavings from "../JoinSavings"
 const Savings = ({ getData, getAccounts }) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [loading, setloading] = useState(false);
@@ -109,63 +109,7 @@ const Savings = ({ getData, getAccounts }) => {
             </div>
             <div className="col-lg-5 col-md-4 d-flex flex-column mb-3">
               <div className="au-card position-relative px-0 flex-grow-1">
-                <div className="au-card-inner">
-                  <div className="px-4">
-                    <h3 className="title-2 tm-b-5">Join a savings challenge</h3>
-                  </div>
-                  <div className="position-relative wecare-sec mx-4">
-                    <div className="swiper-container position-relative wecare-slider">
-                      <div className="swiper-wrapper py-2">
-                        <div className="swiper-slide">
-                          <div className="w-100 h-100">
-                            <div className="container h-100">
-                              <div className="row h-100 py-3 mb-4">
-                                <div className="au-message-list w-100 todolist mt-4">
-                                  <img
-                                    src={challenge}
-                                    className="img-fluid w-100"
-                                    alt="join a savings challenge"
-                                  />
-                                </div>
-                                {/* <!-- .col --> */}
-                              </div>
-                              {/* <!-- .row --> */}
-                            </div>
-                            {/* <!-- .container --> */}
-                          </div>
-                          {/* <!-- .hero-content-overlay --> */}
-                        </div>
-                        {/* <!-- .hero-content-wrap --> */}
-
-                        <div className="swiper-slide">
-                          <div className="w-100 h-100">
-                            <div className="container h-100">
-                              <div className="row h-100 py-3 mb-4">
-                                <div className="au-message-list w-100 todolist mt-4">
-                                  <img
-                                    src={challenge}
-                                    className="img-fluid w-100"
-                                    alt="join a savings challenge"
-                                  />
-                                </div>
-                                {/* <!-- .col --> */}
-                              </div>
-                              {/* <!-- .row --> */}
-                            </div>
-                            {/* <!-- .container --> */}
-                          </div>
-                          {/* <!-- .hero-content-overlay --> */}
-                        </div>
-                        {/* <!-- .hero-content-wrap --> */}
-                      </div>
-                      {/* <!-- .swiper-wrapper --> */}
-                    </div>
-                    <div className="d-flex">
-                      <div className="swiper-button-next"></div>
-                      <div className="swiper-button-prev"></div>
-                    </div>
-                  </div>
-                </div>
+   <JoinSavings/>
               </div>
             </div>
           </div>
@@ -327,8 +271,16 @@ const Savings = ({ getData, getAccounts }) => {
                     {coreAccounts.length > 0 ? (
                       coreAccounts.map((single, index) => {
                         return (
-                          <a
-                            href="#0"
+                          <Link
+                          key={single?.id}
+                            to={{
+                              pathname: `/app/singlesavings/${single?.id}`,
+                              state: {
+                                fromNotifications:true,
+                                data: single,
+                              },
+                            }}
+                            // href="#0"
                             className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
                           >
                             <div className="savings-card-box d-flex flex-column">
@@ -369,7 +321,7 @@ const Savings = ({ getData, getAccounts }) => {
                                 </div>
                               </div>
                             </div>
-                          </a>
+                          </Link>
                         );
                       })
                     ) : (

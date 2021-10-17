@@ -2,9 +2,50 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ReactDom from "react-dom";
 import styled from "styled-components";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { connect } from "react-redux";
+import { usersActions } from "../../redux/actions";
+import { dateConv } from "../../helpers";
 import closeImg from "../../assets/images/modal-close.svg";
-const Modal = ({ close }) => {
+const Modal = ({ close, getAccount }) => {
   const [first, setFirst] = useState("code");
+  const [groupAccount, setGroupAccount] = useState("");
+  const initialValues = {
+    code: "",
+  };
+  const validationSchema = Yup.object({
+    code: Yup.string().required("The Group code is required"),
+  });
+
+  const next = () => {
+    setFirst("breakdown");
+  };
+  const onSubmit = (values, onSubmitProps) => {
+    (async () =>{
+     const data= await getAccount("/api/v1/user/group_savings", values.code, next).then();
+     setGroupAccount(data);
+    //  console.log(j)
+    } )()
+    onSubmitProps.setSubmitting(false);
+  };
+
+  console.log(groupAccount, "adf");
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+    validateOnMount: true,
+  });
+
+  const currencyVal = (number) =>
+    new Intl.NumberFormat(
+      groupAccount?.currency?.code === 1 ? "en-NG" : "en-US",
+      {
+        style: "currency",
+        currency: groupAccount?.currency?.code === 1 ? "NGN" : "USD",
+      }
+    ).format(number);
 
   return ReactDom.createPortal(
     <OVERLAY>
@@ -41,14 +82,21 @@ const Modal = ({ close }) => {
                           Enter group code below to join
                         </h3>
                         <div className="small-red-line"></div>
-                        <form action="" className="mt-5">
+                        <form onSubmit={formik.handleSubmit} className="mt-5">
                           <div className="form-group">
                             <input
                               type="text"
                               className="text-field"
                               placeholder="Group code"
+                              name="code"
+                              {...formik.getFieldProps("code")}
                             />
                           </div>
+                          {formik.touched.code && formik.errors.code && (
+                            <p className="text-danger font-sm error1 font-weight-bold">
+                              {formik.errors.code}
+                            </p>
+                          )}
                           <div className="row mt-5 align-items-center justify-content-end">
                             <div className="col-lg-8">
                               <div className="row">
@@ -59,7 +107,8 @@ const Modal = ({ close }) => {
                                 </div>
                                 <div className="col-lg-6">
                                   <button
-                                    onClick={() => setFirst("breakdown")}
+                                    type="submit"
+                                    // onClick={() => setFirst("breakdown")}
                                     className="btn login-submit"
                                     //   data-toggle="modal"
                                     data-target="#newGroupDetails"
@@ -119,7 +168,8 @@ const Modal = ({ close }) => {
                                 <tr>
                                   <td>Group Name:</td>
                                   <td className="text-right weight-500">
-                                    Abuja Hikers July 2021
+                                    {groupAccount?.code}
+                                    {/* Abuja Hikers July 2021 */}
                                   </td>
                                 </tr>
                                 <tr>
@@ -131,7 +181,8 @@ const Modal = ({ close }) => {
                                 <tr>
                                   <td>End Date:</td>
                                   <td className="text-right weight-500">
-                                    12 - February - 2021
+                                    {/* 12 - February - 2021 */}
+                                    {dateConv(groupAccount?.endDate)}
                                   </td>
                                 </tr>
                                 <tr>
@@ -143,7 +194,7 @@ const Modal = ({ close }) => {
                                 <tr>
                                   <td>Target Amount:</td>
                                   <td className="text-right weight-500">
-                                    ₦ 1,515,000.00
+                                    {currencyVal(groupAccount?.target)}
                                   </td>
                                 </tr>
                               </table>
@@ -186,7 +237,18 @@ const Modal = ({ close }) => {
   );
 };
 
-export default Modal;
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  const { loading, alertType, message } = state.registration;
+  return { alert, username, message, alertType, loading };
+};
+
+const actionCreators = {
+  getAccount: usersActions.getGroupCode,
+};
+
+export default connect(mapStateToProps, actionCreators)(Modal);
 
 const OVERLAY = styled.div`
   position: fixed;
