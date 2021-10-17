@@ -1,7 +1,17 @@
 import React from "react";
 import ReactDom from "react-dom";
 import styled from "styled-components";
-const Modal = ({ close }) => {
+
+import { nairaCurrencyVal } from "../../../helpers/helper";
+
+const Modal = ({ objects, close, onSubmit ,setModal}) => {
+
+
+  const handleSubmit=()=>{
+    setModal(false);
+    onSubmit()
+
+  }
   return ReactDom.createPortal(
     <OVERLAY>
       <ModalBox>
@@ -28,7 +38,7 @@ const Modal = ({ close }) => {
                             <tr>
                               <td>You are transfering:</td>
                               <td className="text-right weight-500">
-                                ₦500,000.00
+                                {nairaCurrencyVal(objects.amount)}
                               </td>
                             </tr>
                             <tr>
@@ -40,14 +50,14 @@ const Modal = ({ close }) => {
                             <tr>
                               <td>To:</td>
                               <td className="text-right weight-500">
-                                isaac.Newton@gmail.com
+                                {objects?.email}
                               </td>
                             </tr>
                             <tr>
-                              <td>Name:</td>
+                              {/* <td>Name:</td>
                               <td className="text-right weight-500">
                                 Isaac Newton
-                              </td>
+                              </td> */}
                             </tr>
                           </table>
                         </div>
@@ -65,7 +75,16 @@ const Modal = ({ close }) => {
                             </button>
                           </div>
                           <div className="col-lg-6">
-                            <button className="btn login-submit">NEXT</button>
+                            <button
+                              className="btn login-submit"
+                              onClick={() => 
+                                handleSubmit()
+                                // setModal(false);
+                                // onSubmit();
+                              }
+                            >
+                              NEXT
+                            </button>
                           </div>
                         </div>
                       </div>

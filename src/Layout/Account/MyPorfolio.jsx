@@ -1,8 +1,31 @@
-import React from "react";
-import {Link} from "react-router-dom"
-const MyPorfolio = () => {
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { usersActions } from "../../redux/actions";
+import { nairaCurrencyVal, dollarCurrencyVal } from "../../helpers/helper";
+import Loader from "../../common/Loader";
+const MyPorfolio = (props) => {
+  const [portfolio, setPortfolio] = useState([]);
+  const [loading, setloading] = useState([]);
+
+  useEffect(() => {
+    setloading(true);
+    (async function dataInfo() {
+      const data = await props
+        .getPortfolio("/api/v1/user/portfolio_summary")
+        .then();
+      console.log(data, "dfg");
+      setPortfolio(data);
+      setloading(false);
+    })();
+    // eslint-disable-next-line
+  }, []);
+
+  console.log(portfolio, "retro");
+
   return (
     <>
+    {loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row  justify-content-between">
@@ -13,10 +36,14 @@ const MyPorfolio = () => {
             </div>
             <div className="col-lg-5 d-flex justify-content-between cg-3">
               <div className="mt-2 flex-grow-1 w-auto">
-                <Link to="/app/account/transfer" className="btn btn-transfer">Transfer Funds</Link>
+                <Link to="/app/account/transfer" className="btn btn-transfer">
+                  Transfer Funds
+                </Link>
               </div>
               <div className="mt-2 flex-grow-1 w-auto">
-                <Link to="/app/account/withdraw" className="btn btn-withdraw">Withdraw Funds</Link>
+                <Link to="/app/account/withdraw" className="btn btn-withdraw">
+                  Withdraw Funds
+                </Link>
               </div>
             </div>
           </div>
@@ -33,23 +60,39 @@ const MyPorfolio = () => {
                       <tbody>
                         <tr>
                           <td>Savings balance</td>
-                          <td className="text-blue text-right">₦5,024.12</td>
+                          <td className="text-blue text-right">
+                            {nairaCurrencyVal(
+                              portfolio?.savings?.totalSavingsBal
+                            )}
+                          </td>
                         </tr>
                         <tr>
                           <td>Naira savings</td>
-                          <td className="text-blue text-right">₦5,024.12</td>
+                          <td className="text-blue text-right">
+                            {nairaCurrencyVal(portfolio?.savings?.totalNaira)}
+                          </td>
                         </tr>
                         <tr>
-                          <td>Interest earned</td>
-                          <td className="text-blue text-right">₦24.12</td>
+                          <td>Naira Interest earned</td>
+                          <td className="text-blue text-right">
+                            {nairaCurrencyVal(
+                              portfolio?.savings?.totalNairaInterest
+                            )}
+                          </td>
                         </tr>
                         <tr>
                           <td>Dollar savings</td>
-                          <td className="text-blue text-right">$0.00</td>
+                          <td className="text-blue text-right">
+                            {dollarCurrencyVal(portfolio?.savings?.totalDollar)}
+                          </td>
                         </tr>
                         <tr>
                           <td>Dollar interest earned</td>
-                          <td className="text-blue text-right">$0.00</td>
+                          <td className="text-blue text-right">
+                            {dollarCurrencyVal(
+                              portfolio?.savings?.totalDollarInterest
+                            )}
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -69,15 +112,27 @@ const MyPorfolio = () => {
                       <tbody>
                         <tr>
                           <td>Investment balance</td>
-                          <td className="text-blue text-right">₦5,024.12</td>
+                          <td className="text-blue text-right">
+                            {nairaCurrencyVal(
+                              portfolio?.investment?.totalInvetmentBal
+                            )}
+                          </td>
                         </tr>
                         <tr>
                           <td>Naira investments</td>
-                          <td className="text-blue text-right">₦5,024.12</td>
+                          <td className="text-blue text-right">
+                            {nairaCurrencyVal(
+                              portfolio?.investment?.investmentNairaBal
+                            )}
+                          </td>
                         </tr>
                         <tr>
                           <td>Dollar investments</td>
-                          <td className="text-blue text-right">$0.00</td>
+                          <td className="text-blue text-right">
+                            {dollarCurrencyVal(
+                              portfolio?.investment?.investmentDollarBal
+                            )}
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -97,12 +152,28 @@ const MyPorfolio = () => {
                         <thead></thead>
                         <tbody>
                           <tr>
+                            <td>Total balance</td>
+                            <td className="text-blue text-right">
+                              {nairaCurrencyVal(
+                                portfolio?.myPurse?.totalPurseBal
+                              )}
+                            </td>
+                          </tr>
+                          <tr>
                             <td>Naira balance</td>
-                            <td className="text-blue text-right">₦5,024.12</td>
+                            <td className="text-blue text-right">
+                              {nairaCurrencyVal(
+                                portfolio?.myPurse?.purseNairaBal
+                              )}
+                            </td>
                           </tr>
                           <tr>
                             <td>Dollar balance</td>
-                            <td className="text-blue text-right">$0.00</td>
+                            <td className="text-blue text-right">
+                              {dollarCurrencyVal(
+                                portfolio?.myPurse?.purseDollarBal
+                              )}
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -118,4 +189,15 @@ const MyPorfolio = () => {
   );
 };
 
-export default MyPorfolio;
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  const { loading } = state.registration;
+  return { alert, username, loading };
+};
+
+const actionCreators = {
+  getPortfolio: usersActions.getPortfolio,
+};
+
+export default connect(mapStateToProps, actionCreators)(MyPorfolio);

@@ -24,8 +24,6 @@ const Otp = (props) => {
       transId: getTransfer.transId,
       challengeId: getTransfer.challengeId,
     };
-
-    // console.log(obj);
     props.confirmToken(obj, "/api/v1/transfer/accountbycard", modalToggle1);
   };
 

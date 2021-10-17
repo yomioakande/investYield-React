@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ReactDom from "react-dom";
 import modalclose from "../assets/images/modal-close.svg";
 import "../assets/css/theme.css";
 import "./transitions.css";
-// import { CSSTransition } from "react-transition-group";
-// import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import { connect } from "react-redux";
 import { usersActions } from "../redux";
 import { useFormik } from "formik";

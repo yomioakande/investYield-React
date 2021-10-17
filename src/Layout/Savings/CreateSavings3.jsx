@@ -130,9 +130,6 @@ const CreateSavings3 = (props) => {
     setTargetNum(data?.data?.estimate);
   };
 
-  // const [state, setState] = useState(initialValues);
-  // const [amount1, setAmount1] = useState(targetNum);
-
   const onChangers = (e) => {
     const { value } = e.target;
     dataInfo(value);

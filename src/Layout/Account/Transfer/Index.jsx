@@ -2,22 +2,25 @@ import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import SelectModal from "./SelectModal";
 import { useFormik } from "formik";
+import NumberFormat from "react-number-format";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import { usersActions } from "../../../redux/actions";
-
+import Loader from "../../../common/Loader";
+import Congrats from "../../Congrats";
 const Index = (props) => {
   const [modalInOpen, setModalInOpen] = useState(false);
   const [selectModalOpen, setSelectModalOpen] = useState(false);
   const [beneficiary, setBeneficiary] = useState("");
+  const [successModal, setSuccessModal] = useState(false);
   const [single, setSingle] = useState("");
-
+  const [num, setNum] = useState("");
   const modalToggle = () => {
     setModalInOpen(true);
   };
 
   const selectModalToggle = () => {
-    setSingle('')
+    setSingle("");
     setSelectModalOpen(!selectModalOpen);
   };
 
@@ -32,53 +35,60 @@ const Index = (props) => {
   const initialValues = {
     email: "",
     amount: "",
-    save:""
+    save: false,
   };
 
   const validationSchema = Yup.object({
-    identifier: Yup.string().required("This field is required"),
+    email: Yup.string().required("This field is required"),
+    amount: Yup.string().required("This field is required"),
+    save: Yup.string().required("This field is required"),
   });
 
-  const onSubmit = (values, onSubmitProps) => {
-    // setShowError(true);
-    const obj = {
-      identifier: values.identifier,
-      type: values.identifier.split("").includes("@") ? "0" : "1",
-    };
+  const setModal = () => {
+    setSuccessModal(true);
+    // alert("success")
+  };
 
-    console.log(obj);
-    // modalBenf(obj, "/api/v1/user/resolve_beneficiary", setModal);
+  const onSubmit = (values, onSubmitProps) => {
+    const obj = {
+      beneficiaryId: values.email,
+      amount: values.amount,
+      saveBeneficiary: values.save,
+    };
+    props.transfer(obj, "/api/v1transfer/TransferToBeneficiary", setModal);
     // onSubmitProps.resetForm();
     // show();
     onSubmitProps.setSubmitting(false);
   };
 
   const formik = useFormik({
-    // enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
   });
+  useEffect(() => {
+    formik.setFieldValue("amount", num?.value);
+    // eslint-disable-next-line
+  }, [num?.value]);
 
   const dataInfo = async () => {
     const data = await props.getData("/api/v1/user/beneficiary").then();
     setBeneficiary(data);
-    console.log(data);
   };
-  // console.log("papr", beneficiary);
 
   useEffect(() => {
-    formik.setFieldValue("email",single);
+    formik.setFieldValue("email", single);
     dataInfo();
     // eslint-disable-next-line
   }, [single]);
 
   console.log("repository", single);
-  console.log(formik.values)
+  console.log(formik.values);
 
   return (
     <>
+      {props.loading && <Loader />}
       <div className="section__content section__content--p30 pb-4">
         <div className="container-fluid">
           <div className="row mt-4 justify-content-center">
@@ -104,12 +114,16 @@ const Index = (props) => {
                             <button
                               type="button"
                               onClick={() => selectModalToggle()}
-                              // href="/app/account"
                               className="col-lg-4 d-flex align-items-center justify-content-center font-sm btn btn-withdraw"
                             >
                               Select Beneficiary
                             </button>
                           </div>
+                          {props.alertType && (
+                            <div className={`font-sm ${props.alertType}`}>
+                              {props.message}
+                            </div>
+                          )}
                         </div>
                         <input
                           type="email"
@@ -119,6 +133,11 @@ const Index = (props) => {
                           {...formik.getFieldProps("email")}
                         />
                       </div>
+                      {formik.touched.email && formik.errors.email && (
+                        <p className="text-danger font-sm error1 font-weight-bold">
+                          {formik.errors.email}
+                        </p>
+                      )}
                       <div className="form-group mt-4">
                         <label
                           for="Amount"
@@ -126,19 +145,41 @@ const Index = (props) => {
                         >
                           How much would you like to send?
                         </label>
-                        <input
-                          type="text"
+                        {/* <input
+                          type="number"
                           className="text-field mt-2"
                           placeholder="Amount (N)"
                           {...formik.getFieldProps("amount")}
+                        /> */}
+
+                        <NumberFormat
+                          isNumericString={true}
+                          thousandSeparator={true}
+                          className="text-field"
+                          placeholder="Amount"
+                          name="amount"
+                          value={formik.values.amount}
+                          onValueChange={(values) => {
+                            setNum({ value: values.value });
+                          }}
+                          onChange={formik.handleChange}
                         />
                       </div>
+                      {formik.touched.amount && formik.errors.amount && (
+                        <p className="text-danger font-sm error1 font-weight-bold">
+                          {formik.errors.amount}
+                        </p>
+                      )}
                       <div className="text-field mt-4 d-flex align-items-center justify-content-between">
                         <h6 className="weight-600 text-blue">
                           Save beneficiary
                         </h6>
                         <label className="switch mb-0">
-                          <input type="checkbox" />
+                          <input
+                            type="checkbox"
+                            value={true}
+                            {...formik.getFieldProps("save")}
+                          />
                           <span className="slider round"></span>
                         </label>
                       </div>
@@ -154,6 +195,22 @@ const Index = (props) => {
                           NEXT
                         </button>
                       </div>
+                      {modalInOpen && (
+                        <Modal
+                          setModal={setModalInOpen}
+                          objects={formik.values}
+                          onSubmit={formik.handleSubmit}
+                          close={close}
+                        />
+                      )}
+                      {selectModalOpen && (
+                        <SelectModal
+                          beneficiary={beneficiary}
+                          single={single}
+                          setSingle={setSingle}
+                          close={close1}
+                        />
+                      )}
                     </form>
                   </div>
                 </div>
@@ -162,13 +219,14 @@ const Index = (props) => {
           </div>
         </div>
       </div>
-      {modalInOpen && <Modal close={close} />}
-      {selectModalOpen && (
-        <SelectModal
-          beneficiary={beneficiary}
-          single={single}
-          setSingle={setSingle}
-          close={close1}
+
+      {successModal && (
+        <Congrats
+          headline1={"Fantastic!"}
+          headline2={"Successful fund transfer"}
+          content={
+            "You have transferred NXXXX.XX to Isaac Newton (isacc.newton@gmail.com)"
+          }
         />
       )}
     </>
@@ -176,16 +234,15 @@ const Index = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  // const { alert } = state;
-  const username = state.authentication.user;
-  const { type, message } = state.alert;
-  // const loading = state.authentication.loading;
-  return { type, message, username };
+  const { loading, message, alertType } = state.registration;
+
+  return { loading, message, alertType };
 };
 
 const actionCreators = {
   getData: usersActions.getInfo,
-  deleteData: usersActions.deleteData,
+  transfer: usersActions.payPurse,
+  // deleteData: usersActions.deleteData,
 };
 
 export default connect(mapStateToProps, actionCreators)(Index);

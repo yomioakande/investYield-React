@@ -7,7 +7,7 @@ const Breakdown = (props) => {
   const [targetValue, setTargetValue] = useState("");
   const stash = JSON.parse(sessionStorage.getItem("stash"));
   const stashfreq = JSON.parse(sessionStorage.getItem("stashfreq"));
-  console.log("stash", stash);
+  // console.log("stash", stash);
 
   let date = new Date();
   //START DATE
@@ -16,7 +16,6 @@ const Breakdown = (props) => {
   let df = date.setDate(date.getDate() + stash.frequency);
   const nxt = new Date(df);
   const nextDate = dateConv(nxt);
-  // console.log(props.message)
   useEffect(() => {
     (async function dataInfo() {
       const getTargetValue = await props.getTargetValue(

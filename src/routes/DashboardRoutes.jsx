@@ -44,7 +44,9 @@ import myPurse from "../Layout/myPurse/index";
 import myPurse2 from "../Layout/myPurse/MyPurse2";
 import myPurse3 from "../Layout/myPurse/MyPurse3";
 import myPurse4 from "../Layout/myPurse/MyPurse4";
-
+// import fundPurse from "../Layout/FundPurse1"
+import fundPurse2 from "../Layout/FundPurse2"
+import BreakdownFund from "../Layout/BreakdownFund"
 import Blog from "../Layout/Blog/index";
 import SingleBlog from "../Layout/Blog/Main";
 import Help from "../Layout/FeedBack";
@@ -74,6 +76,8 @@ const DashboardRoutes = () => {
         <PrivateRoute path="/app/savings/pursestep2" component={myPurse3} />
         <PrivateRoute path="/app/savings/pursestep3" component={myPurse4} />
         <PrivateRoute path="/app/savings/mypurse" component={myPurse} />
+        <PrivateRoute path="/app/savings/fundpurse" component={fundPurse2} />
+        <PrivateRoute path="/app/savings/fundpursebreakdown" component={BreakdownFund} />
         <PrivateRoute path="/app/savings" component={Savings} />
 
         <PrivateRoute

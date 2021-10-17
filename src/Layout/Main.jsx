@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { Link } from "react-router-dom";
 import dashboard from "../assets/images/dashboard_card_bg.jpg";
 import retirement from "../assets/images/Savingsplan/retirementplan.svg";
@@ -20,18 +19,17 @@ import { CSSTransition } from "react-transition-group";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./transitions.css";
-import {Swiper, SwiperSlide} from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
 import { nairaCurrencyVal, dollarCurrencyVal } from "../helpers/helper";
 import { ErrorBoundary } from "react-error-boundary";
 import FallBack from "./FallBack";
+import FundPurse from "./FundPurse1";
 
 const Main = (props) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [modalInOpen, setModalInOpen] = useState(false);
+  const [modalInOpen1, setModalInOpen1] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [coreAccounts, setCoreAccounts] = useState([]);
   const [purseAccounts, setPurseAccounts] = useState([]);
@@ -40,9 +38,16 @@ const Main = (props) => {
   const modalToggle = () => {
     setModalInOpen(true);
   };
+  const modalToggle1 = () => {
+    setModalInOpen1(true);
+  };
 
   const close = () => {
     setModalInOpen(false);
+  };
+
+  const close1 = () => {
+    setModalInOpen1(false);
   };
 
   const toggleHide = (index) => {
@@ -67,8 +72,6 @@ const Main = (props) => {
       const coreAccounts = await props
         .getAccounts("/api/v1/user/accountbyproduct", "0201")
         .then();
-
-      console.log("reerse", data);
       setSummaryInfo(data);
       setTodoList(todo);
       setPurseAccounts(myPurseAccounts);
@@ -81,17 +84,12 @@ const Main = (props) => {
     })();
     // eslint-disable-next-line
   }, []);
-
-  console.log(transactions, "dj");
-
-  console.log(purseAccounts, "purse");
-  console.log(coreAccounts, "cores");
-
+  console.log(coreAccounts, "PURSES");
   const errorHandler = (error, errorInfo) => {
     console.log("logging", error, errorInfo);
   };
 
-  console.log(hidden);
+  console.log(purseAccounts, "jkl");
 
   return (
     <>
@@ -240,8 +238,10 @@ const Main = (props) => {
                         {purseAccounts.map((single, index) => {
                           return (
                             <Purse
+                              modalToggle={modalToggle1}
                               key={index}
                               index={index}
+                              id={single.id}
                               currency={single.currency?.code}
                               namePurse={single.name}
                               purseAmount={single.contribution}
@@ -435,55 +435,55 @@ const Main = (props) => {
                   </div>
                   <div className="position-relative wecare-sec mx-4">
                     <Swiper>
-                    <div className="swiper-container position-relative wecare-slider">
-                      <div className="swiper-wrapper py-2">
-                        <SwiperSlide>
-                        <div className="swiper-slide">
-                          <div className="w-100 h-100">
-                            <div className="container h-100">
-                              <div className="row h-100 py-3 mb-4">
-                                <div className="au-message-list w-100 todolist mt-4">
-                                  <img
-                                    src={challenge}
-                                    className="img-fluid w-100"
-                                    alt="join a savings challenge"
-                                  />
+                      <div className="swiper-container position-relative wecare-slider">
+                        <div className="swiper-wrapper py-2">
+                          <SwiperSlide>
+                            <div className="swiper-slide">
+                              <div className="w-100 h-100">
+                                <div className="container h-100">
+                                  <div className="row h-100 py-3 mb-4">
+                                    <div className="au-message-list w-100 todolist mt-4">
+                                      <img
+                                        src={challenge}
+                                        className="img-fluid w-100"
+                                        alt="join a savings challenge"
+                                      />
+                                    </div>
+                                    {/* <!-- .col --> */}
+                                  </div>
+                                  {/* <!-- .row --> */}
                                 </div>
-                                {/* <!-- .col --> */}
+                                {/* <!-- .container --> */}
                               </div>
-                              {/* <!-- .row --> */}
+                              {/* <!-- .hero-content-overlay --> */}
                             </div>
-                            {/* <!-- .container --> */}
-                          </div>
-                          {/* <!-- .hero-content-overlay --> */}
-                        </div>
-                        </SwiperSlide>
-                        {/* <!-- .hero-content-wrap --> */}
-                        <SwiperSlide>
-                        <div className="swiper-slide">
-                          <div className="w-100 h-100">
-                            <div className="container h-100">
-                              <div className="row h-100 py-3 mb-4">
-                                <div className="au-message-list w-100 todolist mt-4">
-                                  <img
-                                    src={challenge}
-                                    className="img-fluid w-100"
-                                    alt="join a savings challenge"
-                                  />
+                          </SwiperSlide>
+                          {/* <!-- .hero-content-wrap --> */}
+                          <SwiperSlide>
+                            <div className="swiper-slide">
+                              <div className="w-100 h-100">
+                                <div className="container h-100">
+                                  <div className="row h-100 py-3 mb-4">
+                                    <div className="au-message-list w-100 todolist mt-4">
+                                      <img
+                                        src={challenge}
+                                        className="img-fluid w-100"
+                                        alt="join a savings challenge"
+                                      />
+                                    </div>
+                                    {/* <!-- .col --> */}
+                                  </div>
+                                  {/* <!-- .row --> */}
                                 </div>
-                                {/* <!-- .col --> */}
+                                {/* <!-- .container --> */}
                               </div>
-                              {/* <!-- .row --> */}
+                              {/* <!-- .hero-content-overlay --> */}
                             </div>
-                            {/* <!-- .container --> */}
-                          </div>
-                          {/* <!-- .hero-content-overlay --> */}
+                          </SwiperSlide>
+                          {/* <!-- .hero-content-wrap --> */}
                         </div>
-                        </SwiperSlide>
-                        {/* <!-- .hero-content-wrap --> */}
+                        {/* <!-- .swiper-wrapper --> */}
                       </div>
-                      {/* <!-- .swiper-wrapper --> */}
-                    </div>
                     </Swiper>
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
@@ -518,6 +518,15 @@ const Main = (props) => {
         timeout={500}
       >
         <Modal1 close={close} />
+      </CSSTransition>
+      <CSSTransition
+        in={modalInOpen1}
+        className="modal-transition"
+        classNames="modal-transition"
+        unmountOnExit
+        timeout={500}
+      >
+        <FundPurse close={close1} />
       </CSSTransition>
       <ToastContainer autoClose={1000} hideProgressBar />
     </>

@@ -50,7 +50,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
   };
 
   const formik = useFormik({
-    // enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
