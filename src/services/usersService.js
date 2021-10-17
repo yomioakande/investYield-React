@@ -13,7 +13,8 @@ export const userService = {
   getTargetValue,
   getAccounts,
   getPaginateTransact,
-  getPortfolio
+  getPortfolio,
+  getGroupCode
 };
 
 async function register1(user, apiUrl) {
@@ -107,6 +108,23 @@ async function getAccounts(apiUrl, accountCode) {
   try {
     const datas = await fetch(
       `https://api-staging.investyield.ng:44377${apiUrl}?productCode=${accountCode}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+    return error;
+  }
+}
+
+async function getGroupCode(apiUrl, Code) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
+  try {
+    const datas = await fetch(
+      `https://api-staging.investyield.ng:44377${apiUrl}?Code=${Code}`,
       requestOptions
     );
     const getData = await datas.json();

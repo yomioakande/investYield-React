@@ -6,7 +6,7 @@ import homeplan from "../assets/images/Savingsplan/homeplan.svg";
 import emergency from "../assets/images/Savingsplan/emergencyplan.svg";
 import personalplan from "../assets/images/Savingsplan/personalplan.svg";
 import stash from "../assets/images/Stash/plus2.svg";
-import challenge from "../assets/images/savingschallenge.svg";
+// import challenge from "../assets/images/savingschallenge.svg";
 import "../assets/css/theme.css";
 import CardTransfer from "./common/CardTransfer";
 import Plan from "./common/Plan";
@@ -19,12 +19,13 @@ import { CSSTransition } from "react-transition-group";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./transitions.css";
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import { nairaCurrencyVal, dollarCurrencyVal } from "../helpers/helper";
 import { ErrorBoundary } from "react-error-boundary";
 import FallBack from "./FallBack";
 import FundPurse from "./FundPurse1";
+import JoinSavings from "./JoinSavings"
 
 const Main = (props) => {
   const [summaryInfo, setSummaryInfo] = useState({});
@@ -89,7 +90,7 @@ const Main = (props) => {
     console.log("logging", error, errorInfo);
   };
 
-  console.log(purseAccounts, "jkl");
+  console.log(coreAccounts, "jkl");
 
   return (
     <>
@@ -429,73 +430,7 @@ const Main = (props) => {
               </div>
 
               <div className="au-card position-relative mt-4 px-0">
-                <div className="au-card-inner ">
-                  <div className="px-4">
-                    <h3 className="title-2 tm-b-5">Join a savings challenge</h3>
-                  </div>
-                  <div className="position-relative wecare-sec mx-4">
-                    <Swiper>
-                      <div className="swiper-container position-relative wecare-slider">
-                        <div className="swiper-wrapper py-2">
-                          <SwiperSlide>
-                            <div className="swiper-slide">
-                              <div className="w-100 h-100">
-                                <div className="container h-100">
-                                  <div className="row h-100 py-3 mb-4">
-                                    <div className="au-message-list w-100 todolist mt-4">
-                                      <img
-                                        src={challenge}
-                                        className="img-fluid w-100"
-                                        alt="join a savings challenge"
-                                      />
-                                    </div>
-                                    {/* <!-- .col --> */}
-                                  </div>
-                                  {/* <!-- .row --> */}
-                                </div>
-                                {/* <!-- .container --> */}
-                              </div>
-                              {/* <!-- .hero-content-overlay --> */}
-                            </div>
-                          </SwiperSlide>
-                          {/* <!-- .hero-content-wrap --> */}
-                          <SwiperSlide>
-                            <div className="swiper-slide">
-                              <div className="w-100 h-100">
-                                <div className="container h-100">
-                                  <div className="row h-100 py-3 mb-4">
-                                    <div className="au-message-list w-100 todolist mt-4">
-                                      <img
-                                        src={challenge}
-                                        className="img-fluid w-100"
-                                        alt="join a savings challenge"
-                                      />
-                                    </div>
-                                    {/* <!-- .col --> */}
-                                  </div>
-                                  {/* <!-- .row --> */}
-                                </div>
-                                {/* <!-- .container --> */}
-                              </div>
-                              {/* <!-- .hero-content-overlay --> */}
-                            </div>
-                          </SwiperSlide>
-                          {/* <!-- .hero-content-wrap --> */}
-                        </div>
-                        {/* <!-- .swiper-wrapper --> */}
-                      </div>
-                    </Swiper>
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div>
-                        <div className="swiper-button-next"></div>
-                        <div className="swiper-button-prev"></div>
-                      </div>
-                      {/* <a href="/" className="au-btn-link">
-                        View more
-                      </a> */}
-                    </div>
-                  </div>
-                </div>
+                <JoinSavings/>
               </div>
             </div>
           </div>

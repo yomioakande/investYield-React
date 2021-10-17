@@ -9,11 +9,11 @@ import "../assets/vendor/css-hamburgers/hamburgers.css";
 import { connect } from "react-redux";
 import { usersActions } from "../redux/actions";
 
-const Header = ({ username }) => {
+const Header = ({ username, logout }) => {
   const location = useLocation().pathname.split("/")[2];
 
   const [scroll, setScroll] = useState(false);
-
+  const [mobile, setMobile] = useState(false);
   const addShadow = () => {
     if (window.scrollY >= 10) {
       setScroll(true);
@@ -22,7 +22,9 @@ const Header = ({ username }) => {
     }
   };
   window.addEventListener("scroll", addShadow);
-
+  const toggle = () => {
+    setMobile(!mobile);
+  };
   return (
     // <!-- HEADER MOBILE-->
     <>
@@ -33,7 +35,11 @@ const Header = ({ username }) => {
               <a className="logo" href="/index.html">
                 <img src={invest} alt="investYield" />
               </a>
-              <button className="hamburger hamburger--slider" type="button">
+              <button
+                className="hamburger hamburger--slider"
+                type="button"
+                onClick={() => toggle()}
+              >
                 <span className="hamburger-box">
                   <span className="hamburger-inner"></span>
                 </span>
@@ -42,40 +48,56 @@ const Header = ({ username }) => {
           </div>
         </div>
 
-        <nav className="navbar-mobile">
+        <nav
+          className="navbar-mobile"
+          style={{ display: mobile ? "block" : "none" }}
+        >
           <div className="container-fluid">
             <ul className="navbar-mobile__list list-unstyled">
               <li className="has-sub">
-                <a
-                  class="js-arrow d-flex align-items-center active"
-                  href="/app"
+                <Link
+                  to="/app"
+                  className="js-arrow d-flex align-items-center active"
                 >
-                  <i data-feather="home" class="mr-3"></i>Home
+                  <i data-feather="home" className="mr-3"></i>Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/app/savings"
+                  class="js-arrow d-flex align-items-center"
+                >
+                  <i data-feather="shield" className="mr-3"></i>Savings
+                </Link>
+              </li>
+              <li>
+                <a href="/app" className="js-arrow d-flex align-items-center">
+                  <i data-feather="activity" className="mr-3"></i>Investments
                 </a>
               </li>
               <li>
-                <a href="/app" class="js-arrow d-flex align-items-center">
-                  <i data-feather="shield" class="mr-3"></i>Savings
-                </a>
+                <Link
+                  to="/app/blog"
+                  className="js-arrow d-flex align-items-center"
+                >
+                  <i data-feather="file" className="mr-3"></i>Blog
+                </Link>
               </li>
               <li>
-                <a href="/app" class="js-arrow d-flex align-items-center">
-                  <i data-feather="activity" class="mr-3"></i>Investments
-                </a>
+                <Link
+                  to="/app/account"
+                  className="js-arrow d-flex align-items-center"
+                >
+                  <i data-feather="user" className="mr-3"></i>Account
+                </Link>
               </li>
               <li>
-                <a href="/app" class="js-arrow d-flex align-items-center">
-                  <i data-feather="file" class="mr-3"></i>Blog
-                </a>
-              </li>
-              <li>
-                <a href="/app" class="js-arrow d-flex align-items-center">
-                  <i data-feather="user" class="mr-3"></i>Account
-                </a>
-              </li>
-              <li>
-                <a href="/app" class="text-danger d-flex align-items-center">
-                  <i data-feather="log-out" class="mr-3"></i>Logout
+                <a
+                  href="/auth/login"
+                  onClick={() => logout()}
+                  className="text-danger d-flex align-items-center"
+                >
+                  <i data-feather="log-out" className="mr-3"></i>Logout
                 </a>
               </li>
             </ul>
@@ -109,8 +131,6 @@ const Header = ({ username }) => {
                   Stash
                 </Link>
               )}
-
-              {/* <MenuBar/> */}
 
               <div className="header-button">
                 <div className="account-wrap">
@@ -189,6 +209,7 @@ const mapStateToProps = (state) => {
 
 const actionCreators = {
   getData: usersActions.getInfo,
+  logout: usersActions.logout,
 };
 
 export default connect(mapStateToProps, actionCreators)(Header);

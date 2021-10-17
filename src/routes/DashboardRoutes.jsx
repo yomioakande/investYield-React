@@ -37,16 +37,15 @@ import myCard from "../Layout/Account/Card/index";
 import Transfer from "../Layout/Account/Transfer/Index";
 // import Transfer2 from "../Layout/Account/Transfer/Transfer2"
 // import Transfer3 from "../Layout/Account/Transfer/Transfer3"
-
+import SingleSavings from "../Layout/Savings/SingleSavings";
 import Withdraw from "../Layout/Account/Withdraw/index";
 
 import myPurse from "../Layout/myPurse/index";
 import myPurse2 from "../Layout/myPurse/MyPurse2";
 import myPurse3 from "../Layout/myPurse/MyPurse3";
 import myPurse4 from "../Layout/myPurse/MyPurse4";
-// import fundPurse from "../Layout/FundPurse1"
-import fundPurse2 from "../Layout/FundPurse2"
-import BreakdownFund from "../Layout/BreakdownFund"
+import fundPurse2 from "../Layout/FundPurse2";
+import BreakdownFund from "../Layout/BreakdownFund";
 import Blog from "../Layout/Blog/index";
 import SingleBlog from "../Layout/Blog/Main";
 import Help from "../Layout/FeedBack";
@@ -67,7 +66,10 @@ const DashboardRoutes = () => {
           path="/app/savings/create2/:id"
           component={CreateSavings2}
         />
-        <PrivateRoute path="/app/savings/create3/:id" component={CreateSavings3} />
+        <PrivateRoute
+          path="/app/savings/create3/:id"
+          component={CreateSavings3}
+        />
         <PrivateRoute path="/app/savings/create4" component={CreateSavings4} />
         <PrivateRoute path="/app/savings/otp/id" component={CardOTP} />
 
@@ -77,8 +79,13 @@ const DashboardRoutes = () => {
         <PrivateRoute path="/app/savings/pursestep3" component={myPurse4} />
         <PrivateRoute path="/app/savings/mypurse" component={myPurse} />
         <PrivateRoute path="/app/savings/fundpurse" component={fundPurse2} />
-        <PrivateRoute path="/app/savings/fundpursebreakdown" component={BreakdownFund} />
+        <PrivateRoute
+          path="/app/savings/fundpursebreakdown"
+          component={BreakdownFund}
+        />
         <PrivateRoute path="/app/savings" component={Savings} />
+
+        <PrivateRoute path="/app/singlesavings/:id" component={SingleSavings} />
 
         <PrivateRoute
           path="/app/groupsavings/joingroup1"

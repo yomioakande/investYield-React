@@ -29,6 +29,7 @@ export const usersActions = {
   postImageBase64,
   getPortfolio,
   resetAlerts,
+  getGroupCode,
 };
 
 function login(body) {
@@ -281,18 +282,16 @@ function createStash(obj1, apiUrl, nextRoute) {
         JSON.stringify({ ...obj1, groupRef: data?.transId })
       );
       window.location.href = nextRoute;
-    } 
+    }
     if (apiUrl === "/api/v1transfer/FundExistingPurse" && success === true) {
       dispatch(successReg(data?.transId));
       console.log(register, "fundpurse");
       sessionStorage.setItem(
         "fundPurse",
-        JSON.stringify({ ...obj1, fundPurseRef: data?.reference})
+        JSON.stringify({ ...obj1, fundPurseRef: data?.reference })
       );
       window.location.href = nextRoute;
-    } 
-    
-    else {
+    } else {
       dispatch(failure(messages));
       return;
     }
@@ -454,6 +453,23 @@ function getAccounts(apiUrl, accountCode) {
     console.log("data", getAll);
     if (success === true) {
       dispatch(successReg());
+      return data;
+    } else {
+      dispatch(failure(""));
+      dispatch(alertActions.error(messages));
+    }
+  };
+}
+
+function getGroupCode(apiUrl, code, func) {
+  return async (dispatch) => {
+    dispatch(request());
+    const getAll = await userService.getGroupCode(apiUrl, code);
+    const { data, success, messages } = getAll;
+    console.log("data", getAll);
+    if (success === true) {
+      dispatch(successReg());
+      func();
       return data;
     } else {
       dispatch(failure(""));
