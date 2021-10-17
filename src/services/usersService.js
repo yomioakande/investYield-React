@@ -12,7 +12,8 @@ export const userService = {
   getEstimate,
   getTargetValue,
   getAccounts,
-  getPaginateTransact
+  getPaginateTransact,
+  getPortfolio
 };
 
 async function register1(user, apiUrl) {
@@ -211,6 +212,33 @@ async function putData(user, apiUrl) {
     return error;
   }
 }
+
+
+
+async function getPortfolio(apiUrl) {
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      // 'Accept': 'application/json',
+      Authorization: authHeader()?.Authorization,
+      "Content-Type": "application/json",
+    },
+    // headers: { "Content-Type": "application/json",authHeader() },
+    // body: JSON.stringify(user),
+  };
+  try {
+    const datas = await fetch(
+      `https://api-staging.investyield.ng:44377${apiUrl}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+    return error;
+  }
+}
+
+
 
 async function deleteData(apiUrl, obj) {
   const requestOptions = {

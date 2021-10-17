@@ -27,6 +27,7 @@ export const usersActions = {
   getTargetValue,
   getAccounts,
   postImageBase64,
+  getPortfolio,
   resetAlerts,
 };
 
@@ -277,10 +278,21 @@ function createStash(obj1, apiUrl, nextRoute) {
       // console.log(register, "groupsavingsRef");
       sessionStorage.setItem(
         "mainGroupObj",
-        JSON.stringify({ ...obj1, groupRef: data?.transId})
+        JSON.stringify({ ...obj1, groupRef: data?.transId })
       );
       window.location.href = nextRoute;
-    } else {
+    } 
+    if (apiUrl === "/api/v1transfer/FundExistingPurse" && success === true) {
+      dispatch(successReg(data?.transId));
+      console.log(register, "fundpurse");
+      sessionStorage.setItem(
+        "fundPurse",
+        JSON.stringify({ ...obj1, fundPurseRef: data?.reference})
+      );
+      window.location.href = nextRoute;
+    } 
+    
+    else {
       dispatch(failure(messages));
       return;
     }
@@ -300,6 +312,9 @@ function createCore(obj, apiUrl, nextRoute) {
         JSON.stringify({ ...obj, coreRef: data?.reference })
       );
       window.location.href = nextRoute;
+    } else if (success === true) {
+      dispatch(successReg(data?.reference));
+      window.location.href = nextRoute;
     } else {
       dispatch(failure(messages));
       return;
@@ -307,14 +322,14 @@ function createCore(obj, apiUrl, nextRoute) {
   };
 }
 
-function payPurse(obj, apiUrl,func) {
+function payPurse(obj, apiUrl, func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
     const { data, success, messages } = register;
     if (success === true) {
       dispatch(successReg(data?.reference));
-      func()
+      func();
       // sessionStorage.setItem("core", JSON.stringify(obj));
       // window.location.href = nextRoute;
     } else {
@@ -527,6 +542,22 @@ function addCard() {
     const getCard = await userService.getData("/api/v1/user/card_url").then();
     console.log(getCard);
     window.location.href = getCard?.data?.authUrl;
+  };
+}
+
+function getPortfolio(apiUrl) {
+  return async (dispatch) => {
+    dispatch(request());
+    const register = await userService.getPortfolio(apiUrl);
+    console.log(register);
+    const { data, success, messages } = register;
+
+    if (success === true) {
+      return data;
+    } else {
+      dispatch(alertActions.error(messages));
+      dispatch(failure(messages));
+    }
   };
 }
 

@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import { nairaCurrencyVal } from "../../helpers/helper";
 const myPurse = ({
+  // modalToggle,
+  id,
   namePurse,
   purseAmount,
   currency,
@@ -15,6 +17,14 @@ const myPurse = ({
       style: "currency",
       currency: currency === "NGN" ? "NGN" : "USD",
     }).format(number);
+
+  const account = () => {
+    const obj = {
+      accountId: id,
+      accountName: namePurse,
+    };
+    sessionStorage.setItem("fundpurse", JSON.stringify(obj));
+  };
   return (
     <>
       <div
@@ -35,7 +45,14 @@ const myPurse = ({
             >
               {!hidden[index] ? "Show" : "Hide"} Balance
             </p>
-            <p className="mt-2 purse-link-btn">Fund Purse</p>
+            <Link
+              to="/app/savings/fundpurse"
+              onClick={() => account()}
+              className="mt-2 purse-link-btn"
+            >
+              Fund Purse
+            </Link>
+            {/* <button onClick={() => modalToggle()} className="mt-2 purse-link-btn">Fund Purse</button> */}
           </div>
         </div>
       </div>

@@ -324,130 +324,57 @@ const Savings = ({ getData, getAccounts }) => {
                   </div>
 
                   <div className="row mt-4">
-                    <a
-                      href="/"
-                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
-                    >
-                      <div className="savings-card-box d-flex flex-column">
-                        <div className="savings-card-img-box">
-                          <img
-                            src={blog}
-                            className="img-fluid w-100"
-                            alt="savings_goal"
-                          />
-                        </div>
-                        <div className="p-4 detail-div">
-                          <div className="">
-                            <h5 className="text-blue weight-600">
-                              Raymond Rent 1
-                            </h5>
-                            <div className="saving-progress mt-3">
-                              <div className="saving-progress-actual"></div>
+                    {coreAccounts.length > 0 ? (
+                      coreAccounts.map((single, index) => {
+                        return (
+                          <a
+                            href="#0"
+                            className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                          >
+                            <div className="savings-card-box d-flex flex-column">
+                              <div className="savings-card-img-box">
+                                <img
+                                  src={blog}
+                                  className="img-fluid w-100"
+                                  alt="savings_goal"
+                                />
+                              </div>
+                              <div className="p-4 detail-div">
+                                <div className="">
+                                  <h5 className="text-blue weight-600">
+                                    {single?.name}
+                                  </h5>
+                                  <div className="saving-progress mt-3">
+                                    <div className="saving-progress-actual"></div>
+                                  </div>
+                                  <div className="mt-3">
+                                    <h5 className="text-green">
+                                      {single?.currency.code === "NGN"
+                                        ? nairaCurrencyVal(single?.contribution)
+                                        : dollarCurrencyVal(
+                                            single?.contribution
+                                          )}
+                                      <span className="text-blue">
+                                        {" "}
+                                        /{" "}
+                                        {single?.currency.code === "NGN"
+                                          ? nairaCurrencyVal(single?.target)
+                                          : dollarCurrencyVal(single?.target)}
+                                      </span>
+                                    </h5>
+                                    <p className="font-sm-sm mt-2">
+                                      Savings balance
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <div className="mt-3">
-                              <h5 className="text-green">
-                                ₦5,024.12{" "}
-                                <span className="text-blue"> / ₦1,000,000</span>
-                              </h5>
-                              <p className="font-sm-sm mt-2">Savings balance</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <a
-                      href="/"
-                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
-                    >
-                      <div className="savings-card-box d-flex flex-column">
-                        <div className="savings-card-img-box">
-                          <img
-                            src={blog}
-                            className="img-fluid w-100"
-                            alt="savings_goal"
-                          />
-                        </div>
-                        <div className="p-4 detail-div">
-                          <div className="">
-                            <h5 className="text-blue weight-600">
-                              Raymond Rent 1
-                            </h5>
-                            <div className="saving-progress mt-3">
-                              <div className="saving-progress-actual"></div>
-                            </div>
-                            <div className="mt-3">
-                              <h5 className="text-green">
-                                ₦5,024.12{" "}
-                                <span className="text-blue"> / ₦1,000,000</span>
-                              </h5>
-                              <p className="font-sm-sm mt-2">Savings balance</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <a
-                      href="/"
-                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
-                    >
-                      <div className="savings-card-box d-flex flex-column">
-                        <div className="savings-card-img-box">
-                          <img
-                            src={blog}
-                            className="img-fluid w-100"
-                            alt="savings_goal"
-                          />
-                        </div>
-                        <div className="p-4 detail-div">
-                          <div className="">
-                            <h5 className="text-blue weight-600">
-                              Raymond Rent 1
-                            </h5>
-                            <div className="saving-progress mt-3">
-                              <div className="saving-progress-actual"></div>
-                            </div>
-                            <div className="mt-3">
-                              <h5 className="text-green">
-                                ₦5,024.12{" "}
-                                <span className="text-blue"> / ₦1,000,000</span>
-                              </h5>
-                              <p className="font-sm-sm mt-2">Savings balance</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <a
-                      href="/"
-                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
-                    >
-                      <div className="savings-card-box d-flex flex-column">
-                        <div className="savings-card-img-box">
-                          <img
-                            src={blog}
-                            className="img-fluid w-100"
-                            alt="savings_goal"
-                          />
-                        </div>
-                        <div className="p-4 detail-div">
-                          <div className="">
-                            <h5 className="text-blue weight-600">
-                              Abuja Hikers July 2021
-                            </h5>
-                            <div className="saving-progress mt-3">
-                              <div className="saving-progress-actual"></div>
-                            </div>
-                            <div className="mt-3">
-                              <h5 className="text-green">
-                                ₦5,024.12{" "}
-                                <span className="text-blue"> / ₦1,000,000</span>
-                              </h5>
-                              <p className="font-sm-sm mt-2">Savings balance</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
+                          </a>
+                        );
+                      })
+                    ) : (
+                      <p>No core Accounts</p>
+                    )}
                   </div>
                 </div>
 
@@ -457,54 +384,44 @@ const Savings = ({ getData, getAccounts }) => {
                   </div>
 
                   <div className="row mt-4">
-                    <a
-                      href="/"
-                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
-                    >
-                      <div className="savings-card-box d-flex flex-column">
-                        <div className="p-4 detail-div">
-                          <div className="">
-                            <h5 className="text-blue weight-600">
-                              90 Days Stash
-                            </h5>
-                            <div className="saving-progress mt-3">
-                              <div className="saving-progress-actual"></div>
+                    {stashAccounts.length > 0 ? (
+                      stashAccounts.map((single, index) => {
+                        return (
+                          <a
+                            href="/"
+                            className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                          >
+                            <div className="savings-card-box d-flex flex-column">
+                              <div className="p-4 detail-div">
+                                <div className="">
+                                  <h5 className="text-blue weight-600">
+                                    {/* 90 Days Stash */}
+                                    {single?.name}
+                                  </h5>
+                                  <div className="saving-progress mt-3">
+                                    <div className="saving-progress-actual"></div>
+                                  </div>
+                                  <div className="mt-3">
+                                    <h5 className="text-green">
+                                      {nairaCurrencyVal(single?.contribution)}
+                                      <span className="text-blue">
+                                        {" "}
+                                        / {nairaCurrencyVal(single?.target)}
+                                      </span>
+                                    </h5>
+                                    <p className="font-sm-sm mt-2">
+                                      Savings balance
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <div className="mt-3">
-                              <h5 className="text-green">
-                                ₦5,024.12{" "}
-                                <span className="text-blue"> / ₦1,000,000</span>
-                              </h5>
-                              <p className="font-sm-sm mt-2">Savings balance</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <a
-                      href="/"
-                      className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
-                    >
-                      <div className="savings-card-box d-flex flex-column">
-                        <div className="p-4 detail-div">
-                          <div className="">
-                            <h5 className="text-blue weight-600">
-                              90 Days Stash
-                            </h5>
-                            <div className="saving-progress mt-3">
-                              <div className="saving-progress-actual"></div>
-                            </div>
-                            <div className="mt-3">
-                              <h5 className="text-green">
-                                ₦5,024.12{" "}
-                                <span className="text-blue"> / ₦1,000,000</span>
-                              </h5>
-                              <p className="font-sm-sm mt-2">Savings balance</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
+                          </a>
+                        );
+                      })
+                    ) : (
+                      <p>No stash accounts</p>
+                    )}
                   </div>
                 </div>
               </div>
