@@ -229,7 +229,7 @@ const CreateSavings3 = (props) => {
                       </div>
                       <div className="mt-4">
                         <label className="text-blue weight-500">
-                          Would you like to earn interests?
+                          Would you like to earn interest?
                         </label>
                         <div className="row">
                           <div className="col-lg-6 col-xl-5">
@@ -273,8 +273,8 @@ const CreateSavings3 = (props) => {
                       </div>
                       <div className="form-group mt-4">
                         <h5 className="text-blue weight-500">
-                          The amount to save daily to meet the to meet the
-                          target amount at the target date is:
+                          The amount to save to meet the target amount at the
+                          target date is:
                         </h5>
                         <input
                           type="text"
@@ -291,7 +291,8 @@ const CreateSavings3 = (props) => {
                       </div>
                       <div className="form-group">
                         <label className="text-blue">
-                          Would you like to upload an image? (optional)
+                          Would you like to upload an image that represents your
+                          goal (optional)
                         </label>
                         <div className="img-upload-div d-flex justify-content-between align-items-center px-3">
                           <h6 className="text-green">{imageName}</h6>

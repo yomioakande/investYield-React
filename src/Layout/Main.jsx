@@ -6,7 +6,6 @@ import homeplan from "../assets/images/Savingsplan/homeplan.svg";
 import emergency from "../assets/images/Savingsplan/emergencyplan.svg";
 import personalplan from "../assets/images/Savingsplan/personalplan.svg";
 import stash from "../assets/images/Stash/plus2.svg";
-// import challenge from "../assets/images/savingschallenge.svg";
 import "../assets/css/theme.css";
 import CardTransfer from "./common/CardTransfer";
 import Plan from "./common/Plan";
@@ -14,7 +13,6 @@ import { connect } from "react-redux";
 import { usersActions } from "../redux/actions";
 import Modal1 from "./Modal";
 import Loader from "../common/Loader";
-import Purse from "./common/myPurse";
 import { CSSTransition } from "react-transition-group";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,6 +23,13 @@ import { ErrorBoundary } from "react-error-boundary";
 import FallBack from "./FallBack";
 import FundPurse from "./FundPurse1";
 import JoinSavings from "./JoinSavings";
+import familyIcon from "../assets/images/familyIcon.svg";
+import tgifIcon from "../assets/images/TGIFIcon.svg";
+import dinnerDateIcon from "../assets/images/dinnerDateIcon.svg";
+import movies from "../assets/images/movies1.svg";
+import shoppingIcon from "../assets/images/shoppingIcon.svg";
+import entertainIcon from "../assets/images/entertainmentIcon.svg";
+
 
 const Main = (props) => {
   const [summaryInfo, setSummaryInfo] = useState({});
@@ -33,14 +38,15 @@ const Main = (props) => {
   const [transactions, setTransactions] = useState([]);
   // const [coreAccounts, setCoreAccounts] = useState([]);
   const [purseAccounts, setPurseAccounts] = useState([]);
+
   const [todoList, setTodoList] = useState({});
-  const [hidden, setHidden] = useState({});
+  // const [hidden, setHidden] = useState({});
   const modalToggle = () => {
     setModalInOpen(true);
   };
-  const modalToggle1 = () => {
-    setModalInOpen1(true);
-  };
+  // const modalToggle1 = () => {
+  //   setModalInOpen1(true);
+  // };
 
   const close = () => {
     setModalInOpen(false);
@@ -50,9 +56,9 @@ const Main = (props) => {
     setModalInOpen1(false);
   };
 
-  const toggleHide = (index) => {
-    setHidden({ ...hidden, [index]: !hidden[index] });
-  };
+  // const toggleHide = (index) => {
+  //   setHidden({ ...hidden, [index]: !hidden[index] });
+  // };
 
   const getTransactions = async () => {
     const data = await props.getData("/api/v1/user/transaction").then();
@@ -66,12 +72,14 @@ const Main = (props) => {
         .getPaginateTransact("/api/v1/user/transaction", "1", "5")
         .then();
       const todo = await props.getData("/api/v1/user/todo").then();
+
       const myPurseAccounts = await props
         .getAccounts("/api/v1/user/accountbyproduct", "0106")
         .then();
       setSummaryInfo(data);
       setTodoList(todo);
       setPurseAccounts(myPurseAccounts);
+
 
       todo.bvnConfirmed !== true &&
         setTimeout(() => {
@@ -220,7 +228,7 @@ const Main = (props) => {
                       >
                         <Link
                           to="/app/savings/mypurse"
-                          className="card-box d-flex flex-column mb-4"
+                          className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column flex-grow-1 mb-4"
                         >
                           <div className="au-card-purse au-card-bg-create-purse flex-grow-1">
                             <div className="au-card-elements">
@@ -230,7 +238,63 @@ const Main = (props) => {
                           </div>
                         </Link>
 
-                        {purseAccounts.map((single, index) => {
+                        <Link
+                          to="/app/savings/pursestep1/Family"
+                          className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column flex-grow-1 mb-4"
+                        >
+                          <div className="au-card-smaller au-card-bg-retirement h-100 px-3">
+                            <img src={familyIcon} alt="Food Tray" />
+                            <p className="text-green">Family</p>
+                          </div>
+                        </Link>
+
+                        <Link
+                          to="/app/savings/pursestep1/TGIF"
+                          className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                        >
+                          <div className="au-card-smaller au-card-bg-homeplan flex-grow-1 px-3">
+                            <img src={tgifIcon} alt="TGIF" />
+                            <p className="text-blue">TGIF</p>
+                          </div>
+                        </Link>
+                        <Link
+                          to="/app/savings/pursestep1/Dinner Date"
+                          className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                        >
+                          <div className="au-card-smaller au-card-bg-emergency flex-grow-1 px-3">
+                            <img src={dinnerDateIcon} alt="Dinner Date" />
+                            <p className="text-stash">Dinner date</p>
+                          </div>
+                        </Link>
+                        <Link
+                          to="/app/savings/pursestep1/Movies"
+                          className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                        >
+                          <div className="au-card-smaller au-card-bg-movie flex-grow-1 px-3">
+                            <img src={movies} alt="Shopping" />
+                            <p className="text-movie">Movies</p>
+                          </div>
+                        </Link>
+                        <Link
+                          to="/app/savings/pursestep1/Shopping"
+                          className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
+                        >
+                          <div className="au-card-smaller au-card-bg-wedding flex-grow-1 px-3">
+                            <img src={shoppingIcon} alt="Family" />
+                            <p className="text-movie">Shopping</p>
+                          </div>
+                        </Link>
+                        <Link
+                          to="/app/savings/pursestep1/Entertaiment"
+                          className="col-xl-3 col-lg-4 col-md-6 d-flex flex-column mb-4"
+                        >
+                          <div className="au-card-smaller au-card-bg-family flex-grow-1 px-3">
+                            <img src={entertainIcon} alt="Celebration" />
+                            <p className="text-stash3">Entertainment</p>
+                          </div>
+                        </Link>
+
+                        {/* {purseAccounts.map((single, index) => {
                           return (
                             <Purse
                               modalToggle={modalToggle1}
@@ -245,7 +309,7 @@ const Main = (props) => {
                               hidden={hidden}
                             />
                           );
-                        })}
+                        })} */}
                       </div>
                     </div>
                   </div>

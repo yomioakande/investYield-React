@@ -117,7 +117,7 @@ const Group3 = (props) => {
                       </div>
                       <div className="mt-4">
                         <label className="text-blue weight-500">
-                          How often would you like members to save?
+                          How often would you like to save?
                         </label>
                         <div className="row cg-3 px-3">
                           <div className="w-auto">
@@ -199,7 +199,7 @@ const Group3 = (props) => {
                       </div>
                       <div className="mt-4">
                         <label className="text-blue weight-500">
-                          Would you like members to earn interest?
+                          Would you like to earn interest?
                         </label>
                         <div className="row cg-3 px-3">
                           <div className="w-auto">
@@ -240,8 +240,8 @@ const Group3 = (props) => {
                       </div>
                       <div className="form-group mt-4">
                         <label className="text-blue">
-                          The amount for members to save daily to meet the
-                          target amount at the target date is:
+                          The amount for you to save daily to meet the target
+                          amount at the target date is:
                         </label>
                         <div className="form-group position-relative">
                           <NumberFormat

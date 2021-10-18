@@ -5,14 +5,13 @@ import "../../assets/css/theme.css";
 import plus2 from "../../assets/images/Stash/plus2.svg";
 import savings from "../../assets/images/individual-savings-icon.svg";
 import group from "../../assets/images/create-new-group-icon.svg";
-import blog from "../../assets/images/BlogImg.png";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import Loader from "../../common/Loader";
 import Charts from "../Charts";
 import { nairaCurrencyVal, dollarCurrencyVal } from "../../helpers/helper";
 import Purse from "../common/myPurse";
-import JoinSavings from "../JoinSavings"
+import JoinSavings from "../JoinSavings";
 const Savings = ({ getData, getAccounts }) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [loading, setloading] = useState(false);
@@ -106,7 +105,7 @@ const Savings = ({ getData, getAccounts }) => {
             </div>
             <div className="col-lg-5 col-md-4 d-flex flex-column mb-3">
               <div className="au-card position-relative px-0 flex-grow-1">
-   <JoinSavings/>
+                <JoinSavings />
               </div>
             </div>
           </div>
@@ -269,11 +268,11 @@ const Savings = ({ getData, getAccounts }) => {
                       coreAccounts.map((single, index) => {
                         return (
                           <Link
-                          key={single?.id}
+                            key={single?.id}
                             to={{
                               pathname: `/app/singlesavings/${single?.id}`,
                               state: {
-                                fromNotifications:true,
+                                fromNotifications: true,
                                 data: single,
                               },
                             }}
@@ -281,13 +280,11 @@ const Savings = ({ getData, getAccounts }) => {
                             className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
                           >
                             <div className="savings-card-box d-flex flex-column">
-                              <div className="savings-card-img-box">
-                                <img
-                                  src={blog}
-                                  className="img-fluid w-100"
-                                  alt="savings_goal"
-                                />
-                              </div>
+                              <img
+                                src={single?.image}
+                                className="img-fluid w-100"
+                                alt=""
+                              />
                               <div className="p-4 detail-div">
                                 <div className="">
                                   <h5 className="text-blue weight-600">

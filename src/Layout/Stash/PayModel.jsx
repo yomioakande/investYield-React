@@ -28,8 +28,7 @@ const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
     };
 
     Swal.fire({
-      title:
-        "Continue to confirm payment by myPurse",
+      title: "Continue to confirm payment by myPurse",
       showDenyButton: true,
       // showCancelButton: true,
       confirmButtonText: "Continue",
@@ -37,7 +36,7 @@ const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         payPurse(obj, "/api/v1/transfer/fundbypurse", modalToggle1);
- 
+
         // setShowInput(true);
         // Swal.fire('Saved!', '', 'success')
       } else if (result.isDenied) {
@@ -45,8 +44,6 @@ const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
         // Swal.fire('Changes are not saved', '', 'info')
       }
     });
-
-
   };
 
   return (
@@ -132,10 +129,7 @@ const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
             </div>
           </div>
           {congratsModal && (
-            <Congrats
-              headline1={"Fantastic!"}
-              headline2={"A 30 day Stash has been created."}
-            />
+            <Congrats headline1={"Fantastic!"} headline2={""} />
           )}
         </>
       ) : active === 2 ? (

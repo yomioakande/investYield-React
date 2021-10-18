@@ -94,7 +94,7 @@ const index = () => {
                               </div>
                               <div className="mt-4">
                                 <p>
-                                  Earn highest possible interest rates on your
+                                  Earn the highest possible interest rates on your
                                   savings.
                                 </p>
                               </div>
