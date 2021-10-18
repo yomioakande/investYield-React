@@ -39,7 +39,7 @@ const Main = (props) => {
   const [modalInOpen1, setModalInOpen1] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [coreAccounts, setCoreAccounts] = useState([]);
-  const [purseAccounts, setPurseAccounts] = useState([]);
+  // const [purseAccounts, setPurseAccounts] = useState([]);
   const [todoList, setTodoList] = useState({});
   const [hidden, setHidden] = useState({});
   const modalToggle = () => {
@@ -73,15 +73,15 @@ const Main = (props) => {
         .getPaginateTransact("/api/v1/user/transaction", "1", "5")
         .then();
       const todo = await props.getData("/api/v1/user/todo").then();
-      const myPurseAccounts = await props
-        .getAccounts("/api/v1/user/accountbyproduct", "0106")
-        .then();
+      // const myPurseAccounts = await props
+      //   .getAccounts("/api/v1/user/accountbyproduct", "0106")
+      //   .then();
       const coreAccounts = await props
         .getAccounts("/api/v1/user/accountbyproduct", "0201")
         .then();
       setSummaryInfo(data);
       setTodoList(todo);
-      setPurseAccounts(myPurseAccounts);
+      // setPurseAccounts(myPurseAccounts);
       setCoreAccounts(coreAccounts);
       todo.bvnConfirmed !== true &&
         setTimeout(() => {
