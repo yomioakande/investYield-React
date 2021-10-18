@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import { useFormik } from "formik";
-// import * as Yup from "yup";
 import Loader from "../../common/Loader";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
@@ -9,8 +6,6 @@ import { usersActions } from "../../redux/actions";
 const PayCard = ({ transId, getCards, payCard, setActive }) => {
   const [cards, setCards] = useState([]);
   const [loading, setloading] = useState(false);
-  // eslint-disable-next-line
-  //   const [rad, setRad] = useState("");
   const [state, setState] = useState({ rad: "" });
   const dataInfo = async () => {
     setloading(true);

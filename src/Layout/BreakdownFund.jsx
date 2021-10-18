@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { usersActions } from "../redux/actions";
 import withdrawal from "../assets/images/withdrawFundIcon.svg";
 import { nairaCurrencyVal } from "../helpers/helper";
+
 const BreakdownFund = (props) => {
   const [bankDetails, setBankDetails] = useState({});
   const [loading, setloading] = useState(false);

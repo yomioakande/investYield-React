@@ -39,7 +39,7 @@ const Second = (props) => {
       },
     };
 
-    console.log(obj);
+   
     props.register2(
       obj,
       "/api/v1/identity/validateregistrationotp",
@@ -63,7 +63,7 @@ const Second = (props) => {
       id: userID,
       operationType: 1,
     };
-    console.log(resendObj);
+ 
     props.resend(resendObj, "/api/v1/util/resendotp");
   };
   // eslint-disable-next-line
@@ -72,7 +72,7 @@ const Second = (props) => {
       setShowError(false);
     }, 2500);
   };
-// console.log(number)
+
   return (
     <>
       {props.loading && <Loader />}

@@ -18,7 +18,6 @@ const Savings = ({ getData, getAccounts }) => {
   const [coreAccounts, setCoreAccounts] = useState([]);
   const [stashAccounts, setStashAccounts] = useState([]);
   const [purseAccounts, setPurseAccounts] = useState([]);
-  const [myPurse, setMyPurse] = useState([]);
   const [hidden, setHidden] = useState({});
   const toggleHide = (index) => {
     setHidden({ ...hidden, [index]: !hidden[index] });
@@ -44,15 +43,13 @@ const Savings = ({ getData, getAccounts }) => {
       setStashAccounts(stashAccounts);
       setPurseAccounts(myPurseAccounts);
       setCoreAccounts(coreAccounts);
-      setMyPurse(myPurseAccounts);
+      
       setloading(false);
     })();
     // eslint-disable-next-line
   }, []);
 
-  console.log(stashAccounts, "stash");
-  console.log(coreAccounts, "cores");
-  console.log(myPurse, "myPurse");
+
   return (
     <>
       {loading && <Loader />}

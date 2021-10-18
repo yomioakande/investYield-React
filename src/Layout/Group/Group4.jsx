@@ -5,7 +5,6 @@ const Group4 = () => {
   const mainGroupInfo = JSON.parse(sessionStorage.getItem("mainGroupObj"));
   // eslint-disable-next-line
   const [main, setMain] = useState(mainGroupInfo);
-  console.log(main);
   const currencyVal = (number) =>
     new Intl.NumberFormat(main.ccy === "1" ? "en-NG" : "en-US", {
       style: "currency",

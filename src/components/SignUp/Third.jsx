@@ -39,7 +39,7 @@ const Third = (props) => {
         id: "string",
       },
     };
-    console.log(obj);
+   
     props.register3(obj, "/api/v1/identity/createpassword", "/createpin");
 
     // onSubmitProps.resetForm();
@@ -54,7 +54,7 @@ const Third = (props) => {
   });
 
   const alert = props.alert;
-  console.log(formik.values);
+
 
   return (
     <>

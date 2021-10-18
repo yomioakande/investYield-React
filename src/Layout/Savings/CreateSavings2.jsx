@@ -36,8 +36,6 @@ const CreateSavings2 = ({ username, register }) => {
     return yyyy + "-" + mm + "-" + dd;
   };
 
-  console.log(name);
-
   const [loading, setloading] = useState(false);
 
   const validationSchema = Yup.object({
@@ -64,7 +62,6 @@ const CreateSavings2 = ({ username, register }) => {
   };
 
   const formik = useFormik({
-   
     initialValues,
     onSubmit,
     validationSchema,
@@ -76,7 +73,7 @@ const CreateSavings2 = ({ username, register }) => {
     // eslint-disable-next-line
   }, [num?.value]);
 
-  console.log(formik.values);
+ 
   return (
     <>
       {loading && <Loader />}

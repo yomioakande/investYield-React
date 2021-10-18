@@ -47,7 +47,7 @@ const Index = () => {
       success();
       return data;
     } catch (error) {
-      // console.log(error.response);
+     
       return error.response;
     }
   };

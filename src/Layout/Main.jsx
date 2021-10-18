@@ -6,7 +6,6 @@ import homeplan from "../assets/images/Savingsplan/homeplan.svg";
 import emergency from "../assets/images/Savingsplan/emergencyplan.svg";
 import personalplan from "../assets/images/Savingsplan/personalplan.svg";
 import stash from "../assets/images/Stash/plus2.svg";
-// import challenge from "../assets/images/savingschallenge.svg";
 import "../assets/css/theme.css";
 import CardTransfer from "./common/CardTransfer";
 import Plan from "./common/Plan";
@@ -14,12 +13,10 @@ import { connect } from "react-redux";
 import { usersActions } from "../redux/actions";
 import Modal1 from "./Modal";
 import Loader from "../common/Loader";
-// import Purse from "./common/myPurse";
 import { CSSTransition } from "react-transition-group";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./transitions.css";
-// import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import { nairaCurrencyVal, dollarCurrencyVal } from "../helpers/helper";
 import { ErrorBoundary } from "react-error-boundary";
@@ -33,13 +30,15 @@ import movies from "../assets/images/movies1.svg";
 import shoppingIcon from "../assets/images/shoppingIcon.svg";
 import entertainIcon from "../assets/images/entertainmentIcon.svg";
 
+
 const Main = (props) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [modalInOpen, setModalInOpen] = useState(false);
   const [modalInOpen1, setModalInOpen1] = useState(false);
   const [transactions, setTransactions] = useState([]);
-  const [coreAccounts, setCoreAccounts] = useState([]);
-  // const [purseAccounts, setPurseAccounts] = useState([]);
+  // const [coreAccounts, setCoreAccounts] = useState([]);
+  const [purseAccounts, setPurseAccounts] = useState([]);
+
   const [todoList, setTodoList] = useState({});
   // const [hidden, setHidden] = useState({});
   const modalToggle = () => {
@@ -73,16 +72,15 @@ const Main = (props) => {
         .getPaginateTransact("/api/v1/user/transaction", "1", "5")
         .then();
       const todo = await props.getData("/api/v1/user/todo").then();
-      // const myPurseAccounts = await props
-      //   .getAccounts("/api/v1/user/accountbyproduct", "0106")
-      //   .then();
-      const coreAccounts = await props
-        .getAccounts("/api/v1/user/accountbyproduct", "0201")
+
+      const myPurseAccounts = await props
+        .getAccounts("/api/v1/user/accountbyproduct", "0106")
         .then();
       setSummaryInfo(data);
       setTodoList(todo);
-      // setPurseAccounts(myPurseAccounts);
-      setCoreAccounts(coreAccounts);
+      setPurseAccounts(myPurseAccounts);
+
+
       todo.bvnConfirmed !== true &&
         setTimeout(() => {
           setModalInOpen(true);
@@ -91,12 +89,10 @@ const Main = (props) => {
     })();
     // eslint-disable-next-line
   }, []);
-  console.log(coreAccounts, "PURSES");
+
   const errorHandler = (error, errorInfo) => {
     console.log("logging", error, errorInfo);
   };
-
-  console.log(coreAccounts, "jkl");
 
   return (
     <>

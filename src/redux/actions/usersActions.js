@@ -60,9 +60,6 @@ function login(body) {
     return { type: userConstants.LOGIN_REQUEST };
   }
 
-  // function success(user) {
-  //   return { type: userConstants.LOGIN_SUCCESS, payload: user };
-  // }
   function failure(message) {
     return { type: userConstants.LOGIN_FAILURE, payload: message };
   }
@@ -85,7 +82,7 @@ function register(user, apiUrl, nextRoute, func) {
     //FIRST SIGNUP
     if (success === true) {
       dispatch(successReg(messages));
-      console.log(register);
+
       if (
         apiUrl === "/api/v1/identity/resetpasswordtoken" ||
         apiUrl === "/api/v1/identity/register"
@@ -171,7 +168,6 @@ function register4(obj, apiUrl, func) {
     const { success, messages } = register;
     if (apiUrl === "/api/v1/user/pin" && success === true) {
       func();
-      // window.location.href = nextRoute;
     } else {
       dispatch(failure(messages));
     }
@@ -211,7 +207,7 @@ function bvnReg(obj, apiUrl, func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
-    console.log("tems", register);
+
     const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/bvn" && success === true) {
       dispatch(successReg(data?.challenge));
@@ -227,7 +223,7 @@ function confirmBvnReg(obj, apiUrl, func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.putData(obj, apiUrl);
-    console.log(register);
+
     const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/bvn" && success === true) {
       dispatch(successReg(data?.challenge));
@@ -255,7 +251,7 @@ function createStash(obj1, apiUrl, nextRoute) {
     const { data, success, messages } = register;
     if (apiUrl === "/api/v1/user/stash" && success === true) {
       dispatch(successReg(data?.reference));
-      console.log(register);
+
       sessionStorage.setItem(
         "stash",
         JSON.stringify({ ...obj1, stashRef: data?.reference })
@@ -265,8 +261,7 @@ function createStash(obj1, apiUrl, nextRoute) {
 
     if (apiUrl === "/api/v1/user/my_purse" && success === true) {
       dispatch(successReg(data?.reference));
-      console.log(data, "purse");
-      console.log(messages);
+
       sessionStorage.setItem(
         "mainPurseObj",
         JSON.stringify({ ...obj1, myPurseRef: data?.reference })
@@ -276,7 +271,7 @@ function createStash(obj1, apiUrl, nextRoute) {
 
     if (apiUrl === "/api/v1/user/group_savings" && success === true) {
       dispatch(successReg(data?.transId));
-      // console.log(register, "groupsavingsRef");
+
       sessionStorage.setItem(
         "mainGroupObj",
         JSON.stringify({ ...obj1, groupRef: data?.transId })
@@ -285,23 +280,22 @@ function createStash(obj1, apiUrl, nextRoute) {
     }
     if (apiUrl === "/api/v1transfer/FundExistingPurse" && success === true) {
       dispatch(successReg(data?.transId));
-      console.log(register, "fundpurse");
+
       sessionStorage.setItem(
         "fundPurse",
         JSON.stringify({ ...obj1, fundPurseRef: data?.reference })
       );
       window.location.href = nextRoute;
-    } if (apiUrl === "/api/v1/user/join_group_savings" && success === true) {
+    }
+    if (apiUrl === "/api/v1/user/join_group_savings" && success === true) {
       dispatch(successReg(data?.transId));
-      console.log(register, "publicgroup");
+
       sessionStorage.setItem(
         "publicGroup",
         JSON.stringify({ ...obj1, publicGroupRef: data?.transId })
       );
       window.location.href = nextRoute;
-    } 
-    
-    else {
+    } else {
       dispatch(failure(messages));
       return;
     }
@@ -322,7 +316,14 @@ function createCore(obj, apiUrl, nextRoute) {
       );
       window.location.href = nextRoute;
     } else if (success === true) {
+      console.log(data);
       dispatch(successReg(data?.reference));
+
+      sessionStorage.setItem(
+        "transferObj",
+        JSON.stringify({ challengeId: data.id })
+      );
+
       window.location.href = nextRoute;
     } else {
       dispatch(failure(messages));
@@ -339,8 +340,6 @@ function payPurse(obj, apiUrl, func) {
     if (success === true) {
       dispatch(successReg(data?.reference));
       func();
-      // sessionStorage.setItem("core", JSON.stringify(obj));
-      // window.location.href = nextRoute;
     } else {
       dispatch(failure(messages));
       return;
@@ -354,10 +353,7 @@ function payCard(obj, apiUrl, nextRoute) {
     const register = await userService.postData(obj, apiUrl);
     const { data, success, messages } = register;
 
-    console.log(register);
     if (success === true) {
-      console.log("df", data);
-      // dispatch(successReg(data?.reference));
       sessionStorage.setItem(
         "transferObj",
         JSON.stringify({ ...obj, challengeId: data.id })
@@ -384,16 +380,13 @@ function postFeedBack(obj, apiUrl, func) {
       apiUrl === "/api/v1/user/resolve_beneficiary" &&
       success === true
     ) {
-      console.log(data);
       sessionStorage.setItem("addBenef", JSON.stringify({ ...data, ...obj }));
       dispatch(successReg(messages));
       func(true);
     } else if (apiUrl === "/api/v1/user/beneficiary" && success === true) {
-      console.log(data);
       dispatch(successReg());
       func();
     } else if (apiUrl && success === true) {
-      console.log(data);
       func();
       dispatch(successReg(messages));
     } else {
@@ -409,7 +402,6 @@ function getDebitCards(apiUrl) {
     const getAll = await userService.getData(apiUrl);
     const { data, success, messages } = getAll;
     if (success === true) {
-      // dispatch(successReg());
       return data;
     } else {
       dispatch(failure(messages));
@@ -419,14 +411,13 @@ function getDebitCards(apiUrl) {
 
 function getInfo(apiUrl) {
   return async (dispatch) => {
-    // const handleError=useErrorHandler();
     dispatch(request());
     const getAll = await userService.getData(apiUrl);
     const { data, success, messages } = getAll;
-    console.log("accounts", data);
+
     if (apiUrl && success === true) {
       dispatch(successReg());
-      // handleError(messages)
+
       return data;
     } else {
       dispatch(failure(""));
@@ -460,7 +451,7 @@ function getAccounts(apiUrl, accountCode) {
     dispatch(request());
     const getAll = await userService.getAccounts(apiUrl, accountCode);
     const { data, success, messages } = getAll;
-    console.log("data", getAll);
+
     if (success === true) {
       dispatch(successReg());
       return data;
@@ -476,7 +467,7 @@ function getGroupCode(apiUrl, code, func) {
     dispatch(request());
     const getAll = await userService.getGroupCode(apiUrl, code);
     const { data, success, messages } = getAll;
-    console.log("data", getAll);
+
     if (success === true) {
       dispatch(successReg());
       func();
@@ -500,7 +491,6 @@ function getFrequency(apiUrl, firstQ, secondQ) {
     }
 
     if (apiUrl && success === true) {
-      console.log(data);
       return data;
     } else {
       dispatch(alertActions.error(messages));
@@ -540,9 +530,8 @@ function deleteData(apiUrl, obj, func) {
 
     const deleteId = await userService.deleteData(apiUrl, obj);
     const { data, success, messages } = deleteId;
-    console.log(deleteId);
+
     if (apiUrl && success === true) {
-      console.log(obj, apiUrl);
       func();
       return data;
     } else {
@@ -550,23 +539,13 @@ function deleteData(apiUrl, obj, func) {
       dispatch(failure(messages));
     }
   };
-
-  // function request(id) {
-  //   return { type: userConstants.DELETE_REQUEST, id };
-  // }
-  // // function success(id) {
-  // //   return { type: userConstants.DELETE_SUCCESS, id };
-  // // }
-  // function failure(id, error) {
-  //   return { type: userConstants.DELETE_FAILURE, id, error };
-  // }
 }
 
 function addCard() {
   return async (dispatch) => {
     dispatch(request());
     const getCard = await userService.getData("/api/v1/user/card_url").then();
-    console.log(getCard);
+
     window.location.href = getCard?.data?.authUrl;
   };
 }
@@ -575,7 +554,7 @@ function getPortfolio(apiUrl) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.getPortfolio(apiUrl);
-    console.log(register);
+
     const { data, success, messages } = register;
 
     if (success === true) {

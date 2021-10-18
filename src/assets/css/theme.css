@@ -324,6 +324,7 @@ strong {
   .pie-text {
     width: auto;
     text-align: center;
+    /* padding-top:3rem; */
   }
   .pie-text p {
     font-size: 0.725rem !important;

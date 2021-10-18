@@ -44,8 +44,7 @@ const ChangePassword = (props) => {
         id: "string",
       },
     };
-    console.log("reaper", obj);
-    // console.log(props.putPassword)
+
     props.putPassword(obj, "/api/v1/identity/password", success);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);

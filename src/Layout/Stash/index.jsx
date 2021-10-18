@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import Select from "react-select";
 import { Persist } from "formik-persist";
-// import FormikStore from 'formik-store'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
@@ -17,15 +16,8 @@ const Index = ({ getFrequency, createStash, loading }) => {
     frequency: "",
     ccyCode: "1",
   };
-  // const [state, setState] = useState(initialValues);
 
-  // let data;
-  // useEffect(() => {
   let data = JSON.parse(sessionStorage.getItem("stash"));
-  // setState(data);
-  // }, []);
-
-  console.log(data);
 
   const validationSchema = Yup.object({
     amount: Yup.number().required("An Amount is Required"),
@@ -118,7 +110,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
   const defaultValue = (options, value) => {
     return options ? options.find((option) => option.value === value) : "";
   };
-  console.log(formik.values);
+
   return (
     <>
       {loading && <Loader />}

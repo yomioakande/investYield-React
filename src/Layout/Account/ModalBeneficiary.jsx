@@ -37,7 +37,6 @@ const ModalBeneficiary = ({
       type: values.identifier.split("").includes("@") ? "0" : "1",
     };
 
-    console.log(obj);
     modalBenf(obj, "/api/v1/user/resolve_beneficiary", setModal);
     // onSubmitProps.resetForm();
     show();
@@ -57,9 +56,7 @@ const ModalBeneficiary = ({
     }, 3000);
   };
 
-  console.log(formik.values);
-
-  console.log(alertType);
+ 
   //true
   return ReactDom.createPortal(
     <>

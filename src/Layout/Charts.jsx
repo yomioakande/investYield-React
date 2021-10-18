@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import { Doughnut } from "react-chartjs-2";
 
-
-
-const Charts = ({summaryInfo}) => {
-
+const Charts = ({ summaryInfo }) => {
   const state = {
     //   maintainAspectRatio: true,
     labels: ["Total Naira Savings", "Total Dollar Savings"],
@@ -21,9 +18,14 @@ const Charts = ({summaryInfo}) => {
       },
     ],
   };
-  
+
   const ChartT = styled.div`
     margin-top: -180px;
+
+    @media only screen and (max-width: 767.98px) {
+      margin-top: -120px;
+      padding-bottom:4rem;
+    }
   `;
   return (
     <ChartT>
@@ -46,15 +48,15 @@ const Charts = ({summaryInfo}) => {
           },
           elements: {
             center: {
-                text: "₦10,000,000.00",
-                color: "#333333", // Default is #000000
-                fontStyle: "Comfortaa", // Default is Arial
-                sidePadding: 20, // Default is 20 (as a percentage)
-                minFontSize: 12, // Default is 20 (in px), set to false and text will not wrap.
-                lineHeight: 25, // Default is 25 (in px), used for when text wraps
+              text: "₦10,000,000.00",
+              color: "#333333", // Default is #000000
+              fontStyle: "Comfortaa", // Default is Arial
+              sidePadding: 20, // Default is 20 (as a percentage)
+              minFontSize: 12, // Default is 20 (in px), set to false and text will not wrap.
+              lineHeight: 25, // Default is 25 (in px), used for when text wraps
             },
+          },
         }}
-    }
       />
     </ChartT>
   );

@@ -46,7 +46,7 @@ const MyPurse2 = () => {
       crFreq: values.crFreq,
       amount: values.amount,
     };
-    console.log(obj);
+
     sessionStorage.setItem("purseObj1", JSON.stringify(obj));
     window.location.href = `/app/savings/pursestep2/${name}`;
     onSubmitProps.resetForm();
@@ -55,7 +55,6 @@ const MyPurse2 = () => {
   };
 
   const formik = useFormik({
-    // enableReinitialize: true,
     initialValues,
     onSubmit,
     validationSchema,
@@ -65,8 +64,6 @@ const MyPurse2 = () => {
     formik.setFieldValue("amount", num?.value);
     // eslint-disable-next-line
   }, [num?.value]);
-
-  console.log("reform", formik.values);
 
   return (
     <>

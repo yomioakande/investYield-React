@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { usersActions } from "../redux/actions";
 import challenge from "../assets/images/savingschallenge.svg";
-const JoinSavings = () => {
+const JoinSavings = (props) => {
+  const [accounts, setAccounts] = useState([]);
+  useEffect(() => {
+    (async function dataInfo() {
+
+      const data = await props
+        .getInfo("/api/v1/user/public_group_savings")
+        .then();
+      setAccounts(data);
+
+    })();
+    // eslint-disable-next-line
+  }, []);
+
+
+
   return (
     <>
       <div className="au-card-inner ">
@@ -37,20 +55,30 @@ const JoinSavings = () => {
                   alt="First slide"
                 />
               </div>
-              <div className="carousel-item">
-                <img
-                  className="d-block w-100"
-                  src={challenge}
-                  alt="Second slide"
-                />
-              </div>
-              <div className="carousel-item">
-                <img
-                  className="d-block w-100"
-                  src={challenge}
-                  alt="Third slide"
-                />
-              </div>
+              {accounts.length > 0 ? (
+                accounts.map((single, index) => {
+                  return (
+                    <Link
+                      to={{
+                        pathname: `/app/groupsavings/joingroup1/${single?.id}`,
+                        state: {
+                          data: single,
+                        },
+                      }}
+                      key={single?.id}
+                      className="carousel-item"
+                    >
+                      <img
+                        className="d-block w-100"
+                        src={single?.imageUrl || challenge}
+                        alt="First slide"
+                      />
+                    </Link>
+                  );
+                })
+              ) : (
+                <p>No Accounts</p>
+              )}
             </div>
             <a
               style={{ display: "none" }}
@@ -91,7 +119,7 @@ const JoinSavings = () => {
                 role="button"
                 data-slide="next"
               >
-                
+                  
               </a>
               <a
                 className="swiper-button-prev carousel-control-prev"
@@ -99,7 +127,7 @@ const JoinSavings = () => {
                 role="button"
                 data-slide="prev"
               >
-                
+
               </a>
             </div>
             {/* <a href="/" className="au-btn-link">
@@ -112,4 +140,15 @@ const JoinSavings = () => {
   );
 };
 
-export default JoinSavings;
+const mapStateToProps = (state) => {
+  const { alert } = state;
+  const username = state.authentication.user;
+  const { loading } = state.registration;
+  return { alert, username, loading };
+};
+
+const actionCreators = {
+  getInfo: usersActions.getInfo,
+};
+
+export default connect(mapStateToProps, actionCreators)(JoinSavings);

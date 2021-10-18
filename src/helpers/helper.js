@@ -21,7 +21,7 @@ export function authHeader() {
         refreshObj,
         "/api/v1/identity/refresh"
       );
-      // console.log(data);
+    
 
       const expires_at = d.getTime() + 1 * 60 * 60 * 1000;
       user = {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import savings from "../../assets/images/savingschallenge.svg";
 import userIcon from "../../assets/images/userIcon.svg";
 import supportIcon from "../../assets/images/supportIcon.svg";
 import settings from "../../assets/images/cardSettingsIcon.svg";
@@ -8,6 +7,7 @@ import referIcon from "../../assets/images/referIcon.svg";
 import beneficiary from "../../assets/images/mgBeneficiariesIcon.svg";
 import securityIcon from "../../assets/images/securityIcon.svg";
 import MenuBar from "../Account/MenuBar";
+import JoinSavings from "../JoinSavings"
 import Charts from "../Charts";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
@@ -105,63 +105,7 @@ const Index = ({ getData }) => {
             </div>
             <div className="col-lg-5 col-md-4 d-flex flex-column mb-3">
               <div className="au-card position-relative px-0 flex-grow-1">
-                <div className="au-card-inner">
-                  <div className="px-4">
-                    <h3 className="title-2 tm-b-5">Join a savings challenge</h3>
-                  </div>
-                  <div className="position-relative wecare-sec mx-4">
-                    <div className="swiper-container position-relative wecare-slider">
-                      <div className="swiper-wrapper py-2">
-                        <div className="swiper-slide">
-                          <div className="w-100 h-100">
-                            <div className="container h-100">
-                              <div className="row h-100 py-3 mb-4">
-                                <div className="au-message-list w-100 todolist mt-4">
-                                  <img
-                                    src={savings}
-                                    className="img-fluid w-100"
-                                    alt="join a savings challenge"
-                                  />
-                                </div>
-                                {/* <!-- .col --> */}
-                              </div>
-                              {/* <!-- .row --> */}
-                            </div>
-                            {/* <!-- .container --> */}
-                          </div>
-                          {/* <!-- .hero-content-overlay --> */}
-                        </div>
-                        {/* <!-- .hero-content-wrap --> */}
-
-                        <div className="swiper-slide">
-                          <div className="w-100 h-100">
-                            <div className="container h-100">
-                              <div className="row h-100 py-3 mb-4">
-                                <div className="au-message-list w-100 todolist mt-4">
-                                  <img
-                                    src={savings}
-                                    className="img-fluid w-100"
-                                    alt="join a savings challenge"
-                                  />
-                                </div>
-                                {/* <!-- .col --> */}
-                              </div>
-                              {/* <!-- .row --> */}
-                            </div>
-                            {/* <!-- .container --> */}
-                          </div>
-                          {/* <!-- .hero-content-overlay --> */}
-                        </div>
-                        {/* <!-- .hero-content-wrap --> */}
-                      </div>
-                      {/* <!-- .swiper-wrapper --> */}
-                    </div>
-                    <div className="d-flex">
-                      <div className="swiper-button-next"></div>
-                      <div className="swiper-button-prev"></div>
-                    </div>
-                  </div>
-                </div>
+               <JoinSavings/>
               </div>
             </div>
           </div>

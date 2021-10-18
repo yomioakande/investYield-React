@@ -19,9 +19,6 @@ export const HomePageRoutes = () => {
     <Router>
       <HomePageHeader />
       <Switch>
-        {/* <Route exact path="/home">
-          {<Redirect to="/" />}
-        </Route> */}
         <Route exact path="/">
           <HomePage />
         </Route>

@@ -14,14 +14,13 @@ const MyPorfolio = (props) => {
       const data = await props
         .getPortfolio("/api/v1/user/portfolio_summary")
         .then();
-      console.log(data, "dfg");
       setPortfolio(data);
       setloading(false);
     })();
     // eslint-disable-next-line
   }, []);
 
-  console.log(portfolio, "retro");
+
 
   return (
     <>

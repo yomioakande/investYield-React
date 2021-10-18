@@ -1,13 +1,7 @@
 import React from "react";
-// import { format } from "date-fns";
+import { nairaCurrencyVal } from "../../helpers/helper";
 const CardTransfer = ({ descr, transactionId, date, amount, value }) => {
-  
-
-  const dates1=new Date(date).toUTCString()
-
-  console.log(dates1,'fgg')
-
-
+  const dates1 = new Date(date).toUTCString();
 
   return (
     <>
@@ -25,13 +19,10 @@ const CardTransfer = ({ descr, transactionId, date, amount, value }) => {
               <div className="text px-0 mx-0">
                 <h5 className="name">
                   {descr} Transaction ID: {transactionId}
-                  {/* Transfer from RAYMOND ADEWOLE [******8907]. Transaction ID: */}
-                  {/* XXXXXXXXXXXXXXX */}
                 </h5>
                 <p className="mt-3">
                   <span className="mr-2">Date:</span>
                   <span>{dates1}</span>
-                  {/* <span>Fri, 04 Sep 2020 15:34:20 GMT</span>{" "} */}
                 </p>
               </div>
             </div>
@@ -41,8 +32,7 @@ const CardTransfer = ({ descr, transactionId, date, amount, value }) => {
                   value ? "text-green" : "text-danger"
                 }`}
               >
-                {amount}
-                {/* ₦ 5000.00 */}
+                {nairaCurrencyVal(amount)}
               </h4>
             </div>
           </div>

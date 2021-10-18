@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { nairaCurrencyVal } from "../../helpers/helper";
 const myPurse = ({
-  // modalToggle,
   id,
   namePurse,
   purseAmount,
@@ -52,7 +50,6 @@ const myPurse = ({
             >
               Fund Purse
             </Link>
-            {/* <button onClick={() => modalToggle()} className="mt-2 purse-link-btn">Fund Purse</button> */}
           </div>
         </div>
       </div>

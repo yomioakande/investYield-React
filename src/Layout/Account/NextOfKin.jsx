@@ -12,8 +12,7 @@ const NextofKin = (props) => {
   const [nokDetails, setNokDetails] = useState(true);
   async function dataInfo() {
     const data = await props.getNok("/api/v1/user/nextofkin").then();
-    console.log(data);
-    console.log("next of kin");
+
     setNokDetails(data);
   }
   useEffect(() => {
@@ -53,7 +52,6 @@ const NextofKin = (props) => {
       password: values.password,
     };
 
-    console.log("reaper", obj);
     props.postNok(obj, "/api/v1/user/nextofkin", success);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
@@ -80,8 +78,6 @@ const NextofKin = (props) => {
     });
     dataInfo();
   };
-
-  console.log(formik.values);
 
   return (
     <>

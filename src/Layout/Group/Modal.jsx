@@ -29,12 +29,10 @@ const Modal = ({ close, getAccount }) => {
         next
       ).then();
       setGroupAccount(data);
-      //  console.log(j)
     })();
     onSubmitProps.setSubmitting(false);
   };
 
-  console.log(groupAccount, "adf");
   const formik = useFormik({
     initialValues,
     onSubmit,

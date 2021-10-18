@@ -7,7 +7,7 @@ const Breakdown = (props) => {
   const [targetValue, setTargetValue] = useState("");
   const stash = JSON.parse(sessionStorage.getItem("stash"));
   const stashfreq = JSON.parse(sessionStorage.getItem("stashfreq"));
-  // console.log("stash", stash);
+ 
 
   let date = new Date();
   //START DATE
