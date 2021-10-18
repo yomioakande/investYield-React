@@ -5,7 +5,6 @@ import "../../assets/css/theme.css";
 import plus2 from "../../assets/images/Stash/plus2.svg";
 import savings from "../../assets/images/individual-savings-icon.svg";
 import group from "../../assets/images/create-new-group-icon.svg";
-import blog from "../../assets/images/BlogImg.png";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import Loader from "../../common/Loader";
@@ -284,13 +283,11 @@ const Savings = ({ getData, getAccounts }) => {
                             className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
                           >
                             <div className="savings-card-box d-flex flex-column">
-                              {/* <div className="savings-card-img-box"> */}
                               <img
                                 src={single?.image}
                                 className="img-fluid w-100"
                                 alt=""
                               />
-                              {/* </div> */}
                               <div className="p-4 detail-div">
                                 <div className="">
                                   <h5 className="text-blue weight-600">

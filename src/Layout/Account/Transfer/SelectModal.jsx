@@ -104,7 +104,6 @@ const SelectModal = ({ beneficiary, close, setSingle, single, loading }) => {
                       <button
                         onClick={() => close()}
                         className="btn login-submit mt-5"
-                        data-dismiss="modal"
                       >
                         NEXT
                       </button>
