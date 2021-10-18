@@ -225,7 +225,7 @@ const Index = (props) => {
           headline1={"Fantastic!"}
           headline2={"Successful fund transfer"}
           content={
-            "You have transferred NXXXX.XX to Isaac Newton (isacc.newton@gmail.com)"
+            ""
           }
         />
       )}

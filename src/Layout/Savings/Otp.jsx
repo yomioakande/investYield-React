@@ -114,7 +114,7 @@ const Otp = (props) => {
       {congratsModal && (
         <Congrats
           headline1={"Fantastic!"}
-          headline2={"A 30 day Stash has been created."}
+          headline2={""}
         />
       )}
     </>

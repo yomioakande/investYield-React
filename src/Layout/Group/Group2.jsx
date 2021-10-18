@@ -139,7 +139,8 @@ const Group2 = (props) => {
                       <div className="mt-4">
                         <div className="form-group">
                           <label className="text-blue">
-                            Would you like to upload an image? (optional)
+                            Would you like to upload an image that represents
+                            your goal (optional)
                           </label>
                           <div className="img-upload-div d-flex justify-content-between align-items-center px-3">
                             <h6 className="text-green">{imageName}</h6>

@@ -159,6 +159,7 @@ const NextofKin = (props) => {
                   <input
                     type="email"
                     className="text-field-profile"
+                    autoComplete="off"
                     name="email"
                     {...formik.getFieldProps("email")}
                   />
