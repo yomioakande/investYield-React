@@ -14,7 +14,7 @@ import { connect } from "react-redux";
 import { usersActions } from "../redux/actions";
 import Modal1 from "./Modal";
 import Loader from "../common/Loader";
-import Purse from "./common/myPurse";
+// import Purse from "./common/myPurse";
 import { CSSTransition } from "react-transition-group";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -45,9 +45,9 @@ const Main = (props) => {
   const modalToggle = () => {
     setModalInOpen(true);
   };
-  const modalToggle1 = () => {
-    setModalInOpen1(true);
-  };
+  // const modalToggle1 = () => {
+  //   setModalInOpen1(true);
+  // };
 
   const close = () => {
     setModalInOpen(false);
@@ -57,9 +57,9 @@ const Main = (props) => {
     setModalInOpen1(false);
   };
 
-  const toggleHide = (index) => {
-    setHidden({ ...hidden, [index]: !hidden[index] });
-  };
+  // const toggleHide = (index) => {
+  //   setHidden({ ...hidden, [index]: !hidden[index] });
+  // };
 
   const getTransactions = async () => {
     const data = await props.getData("/api/v1/user/transaction").then();
