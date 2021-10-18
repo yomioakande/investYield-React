@@ -24,7 +24,7 @@ import Group3 from "../Layout/Group/Group3";
 import Group4 from "../Layout/Group/Group4";
 import JoinGroup1 from "../Layout/Group/JoinGroup1";
 import JoinGroup2 from "../Layout/Group/JoinGroup2";
-
+import PublicGroup from "../Layout/Group/PublicGroup";
 import Account from "../Layout/Account/Index";
 import Support from "../Layout/Account/Support";
 import Beneficiary from "../Layout/Account/Beneficiary";
@@ -88,7 +88,7 @@ const DashboardRoutes = () => {
         <PrivateRoute path="/app/singlesavings/:id" component={SingleSavings} />
 
         <PrivateRoute
-          path="/app/groupsavings/joingroup1"
+          path="/app/groupsavings/joingroup1/:id"
           component={JoinGroup1}
         />
         <PrivateRoute
@@ -100,7 +100,7 @@ const DashboardRoutes = () => {
         <PrivateRoute path="/app/groupsavings2" component={Group2} />
         <PrivateRoute path="/app/groupsavings3" component={Group3} />
         <PrivateRoute path="/app/groupsavings4" component={Group4} />
-
+        <PrivateRoute path="/app/publicgroup" component={PublicGroup} />
         <PrivateRoute path="/app/blog/:id" component={SingleBlog} />
         <PrivateRoute path="/app/blog" component={Blog} />
 

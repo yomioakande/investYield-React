@@ -1,6 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import PayModel from "../Stash/PayModel";
+import { dateConv } from "../../helpers";
 const JoinGroup2 = () => {
+  let data = JSON.parse(sessionStorage.getItem("publicGroup"));
+
+  const currencyVal = (number) =>
+    new Intl.NumberFormat(data.ccy === 1 ? "en-NG" : "en-US", {
+      style: "currency",
+      currency: data.ccy === 1 ? "NGN" : "USD",
+    }).format(number);
+
+  const convertfreq = (freq) => {
+    if (freq === "1") {
+      return "daily";
+    } else if (freq === "7") {
+      return "weekly";
+    } else if (freq === "30") {
+      return "monthly";
+    } else if (freq === "0") {
+      return "once";
+    } else return null;
+  };
   return (
     <>
       <div className="section__content section__content--p30 pb-4">
@@ -16,12 +37,15 @@ const JoinGroup2 = () => {
                   <div className="savings-breakdown p-4 px-lg-5">
                     <div className="savings-breakdown-row text-black">
                       <p>Group Name</p>
-                      <p className="font-weight-bold">Abuja Hikers July 2021</p>
+                      <p className="font-weight-bold">{data?.name}</p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
                       <p>Group members save:</p>
-                      <p className="font-weight-bold">₦ 5,000.00 / daily</p>
+                      <p className="font-weight-bold">
+                        {currencyVal(data?.cntr_amt)} /{" "}
+                        {convertfreq(data?.freq)}
+                      </p>
                     </div>
                     <div className="savings-breakdown-row text-black">
                       <p>Interest rate:</p>
@@ -30,83 +54,30 @@ const JoinGroup2 = () => {
 
                     <div className="savings-breakdown-row text-black">
                       <p>Start Date</p>
-                      <p className="font-weight-bold">12 - February - 2021</p>
+                      <p className="font-weight-bold">
+                        {dateConv(data?.start)}
+                      </p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
                       <p>End Date:</p>
-                      <p className="font-weight-bold">12 - December - 2021</p>
+                      <p className="font-weight-bold">
+                        {dateConv(data?.tgtDate)}
+                      </p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">
                       <p>Target Amount:</p>
-                      <p className="font-weight-bold">₦ 1,515,000.00</p>
+                      <p className="font-weight-bold">
+                        {currencyVal(data?.target)}
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6 d-flex flex-column">
-              <div className="au-card position-relative px-0 flex-grow-1">
-                <div className="au-card-inner">
-                  <div className="px-4 px-lg-5">
-                    <h3 className="title-2 tm-b-5">Select a payment method</h3>
-                  </div>
-                  <div className="px-4 px-lg-5 mt-5">
-                    <form action="">
-                      <div className="pay-method-radio">
-                        <input id="radio1" name="radio" type="radio" />
-                        <label for="radio1">
-                          <span>Pay with Card</span>
-                        </label>
-                      </div>
-                      <div className="pay-method-radio mt-4">
-                        <input id="radio2" name="radio" type="radio" />
-                        <label for="radio2">
-                          <span>Pay with myPurse - Vibe Cash</span>
-                        </label>
-                      </div>
-                      <div className="pay-method-radio mt-4">
-                        <input id="radio3" name="radio" type="radio" />
-                        <label for="radio3">
-                          <span>Pay with Bank Transfer</span>
-                        </label>
-                      </div>
 
-                      <div className="form-group mt-4">
-                        <a
-                          href="/app/groupsavings/joingroup2"
-                          className="au-btn-outline d-flex justify-content-center align-items-center"
-                        >
-                          Add a Card
-                        </a>
-                      </div>
-
-                      <div className="row justify-content-end">
-                        <div className="col-lg-8 mt-5">
-                          <div className="d-flex justify-content-between">
-                            <div className="col-lg-6 px-0">
-                              <Link
-                                to="/app/groupsavings/joingroup1"
-                                // href="#"
-                                className="au-btn iy-btn-secondary text-danger"
-                              >
-                                Cancel
-                              </Link>
-                            </div>
-                            <div className="col-lg-6 px-0">
-                              <button className="au-btn iy-btn-primary">
-                                NEXT
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <PayModel transId={data?.publicGroupRef} />
           </div>
         </div>
       </div>

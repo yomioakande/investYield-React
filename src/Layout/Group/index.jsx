@@ -62,8 +62,8 @@ const Index = () => {
                   </div>
                   <div className="row">
                     <div className="col-lg-6 mt-4">
-                      <a
-                        href="/"
+                      <Link
+                        to="/app/publicgroup"
                         className="join-savings-challenge d-flex align-items-center"
                       >
                         <div>
@@ -79,7 +79,7 @@ const Index = () => {
                           className="img-fluid"
                           alt="arrowWhite"
                         />
-                      </a>
+                      </Link>
                     </div>
                     <div className="col-lg-6 mt-4">
                       <button

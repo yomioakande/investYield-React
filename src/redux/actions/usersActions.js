@@ -291,7 +291,17 @@ function createStash(obj1, apiUrl, nextRoute) {
         JSON.stringify({ ...obj1, fundPurseRef: data?.reference })
       );
       window.location.href = nextRoute;
-    } else {
+    } if (apiUrl === "/api/v1/user/join_group_savings" && success === true) {
+      dispatch(successReg(data?.transId));
+      console.log(register, "publicgroup");
+      sessionStorage.setItem(
+        "publicGroup",
+        JSON.stringify({ ...obj1, publicGroupRef: data?.transId })
+      );
+      window.location.href = nextRoute;
+    } 
+    
+    else {
       dispatch(failure(messages));
       return;
     }

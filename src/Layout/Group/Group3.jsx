@@ -253,6 +253,7 @@ const Group3 = (props) => {
                             name="cntr_amt"
                             // value="cntr_amt"
                             value={currencyVal(targetNum)}
+                            disabled
                             // onValueChange={(values) => {
                             //   setNum({ value: values.value });
                             // }}
