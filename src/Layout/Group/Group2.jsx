@@ -55,8 +55,6 @@ const Group2 = (props) => {
     docId: "",
   };
 
-  console.log(imageRef);
-
   const validationSchema = Yup.object({
     decide: Yup.string().required("Coose an Option"),
   });
@@ -79,8 +77,6 @@ const Group2 = (props) => {
     validationSchema,
     validateOnMount: true,
   });
-
-  console.log(formik.values);
 
   return (
     <>

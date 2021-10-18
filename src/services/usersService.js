@@ -14,8 +14,10 @@ export const userService = {
   getAccounts,
   getPaginateTransact,
   getPortfolio,
-  getGroupCode
+  getGroupCode,
 };
+
+const baseUrl = process.env.REACT_APP_BACKEND_URL;
 
 async function register1(user, apiUrl) {
   const requestOptions = {
@@ -24,17 +26,13 @@ async function register1(user, apiUrl) {
     body: JSON.stringify(user),
   };
   try {
-    const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}`,
-      requestOptions
-    );
+    const datas = await fetch(`${baseUrl}${apiUrl}`, requestOptions);
     const getData = await datas.json();
     return getData;
   } catch (error) {
     return error;
   }
 }
-const baseUrl = "https://api-staging.investyield.ng:44377";
 
 async function login(body) {
   const requestOptions = {
@@ -57,25 +55,13 @@ function logout() {
   sessionStorage.removeItem("user");
 }
 
-// function getData(id) {
-//   const requestOptions = {
-//       method: 'GET',
-//       headers: authHeader()
-//   };
-
-//   // return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-// }
-
 async function getData(apiUrl) {
   const requestOptions = {
     method: "GET",
     headers: authHeader(),
   };
   try {
-    const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}`,
-      requestOptions
-    );
+    const datas = await fetch(`${baseUrl}${apiUrl}`, requestOptions);
     const getData = await datas.json();
     return getData;
   } catch (error) {
@@ -90,7 +76,7 @@ async function getPaginateTransact(apiUrl, first, second) {
   };
   try {
     const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}?pageNumber=${first}&pageSize=${second}`,
+      `${baseUrl}${apiUrl}?pageNumber=${first}&pageSize=${second}`,
       requestOptions
     );
     const getData = await datas.json();
@@ -107,7 +93,7 @@ async function getAccounts(apiUrl, accountCode) {
   };
   try {
     const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}?productCode=${accountCode}`,
+      `${baseUrl}${apiUrl}?productCode=${accountCode}`,
       requestOptions
     );
     const getData = await datas.json();
@@ -124,7 +110,7 @@ async function getGroupCode(apiUrl, Code) {
   };
   try {
     const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}?Code=${Code}`,
+      `${baseUrl}${apiUrl}?Code=${Code}`,
       requestOptions
     );
     const getData = await datas.json();
@@ -141,7 +127,7 @@ async function getFreq(apiUrl, firstQ, secondQ) {
   };
   try {
     const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}/?code=${firstQ}&ccy=${secondQ}`,
+      `${baseUrl}${apiUrl}/?code=${firstQ}&ccy=${secondQ}`,
       requestOptions
     );
     const getData = await datas.json();
@@ -151,14 +137,14 @@ async function getFreq(apiUrl, firstQ, secondQ) {
   }
 }
 
-async function getEstimate(apiUrl, firstQ, secondQ, thirdQ, fourthQ,fifthQ) {
+async function getEstimate(apiUrl, firstQ, secondQ, thirdQ, fourthQ, fifthQ) {
   const requestOptions = {
     method: "GET",
     headers: authHeader(),
   };
   try {
     const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}?ExpectedReturn=${firstQ}&Frequency=${secondQ}&TargetDate=${thirdQ}&StartDate=${fourthQ}&Product=${fifthQ}`,
+      `${baseUrl}${apiUrl}?ExpectedReturn=${firstQ}&Frequency=${secondQ}&TargetDate=${thirdQ}&StartDate=${fourthQ}&Product=${fifthQ}`,
       requestOptions
     );
     const getData = await datas.json();
@@ -175,7 +161,7 @@ async function getTargetValue(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
   };
   try {
     const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}?Principal=${firstQ}&Tenor=${secondQ}&Product=${thirdQ}&Currency=${fourthQ}`,
+      `${baseUrl}${apiUrl}?Principal=${firstQ}&Tenor=${secondQ}&Product=${thirdQ}&Currency=${fourthQ}`,
       requestOptions
     );
     const getData = await datas.json();
@@ -189,18 +175,13 @@ async function postData(user, apiUrl) {
   const requestOptions = {
     method: "POST",
     headers: {
-      // 'Accept': 'application/json',
       Authorization: authHeader()?.Authorization,
       "Content-Type": "application/json",
     },
-    // headers: { "Content-Type": "application/json",authHeader() },
     body: JSON.stringify(user),
   };
   try {
-    const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}`,
-      requestOptions
-    );
+    const datas = await fetch(`${baseUrl}${apiUrl}`, requestOptions);
     const getData = await datas.json();
     return getData;
   } catch (error) {
@@ -212,51 +193,37 @@ async function putData(user, apiUrl) {
   const requestOptions = {
     method: "PUT",
     headers: {
-      // 'Accept': 'application/json',
       Authorization: authHeader()?.Authorization,
       "Content-Type": "application/json",
     },
-    // headers: { "Content-Type": "application/json",authHeader() },
     body: JSON.stringify(user),
   };
   try {
-    const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}`,
-      requestOptions
-    );
+    const datas = await fetch(`${baseUrl}${apiUrl}`, requestOptions);
     const getData = await datas.json();
     return getData;
   } catch (error) {
     return error;
   }
 }
-
-
 
 async function getPortfolio(apiUrl) {
   const requestOptions = {
     method: "PUT",
     headers: {
-      // 'Accept': 'application/json',
       Authorization: authHeader()?.Authorization,
       "Content-Type": "application/json",
     },
-    // headers: { "Content-Type": "application/json",authHeader() },
-    // body: JSON.stringify(user),
+  
   };
   try {
-    const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}`,
-      requestOptions
-    );
+    const datas = await fetch(`${baseUrl}${apiUrl}`, requestOptions);
     const getData = await datas.json();
     return getData;
   } catch (error) {
     return error;
   }
 }
-
-
 
 async function deleteData(apiUrl, obj) {
   const requestOptions = {
@@ -268,10 +235,7 @@ async function deleteData(apiUrl, obj) {
     body: JSON.stringify(obj),
   };
   try {
-    const datas = await fetch(
-      `https://api-staging.investyield.ng:44377${apiUrl}`,
-      requestOptions
-    );
+    const datas = await fetch(`${baseUrl}${apiUrl}`, requestOptions);
     const getData = await datas.json();
     return getData;
   } catch (error) {

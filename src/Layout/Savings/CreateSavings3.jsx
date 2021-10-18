@@ -32,19 +32,15 @@ const CreateSavings3 = (props) => {
   const targetDate = firstData.endDate;
   const startDate = firstData.startDate;
 
-  console.log(startDate, "frgwg");
-
   const initialValues = {
     earnInterest: "",
     frequency: "",
-    // amount: targetNum,
   };
 
   const validationSchema = Yup.object({
     earnInterest: Yup.string().required("A plan Name is Required"),
     frequency: Yup.string().required("A plan Name is Required"),
-    // amount: Yup.string().required("Pick the Currency to save in"),
-  });
+   });
 
   //UPLOAD SUCCESSFUL ALERT
   const success = () => {
@@ -98,7 +94,7 @@ const CreateSavings3 = (props) => {
     };
 
     const mainObj = { ...obj, ...firstData };
-    // console.log(mainObj);
+
     props.createCore(
       mainObj,
       "/api/v1/user/coreaccount",
@@ -115,8 +111,6 @@ const CreateSavings3 = (props) => {
     validationSchema,
     validateOnMount: true,
   });
-
-  console.log(formik.values);
 
   const dataInfo = async (freq) => {
     const data = await userService.getEstimate(
@@ -302,7 +296,12 @@ const CreateSavings3 = (props) => {
                         <div className="img-upload-div d-flex justify-content-between align-items-center px-3">
                           <h6 className="text-green">{imageName}</h6>
                           {imageFile ? (
-                            <button style={{ flexBasis: "10%" }}>
+                            <button
+                              onClick={() => {
+                                setImageFile(null);
+                              }}
+                              style={{ flexBasis: "10%" }}
+                            >
                               <img
                                 src={trashCan}
                                 className="img-fluid"

@@ -8,7 +8,6 @@ const Group1 = () => {
   const location = useLocation();
   let groupType = location.pathname.split("/");
   groupType = groupType[groupType.length - 1];
-  // console.log(groupType);
   const [num, setNum] = useState("");
 
   const initialValues = {
@@ -42,8 +41,6 @@ const Group1 = () => {
       isPublic: groupType === "public" ? true : false,
     };
 
-    console.log(obj);
-
     sessionStorage.setItem("groupInfo", JSON.stringify(obj));
     window.location.href = "/app/groupsavings2";
     onSubmitProps.resetForm();
@@ -61,8 +58,6 @@ const Group1 = () => {
     formik.setFieldValue("target", num?.value);
     // eslint-disable-next-line
   }, [num?.value]);
-
-  console.log(formik.values);
 
   return (
     <>

@@ -24,7 +24,7 @@ const PublicGroup = (props) => {
       currency: stash?.currency?.code === 1 ? "NGN" : "USD",
     }).format(number);
 
-  console.log(accounts, "xzc");
+ 
   return (
     <>
       {loading && <Loader />}

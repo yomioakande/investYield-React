@@ -37,11 +37,6 @@ const PasswordForgot = (props) => {
     });
   };
 
-  console.log("forward redirect");
-  const getID = JSON.parse(sessionStorage.getItem("userReg")) || null;
-  const forgotToken = JSON.parse(sessionStorage.getItem("forgotToken")) || null;
-  console.log(forgotToken);
-  console.log(getID);
   const onSubmit = (values, onSubmitProps) => {
     const getID = JSON.parse(sessionStorage.getItem("userReg")).id || null;
     const forgotToken =
@@ -55,7 +50,7 @@ const PasswordForgot = (props) => {
         id: "string",
       },
     };
-    console.log("retro", obj);
+
     props.register(
       obj,
       "/api/v1/identity/resetpassword",

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-// import {Link} from "react-router-dom"
 import * as Yup from "yup";
-// import { addAsterik } from "../../helpers";
 import { useFormik } from "formik";
 import Congrats from "../Congrats";
 import { connect } from "react-redux";
@@ -15,14 +13,12 @@ const Otp = (props) => {
   const initialValues = {
     token: "",
   };
-
+  const getTransfer = JSON.parse(sessionStorage.getItem("transferObj")) || null;
   const onSubmit = (values, onSubmitProps) => {
-    const getTransfer =
-      JSON.parse(sessionStorage.getItem("transferObj")) || null;
     const obj = {
       token: values.token,
-      transId: getTransfer.transId,
-      challengeId: getTransfer.challengeId,
+      transId: getTransfer?.transId,
+      challengeId: getTransfer?.challengeId,
     };
     props.confirmToken(obj, "/api/v1/transfer/accountbycard", modalToggle1);
   };
@@ -40,18 +36,16 @@ const Otp = (props) => {
 
   const resendOtp = () => {
     const obj = {
-      // id: formik.values.bvn,
-      // operationType: 6,
+      id: getTransfer?.challengeId,
+      operationType: getTransfer?.transId?4:5,
     };
     props.resend(obj, "/api/v1/util/resendotp");
   };
 
-  // console.log(formik.values);
-
   return (
     <>
-      <main>
-        <section className="reg-section">
+      {/* <main> */}
+        <section className="reg-section" >
           <div className="container-fluid">
             <div className="row justify-content-center">
               <div className="col-lg-5 col-xl-4" style={{ flex: "0%" }}>
@@ -60,7 +54,6 @@ const Otp = (props) => {
                     <h6 className="reg-p mb-3">
                       Please enter the One-Time Password (OTP) that has been
                       sent to your phone number
-                      {/* <span className="reg-p-number"> {number} </span> */}
                     </h6>
                     <form onSubmit={formik.handleSubmit}>
                       <div className="form-group mt-4">
@@ -97,6 +90,7 @@ const Otp = (props) => {
                       </div>
                       <div className="mt-4">
                         <button
+                        type="button"
                           onClick={() => resendOtp()}
                           className="btn btn-resend-otp"
                         >
@@ -110,7 +104,7 @@ const Otp = (props) => {
             </div>
           </div>
         </section>
-      </main>
+      {/* </main> */}
       {congratsModal && (
         <Congrats
           headline1={"Fantastic!"}

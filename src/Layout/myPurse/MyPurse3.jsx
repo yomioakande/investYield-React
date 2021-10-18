@@ -52,16 +52,12 @@ const MyPurse3 = ({ createPurse }) => {
     const firstObj = JSON.parse(sessionStorage.getItem("purseObj1"));
 
     const purseMainObj = { ...firstObj, ...obj };
-    console.log("retro");
-    console.log(purseMainObj);
+   
     createPurse(
       purseMainObj,
       "/api/v1/user/my_purse",
       "/app/savings/pursestep3"
     );
-    // console.log(purseMainObj);
-    // sessionStorage.setItem("mainPurseObj", JSON.stringify(purseMainObj));
-    // window.location.href = "/app/savings/pursestep3";
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
     setLoading(false);
@@ -74,8 +70,6 @@ const MyPurse3 = ({ createPurse }) => {
     validateOnMount: true,
   });
 
-  console.log(formik.values);
-  // console.log()
 
   const auto = formik.values.autoWithdraw;
   return (

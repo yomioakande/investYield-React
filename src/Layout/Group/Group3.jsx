@@ -89,7 +89,6 @@ const Group3 = (props) => {
     const { value } = e.target;
     dataInfo(value);
   };
-  console.log(formik.values);
 
   return (
     <>

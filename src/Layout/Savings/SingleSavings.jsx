@@ -4,15 +4,11 @@ import { Link } from "react-router-dom";
 const SingleSavings = (props) => {
   const data = props.location.state.data;
 
-  console.log(data)
-
-
-
   const currencyVal = (number) =>
-  new Intl.NumberFormat(data?.currency?.code === "NGN" ? "en-NG" : "en-US", {
-    style: "currency",
-    currency: data?.currency?.code === "NGN" ? "NGN" : "USD",
-  }).format(number);
+    new Intl.NumberFormat(data?.currency?.code === "NGN" ? "en-NG" : "en-US", {
+      style: "currency",
+      currency: data?.currency?.code === "NGN" ? "NGN" : "USD",
+    }).format(number);
 
   return (
     <>
@@ -40,10 +36,11 @@ const SingleSavings = (props) => {
                       </div>
                       <div className="mt-4">
                         <h4 className="text-green">
-                            {currencyVal(data?.contribution)}
+                          {currencyVal(data?.contribution)}
                           {/* #5,012.12 */}
-                          <span className="text-blue">/ 
-                          {currencyVal(data?.target)} </span>
+                          <span className="text-blue">
+                            /{currencyVal(data?.target)}{" "}
+                          </span>
                         </h4>
                         <p>Savings balance</p>
                       </div>
@@ -55,7 +52,9 @@ const SingleSavings = (props) => {
                         <h4 className="text-green" style={{ color: "#cecece" }}>
                           Interest earnings:
                         </h4>
-                        <p style={{ color: "#000" }}>{`${data?.interestAccrued}%`}</p>
+                        <p
+                          style={{ color: "#000" }}
+                        >{`${data?.interestAccrued}%`}</p>
                       </div>
                       <div
                         className="mt-4 d-flex"

@@ -42,7 +42,7 @@ const Refer = (props) => {
   };
 
   const referral = `${process.env.REACT_APP_FRONTEND_URL}/signup1/${referCode}`;
-  // console.log(referral);
+
   return (
     <>
       <ToastContainer autoClose={1000} hideProgressBar />
@@ -121,7 +121,8 @@ const Refer = (props) => {
                         </div>
                         <div className="mt-30">
                           <a
-                            href={`${process.env.REACT_APP_MAIN_URL}/signup1/${referCode}`}
+                            href={referral}
+                            // href={`${process.env.REACT_APP_FRONTEND_URL}/signup1/${referCode}`}
                             className="share-referral-link d-flex justify-content-center align-items-center"
                           >
                             {" "}

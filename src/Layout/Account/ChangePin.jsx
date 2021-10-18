@@ -40,8 +40,7 @@ const Pin = (props) => {
         id: "string",
       },
     };
-    console.log("reaper", obj);
-    // console.log(props.putPassword)
+
     props.putPassword(obj, "/api/v1/user/pin", success);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
@@ -53,8 +52,6 @@ const Pin = (props) => {
     validationSchema: Schema,
     validateOnMount: true,
   });
-
-  console.log(formik.values);
 
   return (
     <>

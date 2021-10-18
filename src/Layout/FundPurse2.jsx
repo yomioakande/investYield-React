@@ -26,7 +26,7 @@ const[loading,setloading]=useState(false)
       accountNumber: getFundDetails.accountId,
       amount: formik.values.amount,
     };
-    console.log(obj, "faults");
+ 
     props.fundPurse(
         obj,
         "/api/v1transfer/FundExistingPurse",
@@ -52,7 +52,7 @@ const[loading,setloading]=useState(false)
     // eslint-disable-next-line
   }, [num?.value]);
 
-  console.log(formik.values);
+ 
   return (
     <>
     {loading && <Loader />}

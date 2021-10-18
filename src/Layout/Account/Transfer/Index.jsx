@@ -83,9 +83,6 @@ const Index = (props) => {
     // eslint-disable-next-line
   }, [single]);
 
-  console.log("repository", single);
-  console.log(formik.values);
-
   return (
     <>
       {props.loading && <Loader />}

@@ -42,8 +42,6 @@ const Profile = ({
     // eslint-disable-next-line
   }, []);
 
-  console.log(profile);
-
   const initialValues = {
     address: profile.address,
     password: "",
@@ -67,8 +65,7 @@ const Profile = ({
       address: values.address,
       password: values.password,
     };
-    console.log("reaper", obj);
-    // console.log(props.putPassword)
+
     post(obj, "/api/v1/user/profile", success);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
@@ -116,7 +113,7 @@ const Profile = ({
           name: file.name,
           content: reader.result,
         };
-        console.log(baseObj);
+    
         //eslint-disable-next-line
         const postImageRef = postImageBase64(
           baseObj,
@@ -133,7 +130,7 @@ const Profile = ({
     // setBase64(btoa(binaryString));
   };
 
-  console.log(message);
+
 
   return (
     <>

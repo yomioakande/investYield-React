@@ -23,7 +23,7 @@ const Beneficiary = ({ getData, deleteData }) => {
     const obj = {
       id,
     };
-    console.log(obj);
+   
     deleteData("/api/v1/user/beneficiary", obj, success);
     dataInfo();
   };

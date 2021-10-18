@@ -7,9 +7,7 @@ import { usersActions } from "../../redux";
 const CreateSavings4 = (props) => {
   const [finalVal, setFinalVal] = useState("");
   const core = JSON.parse(sessionStorage.getItem("core"));
-  console.log(core);
 
-  console.log(core.ccyCode);
   useEffect(() => {
     const get = async () => {
       const getFinalValue = await props.getTargetValue(
@@ -19,7 +17,7 @@ const CreateSavings4 = (props) => {
         "0201",
         core.ccyCode
       );
-      console.log(getFinalValue);
+
       setFinalVal(getFinalValue.value);
     };
 

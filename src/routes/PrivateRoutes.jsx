@@ -30,4 +30,3 @@ export const PublicRoute = ({ component: Component, restricted, ...rest }) => {
     />
   );
 };
-//  default PrivateRoute;

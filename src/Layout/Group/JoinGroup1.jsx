@@ -13,11 +13,11 @@ const JoinGroup1 = (props) => {
   const [num, setNum] = useState("");
   const [targetNum, setTargetNum] = useState("");
   const [loading, setloading] = useState(false);
-  console.log(data);
+
   const initialValues = {
     freq: "",
     earn: "",
-    // cntr_amt: 0,
+
     start: "",
   };
   const validationSchema = Yup.object({

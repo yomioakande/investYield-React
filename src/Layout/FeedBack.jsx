@@ -44,7 +44,7 @@ const Help = (props) => {
       projection: values.projection,
     };
 
-    console.log(obj);
+  
 
     props.postFeedBack(obj, "/api/v1/util/feedback", modalToggle1);
     // onSubmitProps.resetForm();
@@ -58,7 +58,7 @@ const Help = (props) => {
     validateOnMount: true,
   });
 
-  console.log(formik.values);
+
 
   return (
     <>

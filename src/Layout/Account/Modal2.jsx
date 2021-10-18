@@ -25,7 +25,6 @@ const Modal2 = ({ dataInfo, modalBenf2, close, loading }) => {
       id: addBeneficiary.id,
     };
     modalBenf2(obj, "/api/v1/user/beneficiary", success);
-    console.log(obj);
   };
 
   return ReactDom.createPortal(

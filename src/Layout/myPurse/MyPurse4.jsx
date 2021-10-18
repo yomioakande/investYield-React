@@ -30,7 +30,6 @@ const MyPurse4 = (props) => {
       currency: purse.ccyCode === "1" ? "NGN" : "USD",
     }).format(number);
 
-  // console.log(new Date("2021-09-22").getDay());
 
   const convertDebitFreq = (freq) => {
     if (freq === "7") {
@@ -61,8 +60,7 @@ const MyPurse4 = (props) => {
       return `${percent}% ${convertDebitFreq(dateConv(freq2))}`;
     }
   }
-  // console.log(daysToWeeks(purse.drPct, purse.drFreq, purse.drDate));
-
+  
   return (
     <>
       {loading && <Loader />}

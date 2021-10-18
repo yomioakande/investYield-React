@@ -22,7 +22,7 @@ const WithdrawalAccount = (props) => {
     const datas = await props.getBanks("/api/v1/util/bank").then();
     const account = await props.getAccount("/api/v1/user/bankaccount").then();
     setBankDetails(account);
-    console.log("accouunntt", account);
+
     setBankOptions(datas);
   };
   useEffect(() => {

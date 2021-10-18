@@ -72,8 +72,7 @@ const First = (props) => {
     validationSchema,
     validateOnMount: true,
   });
-  console.log(props.loading);
-  console.log(props);
+
 
   const show = () => {
     setTimeout(() => {

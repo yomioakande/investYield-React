@@ -20,7 +20,6 @@ const Index = (props) => {
     const myPurseAccounts = await props
       .getAccounts("/api/v1/user/accountbyproduct", "0106")
       .then();
-    console.log(purseAccounts, "jkk");
     setPurseAccounts(myPurseAccounts);
     setBankDetails({ ...account });
     setloading(false);
@@ -52,6 +51,7 @@ const Index = (props) => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
+    setloading(true);
     const obj = {
       pin: values.pin,
       amount: values.amount,
@@ -60,10 +60,11 @@ const Index = (props) => {
       accountId: values.accountId,
     };
 
-    console.log("submitted", obj);
-
-    props.withdrawal(obj, "/api/v1/transfer/savingswithdraw", "/app/stash/otp");
-    // onSubmitProps.resetForm();
+    props.withdrawal(
+      obj,
+      "/api/v1/transfer/savingswithdraw",
+      "/app/stash/otp/withdraw"
+    );
     onSubmitProps.setSubmitting(false);
   };
 
@@ -143,7 +144,6 @@ const Index = (props) => {
   const defaultValue = (options, value) => {
     return options ? options.find((option) => option.value === value) : "";
   };
-  console.log(formik.values);
   return (
     <>
       {loading && <Loader />}

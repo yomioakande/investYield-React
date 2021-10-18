@@ -19,20 +19,19 @@ import { CSSTransition } from "react-transition-group";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./transitions.css";
-// import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import { nairaCurrencyVal, dollarCurrencyVal } from "../helpers/helper";
 import { ErrorBoundary } from "react-error-boundary";
 import FallBack from "./FallBack";
 import FundPurse from "./FundPurse1";
-import JoinSavings from "./JoinSavings"
+import JoinSavings from "./JoinSavings";
 
 const Main = (props) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [modalInOpen, setModalInOpen] = useState(false);
   const [modalInOpen1, setModalInOpen1] = useState(false);
   const [transactions, setTransactions] = useState([]);
-  const [coreAccounts, setCoreAccounts] = useState([]);
+  // const [coreAccounts, setCoreAccounts] = useState([]);
   const [purseAccounts, setPurseAccounts] = useState([]);
   const [todoList, setTodoList] = useState({});
   const [hidden, setHidden] = useState({});
@@ -70,13 +69,10 @@ const Main = (props) => {
       const myPurseAccounts = await props
         .getAccounts("/api/v1/user/accountbyproduct", "0106")
         .then();
-      const coreAccounts = await props
-        .getAccounts("/api/v1/user/accountbyproduct", "0201")
-        .then();
       setSummaryInfo(data);
       setTodoList(todo);
       setPurseAccounts(myPurseAccounts);
-      setCoreAccounts(coreAccounts);
+
       todo.bvnConfirmed !== true &&
         setTimeout(() => {
           setModalInOpen(true);
@@ -85,12 +81,10 @@ const Main = (props) => {
     })();
     // eslint-disable-next-line
   }, []);
-  console.log(coreAccounts, "PURSES");
+
   const errorHandler = (error, errorInfo) => {
     console.log("logging", error, errorInfo);
   };
-
-  console.log(coreAccounts, "jkl");
 
   return (
     <>
@@ -430,7 +424,7 @@ const Main = (props) => {
               </div>
 
               <div className="au-card position-relative mt-4 px-0">
-                <JoinSavings/>
+                <JoinSavings />
               </div>
             </div>
           </div>
