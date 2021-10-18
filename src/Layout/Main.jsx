@@ -242,61 +242,61 @@ const Main = (props) => {
                           </div>
                         </Link>
 
-                        <a
-                          href="/app/savings/pursestep1/Family"
+                        <Link
+                          to="/app/savings/pursestep1/Family"
                           className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column flex-grow-1 mb-4"
                         >
                           <div className="au-card-smaller au-card-bg-retirement h-100 px-3">
                             <img src={familyIcon} alt="Food Tray" />
                             <p className="text-green">Family</p>
                           </div>
-                        </a>
+                        </Link>
 
-                        <a
-                          href="/app/savings/pursestep1/TGIF"
+                        <Link
+                          to="/app/savings/pursestep1/TGIF"
                           className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
                         >
                           <div className="au-card-smaller au-card-bg-homeplan flex-grow-1 px-3">
                             <img src={tgifIcon} alt="TGIF" />
                             <p className="text-blue">TGIF</p>
                           </div>
-                        </a>
-                        <a
-                          href="/app/savings/pursestep1/Dinner Date"
+                        </Link>
+                        <Link
+                          to="/app/savings/pursestep1/Dinner Date"
                           className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
                         >
                           <div className="au-card-smaller au-card-bg-emergency flex-grow-1 px-3">
                             <img src={dinnerDateIcon} alt="Dinner Date" />
                             <p className="text-stash">Dinner date</p>
                           </div>
-                        </a>
-                        <a
-                          href="/app/savings/pursestep1/Movies"
+                        </Link>
+                        <Link
+                          to="/app/savings/pursestep1/Movies"
                           className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
                         >
                           <div className="au-card-smaller au-card-bg-movie flex-grow-1 px-3">
                             <img src={movies} alt="Shopping" />
                             <p className="text-movie">Movies</p>
                           </div>
-                        </a>
-                        <a
-                          href="/app/savings/pursestep1/Shopping"
+                        </Link>
+                        <Link
+                          to="/app/savings/pursestep1/Shopping"
                           className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
                         >
                           <div className="au-card-smaller au-card-bg-wedding flex-grow-1 px-3">
                             <img src={shoppingIcon} alt="Family" />
                             <p className="text-movie">Shopping</p>
                           </div>
-                        </a>
-                        <a
-                          href="/app/savings/pursestep1/Entertaiment"
+                        </Link>
+                        <Link
+                          to="/app/savings/pursestep1/Entertaiment"
                           className="col-xl-3 col-lg-4 col-md-6 d-flex flex-column mb-4"
                         >
                           <div className="au-card-smaller au-card-bg-family flex-grow-1 px-3">
                             <img src={entertainIcon} alt="Celebration" />
                             <p className="text-stash3">Entertainment</p>
                           </div>
-                        </a>
+                        </Link>
 
                         {/* {purseAccounts.map((single, index) => {
                           return (
