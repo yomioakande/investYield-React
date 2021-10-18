@@ -735,7 +735,7 @@ const Index = () => {
                     </li>
                     <li className="font-sm">
                       These rights can all be exercised by contacting us at
-                      privacy@investyield.com
+                      privacy@investyield.ng
                     </li>
                   </ol>
                 </div>

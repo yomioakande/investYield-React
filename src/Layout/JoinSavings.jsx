@@ -7,17 +7,13 @@ const JoinSavings = (props) => {
   const [accounts, setAccounts] = useState([]);
   useEffect(() => {
     (async function dataInfo() {
-
       const data = await props
         .getInfo("/api/v1/user/public_group_savings")
         .then();
       setAccounts(data);
-
     })();
     // eslint-disable-next-line
   }, []);
-
-
 
   return (
     <>
@@ -118,17 +114,13 @@ const JoinSavings = (props) => {
                 href="#carouselExampleIndicators"
                 role="button"
                 data-slide="next"
-              >
-                  
-              </a>
+              ></a>
               <a
                 className="swiper-button-prev carousel-control-prev"
                 href="#carouselExampleIndicators"
                 role="button"
                 data-slide="prev"
-              >
-
-              </a>
+              ></a>
             </div>
             {/* <a href="/" className="au-btn-link">
                         View more

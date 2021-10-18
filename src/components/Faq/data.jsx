@@ -62,7 +62,7 @@ export const SafetySecurity = [
     answer1:
       "Our physical office is located at No1, Adewale Oshin street, Off Chief Collins, Lekki Phase1, Lagos, Nigeria",
 
-    answer2: "Email: support@investYield.com",
+    answer2: "Email: support@investYield.ng",
     answer3: "website: https://investyield.ng",
   },
 
