@@ -22,11 +22,15 @@ const Modal = ({ close, getAccount }) => {
     setFirst("breakdown");
   };
   const onSubmit = (values, onSubmitProps) => {
-    (async () =>{
-     const data= await getAccount("/api/v1/user/group_savings", values.code, next).then();
-     setGroupAccount(data);
-    //  console.log(j)
-    } )()
+    (async () => {
+      const data = await getAccount(
+        "/api/v1/user/group_savings",
+        values.code,
+        next
+      ).then();
+      setGroupAccount(data);
+      //  console.log(j)
+    })();
     onSubmitProps.setSubmitting(false);
   };
 
@@ -214,7 +218,13 @@ const Modal = ({ close, getAccount }) => {
                               </div>
                               <div className="col-lg-6">
                                 <Link
-                                  to="/app/groupsavings/joingroup1"
+                                  key={groupAccount?.id}
+                                  to={{
+                                    pathname: `/app/groupsavings/joingroup1/${groupAccount?.id}`,
+                                    state: {
+                                      data: groupAccount,
+                                    },
+                                  }}
                                   className="btn login-submit"
                                 >
                                   NEXT

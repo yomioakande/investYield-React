@@ -24,8 +24,6 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
     // eslint-disable-next-line
   }, []);
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,7 +34,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
 
     await payCard(obj, "/api/v1/transfer/accountbycard", "/app/stash/otp");
   };
-  console.log(state);
+
   return (
     <>
       {loading && <Loader />}
@@ -83,22 +81,20 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
                   <div className="col-lg-8">
                     <div className="row">
                       <div className="col-lg-6">
-                        <button
-                          onClick={() => setActive(1)}
-                          className="btn btn-cancel text-danger"
-                        >
-                          Cancel
-                        </button>
+                        {!loading && (
+                          <button
+                            onClick={() => setActive(1)}
+                            className="btn btn-cancel text-danger"
+                          >
+                            Cancel
+                          </button>
+                        )}
                       </div>
 
                       {state?.rad.length > 0 ? (
                         <>
                           <div className="col-lg-6">
-                            <button
-                              type="submit"
-                              //   to="/app/savings/otp"
-                              className="btn login-submit"
-                            >
+                            <button type="submit" className="btn login-submit">
                               NEXT
                             </button>
                           </div>
@@ -126,8 +122,6 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   getCards: usersActions.getInfo,
   payCard: usersActions.payCard,
-  //   addCard: usersActions.addCard,
-  //   deleteCards: usersActions.deleteData,
 };
 
 export default connect(mapStateToProps, actionCreators)(PayCard);
