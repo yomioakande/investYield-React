@@ -94,8 +94,8 @@ const index = () => {
                               </div>
                               <div className="mt-4">
                                 <p>
-                                  Earn the highest possible interest rates on your
-                                  savings.
+                                  Earn the highest possible interest rates on
+                                  your savings.
                                 </p>
                               </div>
                             </div>
@@ -276,7 +276,7 @@ const index = () => {
                           <img src={whiteDot} className="img-fluid" alt="dot" />
                           <div className="px-3">
                             <h5 className="why-sub-headers">
-                              Save in USD dollars
+                              Save in USD dollars (Coming Soon)
                             </h5>
                             <div className="mt-4 col-lg-10 px-0">
                               <p className="why-p mb-0">

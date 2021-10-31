@@ -20,6 +20,15 @@ const JoinGroup1 = (props) => {
 
     start: "",
   };
+
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+  };
+
   const validationSchema = Yup.object({
     freq: Yup.string().required("A plan Name is Required"),
     earn: Yup.string().required("A plan Name is Required"),
@@ -99,7 +108,7 @@ const JoinGroup1 = (props) => {
               <div className="au-card">
                 <div className="au-card-inner">
                   <h4 className="text-blue">
-                    Decide how you want the group to save
+                    Please choose how you want to save
                   </h4>
                   <div className="small-red-line"></div>
 
@@ -109,6 +118,7 @@ const JoinGroup1 = (props) => {
                         <label className="text-blue">Choose a start date</label>
                         <input
                           type="date"
+                          min={disablePastDate()}
                           name={"start"}
                           {...formik.getFieldProps("start")}
                           className="text-field mt-2"

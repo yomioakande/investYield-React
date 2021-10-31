@@ -30,7 +30,6 @@ import movies from "../assets/images/movies1.svg";
 import shoppingIcon from "../assets/images/shoppingIcon.svg";
 import entertainIcon from "../assets/images/entertainmentIcon.svg";
 
-
 const Main = (props) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [modalInOpen, setModalInOpen] = useState(false);
@@ -80,7 +79,6 @@ const Main = (props) => {
       setTodoList(todo);
       // setPurseAccounts(myPurseAccounts);
 
-
       todo.bvnConfirmed !== true &&
         setTimeout(() => {
           setModalInOpen(true);
@@ -102,10 +100,7 @@ const Main = (props) => {
         <div className="container-fluid">
           <div className="row">
             <ErrorBoundary FallbackComponent={FallBack} onError={errorHandler}>
-              <a
-                href="#0"
-                className="col-lg-4 col-md-6 d-flex flex-column mb-4"
-              >
+              <div className="col-lg-4 col-md-6 d-flex flex-column mb-4">
                 <div className="au-card au-card--bg-blue flex-grow-1">
                   <div className="bg-card-img">
                     <img
@@ -123,8 +118,8 @@ const Main = (props) => {
                     </h3>
                   </div>
                 </div>
-              </a>
-              <a
+              </div>
+              <div
                 href="#0"
                 className="col-lg-4 col-md-6 d-flex flex-column mb-4"
               >
@@ -145,8 +140,8 @@ const Main = (props) => {
                     </h3>
                   </div>
                 </div>
-              </a>
-              <a
+              </div>
+              <div
                 href="#0"
                 className="col-lg-4 col-md-6 d-flex flex-column mb-4"
               >
@@ -167,7 +162,7 @@ const Main = (props) => {
                     </h3>
                   </div>
                 </div>
-              </a>
+              </div>
             </ErrorBoundary>
           </div>
           <div className="row mt-4">

@@ -52,7 +52,7 @@ const Profile = ({
   });
 
   const success = () => {
-    toast.success("Address Updated!", {
+    toast.success("Profile Updated!", {
       position: toast.POSITION.TOP_CENTER,
     });
     // setloading(false);
@@ -113,7 +113,7 @@ const Profile = ({
           name: file.name,
           content: reader.result,
         };
-    
+
         //eslint-disable-next-line
         const postImageRef = postImageBase64(
           baseObj,
@@ -129,8 +129,6 @@ const Profile = ({
     let binaryString = readerEvt.target.result;
     // setBase64(btoa(binaryString));
   };
-
-
 
   return (
     <>
