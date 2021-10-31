@@ -114,17 +114,18 @@ const JoinSavings = (props) => {
                 href="#carouselExampleIndicators"
                 role="button"
                 data-slide="next"
-              ></a>
+              >
+                <span></span>
+              </a>
               <a
                 className="swiper-button-prev carousel-control-prev"
                 href="#carouselExampleIndicators"
                 role="button"
                 data-slide="prev"
-              ></a>
+              >
+                <span></span>
+              </a>
             </div>
-            {/* <a href="/" className="au-btn-link">
-                        View more
-                      </a> */}
           </div>
         </div>
       </div>
