@@ -107,13 +107,13 @@ const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
                       <div className="col-lg-8 mt-5">
                         <div className="d-flex justify-content-between">
                           <div className="col-lg-6 px-0">
-                            <button
+                            {/* <button
                               type="button"
                               onClick={() => setActive(1)}
                               className="au-btn iy-btn-secondary text-danger"
                             >
                               Cancel
-                            </button>
+                            </button> */}
                           </div>
                           <div className="col-lg-6 px-0">
                             <a href="*" className="au-btn iy-btn-primary">

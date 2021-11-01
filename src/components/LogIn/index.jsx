@@ -14,7 +14,7 @@ const Index = (props) => {
 
   // eslint-disable-next-line
   const [showError, setShowError] = useState(true);
-
+  const [showPassword, setShowPassword] = useState(false);
   const initialValues = {
     email: "",
     password: "",
@@ -127,14 +127,31 @@ const Index = (props) => {
                             </p>
                           )}
                         </div>
-                        <div className="form-group mt-3">
+                        <div
+                          className="form-group mt-3"
+                          style={{ position: "relative" }}
+                        >
                           <input
-                            type="password"
+                            type={`${showPassword ? "type" : "password"}`}
                             name="password"
                             {...formik.getFieldProps("password")}
                             className="text-field"
                             placeholder="Password"
                           />
+                          <i
+                            style={{
+                              position: "absolute",
+                              top: "1rem",
+                              right: "1rem",
+                              color:'#000'
+                            }}
+                            onClick={() => {
+                              setShowPassword(!showPassword);
+                            }}
+                            className={`fas ${
+                              showPassword ? "fa-eye" : "fa-eye-slash"
+                            } `}
+                          ></i>
                           {formik.touched.password &&
                             formik.errors.password && (
                               <p className="text-danger font-sm error1 font-weight-bold">
@@ -165,7 +182,7 @@ const Index = (props) => {
                         <div className="form-group mt-5">
                           <input
                             type="submit"
-                            disabled={!formik.isValid || formik.isSubmitting}
+                            // disabled={!formik.isValid || formik.isSubmitting}
                             className="btn login-submit"
                             value="LOGIN"
                           />

@@ -10,6 +10,7 @@ import { usersActions } from "../../redux";
 import Loader from "../../common/Loader";
 
 const Third = (props) => {
+  const [showPassword, setShowPassword] = useState(false);
   const initialValues = {
     password: "",
     confirmPassword: "",
@@ -20,13 +21,15 @@ const Third = (props) => {
 
   const Schema = Yup.object().shape({
     password: Yup.string().required("This field is required"),
-    confirmPassword: Yup.string().when("password", {
-      is: (val) => (val && val.length > 0 ? true : false),
-      then: Yup.string().oneOf(
-        [Yup.ref("password")],
-        "Both password need to be the same"
-      ),
-    }),
+    confirmPassword: Yup.string()
+      .required("This field is required")
+      .when("password", {
+        is: (val) => (val && val.length > 0 ? true : false),
+        then: Yup.string().oneOf(
+          [Yup.ref("password")],
+          "Both password need to be the same"
+        ),
+      }),
   });
 
   const onSubmit = (values, onSubmitProps) => {
@@ -39,7 +42,7 @@ const Third = (props) => {
         id: "string",
       },
     };
-   
+
     props.register3(obj, "/api/v1/identity/createpassword", "/createpin");
 
     // onSubmitProps.resetForm();
@@ -53,8 +56,7 @@ const Third = (props) => {
     validateOnMount: true,
   });
 
-  const alert = props.alert;
-
+  const alert = props.alertType;
 
   return (
     <>
@@ -91,19 +93,37 @@ const Third = (props) => {
                       Create a password for signing in.
                     </h6>
                     <form onSubmit={formik.handleSubmit}>
-                      <div className="form-group mt-3">
-                        {alert.message && (
-                          <div className={`font-sm alert ${alert.type}`}>
-                            {alert.message}
-                          </div>
-                        )}
+                      {props.message && (
+                        <div className={`font-sm alert ${alert}`}>
+                          {props.message}
+                        </div>
+                      )}
+                      <div
+                        className="form-group mt-3"
+                        style={{ position: "relative" }}
+                      >
                         <input
-                          type="password"
+                          type={`${showPassword ? "type" : "password"}`}
                           className="text-field"
                           name="password"
+                          pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}"
+                          title="Must contain at least one number, one symbol one uppercase and lowercase letter, and at least 8 or more characters"
                           {...formik.getFieldProps("password")}
                           placeholder="Create Password"
                         />
+                        <i
+                          style={{
+                            position: "absolute",
+                            top: "1rem",
+                            right: "1rem",
+                          }}
+                          onClick={() => {
+                            setShowPassword(!showPassword);
+                          }}
+                          className={`fas ${
+                            showPassword ? "fa-eye" : "fa-eye-slash"
+                          } `}
+                        ></i>
 
                         {formik.touched.password && formik.errors.password && (
                           <p className="text-danger font-sm error1 font-weight-bold">
@@ -111,14 +131,32 @@ const Third = (props) => {
                           </p>
                         )}
                       </div>
-                      <div className="form-group mt-3">
+                      <div
+                        className="form-group mt-3"
+                        style={{ position: "relative" }}
+                      >
                         <input
-                          type="password"
+                          type={`${showPassword ? "type" : "password"}`}
                           className="text-field"
                           name="confirmPassword"
+                          pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}"
+                          title="Must contain at least one number, one symbol one uppercase and lowercase letter, and at least 8 or more characters"
                           {...formik.getFieldProps("confirmPassword")}
                           placeholder="Confirm Password"
                         />
+                        <i
+                          style={{
+                            position: "absolute",
+                            top: "1rem",
+                            right: "1rem",
+                          }}
+                          onClick={() => {
+                            setShowPassword(!showPassword);
+                          }}
+                          className={`fas ${
+                            showPassword ? "fa-eye" : "fa-eye-slash"
+                          } `}
+                        ></i>
 
                         {formik.touched.confirmPassword &&
                           formik.errors.confirmPassword && (
@@ -137,7 +175,7 @@ const Third = (props) => {
                       <div className="form-group mt-5">
                         <input
                           type="submit"
-                          disabled={!formik.isValid || formik.isSubmitting}
+                          // disabled={!formik.isValid || formik.isSubmitting}
                           className="btn login-submit"
                           value="SIGN UP"
                         />
@@ -155,10 +193,10 @@ const Third = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { loggingIn } = state.authentication;
+  // const { loggingIn } = state.authentication;
   const { loading, alertType, message } = state.registration;
-  const { alert } = state;
-  return { loggingIn, alert, loading, alertType, message };
+  // const { alert } = state;
+  return { alert, loading, alertType, message };
 };
 
 const actionCreators = {

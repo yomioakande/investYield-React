@@ -21,7 +21,6 @@ export function authHeader() {
         refreshObj,
         "/api/v1/identity/refresh"
       );
-    
 
       const expires_at = d.getTime() + 1 * 60 * 60 * 1000;
       user = {
@@ -41,7 +40,7 @@ export function authHeader() {
 }
 
 export const addAsterik = (strn) => {
-  let cap = ("+234" + strn?.toString()).split("");
+  let cap = strn?.toString().split("");
   cap.splice(7, 4, "*", "*", "*", "*");
   return cap.join("");
 };

@@ -7,13 +7,10 @@ import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 import Loader from "../../common/Loader";
 import Congrats from "../../Layout/Congrats";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 
 const Fourth = (props) => {
   const [congratsModal1, setCongratsModal1] = useState(false);
-  // const [loading, setLoading] = useState(false);
-  const [showError, setShowError] = useState(true);
+  const [showError, setShowError] = useState(false);
 
   const modalToggle2 = () => {
     setCongratsModal1(true);
@@ -24,18 +21,21 @@ const Fourth = (props) => {
   };
 
   const Schema = Yup.object().shape({
-    pin: Yup.string().required("This field is required"),
-    confirmPin: Yup.string().when("pin", {
-      is: (val) => (val && val.length > 0 ? true : false),
-      then: Yup.string().oneOf(
-        [Yup.ref("pin")],
-        "Both Pin need to be the same"
-      ),
-    }),
+    pin: Yup.string().min(4).max(4).required("This field is required"),
+    confirmPin: Yup.string()
+      .min(4)
+      .required("This field is required")
+      .max(4)
+      .when("pin", {
+        is: (val) => (val && val.length > 0 ? true : false),
+        then: Yup.string().oneOf(
+          [Yup.ref("pin")],
+          "Both Pin need to be the same"
+        ),
+      }),
   });
 
   const onSubmit = (values, onSubmitProps) => {
-    // setLoading(true);
     setShowError(true);
     const obj = {
       pin: values.pin,
@@ -47,7 +47,6 @@ const Fourth = (props) => {
     props.register4(obj, "/api/v1/user/pin", modalToggle2);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
-    // setLoading(true);
   };
 
   const formik = useFormik({
@@ -60,12 +59,6 @@ const Fourth = (props) => {
   const later = () => {
     window.location.href = "/app/dashboard";
   };
-
-  // const show = () => {
-  //   setTimeout(() => {
-  //     setShowError(false);
-  //   }, 3000);
-  // };
 
   return (
     <>
@@ -92,8 +85,8 @@ const Fourth = (props) => {
                       Create a 4-digit PIN for transactions on investYield.
                     </h6>
                     {showError
-                      ? props.alertType && (
-                          <div className={`font-sm alert ${props.alertType}`}>
+                      ? props.message && (
+                          <div className={`font-sm ${props.alertType}`}>
                             {props.message}
                           </div>
                         )
@@ -107,6 +100,7 @@ const Fourth = (props) => {
                           name="pin"
                           {...formik.getFieldProps("pin")}
                           maxlength="4"
+                          title="The Pin must be 4 characters"
                         />
                         {formik.touched.pin && formik.errors.pin && (
                           <p className="text-danger font-sm error1 font-weight-bold">
@@ -133,7 +127,7 @@ const Fourth = (props) => {
                       <div class="form-group mt-5">
                         <input
                           type="submit"
-                          disabled={!formik.isValid || formik.isSubmitting}
+                          // disabled={!formik.isValid || formik.isSubmitting}
                           className="btn login-submit"
                           value="NEXT"
                         />
@@ -166,10 +160,8 @@ const Fourth = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  //
-  const { loggingIn, loading, alertType, message } = state.registration;
-  const { alert } = state;
-  return { loggingIn, alert, loading, alertType, message };
+  const { loading, alertType, message } = state.registration;
+  return { loading, alertType, message };
 };
 
 const actionCreators = {

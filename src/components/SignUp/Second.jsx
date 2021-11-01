@@ -106,7 +106,7 @@ const Second = (props) => {
                     <form onSubmit={formik.handleSubmit}>
                       <div className="form-group mt-4">
                         {showError
-                          ? props.alertType && (
+                          ? props.message && (
                               <div
                                 className={`font-sm alert ${props.alertType}`}
                               >
@@ -130,7 +130,7 @@ const Second = (props) => {
                       <div className="form-group mt-50">
                         <input
                           type="submit"
-                          disabled={!formik.isValid || formik.isSubmitting}
+                          // disabled={!formik.isValid || formik.isSubmitting}
                           className="btn login-submit"
                           value="NEXT"
                         />

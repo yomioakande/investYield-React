@@ -14,7 +14,7 @@ export function authentication(state = initialState, action) {
         loading: false,
         loggedIn: true,
         user: action.user,
-        alertType: "alert-danger",
+        alertType: "alert alert-danger",
         message: action.payload,
       };
     case userConstants.LOGIN_FAILURE:
@@ -22,7 +22,7 @@ export function authentication(state = initialState, action) {
         loading: false,
         loggedIn: false,
         user: {},
-        alertType: "alert-danger",
+        alertType: "alert alert-danger",
         message: action.payload,
       };
     case userConstants.LOGOUT:
