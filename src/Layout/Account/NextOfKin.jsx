@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
+import Swal from "sweetalert2";
 const NextofKin = (props) => {
   // eslint-disable-next-line
   const [showError, setShowError] = useState(true);
@@ -73,8 +74,20 @@ const NextofKin = (props) => {
   };
   // eslint-disable-next-line
   const success = () => {
-    toast.success("Next of Kin Updated!", {
-      position: toast.POSITION.TOP_CENTER,
+    // toast.success("Next of Kin Updated!", {
+    //   position: toast.POSITION.TOP_CENTER,
+    // });
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Next of Kin Updated!",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 1500,
     });
     dataInfo();
   };
@@ -83,7 +96,7 @@ const NextofKin = (props) => {
     <>
       {props.loading && <Loader />}
 
-      <ToastContainer autoClose={1000} hideProgressBar />
+      {/* <ToastContainer autoClose={1000} hideProgressBar /> */}
       {props.message
         ? props.alertType && (
             <div className={`font-sm alert ${props.alertType}`}>

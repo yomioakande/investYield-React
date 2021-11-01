@@ -10,10 +10,9 @@ import { usersActions } from "../../redux/actions";
 import { format } from "date-fns";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Swal from "sweetalert2";
 const Profile = ({
   postImageBase64,
   loading,
@@ -32,13 +31,16 @@ const Profile = ({
   // eslint-disable-next-line
   const [imageFile, setImageFile] = useState(null);
 
+  const dataInfo = async () => {
+    setloading1(true);
+    const data = await getData("/api/v1/user/profile").then();
+    console.log(data)
+    setProfile(data);
+    setloading1(false);
+  };
+
   useEffect(() => {
-    (async function dataInfo() {
-      setloading1(true);
-      const data = await getData("/api/v1/user/profile").then();
-      setProfile(data);
-      setloading1(false);
-    })();
+    dataInfo();
     // eslint-disable-next-line
   }, []);
 
@@ -47,20 +49,27 @@ const Profile = ({
     password: "",
   };
   const Schema = Yup.object({
-    address: Yup.string().required("Enter your Address"),
+    address: Yup.string().required("Enter your Address").nullable(),
     password: Yup.string().required("Enter your Password"),
   });
 
   const success = () => {
-    toast.success("Profile Updated!", {
-      position: toast.POSITION.TOP_CENTER,
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Profile Updated",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 1500,
     });
-    // setloading(false);
   };
 
   const onSubmit = (values, onSubmitProps) => {
     setShowError(true);
-    // setloading(true);
     const obj = {
       address: values.address,
       password: values.password,
@@ -90,10 +99,18 @@ const Profile = ({
   //CHANGE TO BASE64
 
   const success2 = () => {
-    toast.success("Upload Successful!", {
-      position: toast.POSITION.TOP_CENTER,
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Profile Updated",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 1500,
     });
-    // setloading(false);
   };
   const onChanger = (e) => {
     setImageFile(e.target.files[0]);
@@ -130,9 +147,11 @@ const Profile = ({
     // setBase64(btoa(binaryString));
   };
 
+  // console.log()
+
   return (
     <>
-      <ToastContainer autoClose={1000} hideProgressBar />
+      {/* <ToastContainer autoClose={1000} hideProgressBar /> */}
 
       {(loading1 || loading) && <Loader />}
       <div className="section__content section__content--p30">
@@ -234,13 +253,27 @@ const Profile = ({
                                 <label
                                   htmlFor="fileUpload"
                                   className="form-label"
-                                  style={{ flexBasis: "10%" }}
+                                  style={{
+                                    flexBasis: "10%",
+                                    width: "100%",
+                                    height: "100%",
+                                  }}
                                 >
                                   <img
-                                    src={uploadImg}
+                                    src={
+                                      imageFile
+                                        ? URL.createObjectURL(imageFile)
+                                        : uploadImg
+                                    }
                                     className="img-fluid"
                                     alt="Upload"
                                     id="fileUpload"
+                                    style={{
+                                      verticalAlign: "middle",
+                                      width: "50px",
+                                      height: "50px",
+                                      borderRadius: "50%",
+                                    }}
                                   />
                                   Tap to edit profile picture
                                 </label>

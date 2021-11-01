@@ -9,9 +9,9 @@ import { usersActions } from "../redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../common/Loader";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 const Modal1 = ({
   alertType,
   message,
@@ -24,7 +24,7 @@ const Modal1 = ({
   const [dropper, setDropper] = useState(false);
   const [bvn, setBvn] = useState(true);
   const [nextPage, setNextPage] = useState(false);
-  const [showError, setShowError] = useState(false);
+  const [showError, setShowError] = useState(true);
 
   const dropdown = () => {
     setDropper(!dropper);
@@ -34,43 +34,24 @@ const Modal1 = ({
     setNextPage(true);
   };
 
- 
-
   const success = () => {
     // toast.success("BVN Registered successfully!", {
     //   position: toast.POSITION.TOP_CENTER,
     // });
     close();
     Swal.fire({
-      customClass : {
-        title: 'swal2-title'
+      customClass: {
+        title: "swal2-title",
       },
-      position: 'center',
-      icon: 'success',
-      iconColor: '#003079',
-      title: 'Your BVN has been saved',
-      titleColor:'#fff',
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Your BVN has been saved",
+      titleColor: "#fff",
       showConfirmButton: false,
-      timer: 1500
-    })
-  
+      timer: 1500,
+    });
   };
-  // Swal.fire({
-  //   customClass : {
-  //     title: 'swal2-title'
-  //   },
-  //   position: 'center',
-  //   icon: 'success',
-  //   iconColor: '#003079',
-  //   title: 'Your BVN has been saved',
-  //   titleColor:'#fff',
-  //   showConfirmButton: false,
-  //   timer: 1500
-  // })
-  
-  // toast.success("BVN Registered successfully!", {
-  //     position: toast.POSITION.TOP_CENTER,
-  //   });
 
   const initialValues = {
     bvn: "",
@@ -218,7 +199,6 @@ const Modal1 = ({
                               // >
                               value={"CONTINUE"}
                             />
-                       
                           </div>
                         </form>
                         <div className="mt-4 d-flex justify-content-center">
@@ -290,7 +270,7 @@ const Modal1 = ({
                               className="text-field-modal"
                               placeholder="Enter OTP"
                               name="otp"
-                              autoComplete={'off'}
+                              autoComplete={"off"}
                               onChange={formik.handleChange}
                               // onChange={(e) => setOtp(e.target.value)}
                             />
@@ -394,7 +374,7 @@ const ModalBox = styled.div`
     display: none !important;
   }
 
- .swal2-title{
-   color:#000;
- }
+  .swal2-title {
+    color: #000;
+  }
 `;
