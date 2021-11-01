@@ -94,7 +94,7 @@ const Third = (props) => {
                     </h6>
                     <form onSubmit={formik.handleSubmit}>
                       {props.message && (
-                        <div className={`font-sm alert ${alert}`}>
+                        <div className={`font-sm ${alert}`}>
                           {props.message}
                         </div>
                       )}

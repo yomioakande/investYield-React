@@ -5,15 +5,13 @@ import { usersActions } from "../../redux";
 import PayModel from "./PayModel";
 const Breakdown = (props) => {
   const [targetValue, setTargetValue] = useState("");
-  const stash = JSON.parse(sessionStorage.getItem("stash"));
-  const stashfreq = JSON.parse(sessionStorage.getItem("stashfreq"));
- 
-
+  const stash = JSON.parse(sessionStorage.getItem("stash"))
+  const stashfreq = JSON.parse(sessionStorage.getItem("stashfreq"))
   let date = new Date();
   //START DATE
   const startDate = dateConv(date);
   // NEXT DATE
-  let df = date.setDate(date.getDate() + stash.frequency);
+  let df = date.setDate(date.getDate() + Number(stash.frequency));
   const nxt = new Date(df);
   const nextDate = dateConv(nxt);
   useEffect(() => {
@@ -59,7 +57,7 @@ const Breakdown = (props) => {
                     <div className="savings-breakdown-row text-black">
                       <p>Interest Rate</p>
                       <p className="font-weight-bold">
-                        {stashfreq.rate}% per annum
+                        {stashfreq.rate}%{/* % per annum */}
                       </p>
                     </div>
 

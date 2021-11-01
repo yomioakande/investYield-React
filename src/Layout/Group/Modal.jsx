@@ -8,9 +8,17 @@ import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import { dateConv } from "../../helpers";
 import closeImg from "../../assets/images/modal-close.svg";
-const Modal = ({ close, getAccount }) => {
+import Loader from "../../common/Loader";
+const Modal = ({ close, getAccount, message, alertType, loading }) => {
   const [first, setFirst] = useState("code");
   const [groupAccount, setGroupAccount] = useState("");
+  const [showError, setShowError] = useState(true);
+
+  const show = () => {
+    setTimeout(() => {
+      setShowError(false);
+    }, 3000);
+  };
   const initialValues = {
     code: "",
   };
@@ -30,6 +38,7 @@ const Modal = ({ close, getAccount }) => {
       ).then();
       setGroupAccount(data);
     })();
+    show();
     onSubmitProps.setSubmitting(false);
   };
 
@@ -52,6 +61,7 @@ const Modal = ({ close, getAccount }) => {
   return ReactDom.createPortal(
     <OVERLAY>
       <ModalBox>
+        {loading && <Loader />}
         {first === "code" ? (
           <>
             {" "}
@@ -85,6 +95,13 @@ const Modal = ({ close, getAccount }) => {
                         </h3>
                         <div className="small-red-line"></div>
                         <form onSubmit={formik.handleSubmit} className="mt-5">
+                          {showError
+                            ? message && (
+                                <div className={`font-sm ${alertType}`}>
+                                  {message}
+                                </div>
+                              )
+                            : null}
                           <div className="form-group">
                             <input
                               type="text"
@@ -246,10 +263,8 @@ const Modal = ({ close, getAccount }) => {
 };
 
 const mapStateToProps = (state) => {
-  const { alert } = state;
-  const username = state.authentication.user;
   const { loading, alertType, message } = state.registration;
-  return { alert, username, message, alertType, loading };
+  return { message, alertType, loading };
 };
 
 const actionCreators = {

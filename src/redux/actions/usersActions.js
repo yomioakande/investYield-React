@@ -167,8 +167,8 @@ function register4(obj, apiUrl, func) {
     const register = await userService.postData(obj, apiUrl);
     const { success, messages } = register;
     if (apiUrl === "/api/v1/user/pin" && success === true) {
-      dispatch(successReg(messages));
       func();
+      dispatch(successReg(messages));
     } else {
       dispatch(failure(messages));
     }
@@ -473,8 +473,8 @@ function getGroupCode(apiUrl, code, func) {
       func();
       return data;
     } else {
-      dispatch(failure(""));
-      dispatch(alertActions.error(messages));
+      dispatch(failure(messages));
+      // dispatch(alertActions.error(messages));
     }
   };
 }
@@ -545,8 +545,9 @@ function addCard() {
   return async (dispatch) => {
     dispatch(request());
     const getCard = await userService.getData("/api/v1/user/card_url").then();
-
-    window.location.href = getCard?.data?.authUrl;
+    window.open(getCard?.data?.authUrl, "_blank");
+    dispatch(successReg());
+    // window.location.href = getCard?.data?.authUrl;
   };
 }
 

@@ -6,6 +6,9 @@ import { usersActions } from "../../redux";
 import PayModel from "../Stash/PayModel";
 const CreateSavings4 = (props) => {
   const [finalVal, setFinalVal] = useState("");
+  const [freqOptions, setFreqOptions] = useState([]);
+  // eslint-disable-next-line
+  const [loading, setloading] = useState(false);
   const core = JSON.parse(sessionStorage.getItem("core"));
 
   useEffect(() => {
@@ -22,12 +25,32 @@ const CreateSavings4 = (props) => {
     };
 
     get();
+
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    (async function dataInfo() {
+      setloading(true);
+      const datas = await props
+        .getFrequency("/api/v1/util/productinterest", "0201", 1)
+        .then();
+      const { interest } = datas;
+      console.log(interest);
+      setFreqOptions(interest);
+      setloading(false);
+    })();
     // eslint-disable-next-line
   }, []);
 
   const main1 =
     new Date(core.endDate).getTime() - new Date(core.startDate).getTime();
   const numOfDays = main1 / (1000 * 3600 * 24);
+
+  const filterInterest = freqOptions.filter((value, _index) => {
+    return numOfDays >= value.tenor.minDays && numOfDays <= value.tenor.maxDays? value.rate:null
+    
+  });
 
   const currencyVal = (number) =>
     new Intl.NumberFormat(core.ccyCode === "1" ? "en-NG" : "en-US", {
@@ -73,7 +96,7 @@ const CreateSavings4 = (props) => {
                         </tr>
                         <tr>
                           <td>Interest rate:</td>
-                          <td className="text-right">10% per annum</td>
+                          <td className="text-right">{filterInterest[0]?.rate}% per annum</td>
                         </tr>
                         <tr>
                           <td>Start Date:</td>
@@ -125,13 +148,14 @@ const CreateSavings4 = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { loggingIn, loading, alertType, message } = state.registration;
+  const { loading, alertType, message } = state.registration;
   const { alert } = state;
-  return { loggingIn, alert, loading, alertType, message };
+  return { alert, loading, alertType, message };
 };
 
 const actionCreators = {
   getTargetValue: usersActions.getTargetValue,
+  getFrequency: usersActions.getFrequency,
 };
 
 export default connect(mapStateToProps, actionCreators)(CreateSavings4);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import Select from "react-select";
-import { Persist } from "formik-persist";
+// import { Persist } from "formik-persist";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
@@ -18,7 +18,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
   };
 
   let data = JSON.parse(sessionStorage.getItem("stash"));
-
   const validationSchema = Yup.object({
     amount: Yup.number().required("An Amount is Required"),
     frequency: Yup.string().required("Choose a frequency"),
@@ -26,6 +25,8 @@ const Index = ({ getFrequency, createStash, loading }) => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
+    // sessionStorage.removeItem("stash");
+    // sessionStorage.removeItem("stashfreq");
     const obj = {
       amount: values.amount,
       frequency: `${values.frequency}`,
@@ -35,9 +36,10 @@ const Index = ({ getFrequency, createStash, loading }) => {
     const obj2 = freqOptions.find(
       (option) => option.tenor.code === formik.values.frequency
     );
+    console.log(obj2)
     sessionStorage.setItem("stashfreq", JSON.stringify(obj2));
     createStash(obj, "/api/v1/user/stash", "/app/stash/breakdown");
-    onSubmitProps.resetForm();
+    // onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };
 
@@ -85,7 +87,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
       paddingTop: 14,
       paddingBottom: 14,
       hover: "#DDE9FB",
-      // zIndex: 9999,
     }),
 
     menuList: (provided, state) => ({
@@ -110,7 +111,8 @@ const Index = ({ getFrequency, createStash, loading }) => {
   const defaultValue = (options, value) => {
     return options ? options.find((option) => option.value === value) : "";
   };
-
+  console.log(formik.values);
+  console.log(freqOptions)
   return (
     <>
       {loading && <Loader />}
@@ -122,7 +124,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
                 <div className="au-card-inner">
                   <h4 className="text-blue">Stash</h4>
                   <div className="small-red-line"></div>
-
                   <div className="mt-5">
                     <form onSubmit={formik.handleSubmit}>
                       <div className="mt-4">
@@ -154,7 +155,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
                                     id="radio2"
                                     name="ccyCode"
                                     type="radio"
-                                    // checked={formik.values.ccyCode === 1}
                                     value={"1"}
                                     onChange={formik.handleChange}
                                   />
@@ -174,7 +174,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
                         </div>
                         <div className="form-group mt-4">
                           <label for="Amount" className="text-blue weight-500">
-                            How much will you like to stash daily?
+                            How much will you like to stash?
                           </label>
                           <NumberFormat
                             isNumericString={true}
@@ -245,32 +245,22 @@ const Index = ({ getFrequency, createStash, loading }) => {
                         <div className="row mt-5 align-items-center justify-content-end">
                           <div className="col-lg-8">
                             <div className="row">
-                              <div className="col-lg-6">
-                                {/* <button className="btn btn-previous text-green">
-                                  PREVIOUS
-                                </button> */}
-                              </div>
+                              <div className="col-lg-6"></div>
                               <div className="col-lg-6">
                                 <input
                                   type="submit"
                                   value={"PROCEED"}
-                                  disabled={
-                                    !formik.isValid || formik.isSubmitting
-                                  }
+                                  // disabled={
+                                  //   !formik.isValid || formik.isSubmitting
+                                  // }
                                   className="btn login-submit"
                                 />
-                                <Persist
-                                  // isSessionStorage={true}
-                                  name="first-form"
-                                />
-                                {/* <FormikStore name="signup" storage={window.sessionStorage} /> */}
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </form>
-                    {/* </Formik> */}
                   </div>
                 </div>
               </div>
