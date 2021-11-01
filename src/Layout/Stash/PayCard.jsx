@@ -33,7 +33,10 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
   return (
     <>
       {loading && <Loader />}
-      <div className="col-lg-6 flex-column flex-grow-1">
+      <div
+        className="col-lg-6 flex-column flex-grow-1"
+        style={{ position: "relative" }}
+      >
         <div className="au-card h-100">
           <div className="au-card-inner">
             <h4 className="text-blue">Choose a Card to Pay with</h4>
@@ -44,6 +47,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
                   className="payment-selection"
                   style={{ height: "100%", overflowY: "scroll" }}
                 >
+                  {cards.length === 0 ? <p>No cards registered</p> : null}
                   {cards && cards.length > 0
                     ? cards.map((single, index) => {
                         return (
@@ -73,7 +77,10 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
                 </div>
 
                 <div className="row mt-50 align-items-center justify-content-end">
-                  <div className="col-lg-8">
+                  <div
+                    className="col-lg-8"
+                    style={{ position: "absolute", bottom: "0rem" }}
+                  >
                     <div className="row">
                       <div className="col-lg-6">
                         {!loading && (

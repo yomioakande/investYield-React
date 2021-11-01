@@ -9,9 +9,9 @@ import { usersActions } from "../redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../common/Loader";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Swal from 'sweetalert2'
 const Modal1 = ({
   alertType,
   message,
@@ -24,7 +24,7 @@ const Modal1 = ({
   const [dropper, setDropper] = useState(false);
   const [bvn, setBvn] = useState(true);
   const [nextPage, setNextPage] = useState(false);
-  const [showError, setShowError] = useState(true);
+  const [showError, setShowError] = useState(false);
 
   const dropdown = () => {
     setDropper(!dropper);
@@ -34,12 +34,43 @@ const Modal1 = ({
     setNextPage(true);
   };
 
+ 
+
   const success = () => {
-    toast.success("BVN Registered successfully!", {
-      position: toast.POSITION.TOP_CENTER,
-    });
+    // toast.success("BVN Registered successfully!", {
+    //   position: toast.POSITION.TOP_CENTER,
+    // });
     close();
+    Swal.fire({
+      customClass : {
+        title: 'swal2-title'
+      },
+      position: 'center',
+      icon: 'success',
+      iconColor: '#003079',
+      title: 'Your BVN has been saved',
+      titleColor:'#fff',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  
   };
+  // Swal.fire({
+  //   customClass : {
+  //     title: 'swal2-title'
+  //   },
+  //   position: 'center',
+  //   icon: 'success',
+  //   iconColor: '#003079',
+  //   title: 'Your BVN has been saved',
+  //   titleColor:'#fff',
+  //   showConfirmButton: false,
+  //   timer: 1500
+  // })
+  
+  // toast.success("BVN Registered successfully!", {
+  //     position: toast.POSITION.TOP_CENTER,
+  //   });
 
   const initialValues = {
     bvn: "",
@@ -89,8 +120,9 @@ const Modal1 = ({
       operationType: 6,
     };
     resend(obj, "/api/v1/util/resendotp");
-    show()
+    show();
   };
+  // success()
 
   return ReactDom.createPortal(
     <>
@@ -131,10 +163,8 @@ const Modal1 = ({
                           information for us to verify you and know you better.
                         </p>
                         {showError
-                          ? alertType && (
-                              <div
-                                className={`font-sm alert mt-3 ${alertType}`}
-                              >
+                          ? message && (
+                              <div className={`font-sm mt-3 ${alertType}`}>
                                 {message}
                               </div>
                             )
@@ -146,6 +176,8 @@ const Modal1 = ({
                               className="text-field-modal"
                               placeholder="Enter BVN"
                               name="bvn"
+                              minLength="10"
+                              maxLength="11"
                               onChange={formik.handleChange}
                             />
                           </div>
@@ -186,7 +218,7 @@ const Modal1 = ({
                               // >
                               value={"CONTINUE"}
                             />
-                            {/* </button> */}
+                       
                           </div>
                         </form>
                         <div className="mt-4 d-flex justify-content-center">
@@ -237,7 +269,7 @@ const Modal1 = ({
                         <div className="small-red-line"></div>
                         <h6 className="mt-5 dashboard-modal-p">
                           Please enter the One-Time Password (OTP) that has been
-                          sent to the phone number linked with your BVN
+                          sent to the phone number/email linked with your BVN
                           {/* <span className="reg-p-number">
                             {" "}
                             +234705*****95.
@@ -245,8 +277,8 @@ const Modal1 = ({
                           {/* linked with your BVN */}
                         </h6>
                         {showError
-                          ? alertType && (
-                              <div className={`font-sm alert ${alertType}`}>
+                          ? message && (
+                              <div className={`font-sm mt-2 ${alertType}`}>
                                 {message}
                               </div>
                             )
@@ -258,7 +290,7 @@ const Modal1 = ({
                               className="text-field-modal"
                               placeholder="Enter OTP"
                               name="otp"
-                              // value={otp}
+                              autoComplete={'off'}
                               onChange={formik.handleChange}
                               // onChange={(e) => setOtp(e.target.value)}
                             />
@@ -266,7 +298,6 @@ const Modal1 = ({
                           <div className="mt-5">
                             <input
                               type="submit"
-                              // onClick
                               value={"CONTINUE"}
                               className="btn modal-button"
                             />
@@ -299,13 +330,10 @@ const Modal1 = ({
   );
 };
 
-// export default ;
-
 const mapStateToProps = (state) => {
-  const { loggingIn } = state.authentication;
   const { loading, alertType, message } = state.registration;
   const { alert } = state;
-  return { loggingIn, alert, loading, alertType, message };
+  return { alert, loading, alertType, message };
 };
 
 const actionCreators = {
@@ -365,4 +393,8 @@ const ModalBox = styled.div`
   .none {
     display: none !important;
   }
+
+ .swal2-title{
+   color:#000;
+ }
 `;

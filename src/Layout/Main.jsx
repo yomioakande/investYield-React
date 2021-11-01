@@ -59,10 +59,10 @@ const Main = (props) => {
   //   setHidden({ ...hidden, [index]: !hidden[index] });
   // };
 
-  const getTransactions = async () => {
-    const data = await props.getData("/api/v1/user/transaction").then();
-    setTransactions(data);
-  };
+  // const getTransactions = async () => {
+  //   const data = await props.getData("/api/v1/user/transaction").then();
+  //   setTransactions(data);
+  // };
 
   useEffect(() => {
     (async function dataInfo() {
@@ -82,7 +82,7 @@ const Main = (props) => {
       todo.bvnConfirmed !== true &&
         setTimeout(() => {
           setModalInOpen(true);
-        }, 2000);
+        }, 3000);
       setTransactions(transactionsData);
     })();
     // eslint-disable-next-line
@@ -315,12 +315,12 @@ const Main = (props) => {
                 <div className="au-card-inner recent-activities">
                   <div className="d-flex justify-content-between align-items-start">
                     <h3 className="title-2">Recent Activities</h3>
-                    <button
+                    {/* <button
                       onClick={() => getTransactions()}
                       className="au-btn-link"
                     >
                       View All
-                    </button>
+                    </button> */}
                   </div>
                   <div
                     className="au-message-list"
@@ -360,13 +360,18 @@ const Main = (props) => {
                       <div className="au-message__item-inner px-2 py-2">
                         <div className="au-message__item-text">
                           {!todoList.bvnConfirmed && (
-                            <Link
+                            <button
                               onClick={() => modalToggle()}
                               className="text px-0 mx-0"
                             >
-                              <h5 className="name">Link your BVN</h5>
+                              <h5
+                                className="name"
+                                style={{ textAlign: "left" }}
+                              >
+                                Link your BVN
+                              </h5>
                               <p>Gain access to more features</p>
-                            </Link>
+                            </button>
                           )}
                         </div>
                         <div className="au-message__item-time mt-0">

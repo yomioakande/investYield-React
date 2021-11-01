@@ -167,6 +167,7 @@ function register4(obj, apiUrl, func) {
     const register = await userService.postData(obj, apiUrl);
     const { success, messages } = register;
     if (apiUrl === "/api/v1/user/pin" && success === true) {
+      dispatch(successReg(messages));
       func();
     } else {
       dispatch(failure(messages));
@@ -193,10 +194,9 @@ function resend(resendObj, apiUrl) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.register1(resendObj, apiUrl);
-
-    const { data, success, messages } = register;
+    const { success, messages } = register;
     if (apiUrl === "/api/v1/util/resendotp" && success === true) {
-      dispatch(successReg(data?.challenge));
+      dispatch(successReg(messages));
     } else {
       dispatch(failure(messages));
     }
@@ -208,9 +208,9 @@ function bvnReg(obj, apiUrl, func) {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
 
-    const { data, success, messages } = register;
+    const { success, messages } = register;
     if (apiUrl === "/api/v1/user/bvn" && success === true) {
-      dispatch(successReg(data?.challenge));
+      dispatch(successReg(messages));
       func();
     } else {
       dispatch(failure(messages));
@@ -224,9 +224,9 @@ function confirmBvnReg(obj, apiUrl, func) {
     dispatch(request());
     const register = await userService.putData(obj, apiUrl);
 
-    const { data, success, messages } = register;
+    const { success, messages } = register;
     if (apiUrl === "/api/v1/user/bvn" && success === true) {
-      dispatch(successReg(data?.challenge));
+      dispatch(successReg(messages));
       func();
     }
 

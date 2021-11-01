@@ -44,7 +44,6 @@ async function login(body) {
   try {
     const res = await fetch(`${baseUrl}/api/v1/identity/login`, requestOptions);
     const getData = await res.json();
-
     return getData;
   } catch (error) {
     return error;

@@ -47,9 +47,9 @@ const Index = ({ getFrequency, createStash, loading }) => {
     validationSchema,
     validateOnMount: true,
   });
-
+  // data?.amount ||
   useEffect(() => {
-    formik.setFieldValue("amount", data?.amount || num?.value);
+    formik.setFieldValue("amount", num?.value);
     // formik.setFieldValue("frequency",JSON.parse(sessionStorage.getItem("stash")).frequency)
     // eslint-disable-next-line
   }, [num?.value]);

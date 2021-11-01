@@ -109,8 +109,8 @@ const First = (props) => {
                       Create an account, start saving and yielding.
                     </h6>
                     {showError
-                      ? props.alertType && (
-                          <div className={`font-sm alert ${props.alertType}`}>
+                      ? props.message && (
+                          <div className={`font-sm ${props.alertType}`}>
                             {props.message}
                           </div>
                         )
@@ -200,7 +200,7 @@ const First = (props) => {
                       <div className="form-group mt-5">
                         <input
                           type="submit"
-                          disabled={!formik.isValid || formik.isSubmitting}
+                          // disabled={!formik.isValid || formik.isSubmitting}
                           className="btn login-submit"
                           value="NEXT"
                         />

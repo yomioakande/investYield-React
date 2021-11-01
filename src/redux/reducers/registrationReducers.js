@@ -11,16 +11,14 @@ export function registration(
       return {
         ...state,
         loading: false,
-        alertType: "alert-success",
-        // message:action.user,
-        // user: action.user,
+        alertType: "alert alert-success",
         message: action.payload,
       };
     case userConstants.REGISTER_FAILURE:
       return {
         ...state,
         loading: false,
-        alertType: "alert-danger",
+        alertType: "alert alert-danger",
         message: action.payload,
       };
     default:
