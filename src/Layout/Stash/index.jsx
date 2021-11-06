@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import Select from "react-select";
-// import { Persist } from "formik-persist";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 const Index = ({ getFrequency, createStash, loading }) => {
+
   const [freqOptions, setFreqOptions] = useState([]);
   const [num, setNum] = useState("");
 
@@ -24,22 +24,19 @@ const Index = ({ getFrequency, createStash, loading }) => {
     ccyCode: Yup.string().required("Pick the Currency to save in"),
   });
 
-  const onSubmit = (values, onSubmitProps) => {
-    // sessionStorage.removeItem("stash");
-    // sessionStorage.removeItem("stashfreq");
+  const onSubmit = (values, onSubmitProps) => {  
+    sessionStorage.removeItem("stash")
     const obj = {
       amount: values.amount,
       frequency: `${values.frequency}`,
       ccyCode: values.ccyCode,
     };
-
-    const obj2 = freqOptions.find(
-      (option) => option.tenor.code === formik.values.frequency
+    let obj2 = freqOptions.find(
+      (option) => option.tenor.code === values.frequency
     );
-    console.log(obj2)
-    sessionStorage.setItem("stashfreq", JSON.stringify(obj2));
     createStash(obj, "/api/v1/user/stash", "/app/stash/breakdown");
-    // onSubmitProps.resetForm();
+    sessionStorage.setItem("stashfreq", JSON.stringify(obj2));
+    onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };
 
@@ -49,12 +46,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
     validationSchema,
     validateOnMount: true,
   });
-  // data?.amount ||
-  useEffect(() => {
-    formik.setFieldValue("amount", num?.value);
-    // formik.setFieldValue("frequency",JSON.parse(sessionStorage.getItem("stash")).frequency)
-    // eslint-disable-next-line
-  }, [num?.value]);
 
   const ccy = formik.values.ccyCode;
   useEffect(() => {
@@ -64,14 +55,19 @@ const Index = ({ getFrequency, createStash, loading }) => {
         "0103",
         ccy
       ).then();
-
       const { interest } = datas;
       setFreqOptions(interest);
+      console.log('cvb',freqOptions)
     })();
     //eslint-disable-next-line
   }, [ccy]);
 
-  const options = freqOptions.map((single, index) => {
+  useEffect(() => {
+    formik.setFieldValue("amount", num?.value);
+    // eslint-disable-next-line
+  }, [num?.value]);
+
+  const options = freqOptions.map((single, _index) => {
     return {
       value: single.tenor.code,
       label: `${single.tenor.name} at ${single.rate}% per annum`,
@@ -112,7 +108,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
     return options ? options.find((option) => option.value === value) : "";
   };
   console.log(formik.values);
-  console.log(freqOptions)
+  console.log(freqOptions);
   return (
     <>
       {loading && <Loader />}
@@ -250,9 +246,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
                                 <input
                                   type="submit"
                                   value={"PROCEED"}
-                                  // disabled={
-                                  //   !formik.isValid || formik.isSubmitting
-                                  // }
                                   className="btn login-submit"
                                 />
                               </div>
@@ -268,12 +261,9 @@ const Index = ({ getFrequency, createStash, loading }) => {
           </div>
         </div>
       </div>
-      {/* </Formik> */}
     </>
   );
 };
-
-// export default
 
 const mapStateToProps = (state) => {
   const { loggingIn } = state.authentication;
@@ -283,7 +273,6 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
-  // bvnReg: usersActions.bvnReg,
   getFrequency: usersActions.getFrequency,
   createStash: usersActions.createStash,
 };

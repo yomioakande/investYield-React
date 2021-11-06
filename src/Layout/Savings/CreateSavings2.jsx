@@ -57,7 +57,6 @@ const CreateSavings2 = ({ username, register }) => {
     };
     sessionStorage.setItem("savingsInfo", JSON.stringify(obj));
     window.location.href = `/app/savings/create3/${useLink}`;
-    // onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };
 
@@ -73,7 +72,6 @@ const CreateSavings2 = ({ username, register }) => {
     // eslint-disable-next-line
   }, [num?.value]);
 
- 
   return (
     <>
       {loading && <Loader />}

@@ -8,7 +8,8 @@ import * as Yup from "yup";
 import Loader from "../../common/Loader";
 import { userService } from "../../services/usersService";
 const JoinGroup1 = (props) => {
-  const data = props.location.state.data;
+  let data = props.location.state.data;
+  data = data.startDate.toString();
   // eslint-disable-next-line
   const [num, setNum] = useState("");
   const [targetNum, setTargetNum] = useState("");
@@ -17,12 +18,10 @@ const JoinGroup1 = (props) => {
   const initialValues = {
     freq: "",
     earn: "",
-
     start: "",
   };
-
   const disablePastDate = () => {
-    const today = new Date();
+    const today = new Date(data);
     const dd = String(today.getDate()).padStart(2, "0");
     const mm = String(today.getMonth() + 1).padStart(2, "0");
     const yyyy = today.getFullYear();

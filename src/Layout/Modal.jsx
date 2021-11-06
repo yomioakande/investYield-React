@@ -35,9 +35,6 @@ const Modal1 = ({
   };
 
   const success = () => {
-    // toast.success("BVN Registered successfully!", {
-    //   position: toast.POSITION.TOP_CENTER,
-    // });
     close();
     Swal.fire({
       customClass: {

@@ -141,7 +141,7 @@ const Savings = ({ getData, getAccounts }) => {
                         </div>
                       </Link>
 
-                      {purseAccounts.map((single, index) => {
+                     {purseAccounts.map((single, index) => {
                         return (
                           <Purse
                             key={index}

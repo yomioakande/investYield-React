@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
-// import { Link } from "react-router-dom";
+import Loader from "../../common/Loader";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
@@ -33,6 +33,7 @@ const Group3 = (props) => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
+   
     const obj = {
       start: values.start,
       freq: values.freq,
@@ -51,6 +52,7 @@ const Group3 = (props) => {
     );
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
+    // setloading(false);
   };
 
   const formik = useFormik({
@@ -66,7 +68,6 @@ const Group3 = (props) => {
   }, [num?.value]);
 
   const groupData = JSON.parse(sessionStorage.getItem("groupInfo"));
-  // const ccyCode = JSON.parse(sessionStorage.getItem("savingsInfo")).ccyCode;
   const currencyVal = (number) =>
     new Intl.NumberFormat(groupData.ccy === "1" ? "en-NG" : "en-US", {
       style: "currency",
@@ -92,6 +93,7 @@ const Group3 = (props) => {
 
   return (
     <>
+      {props.loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="d-flex justify-content-center">
@@ -314,8 +316,6 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
-  // bvnReg: usersActions.bvnReg,
-  // getFrequency: usersActions.getFrequency,
   createGroup: usersActions.createStash,
 };
 
