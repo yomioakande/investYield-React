@@ -6,7 +6,15 @@ import PayBank from "./PayBank";
 import PayCard from "./PayCard";
 import Congrats from "../Congrats";
 import Swal from "sweetalert2";
-const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
+import Loader from "../../common/Loader";
+const PayModel = ({
+  transId,
+  getDetails,
+  addCard,
+  payPurse,
+  loading,
+  message,
+}) => {
   const [active, setActive] = useState(1);
   const [details, setDetails] = useState({});
   const [congratsModal, setCongratsModal] = useState(false);
@@ -14,10 +22,15 @@ const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
   const modalToggle1 = () => {
     setCongratsModal(true);
   };
+
+  const fail = (message) => {
+    Swal.fire(`${message}`, "", "error");
+  };
   useEffect(() => {
     (async function () {
       const data = await getDetails("/api/v1/user/virtual_acct");
       setDetails({ ...data });
+      console.log(data);
     })();
     // eslint-disable-next-line
   }, []);
@@ -35,10 +48,7 @@ const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
       denyButtonText: `Cancel`,
     }).then((result) => {
       if (result.isConfirmed) {
-        payPurse(obj, "/api/v1/transfer/fundbypurse", modalToggle1);
-
-        // setShowInput(true);
-        // Swal.fire('Saved!', '', 'success')
+        payPurse(obj, "/api/v1/transfer/fundbypurse", modalToggle1, fail);
       } else if (result.isDenied) {
         // setShowInput(false);
         // Swal.fire('Changes are not saved', '', 'info')
@@ -48,6 +58,7 @@ const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
 
   return (
     <>
+      {loading && <Loader />}
       {active === 1 ? (
         <>
           {" "}
@@ -148,16 +159,14 @@ const PayModel = ({ transId, getDetails, addCard, payPurse }) => {
 const mapStateToProps = (state) => {
   const { alert } = state;
   const username = state.authentication.user;
-  const { loading } = state.registration;
-  return { alert, username, loading };
+  const { loading, alertType, message } = state.registration;
+  return { alert, username, loading, alertType, message };
 };
 
 const actionCreators = {
   getDetails: usersActions.getInfo,
   payPurse: usersActions.payPurse,
   addCard: usersActions.addCard,
-  // getAccounts: usersActions.getAccounts,
 };
 
-// export default ;
 export default connect(mapStateToProps, actionCreators)(PayModel);

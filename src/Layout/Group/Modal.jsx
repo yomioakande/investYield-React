@@ -15,6 +15,7 @@ const Modal = ({ close, getAccount, message, alertType, loading }) => {
   const [showError, setShowError] = useState(true);
 
   const show = () => {
+    setShowError(true)
     setTimeout(() => {
       setShowError(false);
     }, 3000);
@@ -29,7 +30,9 @@ const Modal = ({ close, getAccount, message, alertType, loading }) => {
   const next = () => {
     setFirst("breakdown");
   };
+
   const onSubmit = (values, onSubmitProps) => {
+    
     (async () => {
       const data = await getAccount(
         "/api/v1/user/group_savings",
@@ -37,7 +40,9 @@ const Modal = ({ close, getAccount, message, alertType, loading }) => {
         next
       ).then();
       setGroupAccount(data);
+      console.log(data)
     })();
+   
     show();
     onSubmitProps.setSubmitting(false);
   };
@@ -120,9 +125,9 @@ const Modal = ({ close, getAccount, message, alertType, loading }) => {
                             <div className="col-lg-8">
                               <div className="row">
                                 <div className="col-lg-6">
-                                  <button className="btn btn-cancel text-danger">
+                                  {/* <button className="btn btn-cancel text-danger">
                                     Cancel
-                                  </button>
+                                  </button> */}
                                 </div>
                                 <div className="col-lg-6">
                                   <button

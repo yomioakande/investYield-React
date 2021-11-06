@@ -5,8 +5,8 @@ import { usersActions } from "../../redux";
 import PayModel from "./PayModel";
 const Breakdown = (props) => {
   const [targetValue, setTargetValue] = useState("");
-  const stash = JSON.parse(sessionStorage.getItem("stash"))
-  const stashfreq = JSON.parse(sessionStorage.getItem("stashfreq"))
+  const stash = JSON.parse(sessionStorage.getItem("stash"));
+  const stashfreq = JSON.parse(sessionStorage.getItem("stashfreq"));
   let date = new Date();
   //START DATE
   const startDate = dateConv(date);
@@ -26,7 +26,7 @@ const Breakdown = (props) => {
       setTargetValue(getTargetValue);
     })();
     //eslint-disable-next-line
-  }, [stash.amount, stashfreq.tenor.code, stash.ccyCode]);
+  }, []);
 
   const currencyVal = (number) =>
     new Intl.NumberFormat(stash.ccyCode === "1" ? "en-NG" : "en-US", {
@@ -56,9 +56,7 @@ const Breakdown = (props) => {
 
                     <div className="savings-breakdown-row text-black">
                       <p>Interest Rate</p>
-                      <p className="font-weight-bold">
-                        {stashfreq.rate}%{/* % per annum */}
-                      </p>
+                      <p className="font-weight-bold">{stashfreq.rate}%</p>
                     </div>
 
                     <div className="savings-breakdown-row text-black">

@@ -115,7 +115,7 @@ const JoinSavings = (props) => {
                 role="button"
                 data-slide="next"
               >
-                <span></span>
+                {/* <span></span> */}
               </a>
               <a
                 className="swiper-button-prev carousel-control-prev"
@@ -123,7 +123,7 @@ const JoinSavings = (props) => {
                 role="button"
                 data-slide="prev"
               >
-                <span></span>
+                {/* <span></span> */}
               </a>
             </div>
           </div>

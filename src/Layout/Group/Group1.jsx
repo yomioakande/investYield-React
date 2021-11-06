@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
-// import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useLocation } from "react-router-dom";
+import Loader from "../../common/Loader";
 const Group1 = () => {
   const location = useLocation();
   let groupType = location.pathname.split("/");
   groupType = groupType[groupType.length - 1];
   const [num, setNum] = useState("");
-
+  const [loading, setloading] = useState(false);
   const initialValues = {
     name: "",
     ccy: "",
@@ -33,6 +33,7 @@ const Group1 = () => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
+    setloading(true)
     const obj = {
       name: values.name,
       ccy: values.ccy,
@@ -43,8 +44,9 @@ const Group1 = () => {
 
     sessionStorage.setItem("groupInfo", JSON.stringify(obj));
     window.location.href = "/app/groupsavings2";
-    onSubmitProps.resetForm();
+    // onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
+    setloading(false)
   };
 
   const formik = useFormik({
@@ -61,6 +63,7 @@ const Group1 = () => {
 
   return (
     <>
+      {loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row justify-content-center">

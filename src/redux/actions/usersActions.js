@@ -332,16 +332,17 @@ function createCore(obj, apiUrl, nextRoute) {
   };
 }
 
-function payPurse(obj, apiUrl, func) {
+function payPurse(obj, apiUrl, func, fail) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
-    const { data, success, messages } = register;
+    const { success, messages } = register;
     if (success === true) {
-      dispatch(successReg(data?.reference));
+      dispatch(successReg());
       func();
     } else {
       dispatch(failure(messages));
+      fail(messages);
       return;
     }
   };
@@ -451,7 +452,6 @@ function getAccounts(apiUrl, accountCode) {
     dispatch(request());
     const getAll = await userService.getAccounts(apiUrl, accountCode);
     const { data, success, messages } = getAll;
-
     if (success === true) {
       dispatch(successReg());
       return data;

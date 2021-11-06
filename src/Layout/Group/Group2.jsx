@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
-// import { userService } from "../../services/usersService";
+import Loader from "../../common/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import cloudUpload from "../../assets/images/upload-cloud-grey.svg";
@@ -14,7 +12,7 @@ const Group2 = (props) => {
   const [imageName, setImageName] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [imageRef, setImageRef] = useState("");
-
+  const [loading, setloading] = useState(false);
   //UPLOAD SUCCESSFUL ALERT
   const success = () => {
     toast.success("Uploaded Successfully!", {
@@ -60,6 +58,7 @@ const Group2 = (props) => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
+    setloading(true)
     const obj = {
       decide: values.decide,
       docId: imageRef.reference,
@@ -69,6 +68,7 @@ const Group2 = (props) => {
     window.location.href = "/app/groupsavings3";
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
+    setloading(false)
   };
 
   const formik = useFormik({
@@ -80,8 +80,9 @@ const Group2 = (props) => {
 
   return (
     <>
-      <ToastContainer autoClose={1000} hideProgressBar />
 
+      <ToastContainer autoClose={1000} hideProgressBar />
+ {loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row justify-content-center">

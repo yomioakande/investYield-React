@@ -8,7 +8,7 @@ import Select from "react-select";
 import Loader from "../../../common/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Swal from "sweetalert2";
 const WithdrawalAccount = (props) => {
   // props.resetAlerts()
   const [bankOptions, setBankOptions] = useState([]);
@@ -116,8 +116,21 @@ const WithdrawalAccount = (props) => {
   });
 
   const success = () => {
-    toast.success("Account successfully added", {
-      position: toast.POSITION.TOP_CENTER,
+    // toast.success("Account successfully added", {
+    //   position: toast.POSITION.TOP_CENTER,
+    // });
+    dataInfo();
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Account successfully added",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 1500,
     });
   };
 
@@ -230,7 +243,7 @@ const WithdrawalAccount = (props) => {
                 </div>
                 <div className="form-group mt-4">
                   <input
-                    type="text"
+                    type="number"
                     className="text-field"
                     autoComplete="off"
                     placeholder="Enter Account Number"
