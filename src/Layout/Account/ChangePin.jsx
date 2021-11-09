@@ -3,10 +3,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
 import mail from "../../assets/images/mail1.svg";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
+import Swal from "sweetalert2";
 const Pin = (props) => {
   const initialValues = {
     oldPin: "",
@@ -26,8 +27,21 @@ const Pin = (props) => {
   });
 
   const success = () => {
-    toast.success("Pin successfully changed!", {
-      position: toast.POSITION.TOP_CENTER,
+    // toast.success("Pin successfully changed!", {
+    //   position: toast.POSITION.TOP_CENTER,
+    // });
+
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Pin successfully changed!",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 1500,
     });
   };
 
@@ -57,14 +71,12 @@ const Pin = (props) => {
     <>
       {props.loading && <Loader />}
 
-      <ToastContainer autoClose={1000} hideProgressBar />
-      {props.message !== null
-        ? props.alertType && (
-            <div className={`font-sm alert ${props.alertType}`}>
-              {props.message}
-            </div>
-          )
-        : null}
+      {/* <ToastContainer autoClose={1000} hideProgressBar /> */}
+      {props.message && (
+        <div className={`font-sm alert ${props.alertType}`}>
+          {props.message}
+        </div>
+      )}
 
       <form onSubmit={formik.handleSubmit}>
         <div className="row mt-5">

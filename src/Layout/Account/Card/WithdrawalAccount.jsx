@@ -22,6 +22,7 @@ const WithdrawalAccount = (props) => {
     const datas = await props.getBanks("/api/v1/util/bank").then();
     const account = await props.getAccount("/api/v1/user/bankaccount").then();
     setBankDetails(account);
+    console.log(account, "asdf");
 
     setBankOptions(datas);
   };
@@ -63,13 +64,9 @@ const WithdrawalAccount = (props) => {
       hover: "#DDE9FB",
     }),
     placeholder: (provided, state) => ({
-      // ...provided,
-      // width: state.selectProps.width,
-      // borderBottom: "1px solid #DDE9FB",
       color: state.selectProps.menuColor,
       paddingTop: 14,
-      // paddingBottom: 14,
-      // hover: "#DDE9FB",
+     
     }),
 
     menuList: (provided, state) => ({
@@ -116,10 +113,6 @@ const WithdrawalAccount = (props) => {
   });
 
   const success = () => {
-    // toast.success("Account successfully added", {
-    //   position: toast.POSITION.TOP_CENTER,
-    // });
-    dataInfo();
     Swal.fire({
       customClass: {
         title: "swal2-title",
@@ -132,6 +125,8 @@ const WithdrawalAccount = (props) => {
       showConfirmButton: false,
       timer: 1500,
     });
+
+    dataInfo().then();
   };
 
   const onSubmit = (values, onSubmitProps) => {
@@ -182,13 +177,15 @@ const WithdrawalAccount = (props) => {
           <div className="row">
             <div className="col-lg-6">
               <div className="mt-3">
-                <button
-                  type="button"
-                  onClick={updateToggle}
-                  className="btn login-submit"
-                >
-                  {bankDetails ? " Update Account" : "Add Account"}
-                </button>
+                {!bankDetails && (
+                  <button
+                    type="button"
+                    onClick={updateToggle}
+                    className="btn login-submit"
+                  >
+                    "Add Account"
+                  </button>
+                )}
               </div>
             </div>
 
@@ -257,6 +254,7 @@ const WithdrawalAccount = (props) => {
                     type="password"
                     className="text-field"
                     name="pin"
+                    autoComplete="off"
                     maxLength={4}
                     {...formik.getFieldProps("pin")}
                     placeholder="Enter Pin"

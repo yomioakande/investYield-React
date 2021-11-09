@@ -7,7 +7,6 @@ import Loader from "../../common/Loader";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 const Index = ({ getFrequency, createStash, loading }) => {
-
   const [freqOptions, setFreqOptions] = useState([]);
   const [num, setNum] = useState("");
 
@@ -24,22 +23,28 @@ const Index = ({ getFrequency, createStash, loading }) => {
     ccyCode: Yup.string().required("Pick the Currency to save in"),
   });
 
-  const onSubmit = (values, onSubmitProps) => {  
-    sessionStorage.removeItem("stash")
+  const onSubmit = (values, onSubmitProps) => {
+    save();
     const obj = {
       amount: values.amount,
       frequency: `${values.frequency}`,
       ccyCode: values.ccyCode,
     };
-    let obj2 = freqOptions.find(
-      (option) => option.tenor.code === values.frequency
-    );
+
     createStash(obj, "/api/v1/user/stash", "/app/stash/breakdown");
-    sessionStorage.setItem("stashfreq", JSON.stringify(obj2));
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };
 
+  function save() {
+    sessionStorage.removeItem('stash')
+    const interestList = JSON.parse(sessionStorage.getItem("interestList"));
+    let obj2 = interestList.find(
+      (option) => option.tenor.code === formik.values.frequency
+    );
+    sessionStorage.setItem("stashfreq", JSON.stringify(obj2));
+  }
+console.log(JSON.parse(sessionStorage.getItem("interestList")))
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -57,10 +62,12 @@ const Index = ({ getFrequency, createStash, loading }) => {
       ).then();
       const { interest } = datas;
       setFreqOptions(interest);
-      console.log('cvb',freqOptions)
+      sessionStorage.setItem("interestList", JSON.stringify(interest));
+      console.log("cvb", freqOptions);
     })();
     //eslint-disable-next-line
   }, [ccy]);
+  console.log("cvb2", freqOptions);
 
   useEffect(() => {
     formik.setFieldValue("amount", num?.value);

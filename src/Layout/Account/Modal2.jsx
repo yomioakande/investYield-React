@@ -4,16 +4,24 @@ import modalclose from "../../assets/images/modal-close.svg";
 import { OVERLAY, ModalBox } from "./ModalBeneficiary";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../common/Loader";
+import Swal from "sweetalert2";
 
 const Modal2 = ({ dataInfo, modalBenf2, close, loading }) => {
   const addBeneficiary = JSON.parse(sessionStorage.getItem("addBenef"));
 
   const success = () => {
-    toast.success("Beneficiary successfully added!", {
-      position: toast.POSITION.TOP_CENTER,
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Beneficiary successfully added!",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 1500,
     });
     dataInfo();
     close();
@@ -65,7 +73,10 @@ const Modal2 = ({ dataInfo, modalBenf2, close, loading }) => {
                             disabled
                           />
                         </div>
-                        <p className="text-blue text-left font-sm">
+                        <p
+                          className="text-blue text-left"
+                          style={{ fontSize: ".9rem" }}
+                        >
                           {addBeneficiary?.name}
                         </p>
 
@@ -100,7 +111,6 @@ const Modal2 = ({ dataInfo, modalBenf2, close, loading }) => {
               </div>
             </div>
           </div>
-          <ToastContainer autoClose={1000} hideProgressBar />
         </>
       </ModalBox>
     </OVERLAY>,

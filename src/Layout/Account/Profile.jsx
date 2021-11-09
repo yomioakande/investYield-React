@@ -10,7 +10,6 @@ import { usersActions } from "../../redux/actions";
 import { format } from "date-fns";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-// import { ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 const Profile = ({
@@ -24,6 +23,8 @@ const Profile = ({
   const [profile, setProfile] = useState({});
   const [loading1, setloading1] = useState(false);
   const [showError, setShowError] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+
   // eslint-disable-next-line
   const [imageRef, setImageRef] = useState("");
   // eslint-disable-next-line
@@ -34,7 +35,7 @@ const Profile = ({
   const dataInfo = async () => {
     setloading1(true);
     const data = await getData("/api/v1/user/profile").then();
-    console.log(data)
+    console.log(data);
     setProfile(data);
     setloading1(false);
   };
@@ -64,7 +65,7 @@ const Profile = ({
       title: "Profile Updated",
       titleColor: "#fff",
       showConfirmButton: false,
-      timer: 1500,
+      timer: 3000,
     });
   };
 
@@ -93,7 +94,7 @@ const Profile = ({
   const show = () => {
     setTimeout(() => {
       setShowError(false);
-    }, 3000);
+    }, 5000);
   };
 
   //CHANGE TO BASE64
@@ -109,7 +110,7 @@ const Profile = ({
       title: "Profile Updated",
       titleColor: "#fff",
       showConfirmButton: false,
-      timer: 1500,
+      timer: 3000,
     });
   };
   const onChanger = (e) => {
@@ -137,6 +138,7 @@ const Profile = ({
           "/api/v1/util/fileupload",
           success2
         ).then((data) => setImageRef(data));
+        console.log(imageRef);
       };
       reader.readAsDataURL(file);
     }
@@ -422,16 +424,12 @@ const Profile = ({
                               </div>
                             </div>
                             <div className="mt-3">
-                              {message
-                                ? showError
-                                  ? alertType && (
-                                      <div
-                                        className={`font-sm alert ${alertType}`}
-                                      >
-                                        {message}
-                                      </div>
-                                    )
-                                  : null
+                              {showError
+                                ? message && (
+                                    <div className={`font-sm ${alertType}`}>
+                                      {message}
+                                    </div>
+                                  )
                                 : null}
                               <textarea
                                 className="textAreaProfile"
@@ -501,12 +499,28 @@ const Profile = ({
                               <div className="col-lg-12">
                                 <div className="form-group">
                                   <input
-                                    type="password"
+                                    type={`${
+                                      showPassword ? "type" : "password"
+                                    }`}
                                     className="text-field-profile2"
                                     placeholder="Password"
                                     name="password"
                                     {...formik.getFieldProps("password")}
                                   />
+                                  <i
+                                    style={{
+                                      position: "absolute",
+                                      top: "1.1rem",
+                                      right: "2rem",
+                                      color: "#000",
+                                    }}
+                                    onClick={() => {
+                                      setShowPassword(!showPassword);
+                                    }}
+                                    className={`fas ${
+                                      showPassword ? "fa-eye" : "fa-eye-slash"
+                                    } `}
+                                  ></i>
                                 </div>
                                 {formik.touched.password &&
                                   formik.errors.password && (
@@ -563,7 +577,6 @@ const Profile = ({
 const mapStateToProps = (state) => {
   const { alert } = state;
   const { loading, alertType, message } = state.registration;
-  // const loading = state.authentication.loading;
   return { alert, alertType, message, loading };
 };
 

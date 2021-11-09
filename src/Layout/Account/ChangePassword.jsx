@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Pin from "./ChangePin";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
-
+import Swal from "sweetalert2";
 import Style from "./style";
 
 const ChangePassword = (props) => {
@@ -30,8 +30,21 @@ const ChangePassword = (props) => {
   });
 
   const success = () => {
-    toast.success("Password successfully changed!", {
-      position: toast.POSITION.TOP_CENTER,
+    // toast.success("Password successfully changed!", {
+    //   position: toast.POSITION.TOP_CENTER,
+    // });
+
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Password successfully changed!",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 1500,
     });
   };
 
@@ -257,7 +270,7 @@ const ChangePassword = (props) => {
                             </div>
                           </div>
                         </div>
-                        <div className="row mt-4">
+                        {/* <div className="row mt-4">
                           <div className="col-lg-3">
                             <h5 className="mb-0">Can’t remember Password?</h5>
                           </div>
@@ -272,7 +285,7 @@ const ChangePassword = (props) => {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </form>
                     </div>
                     <div

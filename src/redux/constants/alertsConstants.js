@@ -1,6 +1,5 @@
 export const alertConstants = {
-    LOGIN_SUCCESS:"ALERT_SUCCESS",
-    LOGIN_ERROR:"ALERT_ERROR",
+    REQUEST:"REQUEST",
     SUCCESS: 'ALERT_SUCCESS',
     ERROR: 'ALERT_ERROR',
     CLEAR: 'ALERT_CLEAR'

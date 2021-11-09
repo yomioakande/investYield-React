@@ -23,6 +23,8 @@ const myPurse = ({
     };
     sessionStorage.setItem("fundpurse", JSON.stringify(obj));
   };
+
+  console.log(purseAmount,"pap")
   return (
     <>
       <div

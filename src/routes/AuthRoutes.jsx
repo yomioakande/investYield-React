@@ -27,7 +27,7 @@ export const AuthRoutes = () => {
         <PublicRoute restricted={true} exact path="/auth">
           {<Redirect to="/auth/login" />}
         </PublicRoute>
-        <PublicRoute restricted={true} path="/auth/signup1">
+        <PublicRoute restricted={true} path="/auth/signup1/:id">
           <First />
         </PublicRoute>
         <PublicRoute restricted={true} path="/auth/signup2">

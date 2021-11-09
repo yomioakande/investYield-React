@@ -7,9 +7,7 @@ import { connect } from "react-redux";
 import { usersActions } from "../../../redux/actions";
 import Loader from "../../../common/Loader";
 import styled from "styled-components";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import Swal from "sweetalert2";
 const Index = (props) => {
   const [cards, setCards] = useState([]);
   const dataInfo = async () => {
@@ -23,10 +21,19 @@ const Index = (props) => {
   }, []);
 
   const success = () => {
-    toast.success("Debit Card deleted!", {
-      position: toast.POSITION.TOP_CENTER,
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Debit Card deleted!",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 1500,
     });
-    dataInfo();
+    dataInfo().then();
   };
 
   const deleteCard = (id) => {
@@ -39,9 +46,6 @@ const Index = (props) => {
   return (
     <>
       {props.loading && <Loader />}
-
-      <ToastContainer autoClose={1000} hideProgressBar />
-
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">
@@ -56,7 +60,7 @@ const Index = (props) => {
                 <div className="d-flex flex-wrap justify-content-between">
                   <div className="col-lg-3 px-0">
                     <p className="text-blue mt-3">
-                      My Portfolio / Security Settings
+                      My Portfolio / My Card and Bank Settings
                     </p>
                   </div>
                   <div className="col-lg-5 px-0 d-flex justify-content-between cg-3">
@@ -190,5 +194,5 @@ const Wrapper = styled.div`
   /* border: 1px solid red ; */
   /* width: 110px !important; */
   height: 30rem !important ;
-  overflow: scroll !important ;
+  overflow: auto !important ;
 `;

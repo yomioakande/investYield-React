@@ -13,6 +13,7 @@ export const usersActions = {
   resend,
   getInfo,
   getDebitCards,
+  getNOK,
   bvnReg,
   confirmBvnReg,
   addCard,
@@ -418,7 +419,22 @@ function getInfo(apiUrl) {
 
     if (apiUrl && success === true) {
       dispatch(successReg());
+      return data;
+    } else {
+      dispatch(failure(""));
+      dispatch(alertActions.error(messages));
+    }
+  };
+}
 
+function getNOK(apiUrl) {
+  return async (dispatch) => {
+    dispatch(alertActions.request());
+    const getAll = await userService.getData(apiUrl);
+    const { data, success, messages } = getAll;
+
+    if (apiUrl && success === true) {
+      dispatch(alertActions.success(messages));
       return data;
     } else {
       dispatch(failure(""));

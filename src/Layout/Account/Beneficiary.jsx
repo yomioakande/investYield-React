@@ -4,9 +4,9 @@ import search from "../../assets/images/search-icon.svg";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import ModalB from "./ModalBeneficiary";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Swal from "sweetalert2";
 const Beneficiary = ({ getData, deleteData }) => {
   const [beneficiary, setBeneficiary] = useState([]);
   // const [loading, setloading] = useState(false);
@@ -14,18 +14,42 @@ const Beneficiary = ({ getData, deleteData }) => {
   //DELETE BENEFICIARY DATA
 
   const success = () => {
-    toast.success("Beneficiary successfully deleted!", {
-      position: toast.POSITION.TOP_CENTER,
+    // toast.success("Beneficiary successfully deleted!", {
+    //   position: toast.POSITION.TOP_CENTER,
+    // });
+
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Beneficiary successfully deleted!",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 1500,
     });
-    close();
+    dataInfo().then();
   };
   const deleteBenef = (id) => {
     const obj = {
       id,
     };
-   
-    deleteData("/api/v1/user/beneficiary", obj, success);
-    dataInfo();
+
+    Swal.fire({
+      title: "Click OK to delete this beneficiary",
+      showDenyButton: true,
+      // showCancelButton: true,
+      confirmButtonText: "OK",
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteData("/api/v1/user/beneficiary", obj, success);
+      } else if (result.isDenied) {
+        return;
+      }
+    });
   };
 
   const modalToggle = () => {
@@ -43,7 +67,7 @@ const Beneficiary = ({ getData, deleteData }) => {
 
   useEffect(() => {
     dataInfo();
-   // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -105,47 +129,49 @@ const Beneficiary = ({ getData, deleteData }) => {
                   </div>
                   <div className="mt-4 table-responsive">
                     <table className="table table-borderless font-rem1 weight-500">
-                      {beneficiary && beneficiary.length > 0 ? (
-                        beneficiary.map((person, index) => {
-                          return (
-                            <>
-                              <thead>
-                                <tr>
-                                  <th>S/N</th>
-                                  <th>Name</th>
-                                  <th>Email Address</th>
-                                  <th className="text-right">
-                                    Action (Delete)
-                                  </th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr key={person}>
-                                  <td>{++index}</td>
-                                  <td>{person.name}</td>
-                                  <td>{person.email}</td>
+                      <>
+                        {beneficiary.length > 0 && (
+                          <thead>
+                            <tr>
+                              <th>S/N</th>
+                              <th>Name</th>
+                              <th>Email Address</th>
+                              <th className="text-right">Action (Delete)</th>
+                            </tr>
+                          </thead>
+                        )}
+                        {beneficiary && beneficiary.length > 0 ? (
+                          beneficiary.map((person, index) => {
+                            return (
+                              <>
+                                <tbody>
+                                  <tr key={person}>
+                                    <td>{++index}</td>
+                                    <td>{person.name}</td>
+                                    <td>{person.email}</td>
 
-                                  <td className="text-right">
-                                    <button
-                                      onClick={() => deleteBenef(person.id)}
-                                    >
-                                      <img
-                                        src={deletes}
-                                        className="img-fluid"
-                                        alt="delete"
-                                      />
-                                    </button>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </>
-                          );
-                        })
-                      ) : (
-                        <p className="text-danger ">
-                          No Beneficiary has been saved!
-                        </p>
-                      )}
+                                    <td className="text-right">
+                                      <button
+                                        onClick={() => deleteBenef(person.id)}
+                                      >
+                                        <img
+                                          src={deletes}
+                                          className="img-fluid"
+                                          alt="delete"
+                                        />
+                                      </button>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </>
+                            );
+                          })
+                        ) : (
+                          <p className="text-danger ">
+                            No Beneficiary has been saved!
+                          </p>
+                        )}
+                      </>
                     </table>
                   </div>
                 </div>
