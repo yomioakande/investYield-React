@@ -116,7 +116,7 @@ const Index = (props) => {
                               Select Beneficiary
                             </button>
                           </div>
-                          {props.alertType && (
+                          {props.message && (
                             <div className={`font-sm ${props.alertType}`}>
                               {props.message}
                             </div>
@@ -142,12 +142,6 @@ const Index = (props) => {
                         >
                           How much would you like to send?
                         </label>
-                        {/* <input
-                          type="number"
-                          className="text-field mt-2"
-                          placeholder="Amount (N)"
-                          {...formik.getFieldProps("amount")}
-                        /> */}
 
                         <NumberFormat
                           isNumericString={true}
@@ -221,9 +215,7 @@ const Index = (props) => {
         <Congrats
           headline1={"Fantastic!"}
           headline2={"Successful fund transfer"}
-          content={
-            ""
-          }
+          content={""}
         />
       )}
     </>
@@ -239,7 +231,6 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   getData: usersActions.getInfo,
   transfer: usersActions.payPurse,
-  // deleteData: usersActions.deleteData,
 };
 
 export default connect(mapStateToProps, actionCreators)(Index);

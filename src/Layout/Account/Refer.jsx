@@ -96,7 +96,7 @@ const Refer = (props) => {
                     <div className="col-lg-6">
                       <div>
                         <p>
-                          Use the referral code and link to invite your friends.
+                          Use the referral code or link to invite your friends.
                           For every referral, points are awarded which can be
                           used to get awesome rewards.
                         </p>

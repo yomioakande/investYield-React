@@ -34,12 +34,19 @@ const Index = (props) => {
                   type="text"
                   className="search-field"
                   placeholder="Search..."
+                  style={{
+                    border: "1px solid #DDDDDD",
+                    borderRadius: "5px",
+                    padding: ".5rem",
+                    width: "100%",
+                    paddingLeft: "2rem",
+                  }}
                 />
                 <img
                   src={search}
                   className="img-fluid position-absolute"
                   alt="Search"
-                  style={{ left: "5%", top: "33" }}
+                  style={{ left: "4%", top: "30%" }}
                 />
               </div>
             </div>

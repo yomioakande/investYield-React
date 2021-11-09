@@ -56,7 +56,6 @@ const ModalBeneficiary = ({
     }, 3000);
   };
 
- 
   //true
   return ReactDom.createPortal(
     <>
@@ -93,15 +92,11 @@ const ModalBeneficiary = ({
                           <div className="small-red-line"></div>
                           <form onSubmit={formik.handleSubmit} className="mt-5">
                             {showError
-                              ? message !== null
-                                ? alertType && (
-                                    <div
-                                      className={`font-sm alert ${alertType}`}
-                                    >
-                                      {message}
-                                    </div>
-                                  )
-                                : null
+                              ? message && (
+                                  <div className={`font-sm ${alertType}`}>
+                                    {message}
+                                  </div>
+                                )
                               : null}
                             {active === "0" ? (
                               <>
@@ -135,7 +130,7 @@ const ModalBeneficiary = ({
                                     autoComplete="off"
                                     name="identifier"
                                     {...formik.getFieldProps("identifier")}
-                                    placeholder="Enter beneficiary phone number"
+                                    placeholder="Enter beneficiary phone number starting with +234"
                                   />
                                 </div>
 
@@ -159,7 +154,7 @@ const ModalBeneficiary = ({
                                   <div className="col-lg-6">
                                     <button
                                       onClick={() => close()}
-                                      sclassName="btn btn-cancel text-danger"
+                                      className="btn btn-cancel text-danger"
                                     >
                                       Cancel
                                     </button>

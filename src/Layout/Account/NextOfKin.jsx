@@ -11,9 +11,10 @@ const NextofKin = (props) => {
   // eslint-disable-next-line
   const [showError, setShowError] = useState(true);
   const [nokDetails, setNokDetails] = useState(true);
+  const [showPassword1, setShowPassword1] = useState(false);
+
   async function dataInfo() {
     const data = await props.getNok("/api/v1/user/nextofkin").then();
-
     setNokDetails(data);
   }
   useEffect(() => {
@@ -74,9 +75,6 @@ const NextofKin = (props) => {
   };
   // eslint-disable-next-line
   const success = () => {
-    // toast.success("Next of Kin Updated!", {
-    //   position: toast.POSITION.TOP_CENTER,
-    // });
     Swal.fire({
       customClass: {
         title: "swal2-title",
@@ -87,31 +85,24 @@ const NextofKin = (props) => {
       title: "Next of Kin Updated!",
       titleColor: "#fff",
       showConfirmButton: false,
-      timer: 1500,
+      timer: 3000,
     });
     dataInfo();
   };
 
   return (
     <>
-      {props.loading && <Loader />}
-
-      {/* <ToastContainer autoClose={1000} hideProgressBar /> */}
-      {props.message
-        ? props.alertType && (
-            <div className={`font-sm alert ${props.alertType}`}>
-              {props.message}
-            </div>
-          )
-        : null}
-
-      {props.alert.message !== null
-        ? props.alert.type && (
-            <div className={`font-sm alert mt-3 ${props.alert.type}`}>
-              {props.alert.message}
-            </div>
-          )
-        : null}
+      {/* {props.alert.loading && <Loader />} */}
+      {props.alert.loading && <Loader />}
+      {/* {props.message ? (
+        <div className={`font-sm ${props.alertType}`}>{props.message}</div>
+      ) : null} */}
+      
+      {props.alert.message ? (
+        <div className={`font-sm mt-3 ${props.alert.type}`}>
+          {props.alert.message}
+        </div>
+      ) : null}
 
       <form onSubmit={formik.handleSubmit}>
         <div className="row mt-5">
@@ -233,11 +224,23 @@ const NextofKin = (props) => {
 
             <div className="form-group position-relative">
               <input
-                type="password"
+                type={`${showPassword1 ? "type" : "password"}`}
                 className="text-field-profile"
                 name="password"
                 {...formik.getFieldProps("password")}
               />
+              <i
+                style={{
+                  position: "absolute",
+                  top: "1.1rem",
+                  right: "2rem",
+                  color: "#000",
+                }}
+                onClick={() => {
+                  setShowPassword1(!showPassword1);
+                }}
+                className={`fas ${showPassword1 ? "fa-eye" : "fa-eye-slash"} `}
+              ></i>
               <label
                 for="password"
                 className="font-sm position-absolute"
@@ -271,12 +274,12 @@ const NextofKin = (props) => {
 
 const mapStateToProps = (state) => {
   const { loading, alertType, message } = state.registration;
-  const { alert } = state;
-  return { alert, loading, alertType, message };
+  const alert = state.alert;
+  return { alert, alertType, message, loading };
 };
 
 const actionCreators = {
-  getNok: usersActions.getInfo,
+  getNok: usersActions.getNOK,
   postNok: usersActions.postFeedBack,
 };
 

@@ -39,6 +39,7 @@ const Savings = ({ getData, getAccounts }) => {
         "/api/v1/user/accountbyproduct",
         "0106"
       ).then();
+      console.log(myPurseAccounts)
       setSummaryInfo(data);
       setStashAccounts(stashAccounts);
       setPurseAccounts(myPurseAccounts);
@@ -147,7 +148,7 @@ const Savings = ({ getData, getAccounts }) => {
                             key={index}
                             index={index}
                             namePurse={single.name}
-                            purseAmount={single.purseAmount}
+                            purseAmount={single.availableBalance}
                             nameClass={single.nameClass}
                             toggleHide={toggleHide}
                             hidden={hidden}

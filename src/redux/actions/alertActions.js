@@ -1,13 +1,15 @@
 import { alertConstants } from "../constants";
 
 export const alertActions = {
+  request,
   success,
   error,
   clear,
-  successLogIn,
-  errorLogIn,
-
 };
+
+function request() {
+  return { type: alertConstants.REQUEST };
+}
 
 function success(message) {
   return { type: alertConstants.SUCCESS, message };
@@ -20,13 +22,3 @@ function error(message) {
 function clear() {
   return { type: alertConstants.CLEAR, message: "" };
 }
-function successLogIn(message) {
-  return { type: alertConstants.LOGIN_SUCCESS, message };
-}
-
-
-function errorLogIn(message) {
-  return { type: alertConstants.LOGIN_ERROR, message };
-}
-
-
