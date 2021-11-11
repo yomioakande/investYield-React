@@ -31,13 +31,6 @@ const WithdrawalAccount = (props) => {
     //eslint-disable-next-line
   }, []);
 
-  // const delete1 = () => {
-  //   toast.success("Account successfully deleted", {
-  //     position: toast.POSITION.TOP_CENTER,
-  //   });
-  //   dataInfo();
-  // };
-
   const success2 = () => {
     Swal.fire({
       customClass: {
@@ -46,10 +39,10 @@ const WithdrawalAccount = (props) => {
       position: "center",
       icon: "success",
       iconColor: "#003079",
-      title: "Debit Card deleted!",
+      title: "Account successfully deleted!",
       titleColor: "#fff",
       showConfirmButton: false,
-      timer: 1500,
+      timer: 2000,
     });
     dataInfo().then();
   };
@@ -137,10 +130,11 @@ const WithdrawalAccount = (props) => {
       title: "Account successfully added",
       titleColor: "#fff",
       showConfirmButton: false,
-      timer: 1500,
+      timer: 2000,
     });
 
     dataInfo().then();
+    location.reload();
   };
 
   const onSubmit = (values, onSubmitProps) => {
