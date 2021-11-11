@@ -134,7 +134,7 @@ const WithdrawalAccount = (props) => {
     });
 
     dataInfo().then();
-    location.reload();
+    window.location.reload(false);
   };
 
   const onSubmit = (values, onSubmitProps) => {
