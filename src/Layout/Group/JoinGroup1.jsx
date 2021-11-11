@@ -86,10 +86,10 @@ const JoinGroup1 = (props) => {
     setTargetNum(datas?.data?.estimate);
   };
 
-  const onChangers = (e) => {
-    const { value } = e.target;
-    dataInfo(value);
-  };
+  // const onChangers = (e) => {
+  //   const { value } = e.target;
+  //   dataInfo(value);
+  // };
 
   const currencyVal = (number) =>
     new Intl.NumberFormat(data?.currency?.code === 1 ? "en-NG" : "en-US", {

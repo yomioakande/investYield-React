@@ -67,7 +67,7 @@ const JoinSavings = ({ getData }) => {
                     >
                       <div className="saving-challenge-div">
                         <div className="row justify-content-between align-items-center">
-                          <a href="#" className="col-md-6">
+                          <a href="/" className="col-md-6">
                             <div className="mb-3">
                               <h6 className="text-light font-14px">
                                 {single?.name}
