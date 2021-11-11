@@ -110,3 +110,6 @@ export const dollarCurrencyVal = (number = 0) =>
     style: "currency",
     currency: "USD",
   }).format(number);
+
+// DATETIME FORMATTER
+export const dateConverter = (date = 0) => new Date(date).toDateString();

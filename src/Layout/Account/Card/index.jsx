@@ -40,7 +40,7 @@ const Index = (props) => {
     const obj = {
       id,
     };
-    props.deleteCards("/api/v1/user/card", obj, success);
+    props.deleteCards("/api/v1/user/card?id=" + id, obj, success);
   };
 
   return (

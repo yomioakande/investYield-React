@@ -1014,3 +1014,64 @@ input[type="radio"] {
   margin: 80px 0 30px;
   text-align: center;
 }
+
+.font-6px {
+  font-size: 0.4rem;
+}
+.font-8px {
+  font-size: 0.5rem;
+}
+.font-10px {
+  font-size: 0.625rem;
+}
+.font-12px {
+  font-size: 0.75rem;
+}
+.font-14px {
+  font-size: 0.875rem;
+}
+.f-weight-500 {
+  font-weight: 500;
+}
+.f-weight-600 {
+  font-weight: 600;
+}
+
+.saving-challenge-div {
+  border-radius: 5px;
+  background: #0553c8;
+  width: 100%;
+  padding: 15px;
+}
+.target-div-white {
+  border-radius: 5px;
+  background: #fff;
+  padding: 8px;
+  width: 100%;
+}
+.progress,
+.progress-bar {
+  height: 4px;
+}
+.progress {
+  background: #dddddd;
+}
+.progress-bar {
+  background: #08b29b;
+}
+.target-saving-btn {
+  height: 15px !important;
+  color: #fff !important;
+  font-size: 8px;
+  width: 100%;
+  font-weight: 500;
+}
+.btn-view-more {
+  background: #edfffd;
+  color: #08b29b;
+  font-size: 12px;
+  height: 35px;
+}
+.swal2-styled.swal2-confirm {
+  background-color: #08b29b !important;
+}

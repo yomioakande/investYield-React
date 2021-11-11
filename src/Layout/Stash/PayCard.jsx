@@ -79,7 +79,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
                 <div className="row mt-50 align-items-center justify-content-end">
                   <div
                     className="col-lg-8"
-                    style={{ position: "absolute", bottom: "0rem" }}
+                    style={{ position: "absolute", bottom: "2rem" }}
                   >
                     <div className="row">
                       <div className="col-lg-6">

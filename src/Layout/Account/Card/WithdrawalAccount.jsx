@@ -31,19 +31,34 @@ const WithdrawalAccount = (props) => {
     //eslint-disable-next-line
   }, []);
 
-  const delete1 = () => {
-    toast.success("Account successfully deleted", {
-      position: toast.POSITION.TOP_CENTER,
+  // const delete1 = () => {
+  //   toast.success("Account successfully deleted", {
+  //     position: toast.POSITION.TOP_CENTER,
+  //   });
+  //   dataInfo();
+  // };
+
+  const success2 = () => {
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Debit Card deleted!",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 1500,
     });
-    dataInfo();
+    dataInfo().then();
   };
 
   const deleteId = (id) => {
     const obj = {
       id,
     };
-
-    props.deleteId("/api/v1/user/bankaccount", obj, delete1);
+    props.deleteId("/api/v1/user/bankaccount?id=" + id, obj, success2);
   };
 
   const options = bankOptions.map((single, index) => {
@@ -66,7 +81,6 @@ const WithdrawalAccount = (props) => {
     placeholder: (provided, state) => ({
       color: state.selectProps.menuColor,
       paddingTop: 14,
-     
     }),
 
     menuList: (provided, state) => ({

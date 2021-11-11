@@ -30,7 +30,6 @@ const MyPurse4 = (props) => {
       currency: purse.ccyCode === "1" ? "NGN" : "USD",
     }).format(number);
 
-
   const convertDebitFreq = (freq) => {
     if (freq === "7") {
       return "Every Week";
@@ -60,7 +59,7 @@ const MyPurse4 = (props) => {
       return `${percent}% ${convertDebitFreq(dateConv(freq2))}`;
     }
   }
-  
+
   return (
     <>
       {loading && <Loader />}
@@ -99,7 +98,7 @@ const MyPurse4 = (props) => {
               <div className="au-card px-0 mt-4 flex-grow-1">
                 <div className="au-card-inner">
                   <div className="px-4 px-lg-5">
-                    <h3 className="title-2 tm-b-5">Stash Breakdown</h3>
+                    <h3 className="title-2 tm-b-5">Purse Breakdown</h3>
                   </div>
 
                   <div className="savings-breakdown p-4 px-lg-5">

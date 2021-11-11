@@ -39,17 +39,16 @@ const Savings = ({ getData, getAccounts }) => {
         "/api/v1/user/accountbyproduct",
         "0106"
       ).then();
-      console.log(myPurseAccounts)
+      console.log(myPurseAccounts);
       setSummaryInfo(data);
       setStashAccounts(stashAccounts);
       setPurseAccounts(myPurseAccounts);
       setCoreAccounts(coreAccounts);
-      
+
       setloading(false);
     })();
     // eslint-disable-next-line
   }, []);
-
 
   return (
     <>
@@ -142,7 +141,7 @@ const Savings = ({ getData, getAccounts }) => {
                         </div>
                       </Link>
 
-                     {purseAccounts.map((single, index) => {
+                      {purseAccounts.map((single, index) => {
                         return (
                           <Purse
                             key={index}
@@ -291,8 +290,17 @@ const Savings = ({ getData, getAccounts }) => {
                                   <h5 className="text-blue weight-600">
                                     {single?.name}
                                   </h5>
-                                  <div className="saving-progress mt-3">
-                                    <div className="saving-progress-actual"></div>
+                                  <div className="progress mt-2">
+                                    <div
+                                      className="progress-bar"
+                                      role="progressbar"
+                                      style={{
+                                        width: `${single?.tenureElapsed}%`,
+                                      }}
+                                      aria-valuenow={single?.tenureElapsed}
+                                      aria-valuemin="0"
+                                      aria-valuemax="100"
+                                    ></div>
                                   </div>
                                   <div className="mt-3">
                                     <h5 className="text-green">
