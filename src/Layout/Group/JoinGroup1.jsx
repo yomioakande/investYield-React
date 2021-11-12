@@ -5,13 +5,13 @@ import { usersActions } from "../../redux/actions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
-import { userService } from "../../services/usersService";
+// import { userService } from "../../services/usersService";
 const JoinGroup1 = (props) => {
   let data = props.location.state.data;
   data = data.startDate.toString();
   // eslint-disable-next-line
-  const [num, setNum] = useState("");
-  const [targetNum, setTargetNum] = useState("");
+  // const [num, setNum] = useState("");
+  // const [targetNum, setTargetNum] = useState("");
   const [loading, setloading] = useState(false);
 
   const initialValues = {
@@ -39,7 +39,7 @@ const JoinGroup1 = (props) => {
       freq: values.freq,
       earn: values?.earn,
       start: values.start,
-      cntr_amt: targetNum,
+      // cntr_amt: targetNum,
       id: data?.id,
       name: data?.name,
       ccy: data?.currency?.code,
@@ -67,10 +67,10 @@ const JoinGroup1 = (props) => {
     validateOnMount: true,
   });
 
-  useEffect(() => {
-    formik.setFieldValue("cntr_amt", num?.value);
-    // eslint-disable-next-line
-  }, [num?.value]);
+  // useEffect(() => {
+  //   formik.setFieldValue("cntr_amt", num?.value);
+  //   // eslint-disable-next-line
+  // }, [num?.value]);
 
   // const dataInfo = async (freq) => {
   //   const datas = await userService.getEstimate(

@@ -297,7 +297,9 @@ const Savings = ({ getData, getAccounts }) => {
                                       style={{
                                         width: `${single?.tenureElapsed}%`,
                                       }}
-                                      aria-valuenow={single?.tenureElapsed}
+                                      aria-valuenow={parseInt(
+                                        single?.tenureElapsed
+                                      )}
                                       aria-valuemin="0"
                                       aria-valuemax="100"
                                     ></div>
