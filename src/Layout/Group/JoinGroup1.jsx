@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
