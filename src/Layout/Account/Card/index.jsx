@@ -31,9 +31,10 @@ const Index = (props) => {
       title: "Debit Card deleted!",
       titleColor: "#fff",
       showConfirmButton: false,
-      timer: 1500,
+      timer: 2000,
     });
     dataInfo().then();
+    window.location.reload(false);
   };
 
   const deleteCard = (id) => {

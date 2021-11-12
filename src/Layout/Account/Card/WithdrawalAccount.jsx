@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
 import Loader from "../../../common/Loader";
-// import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 const WithdrawalAccount = (props) => {
@@ -31,27 +31,19 @@ const WithdrawalAccount = (props) => {
     //eslint-disable-next-line
   }, []);
 
-  const success2 = () => {
-    Swal.fire({
-      customClass: {
-        title: "swal2-title",
-      },
-      position: "center",
-      icon: "success",
-      iconColor: "#003079",
-      title: "Account successfully deleted!",
-      titleColor: "#fff",
-      showConfirmButton: false,
-      timer: 2000,
+  const delete1 = () => {
+    toast.success("Account successfully deleted", {
+      position: toast.POSITION.TOP_CENTER,
     });
-    dataInfo().then();
+    dataInfo();
   };
 
   const deleteId = (id) => {
     const obj = {
       id,
     };
-    props.deleteId("/api/v1/user/bankaccount?id=" + id, obj, success2);
+
+    props.deleteId("/api/v1/user/bankaccount?id=" + id, obj, delete1);
   };
 
   const options = bankOptions.map((single, index) => {
@@ -286,7 +278,7 @@ const WithdrawalAccount = (props) => {
                           value="ADD ACCOUNT"
                         />
                       </div>
-                      {/* <ToastContainer autoClose={1000} hideProgressBar /> */}
+                      <ToastContainer autoClose={2000} hideProgressBar />
                     </div>
                   </div>
                 </div>

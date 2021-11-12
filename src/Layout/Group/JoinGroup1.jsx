@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
@@ -73,29 +72,24 @@ const JoinGroup1 = (props) => {
     // eslint-disable-next-line
   }, [num?.value]);
 
-  const dataInfo = async (freq) => {
-    const datas = await userService.getEstimate(
-      "/api/v1/util/estimate",
-      data?.target,
-      freq,
-      data?.endDate,
-      formik.values.start,
-      "0201"
-    );
+  // const dataInfo = async (freq) => {
+  //   const datas = await userService.getEstimate(
+  //     "/api/v1/util/estimate",
+  //     data?.target,
+  //     freq,
+  //     data?.endDate,
+  //     formik.values.start,
+  //     "0201"
+  //   );
 
-    setTargetNum(datas?.data?.estimate);
-  };
-
-  // const onChangers = (e) => {
-  //   const { value } = e.target;
-  //   dataInfo(value);
+  //   setTargetNum(datas?.data?.estimate);
   // };
 
-  const currencyVal = (number) =>
-    new Intl.NumberFormat(data?.currency?.code === 1 ? "en-NG" : "en-US", {
-      style: "currency",
-      currency: data?.currency?.code === 1 ? "NGN" : "USD",
-    }).format(number);
+  // const currencyVal = (number) =>
+  //   new Intl.NumberFormat(data?.currency?.code === 1 ? "en-NG" : "en-US", {
+  //     style: "currency",
+  //     currency: data?.currency?.code === 1 ? "NGN" : "USD",
+  //   }).format(number);
 
   return (
     <>
@@ -164,22 +158,16 @@ const JoinGroup1 = (props) => {
                       </div>
                       <div className="form-group mt-4">
                         <label className="text-blue">
-                          The amount for members to save daily to meet the
-                          target amount at the target date is:
+                          The amount to save daily to meet the target amount at
+                          the target date is:
                         </label>
                         <div className="form-group position-relative">
-                          {/* <input
-                            type="text"
-                            className="text-field-profile"
-                            value="₦ 5,000.00"
-                            readonly
-                          /> */}
                           <NumberFormat
                             isNumericString={true}
                             thousandSeparator={true}
                             className="text-field-profile"
                             name="cntr_amt"
-                            value={currencyVal(targetNum)}
+                            // value={currencyVal(targetNum)}
                             readonly
                             disabled
                           />
@@ -241,5 +229,3 @@ const actionCreators = {
 };
 
 export default connect(mapStateToProps, actionCreators)(JoinGroup1);
-
-// export default JoinGroup1;
