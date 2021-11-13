@@ -13,22 +13,20 @@ const CreateSavings4 = (props) => {
 
   useEffect(() => {
     const get = async () => {
-      const getFinalValue = await props.getTargetValue(
+      const getFinalValue = await props.getTargetValue2(
         "/api/v1/util/future_value",
         core.target,
         core.frequency,
         "0201",
-        core.ccyCode
+        core.ccyCode,
+        core.endDate,
+        core.startDate
       );
-
       setFinalVal(getFinalValue?.value || null);
     };
-
     get();
-
     // eslint-disable-next-line
   }, []);
-
   useEffect(() => {
     (async function dataInfo() {
       setloading(true);
@@ -48,8 +46,9 @@ const CreateSavings4 = (props) => {
   const numOfDays = main1 / (1000 * 3600 * 24);
 
   const filterInterest = freqOptions.filter((value, _index) => {
-    return numOfDays >= value.tenor.minDays && numOfDays <= value.tenor.maxDays? value.rate:null
-    
+    return numOfDays >= value.tenor.minDays && numOfDays <= value.tenor.maxDays
+      ? value.rate
+      : null;
   });
 
   const currencyVal = (number) =>
@@ -96,7 +95,9 @@ const CreateSavings4 = (props) => {
                         </tr>
                         <tr>
                           <td>Interest rate:</td>
-                          <td className="text-right">{filterInterest[0]?.rate}% per annum</td>
+                          <td className="text-right">
+                            {filterInterest[0]?.rate}% per annum
+                          </td>
                         </tr>
                         <tr>
                           <td>Start Date:</td>
@@ -154,7 +155,7 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
-  getTargetValue: usersActions.getTargetValue,
+  getTargetValue2: usersActions.getTargetValue2,
   getFrequency: usersActions.getFrequency,
 };
 

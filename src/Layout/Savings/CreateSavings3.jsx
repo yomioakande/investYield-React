@@ -121,6 +121,7 @@ const CreateSavings3 = (props) => {
       startDate,
       "0201"
     );
+  
     setTargetNum(data?.data?.estimate);
   };
 

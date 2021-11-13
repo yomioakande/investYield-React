@@ -11,6 +11,7 @@ export const userService = {
   getFreq,
   getEstimate,
   getTargetValue,
+  getTargetValue2,
   getAccounts,
   getPaginateTransact,
   getPortfolio,
@@ -153,7 +154,40 @@ async function getEstimate(apiUrl, firstQ, secondQ, thirdQ, fourthQ, fifthQ) {
   }
 }
 
-async function getTargetValue(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
+async function getTargetValue2(
+  apiUrl,
+  firstQ,
+  secondQ,
+  thirdQ,
+  fourthQ,
+  fifthQ,
+  sixthQ
+) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
+  try {
+    const datas = await fetch(
+      `${baseUrl}${apiUrl}?Principal=${firstQ}&Tenor=${secondQ}&Product=${thirdQ}&Currency=${fourthQ}&TargetDate=${fifthQ}&StartDate=${sixthQ}`,
+      requestOptions
+    );
+    const getData = await datas.json();
+    return getData;
+  } catch (error) {
+    return error;
+  }
+}
+
+
+
+async function getTargetValue(
+  apiUrl,
+  firstQ,
+  secondQ,
+  thirdQ,
+  fourthQ,
+) {
   const requestOptions = {
     method: "GET",
     headers: authHeader(),
@@ -169,6 +203,11 @@ async function getTargetValue(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
     return error;
   }
 }
+
+
+
+
+
 
 async function postData(user, apiUrl) {
   const requestOptions = {
@@ -213,7 +252,6 @@ async function getPortfolio(apiUrl) {
       Authorization: authHeader()?.Authorization,
       "Content-Type": "application/json",
     },
-  
   };
   try {
     const datas = await fetch(`${baseUrl}${apiUrl}`, requestOptions);

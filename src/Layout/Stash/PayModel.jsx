@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import PayBank from "./PayBank";
@@ -18,11 +17,9 @@ const PayModel = ({
   const [active, setActive] = useState(1);
   const [details, setDetails] = useState({});
   const [congratsModal, setCongratsModal] = useState(false);
-
   const modalToggle1 = () => {
     setCongratsModal(true);
   };
-
   const fail = (message) => {
     Swal.fire(`${message}`, "", "error");
   };
@@ -30,7 +27,6 @@ const PayModel = ({
     (async function () {
       const data = await getDetails("/api/v1/user/virtual_acct");
       setDetails({ ...data });
-      console.log(data);
     })();
     // eslint-disable-next-line
   }, []);
@@ -50,9 +46,7 @@ const PayModel = ({
       if (result.isConfirmed) {
         payPurse(obj, "/api/v1/transfer/fundbypurse", modalToggle1, fail);
       } else if (result.isDenied) {
-        // setShowInput(false);
-        // Swal.fire('Changes are not saved', '', 'info')
-      }
+      return; }
     });
   };
 

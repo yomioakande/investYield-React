@@ -26,6 +26,7 @@ export const usersActions = {
   createCore,
   createStash,
   getTargetValue,
+  getTargetValue2,
   getAccounts,
   postImageBase64,
   getPortfolio,
@@ -224,19 +225,10 @@ function confirmBvnReg(obj, apiUrl, func) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.putData(obj, apiUrl);
-
     const { success, messages } = register;
-    if (apiUrl === "/api/v1/user/bvn" && success === true) {
+    if (apiUrl && success === true) {
       dispatch(successReg(messages));
       func();
-    }
-
-    if (apiUrl === "/api/v1/user/profile" && success === true) {
-      dispatch(successReg());
-      func();
-    } else if (success === true) {
-      func();
-      dispatch(successReg(messages));
     } else {
       dispatch(failure(messages));
       return;
@@ -317,7 +309,6 @@ function createCore(obj, apiUrl, nextRoute) {
       );
       window.location.href = nextRoute;
     } else if (success === true) {
-      console.log(data);
       dispatch(successReg(data?.reference));
 
       sessionStorage.setItem(
@@ -531,6 +522,42 @@ function getTargetValue(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
     } else {
       dispatch(alertActions.error(messages));
     }
+
+    if (apiUrl && success === true) {
+      return data;
+    } else {
+      dispatch(alertActions.error(messages));
+    }
+  };
+}
+
+function getTargetValue2(
+  apiUrl,
+  firstQ,
+  secondQ,
+  thirdQ,
+  fourthQ,
+  fifthQ,
+  sixthQ
+) {
+  return async (dispatch) => {
+    const getAll = await userService.getTargetValue2(
+      apiUrl,
+      firstQ,
+      secondQ,
+      thirdQ,
+      fourthQ,
+      fifthQ,
+      sixthQ
+    );
+
+    const { data, success, messages } = getAll;
+
+    // if (apiUrl === "/api/v1/util/future_value" && success === true) {
+    //   return data;
+    // } else {
+    //   dispatch(alertActions.error(messages));
+    // }
 
     if (apiUrl && success === true) {
       return data;

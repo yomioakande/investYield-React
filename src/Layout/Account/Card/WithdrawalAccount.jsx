@@ -6,11 +6,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
 import Loader from "../../../common/Loader";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 const WithdrawalAccount = (props) => {
-  // props.resetAlerts()
   const [bankOptions, setBankOptions] = useState([]);
   const [bankDetails, setBankDetails] = useState([]);
   const [update, setUpdate] = useState(false);
@@ -22,8 +19,6 @@ const WithdrawalAccount = (props) => {
     const datas = await props.getBanks("/api/v1/util/bank").then();
     const account = await props.getAccount("/api/v1/user/bankaccount").then();
     setBankDetails(account);
-    console.log(account, "asdf");
-
     setBankOptions(datas);
   };
   useEffect(() => {
@@ -32,8 +27,17 @@ const WithdrawalAccount = (props) => {
   }, []);
 
   const delete1 = () => {
-    toast.success("Account successfully deleted", {
-      position: toast.POSITION.TOP_CENTER,
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Account successfully deleted",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 2000,
     });
     dataInfo();
   };
@@ -43,16 +47,25 @@ const WithdrawalAccount = (props) => {
       id,
     };
 
-    props.deleteId("/api/v1/user/bankaccount?id=" + id, obj, delete1);
+    Swal.fire({
+      title: "Are you sure you want to delete this Account",
+      showDenyButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        props.deleteId("/api/v1/user/bankaccount?id=" + id, obj, delete1);
+      } else if (result.isDenied) {
+        return;
+      }
+    });
   };
-
   const options = bankOptions.map((single, index) => {
     return {
       value: single.code,
       label: single.name,
     };
   });
-
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
@@ -160,19 +173,15 @@ const WithdrawalAccount = (props) => {
       {props.loading && <Loader />}
       <div className="row justify-content-center">
         <div className="col-xl-6 col-lg-8 mt-4">
-          {
-            bankDetails ? (
-              <WithdrawalCard bankDetails={bankDetails} />
-            ) : (
-              // showError ? (
-              props.alert.type && (
-                <div className={`font-sm alert mt-3 ${props.alert.type}`}>
-                  {props.alert.message}
-                </div>
-              )
+          {bankDetails ? (
+            <WithdrawalCard bankDetails={bankDetails} />
+          ) : (
+            props.alert.message && (
+              <div className={`font-sm alert mt-3 ${props.alert.type}`}>
+                {props.alert.message}
+              </div>
             )
-            // ) : null
-          }
+          )}
 
           <div className="row">
             <div className="col-lg-6">
@@ -183,7 +192,7 @@ const WithdrawalAccount = (props) => {
                     onClick={updateToggle}
                     className="btn login-submit"
                   >
-                    "Add Account"
+                    Add Account
                   </button>
                 )}
               </div>
@@ -215,7 +224,7 @@ const WithdrawalAccount = (props) => {
               </h6>
               {showError && props.message
                 ? props.alertType && (
-                    <div className={`font-sm alert ${props.alertType}`}>
+                    <div className={`font-sm ${props.alertType}`}>
                       {props.message}
                     </div>
                   )
@@ -277,11 +286,11 @@ const WithdrawalAccount = (props) => {
                         <input
                           type="submit"
                           className="btn login-submit"
-                          disabled={!formik.isValid || formik.isSubmitting}
+                          // disabled={!formik.isValid || formik.isSubmitting}
                           value="ADD ACCOUNT"
                         />
                       </div>
-                      <ToastContainer autoClose={2000} hideProgressBar />
+                      {/* <ToastContainer autoClose={2000} hideProgressBar /> */}
                     </div>
                   </div>
                 </div>
