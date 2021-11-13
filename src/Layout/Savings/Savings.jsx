@@ -12,7 +12,8 @@ import Charts from "../Charts";
 import { nairaCurrencyVal, dollarCurrencyVal } from "../../helpers/helper";
 import Purse from "../common/myPurse";
 import JoinSavings from "../JoinSavings";
-const Savings = ({ getData, getAccounts }) => {
+import Swal from "sweetalert2";
+const Savings = ({ getData, getAccounts, deleteAccount }) => {
   const [summaryInfo, setSummaryInfo] = useState({});
   const [loading, setloading] = useState(false);
   const [coreAccounts, setCoreAccounts] = useState([]);
@@ -23,36 +24,76 @@ const Savings = ({ getData, getAccounts }) => {
     setHidden({ ...hidden, [index]: !hidden[index] });
   };
 
+  async function dataInfo() {
+    setloading(true);
+    const data = await getData("/api/v1/user/summary").then();
+    const stashAccounts = await getData(
+      "/api/v1/user/stash"
+      // "0103"
+    ).then();
+    const coreAccounts = await getAccounts(
+      "/api/v1/user/accountbyproduct",
+      "0201"
+    ).then();
+    const myPurseAccounts = await getAccounts(
+      "/api/v1/user/accountbyproduct",
+      "0106"
+    ).then();
+    setSummaryInfo(data);
+    setStashAccounts(stashAccounts);
+    setPurseAccounts(myPurseAccounts);
+    setCoreAccounts(coreAccounts);
+
+    sessionStorage.removeItem("stash");
+    sessionStorage.removeItem("stashfreq");
+    sessionStorage.removeItem("interestList");
+
+    setloading(false);
+  }
   useEffect(() => {
-    (async function dataInfo() {
-      setloading(true);
-      const data = await getData("/api/v1/user/summary").then();
-      const stashAccounts = await getData(
-        "/api/v1/user/stash"
-        // "0103"
-      ).then();
-      const coreAccounts = await getAccounts(
-        "/api/v1/user/accountbyproduct",
-        "0201"
-      ).then();
-      const myPurseAccounts = await getAccounts(
-        "/api/v1/user/accountbyproduct",
-        "0106"
-      ).then();
-      console.log(myPurseAccounts);
-      setSummaryInfo(data);
-      setStashAccounts(stashAccounts);
-      setPurseAccounts(myPurseAccounts);
-      setCoreAccounts(coreAccounts);
-
-      sessionStorage.removeItem("stash");
-      sessionStorage.removeItem("stashfreq");
-      sessionStorage.removeItem("interestList");
-
-      setloading(false);
-    })();
+    dataInfo();
     // eslint-disable-next-line
   }, []);
+
+  const terminateStash = (productCode, accountNo, currency) => {
+    const obj = {
+      productCode,
+      accountNo,
+      currency,
+    };
+
+    const delete1 = () => {
+      Swal.fire({
+        customClass: {
+          title: "swal2-title",
+        },
+        position: "center",
+        icon: "success",
+        iconColor: "#003079",
+        title: "Account successfully deleted",
+        titleColor: "#fff",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    };
+    Swal.fire({
+      title:
+        "A 50% penal charge will be deducted from your accrued interest. Do you wish to proceed?",
+      showDenyButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteAccount(obj, "/api/v1/user/Terminate_Savings_Plan", delete1);
+        dataInfo();
+      } else if (result.isDenied) {
+        setloading(false);
+        return;
+      }
+    });
+  };
+
+  console.log(coreAccounts, "CORES");
 
   return (
     <>
@@ -153,6 +194,7 @@ const Savings = ({ getData, getAccounts }) => {
                             namePurse={single.name}
                             purseAmount={single.availableBalance}
                             nameClass={single.nameClass}
+                            id={single.id}
                             toggleHide={toggleHide}
                             hidden={hidden}
                           />
@@ -291,9 +333,29 @@ const Savings = ({ getData, getAccounts }) => {
                               />
                               <div className="p-4 detail-div">
                                 <div className="">
-                                  <h5 className="text-blue weight-600">
-                                    {single?.name}
-                                  </h5>
+                                  <div
+                                    className="d-flex font-sm-sm"
+                                    style={{
+                                      justifyContent: "space-between",
+                                      alignItems: "center",
+                                    }}
+                                  >
+                                    <h5 className="text-blue weight-600">
+                                      {single?.name}
+                                    </h5>
+                                    {single?.isGroup && (
+                                      <p
+                                        style={{
+                                          fontWeight: "900",
+                                          padding: ".3rem",
+                                          backgroundColor: "#f8f7f7",
+                                          color: "#0553C8",
+                                        }}
+                                      >
+                                        Group
+                                      </p>
+                                    )}
+                                  </div>
                                   <div className="progress mt-2">
                                     <div
                                       className="progress-bar"
@@ -348,10 +410,7 @@ const Savings = ({ getData, getAccounts }) => {
                     {stashAccounts.length > 0 ? (
                       stashAccounts.map((single, index) => {
                         return (
-                          <a
-                            href="/"
-                            className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
-                          >
+                          <div className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4">
                             <div className="savings-card-box d-flex flex-column">
                               <div className="p-4 detail-div">
                                 <div className="">
@@ -370,14 +429,29 @@ const Savings = ({ getData, getAccounts }) => {
                                         / {nairaCurrencyVal(single?.target)}
                                       </span>
                                     </h5>
-                                    <p className="font-sm-sm mt-2">
-                                      Savings balance
-                                    </p>
+                                    <div className="">
+                                      <p className="font-sm-sm mt-2">
+                                        Savings balance
+                                      </p>
+
+                                      <button
+                                        onClick={() =>
+                                          terminateStash("0103", single.id, 1)
+                                        }
+                                        className="font-sm-sm"
+                                        style={{
+                                          padding: "1rem 0",
+                                          color: "red",
+                                        }}
+                                      >
+                                        Terminate Stash
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </a>
+                          </div>
                         );
                       })
                     ) : (
@@ -404,6 +478,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   getData: usersActions.getInfo,
   getAccounts: usersActions.getAccounts,
+  deleteAccount: usersActions.confirmBvnReg,
 };
 
 export default connect(mapStateToProps, actionCreators)(Savings);

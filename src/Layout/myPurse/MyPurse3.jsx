@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import percentageIcon from "../../assets/images/percentageIcon.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -69,6 +69,7 @@ const MyPurse3 = ({ createPurse }) => {
     validationSchema,
     validateOnMount: true,
   });
+  console.log(formik);
 
   const auto = formik.values.autoWithdraw;
   return (
@@ -276,7 +277,7 @@ const MyPurse3 = ({ createPurse }) => {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="w-auto">
+                                {/* <div className="w-auto">
                                   <div className="form-group">
                                     <div className="pay-method-radio">
                                       <input
@@ -291,13 +292,13 @@ const MyPurse3 = ({ createPurse }) => {
                                       </label>
                                     </div>
                                   </div>
-                                </div>
+                                </div> */}
                               </div>
 
-                              {formik.values.drPct === "0" ? (
+                              {/* {formik.values.drPct === "0" ? ( */}
                                 <div className="form-group mt-4 position-relative">
                                   <input
-                                    type="text"
+                                    type="number"
                                     className="text-field"
                                     placeholder="Specify the percentage"
                                     name="drPct"
@@ -314,7 +315,7 @@ const MyPurse3 = ({ createPurse }) => {
                                     />
                                   </div>
                                 </div>
-                              ) : null}
+                              {/* ) : null} */}
                             </div>
                           </>
                         ) : null}
@@ -323,17 +324,18 @@ const MyPurse3 = ({ createPurse }) => {
                           <div className="col-lg-8">
                             <div className="row">
                               <div className="col-lg-6">
-                                <button className="btn btn-previous text-green">
+                                <Link
+                                  to="/app/savings/pursestep1"
+                                  className="btn btn-previous text-green"
+                                >
                                   PREVIOUS
-                                </button>
+                                </Link>
                               </div>
                               <div className="col-lg-6">
                                 <input
                                   type="submit"
                                   value={"NEXT"}
-                                  disabled={
-                                    !formik.isValid || formik.isSubmitting
-                                  }
+                                 
                                   className="btn login-submit"
                                 />
                                 {/* <button

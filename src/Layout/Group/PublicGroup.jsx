@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import Loader from "../../common/Loader";
+import Modal2 from "./Modal2";
 const PublicGroup = (props) => {
   const [accounts, setAccounts] = useState([]);
   const [loading, setloading] = useState(false);
+  const [modalInOpen, setModalInOpen] = useState([]);
+
+  const modalToggle = (id) => {
+    let open = modalInOpen.slice();
+    open[id] = !open[id];
+    setModalInOpen([...open]);
+  };
+
+  const close = (id) => {
+    let open = modalInOpen.slice();
+    open[id] = false;
+    setModalInOpen([...open]);
+  };
+
   useEffect(() => {
     (async function dataInfo() {
       setloading(true);
@@ -24,7 +38,6 @@ const PublicGroup = (props) => {
       currency: stash?.currency?.code === 1 ? "NGN" : "USD",
     }).format(number);
 
- 
   return (
     <>
       {loading && <Loader />}
@@ -45,15 +58,9 @@ const PublicGroup = (props) => {
                     {accounts.length > 0 ? (
                       accounts.map((single, index) => {
                         return (
-                          <Link
+                          <button
+                            onClick={() => modalToggle(single.id)}
                             key={single?.id}
-                            to={{
-                              pathname: `/app/groupsavings/joingroup1/${single?.id}`,
-                              state: {
-                                data: single,
-                              },
-                            }}
-                            // to={"/app/groupsavings/joingroup1"}
                             className="col-xl-3 col-lg-4 col-md-6 col-6 d-flex flex-column flex-grow-1 mb-4"
                           >
                             <div className="au-card-smaller au-card-bg-retirement h-100 px-3">
@@ -65,16 +72,16 @@ const PublicGroup = (props) => {
                               )}
 
                               <p className="text-blue">{single?.name}</p>
-                              {/* <p className="text-black">
-                                NYSC Batch B 2021 Savings Challenge
-                              </p> */}
 
                               <p>
                                 {currencyVal(single, single?.target)}/{" "}
                                 {single?.frequency}
                               </p>
                             </div>
-                          </Link>
+                            {modalInOpen[single.id] && (
+                              <Modal2 data={single} close={close} />
+                            )}
+                          </button>
                         );
                       })
                     ) : (

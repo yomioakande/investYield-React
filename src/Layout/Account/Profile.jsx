@@ -17,7 +17,7 @@ const Profile = ({
   loading,
   alertType,
   message,
-  post,
+  putData,
   getData,
 }) => {
   const [profile, setProfile] = useState({});
@@ -31,11 +31,16 @@ const Profile = ({
   const [imageName, setImageName] = useState("");
   // eslint-disable-next-line
   const [imageFile, setImageFile] = useState(null);
+  // eslint-disable-next-line
+  const [imageRef2, setImageRef2] = useState("");
+  // eslint-disable-next-line
+  const [imageName2, setImageName2] = useState("");
+  // eslint-disable-next-line
+  const [imageFile2, setImageFile2] = useState(null);
 
   const dataInfo = async () => {
     setloading1(true);
     const data = await getData("/api/v1/user/profile").then();
-    console.log(data);
     setProfile(data);
     setloading1(false);
   };
@@ -47,6 +52,9 @@ const Profile = ({
 
   const initialValues = {
     address: profile.address,
+    state: "",
+    profileImageRef: "",
+    idCardRef: "",
     password: "",
   };
   const Schema = Yup.object({
@@ -73,10 +81,12 @@ const Profile = ({
     setShowError(true);
     const obj = {
       address: values.address,
+      state: values.state,
+      profileImageRef: imageRef.reference,
+      idCardRef: imageRef2.reference,
       password: values.password,
     };
-
-    post(obj, "/api/v1/user/profile", success);
+    putData(obj, "/api/v1/user/profile", success);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
     show();
@@ -89,7 +99,6 @@ const Profile = ({
     validationSchema: Schema,
     validateOnMount: true,
   });
-  //
 
   const show = () => {
     setTimeout(() => {
@@ -97,21 +106,8 @@ const Profile = ({
     }, 5000);
   };
 
-  //CHANGE TO BASE64
-
-  const success2 = () => {
-    Swal.fire({
-      customClass: {
-        title: "swal2-title",
-      },
-      position: "center",
-      icon: "success",
-      iconColor: "#003079",
-      title: "Profile Updated",
-      titleColor: "#fff",
-      showConfirmButton: false,
-      timer: 3000,
-    });
+  const uploaded = () => {
+    return;
   };
   const onChanger = (e) => {
     setImageFile(e.target.files[0]);
@@ -121,7 +117,6 @@ const Profile = ({
       reader.onload = _handleReaderLoaded;
       reader.readAsBinaryString(file);
     }
-
     const reader = new FileReader();
     if (reader !== undefined && file !== undefined) {
       reader.onloadend = () => {
@@ -131,26 +126,46 @@ const Profile = ({
           name: file.name,
           content: reader.result,
         };
-
         //eslint-disable-next-line
-        const postImageRef = postImageBase64(
-          baseObj,
-          "/api/v1/util/fileupload",
-          success2
-        ).then((data) => setImageRef(data));
-        console.log(imageRef);
+        postImageBase64(baseObj, "/api/v1/util/fileupload", uploaded).then(
+          (data) => setImageRef(data)
+        );
       };
       reader.readAsDataURL(file);
     }
   };
+
+  const onChanger2 = (e) => {
+    setImageFile2(e.target.files[0]);
+    let file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = _handleReaderLoaded;
+      reader.readAsBinaryString(file);
+    }
+    const reader = new FileReader();
+    if (reader !== undefined && file !== undefined) {
+      reader.onloadend = () => {
+        setImageName2(file.name);
+        //file.name,file.size,reader.result
+        const baseObj = {
+          name: file.name,
+          content: reader.result,
+        };
+        //eslint-disable-next-line
+        postImageBase64(baseObj, "/api/v1/util/fileupload", uploaded).then(
+          (data) => setImageRef2(data)
+        );
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const _handleReaderLoaded = (readerEvt) => {
     //eslint-disable-next-line
     let binaryString = readerEvt.target.result;
     // setBase64(btoa(binaryString));
   };
-
-  // console.log()
-
   return (
     <>
       {/* <ToastContainer autoClose={1000} hideProgressBar /> */}
@@ -265,7 +280,7 @@ const Profile = ({
                                     src={
                                       imageFile
                                         ? URL.createObjectURL(imageFile)
-                                        : uploadImg
+                                        : profile.profilePic || uploadImg
                                     }
                                     className="img-fluid"
                                     alt="Upload"
@@ -461,13 +476,12 @@ const Profile = ({
                                   <input
                                     type="file"
                                     className="d-none"
-                                    id="fileUpload"
-                                    onChange={(e) => onChanger(e)}
+                                    id="fileUpload2"
+                                    // name="idCardRef"
+                                    onChange={(e) => onChanger2(e)}
                                   />
                                   <label
-                                    htmlFor="fileUpload"
-                                    // type="button"
-                                    // // href="#"
+                                    htmlFor="fileUpload2"
                                     // id="openFileUpload"
                                     style={{ flexBasis: "10%" }}
                                     className="upload-field-profile d-flex justify-content-between align-items-center"
@@ -479,11 +493,25 @@ const Profile = ({
                                       src={cloudUpload}
                                       className="img-fluid"
                                       alt="Upload"
-                                      id="fileUpload"
+                                      id="fileUpload2"
                                       style={{ cursor: "pointer", width: "5%" }}
                                     />
                                   </label>
                                 </div>
+                                {imageFile2 || profile.idCard ? (
+                                  <div className="mt-3">
+                                    {" "}
+                                    <img
+                                      className="img-fluid w-100"
+                                      src={
+                                        imageFile2
+                                          ? URL.createObjectURL(imageFile2)
+                                          : profile.idCard
+                                      }
+                                      alt="goalImagePreview"
+                                    />{" "}
+                                  </div>
+                                ) : null}
                               </div>
                             </div>
                           </div>
@@ -539,9 +567,6 @@ const Profile = ({
                                 <div className="form-group">
                                   <input
                                     type="submit"
-                                    disabled={
-                                      !formik.isValid || formik.isSubmitting
-                                    }
                                     className="btn login-submit"
                                     value="UPDATE PROFILE"
                                   />
@@ -582,7 +607,7 @@ const mapStateToProps = (state) => {
 
 const actionCreators = {
   getData: usersActions.getInfo,
-  post: usersActions.confirmBvnReg,
+  putData: usersActions.confirmBvnReg,
   postImageBase64: usersActions.postImageBase64,
 };
 

@@ -16,7 +16,6 @@ const InterestList = ({ getFrequency, close, ccy }) => {
         1
       ).then();
       const { interest } = datas;
-      console.log(interest)
       setFreqOptions(interest);
       setloading(false);
     })();

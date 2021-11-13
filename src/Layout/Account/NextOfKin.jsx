@@ -54,6 +54,10 @@ const NextofKin = (props) => {
       password: values.password,
     };
 
+    nokDetails
+      ? props.putNok(obj, "/api/v1/user/nextofkin", success)
+      : props.postNok(obj, "/api/v1/user/nextofkin", success);
+
     props.postNok(obj, "/api/v1/user/nextofkin", success);
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
@@ -92,12 +96,11 @@ const NextofKin = (props) => {
 
   return (
     <>
-      {/* {props.alert.loading && <Loader />} */}
       {props.alert.loading && <Loader />}
       {/* {props.message ? (
         <div className={`font-sm ${props.alertType}`}>{props.message}</div>
       ) : null} */}
-      
+
       {props.alert.message ? (
         <div className={`font-sm mt-3 ${props.alert.type}`}>
           {props.alert.message}
@@ -252,21 +255,40 @@ const NextofKin = (props) => {
           </div>
         </div>
 
-        <div className="row mt-4 justify-content-end">
-          <div className="col-lg-9">
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="form-group">
-                  <input
-                    type="submit"
-                    className="btn login-submit"
-                    value="ADD NEXT OF KIN"
-                  />
+        {nokDetails ? (
+          <div className="row mt-4">
+            <div className="col-lg-3">
+              {/* <h5 className="mb-0">Can’t remember Password?</h5> */}
+            </div>
+            <div className="col-lg-9">
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="form-group">
+                    <button type="submit" className="btn btn-resend-otp">
+                      UPDATE NEXT OF KIN
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="row mt-4 justify-content-end">
+            <div className="col-lg-9">
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="form-group">
+                    <input
+                      type="submit"
+                      className="btn login-submit"
+                      value="ADD NEXT OF KIN"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </form>
     </>
   );
@@ -281,6 +303,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   getNok: usersActions.getNOK,
   postNok: usersActions.postFeedBack,
+  putNok: usersActions.confirmBvnReg,
 };
 
 export default connect(mapStateToProps, actionCreators)(NextofKin);

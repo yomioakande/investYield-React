@@ -13,7 +13,6 @@ const Group3 = (props) => {
   const initialValues = {
     start: "",
     freq: "",
-    // cntr_amt: "",
     earn: "",
   };
 

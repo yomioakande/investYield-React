@@ -58,7 +58,7 @@ const Group2 = (props) => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
-    setloading(true)
+    setloading(true);
     const obj = {
       decide: values.decide,
       docId: imageRef.reference,
@@ -68,7 +68,7 @@ const Group2 = (props) => {
     window.location.href = "/app/groupsavings3";
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
-    setloading(false)
+    setloading(false);
   };
 
   const formik = useFormik({
@@ -80,9 +80,8 @@ const Group2 = (props) => {
 
   return (
     <>
-
       <ToastContainer autoClose={1000} hideProgressBar />
- {loading && <Loader />}
+      {loading && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row justify-content-center">

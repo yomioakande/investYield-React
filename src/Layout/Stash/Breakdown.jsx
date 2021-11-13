@@ -21,7 +21,7 @@ const Breakdown = (props) => {
         stash.amount,
         stashfreq.tenor.code,
         "0103",
-        stash.ccyCode
+        stash.ccyCode,
       );
       setTargetValue(getTargetValue);
     })();
