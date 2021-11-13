@@ -45,6 +45,10 @@ const Savings = ({ getData, getAccounts }) => {
       setPurseAccounts(myPurseAccounts);
       setCoreAccounts(coreAccounts);
 
+      sessionStorage.removeItem("stash");
+      sessionStorage.removeItem("stashfreq");
+      sessionStorage.removeItem("interestList");
+
       setloading(false);
     })();
     // eslint-disable-next-line

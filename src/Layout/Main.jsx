@@ -79,6 +79,10 @@ const Main = (props) => {
       setTodoList(todo);
       // setPurseAccounts(myPurseAccounts);
 
+      sessionStorage.removeItem("stash");
+      sessionStorage.removeItem("stashfreq");
+      sessionStorage.removeItem("interestList");
+
       todo.bvnConfirmed !== true &&
         setTimeout(() => {
           setModalInOpen(true);

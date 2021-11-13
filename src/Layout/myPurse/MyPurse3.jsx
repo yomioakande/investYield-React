@@ -52,7 +52,7 @@ const MyPurse3 = ({ createPurse }) => {
     const firstObj = JSON.parse(sessionStorage.getItem("purseObj1"));
 
     const purseMainObj = { ...firstObj, ...obj };
-   
+
     createPurse(
       purseMainObj,
       "/api/v1/user/my_purse",
@@ -69,7 +69,6 @@ const MyPurse3 = ({ createPurse }) => {
     validationSchema,
     validateOnMount: true,
   });
-
 
   const auto = formik.values.autoWithdraw;
   return (

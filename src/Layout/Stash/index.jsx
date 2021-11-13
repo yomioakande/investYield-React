@@ -37,14 +37,13 @@ const Index = ({ getFrequency, createStash, loading }) => {
   };
 
   function save() {
-    sessionStorage.removeItem('stash')
     const interestList = JSON.parse(sessionStorage.getItem("interestList"));
     let obj2 = interestList.find(
       (option) => option.tenor.code === formik.values.frequency
     );
     sessionStorage.setItem("stashfreq", JSON.stringify(obj2));
   }
-console.log(JSON.parse(sessionStorage.getItem("interestList")))
+  // console.log(JSON.parse(sessionStorage.getItem("interestList")));
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -55,6 +54,10 @@ console.log(JSON.parse(sessionStorage.getItem("interestList")))
   const ccy = formik.values.ccyCode;
   useEffect(() => {
     (async function dataInfo() {
+      sessionStorage.removeItem("stash");
+      sessionStorage.removeItem("stashfreq");
+      sessionStorage.removeItem("interestList");
+
       const datas = await getFrequency(
         "/api/v1/util/productinterest",
         "0103",
@@ -62,8 +65,9 @@ console.log(JSON.parse(sessionStorage.getItem("interestList")))
       ).then();
       const { interest } = datas;
       setFreqOptions(interest);
+
       sessionStorage.setItem("interestList", JSON.stringify(interest));
-      console.log("cvb", freqOptions);
+      // console.log("cvb", freqOptions);
     })();
     //eslint-disable-next-line
   }, [ccy]);

@@ -264,9 +264,12 @@ const WithdrawalAccount = (props) => {
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="mt-3">
-                        <button className=" btn btn-delete-card text-danger ">
+                        <a
+                          href="/app/account"
+                          className=" btn btn-delete-card text-danger"
+                        >
                           CANCEL
-                        </button>
+                        </a>
                       </div>
                     </div>
                     <div className="col-lg-6">
