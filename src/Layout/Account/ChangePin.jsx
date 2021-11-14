@@ -161,8 +161,7 @@ const Pin = (props) => {
                 <div className="form-group">
                   <input
                     type="submit"
-                    disabled={!formik.isValid || formik.isSubmitting}
-                    className="btn login-submit"
+                   className="btn login-submit"
                     value="UPDATE PIN"
                   />
                 </div>

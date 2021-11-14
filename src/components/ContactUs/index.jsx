@@ -214,7 +214,6 @@ const Index = () => {
                     <div className="form-group mt-5">
                       <input
                         type="submit"
-                        disabled={!formik.isValid || formik.isSubmitting}
                         className="btn login-submit"
                         value="SEND"
                       />

@@ -130,7 +130,6 @@ const Second = (props) => {
                       <div className="form-group mt-50">
                         <input
                           type="submit"
-                          // disabled={!formik.isValid || formik.isSubmitting}
                           className="btn login-submit"
                           value="NEXT"
                         />

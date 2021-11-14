@@ -277,10 +277,7 @@ const MyPurse2 = () => {
                             <div className="">
                               <input
                                 type="submit"
-                                disabled={
-                                  !formik.isValid || formik.isSubmitting
-                                }
-                                className="btn login-submit"
+                              className="btn login-submit"
                                 value="NEXT"
                               />
                             </div>

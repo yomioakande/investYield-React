@@ -40,7 +40,7 @@ const CreateSavings3 = (props) => {
   const validationSchema = Yup.object({
     earnInterest: Yup.string().required("A plan Name is Required"),
     frequency: Yup.string().required("A plan Name is Required"),
-   });
+  });
 
   //UPLOAD SUCCESSFUL ALERT
   const success = () => {
@@ -121,7 +121,7 @@ const CreateSavings3 = (props) => {
       startDate,
       "0201"
     );
-  
+
     setTargetNum(data?.data?.estimate);
   };
 
@@ -361,9 +361,6 @@ const CreateSavings3 = (props) => {
                               <input
                                 type="submit"
                                 value="NEXT"
-                                disabled={
-                                  !formik.isValid || formik.isSubmitting
-                                }
                                 className="btn login-submit"
                               />
                             </div>

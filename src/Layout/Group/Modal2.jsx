@@ -7,8 +7,6 @@ import { usersActions } from "../../redux/actions";
 import { dateConv } from "../../helpers";
 import closeImg from "../../assets/images/modal-close.svg";
 const Modal2 = ({ close, data }) => {
-
-  console.log(data, "modal2")
   const currencyVal = (number) =>
     new Intl.NumberFormat(
       data?.currency?.code === 1 ? "en-NG" : "en-US",
