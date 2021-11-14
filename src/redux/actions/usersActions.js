@@ -119,9 +119,7 @@ function register2(user, apiUrl, nextRoute) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.register1(user, apiUrl);
-
     const { success, messages } = register;
-
     if (
       apiUrl === "/api/v1/identity/validateregistrationotp" &&
       success === true
@@ -139,15 +137,12 @@ function register3(user, apiUrl, nextRoute) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.register1(user, apiUrl);
-
     const { data, success, messages } = register;
-
     //THIRD SIGNUP
     if (apiUrl === "/api/v1/identity/createpassword" && success === true) {
       const d = new Date();
       const now = d.getTime();
       const expires_at = data.expiresIn + now;
-
       let user = {
         name: data.name,
         expiresAt: expires_at,

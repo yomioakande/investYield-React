@@ -286,11 +286,9 @@ const WithdrawalAccount = (props) => {
                         <input
                           type="submit"
                           className="btn login-submit"
-                          // disabled={!formik.isValid || formik.isSubmitting}
                           value="ADD ACCOUNT"
                         />
                       </div>
-                      {/* <ToastContainer autoClose={2000} hideProgressBar /> */}
                     </div>
                   </div>
                 </div>

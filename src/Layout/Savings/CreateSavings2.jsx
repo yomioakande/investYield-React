@@ -235,10 +235,7 @@ const CreateSavings2 = ({ username, register }) => {
                               <div className="col-lg-6">
                                 <input
                                   type="submit"
-                                  disabled={
-                                    !formik.isValid || formik.isSubmitting
-                                  }
-                                  className="btn login-submit"
+                                className="btn login-submit"
                                   value="Yes, Proceed"
                                 />
                               </div>

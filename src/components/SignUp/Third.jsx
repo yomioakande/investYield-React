@@ -44,7 +44,6 @@ const Third = (props) => {
     };
 
     props.register3(obj, "/api/v1/identity/createpassword", "/createpin");
-
     // onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
   };
@@ -175,7 +174,6 @@ const Third = (props) => {
                       <div className="form-group mt-5">
                         <input
                           type="submit"
-                          // disabled={!formik.isValid || formik.isSubmitting}
                           className="btn login-submit"
                           value="SIGN UP"
                         />
@@ -193,9 +191,7 @@ const Third = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  // const { loggingIn } = state.authentication;
   const { loading, alertType, message } = state.registration;
-  // const { alert } = state;
   return { alert, loading, alertType, message };
 };
 

@@ -676,9 +676,6 @@ const Help = (props) => {
                                     <div className="col-lg-6">
                                       <input
                                         type="submit"
-                                        disabled={
-                                          !formik.isValid || formik.isSubmitting
-                                        }
                                         className="btn login-submit"
                                         value="NEXT"
                                       />
