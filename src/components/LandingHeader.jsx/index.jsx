@@ -37,10 +37,7 @@ const Index = () => {
                 </NavLink>
               </li>
               <li className="nav-item nav-menu-padding">
-                <NavLink
-                  to="/contactus"
-                  className="nav-link menus text-dark"
-                >
+                <NavLink to="/contactus" className="nav-link menus text-dark">
                   Contact us
                 </NavLink>
               </li>
@@ -59,7 +56,7 @@ const Index = () => {
               </li>
               <li className="nav-item nav-menu-padding nav-margin-top">
                 <a
-                  href="auth/signup1"
+                  href="auth/signup1/1"
                   className="btn btn-create-account px-4 menus nav-link"
                 >
                   Create an Account

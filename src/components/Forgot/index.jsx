@@ -123,7 +123,7 @@ const Index = (props) => {
                         <p className="text-dark text-center">
                           Don't have an account?{" "}
                           <span>
-                            <Link to="/auth/signup1" className="text-green">
+                            <Link to="/auth/signup1/1" className="text-green">
                               Get started here
                             </Link>
                           </span>
