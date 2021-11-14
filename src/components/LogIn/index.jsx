@@ -143,7 +143,7 @@ const Index = (props) => {
                               position: "absolute",
                               top: "1rem",
                               right: "1rem",
-                              color:'#000'
+                              color: "#000",
                             }}
                             onClick={() => {
                               setShowPassword(!showPassword);
@@ -191,7 +191,7 @@ const Index = (props) => {
                           <p className="text-dark text-center">
                             Don't have an account?{" "}
                             <span>
-                              <Link to="/auth/signup1" className="text-green">
+                              <Link to="/auth/signup1/1" className="text-green">
                                 Get started here
                               </Link>
                             </span>

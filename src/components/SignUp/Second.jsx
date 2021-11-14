@@ -84,7 +84,7 @@ const Second = (props) => {
                 <div className="bg-white login-div p-5 shadow mt-5">
                   <div className="d-flex justify-content-between">
                     <Link
-                      to="/auth/signup1"
+                      to="/auth/signup1/1"
                       className="d-flex no-decor align-items-center"
                     >
                       <img

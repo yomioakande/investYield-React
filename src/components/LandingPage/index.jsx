@@ -31,7 +31,7 @@ const index = () => {
                 </div>
                 <div className="d-flex justify-content-end mt-5">
                   <a
-                    href="/auth/signup1"
+                    href="/auth/signup1/1"
                     className="btn btn-get-started d-flex text-center justify-content-center align-items-center"
                   >
                     GET STARTED
@@ -230,7 +230,7 @@ const index = () => {
               <div className="col-xl-4 col-lg-6">
                 <div className="d-flex justify-content-center">
                   <a
-                    href="/auth/signup1"
+                    href="/auth/signup1/1"
                     className="btn btn-get-started d-flex text-center justify-content-center align-items-center w-100"
                   >
                     GET STARTED
