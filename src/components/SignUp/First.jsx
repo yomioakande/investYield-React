@@ -20,7 +20,7 @@ const First = (props) => {
     referral: "",
   };
   // eslint-disable-next-line
-  const [state, setState] = useState(initialValues);
+  // const [state, setState] = useState(initialValues);
 
   const validationSchema = Yup.object({
     firstName: Yup.string()
@@ -72,7 +72,6 @@ const First = (props) => {
     validationSchema,
     validateOnMount: true,
   });
-
 
   const show = () => {
     setTimeout(() => {
