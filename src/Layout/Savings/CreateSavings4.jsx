@@ -34,7 +34,6 @@ const CreateSavings4 = (props) => {
         .getFrequency("/api/v1/util/productinterest", "0201", 1)
         .then();
       const { interest } = datas;
-      console.log(interest);
       setFreqOptions(interest);
       setloading(false);
     })();
