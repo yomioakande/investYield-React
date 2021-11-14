@@ -43,7 +43,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
     );
     sessionStorage.setItem("stashfreq", JSON.stringify(obj2));
   }
-  // console.log(JSON.parse(sessionStorage.getItem("interestList")));
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -71,8 +70,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
     })();
     //eslint-disable-next-line
   }, [ccy]);
-  console.log("cvb2", freqOptions);
-
   useEffect(() => {
     formik.setFieldValue("amount", num?.value);
     // eslint-disable-next-line
@@ -118,8 +115,6 @@ const Index = ({ getFrequency, createStash, loading }) => {
   const defaultValue = (options, value) => {
     return options ? options.find((option) => option.value === value) : "";
   };
-  console.log(formik.values);
-  console.log(freqOptions);
   return (
     <>
       {loading && <Loader />}

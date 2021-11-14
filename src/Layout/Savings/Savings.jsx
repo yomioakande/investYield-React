@@ -93,8 +93,6 @@ const Savings = ({ getData, getAccounts, deleteAccount }) => {
     });
   };
 
-  console.log(coreAccounts, "CORES");
-
   return (
     <>
       {loading && <Loader />}

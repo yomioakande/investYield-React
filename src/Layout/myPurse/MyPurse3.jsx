@@ -69,8 +69,6 @@ const MyPurse3 = ({ createPurse }) => {
     validationSchema,
     validateOnMount: true,
   });
-  console.log(formik);
-
   const auto = formik.values.autoWithdraw;
   return (
     <>

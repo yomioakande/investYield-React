@@ -40,7 +40,6 @@ const Modal = ({ close, getAccount, message, alertType, loading }) => {
         next
       ).then();
       setGroupAccount(data);
-      console.log(data)
     })();
    
     show();
