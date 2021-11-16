@@ -3,7 +3,7 @@ import BigImg from "../../assets/images/aboutUs-BigImg.png";
 import PhoneImg from "../../assets/images/aboutUs-PhoneImg.png";
 import teamImg from "../../assets/images/teamImg.png";
 import OlumideSosanmi from "../../assets/images/OlumideSosanmi.png";
-import JadesolaAdekoya from "../../assets/images/JadesolaAdekoya.png";
+// import JadesolaAdekoya from "../../assets/images/JadesolaAdekoya.png";
 import RaymondChen from "../../assets/images/RaymondChen.png";
 
 const Index = () => {
