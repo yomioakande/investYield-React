@@ -4185,6 +4185,9 @@ a .au-card:hover {
     -ms-flex-align: start;
     align-items: flex-start;
   }
+  .au-card {
+    padding: 15px 5px;
+  }
 }
 
 .au-message__item-time {
