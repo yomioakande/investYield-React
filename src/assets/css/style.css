@@ -941,6 +941,15 @@ input[type="radio"] {
   .contactUs-div {
     height: 70px;
   }
+  .landing-page-header,
+  .get-started-header,
+  .welcomeText,
+  .new-header,
+  .why-header,
+  .footer-topDiv-header,
+  .aboutUs-header {
+    font-size: 24px;
+  }
 }
 .youtube-embed {
   margin-top: 30px;
@@ -1077,6 +1086,6 @@ input[type="radio"] {
 }
 
 .swal2-popup {
-  font-size: .8rem !important;
+  font-size: 0.8rem !important;
   font-family: Georgia, serif;
 }

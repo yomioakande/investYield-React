@@ -4194,7 +4194,7 @@ a .au-card:hover {
     align-items: flex-start;
   }
   .au-card {
-    padding: 15px 5px;
+    padding: 15px;
   }
 }
 

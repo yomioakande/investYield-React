@@ -913,4 +913,13 @@ input[type="radio"] {
   .contactUs-div {
     height: 70px;
   }
+  .landing-page-header,
+  .get-started-header,
+  .welcomeText,
+  .new-header,
+  .why-header,
+  .footer-topDiv-header,
+  .aboutUs-header {
+    font-size: 24px;
+  }
 }

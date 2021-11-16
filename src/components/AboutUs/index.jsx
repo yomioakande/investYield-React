@@ -127,7 +127,7 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-3 mt-4">
+              {/* <div className="col-lg-3 mt-4">
                 <div className="team-div shadow d-flex flex-column">
                   <div>
                     <img
@@ -148,7 +148,7 @@ const Index = () => {
                     <div className="border-decor position-absolute"></div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="col-lg-3 mt-4">
                 <div className="team-div shadow d-flex flex-column">
                   <div>
