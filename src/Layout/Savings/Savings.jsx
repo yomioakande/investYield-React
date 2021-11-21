@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../assets/css/theme.css";
-// import challenge from "../../assets/images/savingschallenge.svg";
 import plus2 from "../../assets/images/Stash/plus2.svg";
 import savings from "../../assets/images/individual-savings-icon.svg";
 import group from "../../assets/images/create-new-group-icon.svg";
@@ -9,7 +8,11 @@ import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import Loader from "../../common/Loader";
 import Charts from "../Charts";
-import { nairaCurrencyVal, dollarCurrencyVal } from "../../helpers/helper";
+import {
+  nairaCurrencyVal,
+  dollarCurrencyVal,
+  dateConv,
+} from "../../helpers/helper";
 import Purse from "../common/myPurse";
 import JoinSavings from "../JoinSavings";
 import Swal from "sweetalert2";
@@ -27,9 +30,9 @@ const Savings = ({ getData, getAccounts, deleteAccount }) => {
   async function dataInfo() {
     setloading(true);
     const data = await getData("/api/v1/user/summary").then();
-    const stashAccounts = await getData(
-      "/api/v1/user/stash"
-      // "0103"
+    const stashAccounts = await getAccounts(
+      "/api/v1/user/accountbyproduct",
+      "0103"
     ).then();
     const coreAccounts = await getAccounts(
       "/api/v1/user/accountbyproduct",
@@ -118,17 +121,6 @@ const Savings = ({ getData, getAccounts, deleteAccount }) => {
                   <div className="row align-items-center d-flex justify-content-center">
                     <div className="col-lg-7 profile-cards col-md-6">
                       <Charts summaryInfo={summaryInfo} />
-                      <p
-                        style={{
-                          marginTop: "-6.5rem",
-                          color: "#333333",
-                          fontStyle: "Comfortaa",
-                          textAlign: "center",
-                        }}
-                        class="chart2-title"
-                      >
-                        {/* ₦10,000,000.00 */}
-                      </p>
                     </div>
                     <div className="col-lg-5 w-auto profile-cards col-md-4 mt-3">
                       <ul className="pie-text mt-3">
@@ -412,24 +404,18 @@ const Savings = ({ getData, getAccounts, deleteAccount }) => {
                             <div className="savings-card-box d-flex flex-column">
                               <div className="p-4 detail-div">
                                 <div className="">
-                                  <h5 className="text-blue weight-600">
-                                    {/* 90 Days Stash */}
-                                    {single?.name}
+                                  <h5 className="weight-600">
+                                    {single?.name} - {single?.daysLeft} day(s)
+                                    left
                                   </h5>
-                                  <div className="saving-progress mt-3">
-                                    <div className="saving-progress-actual"></div>
-                                  </div>
                                   <div className="mt-3">
                                     <h5 className="text-green">
                                       {nairaCurrencyVal(single?.contribution)}
-                                      <span className="text-blue">
-                                        {" "}
-                                        / {nairaCurrencyVal(single?.target)}
-                                      </span>
                                     </h5>
                                     <div className="">
                                       <p className="font-sm-sm mt-2">
-                                        Savings balance
+                                        Maturity:{" "}
+                                        {dateConv(single?.maturityDate)}
                                       </p>
 
                                       <button

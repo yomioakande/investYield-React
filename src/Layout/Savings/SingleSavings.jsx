@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { dateConv } from "../../helpers";
+import { dateConv, nairaCurrencyVal } from "../../helpers";
 const SingleSavings = (props) => {
   const data = props.location.state.data;
 
@@ -50,7 +50,7 @@ const SingleSavings = (props) => {
                         style={{ justifyContent: "space-between" }}
                       >
                         <h4 className="text-green" style={{ color: "#cecece" }}>
-                          Interest earnings:
+                          Interest accrued:
                         </h4>
                         <p
                           style={{ color: "#000" }}
@@ -63,7 +63,9 @@ const SingleSavings = (props) => {
                         <h4 className="text-green" style={{ color: "#cecece" }}>
                           Target end date:
                         </h4>
-                        <p style={{ color: "#000" }}>12-December 2020</p>
+                        <p style={{ color: "#000" }}>
+                          {dateConv(data?.maturityDate)}
+                        </p>
                       </div>
                       <div
                         className="mt-4 d-flex"
@@ -72,7 +74,9 @@ const SingleSavings = (props) => {
                         <h4 className="text-green" style={{ color: "#cecece" }}>
                           Contribution:
                         </h4>
-                        <p style={{ color: "#000" }}>Daily</p>
+                        <p style={{ color: "#000" }}>
+                          {nairaCurrencyVal(data?.contribution)}
+                        </p>
                       </div>
                       <div
                         className="mt-4 d-flex"
@@ -81,7 +85,9 @@ const SingleSavings = (props) => {
                         <h4 className="text-green" style={{ color: "#cecece" }}>
                           Amount:
                         </h4>
-                        <p style={{ color: "#000" }}>#1,000,000</p>
+                        <p style={{ color: "#000" }}>
+                          {nairaCurrencyVal(data?.target)}
+                        </p>
                       </div>
 
                       <div className="row mt-4 align-items-center justify-content-end">

@@ -167,6 +167,7 @@ const Group2 = (props) => {
                               type="file"
                               className="form-control"
                               name="file"
+                              accept="image/*"
                               style={{ display: "none" }}
                               id="fileInput"
                               onChange={(e) => onChanger(e)}

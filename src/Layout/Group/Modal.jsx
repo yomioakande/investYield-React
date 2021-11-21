@@ -15,7 +15,7 @@ const Modal = ({ close, getAccount, message, alertType, loading }) => {
   const [showError, setShowError] = useState(true);
 
   const show = () => {
-    setShowError(true)
+    setShowError(true);
     setTimeout(() => {
       setShowError(false);
     }, 3000);
@@ -32,7 +32,6 @@ const Modal = ({ close, getAccount, message, alertType, loading }) => {
   };
 
   const onSubmit = (values, onSubmitProps) => {
-    
     (async () => {
       const data = await getAccount(
         "/api/v1/user/group_savings",
@@ -41,7 +40,7 @@ const Modal = ({ close, getAccount, message, alertType, loading }) => {
       ).then();
       setGroupAccount(data);
     })();
-   
+
     show();
     onSubmitProps.setSubmitting(false);
   };
@@ -69,14 +68,7 @@ const Modal = ({ close, getAccount, message, alertType, loading }) => {
         {first === "code" ? (
           <>
             {" "}
-            <div
-              //   className="modal"
-              //   tabindex="-1"
-              // role="dialog"
-              //   data-backdrop="static"
-              //   data-keyboard="false"
-              id="enterGroupCode"
-            >
+            <div id="enterGroupCode">
               <div
                 className="modal-dialog modal-dialog-centered"
                 role="document"

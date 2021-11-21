@@ -9,9 +9,6 @@ import Loader from "../../common/Loader";
 const JoinGroup1 = (props) => {
   let data = props.location.state.data;
   data = data.startDate.toString();
-  // eslint-disable-next-line
-  // const [num, setNum] = useState("");
-  // const [targetNum, setTargetNum] = useState("");
   const [loading, setloading] = useState(false);
 
   const initialValues = {
@@ -39,7 +36,6 @@ const JoinGroup1 = (props) => {
       freq: values.freq,
       earn: values?.earn,
       start: values.start,
-      // cntr_amt: targetNum,
       id: data?.id,
       name: data?.name,
       ccy: data?.currency?.code,
@@ -67,29 +63,7 @@ const JoinGroup1 = (props) => {
     validateOnMount: true,
   });
 
-  // useEffect(() => {
-  //   formik.setFieldValue("cntr_amt", num?.value);
-  //   // eslint-disable-next-line
-  // }, [num?.value]);
-
-  // const dataInfo = async (freq) => {
-  //   const datas = await userService.getEstimate(
-  //     "/api/v1/util/estimate",
-  //     data?.target,
-  //     freq,
-  //     data?.endDate,
-  //     formik.values.start,
-  //     "0201"
-  //   );
-
-  //   setTargetNum(datas?.data?.estimate);
-  // };
-
-  // const currencyVal = (number) =>
-  //   new Intl.NumberFormat(data?.currency?.code === 1 ? "en-NG" : "en-US", {
-  //     style: "currency",
-  //     currency: data?.currency?.code === 1 ? "NGN" : "USD",
-  //   }).format(number);
+  let contribution = sessionStorage.getItem("groupContribution");
 
   return (
     <>
@@ -158,8 +132,8 @@ const JoinGroup1 = (props) => {
                       </div>
                       <div className="form-group mt-4">
                         <label className="text-blue">
-                          The amount to save daily to meet the target amount at
-                          the target date is:
+                          The amount to save to meet the target amount at the
+                          target date is:
                         </label>
                         <div className="form-group position-relative">
                           <NumberFormat
@@ -167,7 +141,7 @@ const JoinGroup1 = (props) => {
                             thousandSeparator={true}
                             className="text-field-profile"
                             name="cntr_amt"
-                            // value={currencyVal(targetNum)}
+                            value={contribution}
                             readonly
                             disabled
                           />
@@ -189,12 +163,6 @@ const JoinGroup1 = (props) => {
                               </button>
                             </div>
                             <div className="col-lg-6">
-                              {/* <Link
-                                to="/app/groupsavings/joingroup2"
-                                className="btn login-submit"
-                              >
-                                NEXT
-                              </Link> */}
                               <button
                                 type="submit"
                                 className="btn login-submit"

@@ -7,7 +7,7 @@ import referIcon from "../../assets/images/referIcon.svg";
 import beneficiary from "../../assets/images/mgBeneficiariesIcon.svg";
 import securityIcon from "../../assets/images/securityIcon.svg";
 import MenuBar from "../Account/MenuBar";
-import JoinSavings from "../JoinSavings"
+import JoinSavings from "../JoinSavings";
 import Charts from "../Charts";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
@@ -68,10 +68,9 @@ const Index = ({ getData }) => {
             <div className="col-lg-7 col-md-8 d-flex flex-column mb-3">
               <div className="au-card d-flex justify-content-between align-items-center flex-grow-1">
                 <div className="au-card-inner w-100">
-                  <div className="row align-items-center justify-content-center">
+                  <div className="row align-items-center d-flex justify-content-center">
                     <div className="col-lg-7 profile-cards col-md-6">
                       <Charts summaryInfo={summaryInfo} />
-                      {/* <canvas id="myChart" width="800" height="550"></canvas> */}
                     </div>
                     <div className="col-lg-5 w-auto profile-cards col-md-4 mt-3">
                       <Link
@@ -93,10 +92,6 @@ const Index = ({ getData }) => {
                           <p>Total Dollar Savings</p>
                           <p>{dollarCurrencyVal(summaryInfo.totDollar)}</p>
                         </li>
-                        {/* <li className="mb-3 text-yellow">
-                          <p>Total Purse Cash</p>
-                          <p>₦10,000.00</p>
-                        </li> */}
                       </ul>
                     </div>
                   </div>
@@ -105,7 +100,7 @@ const Index = ({ getData }) => {
             </div>
             <div className="col-lg-5 col-md-4 d-flex flex-column mb-3">
               <div className="au-card position-relative px-0 flex-grow-1">
-               <JoinSavings/>
+                <JoinSavings />
               </div>
             </div>
           </div>

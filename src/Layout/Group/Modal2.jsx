@@ -8,13 +8,12 @@ import { dateConv } from "../../helpers";
 import closeImg from "../../assets/images/modal-close.svg";
 const Modal2 = ({ close, data }) => {
   const currencyVal = (number) =>
-    new Intl.NumberFormat(
-      data?.currency?.code === 1 ? "en-NG" : "en-US",
-      {
-        style: "currency",
-        currency: data?.currency?.code === 1 ? "NGN" : "USD",
-      }
-    ).format(number);
+    new Intl.NumberFormat(data?.currency?.code === 1 ? "en-NG" : "en-US", {
+      style: "currency",
+      currency: data?.currency?.code === 1 ? "NGN" : "USD",
+    }).format(number);
+
+  sessionStorage.setItem("groupContribution", currencyVal(data?.contribution));
 
   return ReactDom.createPortal(
     <OVERLAY>
@@ -22,21 +21,12 @@ const Modal2 = ({ close, data }) => {
         <>
           {/* {loading && <Loader />} */}
 
-          <div
-            // className="modal"
-            // tabindex="-1"
-            // role="dialog"
-            // data-backdrop="static"
-            // data-keyboard="false"
-            id="newGroupDetails"
-          >
+          <div id="newGroupDetails">
             <div className="modal-dialog modal-dialog-centered" role="document">
               <div className="modal-content">
                 <button
                   onClick={() => close(data.id)}
-                  //   href="#"
                   className="d-flex modal-close-link"
-                  //   data-dismiss="modal"
                 >
                   <span className="px-2">close</span>
                   <img src={closeImg} className="img-fluid" alt="close" />
@@ -55,7 +45,6 @@ const Modal2 = ({ close, data }) => {
                                 <td>Group Name:</td>
                                 <td className="text-right weight-500">
                                   {data?.code}
-                                  {/* Abuja Hikers July 2021 */}
                                 </td>
                               </tr>
                               <tr>
@@ -65,7 +54,6 @@ const Modal2 = ({ close, data }) => {
                               <tr>
                                 <td>End Date:</td>
                                 <td className="text-right weight-500">
-                                  {/* 12 - February - 2021 */}
                                   {dateConv(data?.endDate)}
                                 </td>
                               </tr>

@@ -172,7 +172,7 @@ const Index = (props) => {
                         </p>
                       ) : (
                         <p>
-                          Tap this tab to add your Account details for Withdrawl
+                          Tap this tab to add your Account details for Withdrawal
                         </p>
                       )}
                     </div>

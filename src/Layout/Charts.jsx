@@ -3,7 +3,6 @@ import { Doughnut } from "react-chartjs-2";
 
 const Charts = ({ summaryInfo }) => {
   const state = {
-    //   maintainAspectRatio: true,
     labels: ["Total Naira Savings", "Total Dollar Savings"],
     datasets: [
       {
@@ -20,11 +19,11 @@ const Charts = ({ summaryInfo }) => {
   };
 
   const ChartT = styled.div`
-    margin-top: -180px;
+    margin-top: -100px;
 
     @media only screen and (max-width: 767.98px) {
-      margin-top: -120px;
-      padding-bottom:4rem;
+      margin-top: -80px;
+      padding-bottom: 4rem;
     }
   `;
   return (
@@ -42,7 +41,6 @@ const Charts = ({ summaryInfo }) => {
             },
             title: {
               display: true,
-              // text: 'Chart.js Doughnut Chart',
               padding: { top: 100, left: 0, right: 0, bottom: 0 },
             },
           },

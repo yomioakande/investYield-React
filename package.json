@@ -49,7 +49,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "tailwind": "tailwindcss build src/tailwind.css -o src/tailwind.generated.css",
     "build": "react-scripts build",
     "test": "react-scripts test",

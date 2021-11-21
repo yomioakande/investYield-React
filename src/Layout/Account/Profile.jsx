@@ -287,15 +287,14 @@ const Profile = ({
                                     id="fileUpload"
                                     style={{
                                       verticalAlign: "middle",
-                                      width: "50px",
-                                      height: "50px",
+                                      width: "100px",
+                                      height: "100px",
                                       borderRadius: "50%",
+                                      objectFit: "cover",
                                     }}
                                   />
                                   Tap to edit profile picture
                                 </label>
-                                {/* <span>Tap to edit profile picture</span> */}
-                                {/* </button> */}
                               </div>
                             </div>
                           </div>
