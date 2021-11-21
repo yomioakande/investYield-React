@@ -11,9 +11,9 @@ const myPurse = ({
   index,
 }) => {
   const currencyVal = (number) =>
-    new Intl.NumberFormat(currency === "NGN" ? "en-NG" : "en-US", {
+    new Intl.NumberFormat(currency === "NGN" ? "en-NG" : "en-NG", {
       style: "currency",
-      currency: currency === "NGN" ? "NGN" : "USD",
+      currency: currency === "NGN" ? "NGN" : "NGN",
     }).format(number);
 
   const account = () => {
