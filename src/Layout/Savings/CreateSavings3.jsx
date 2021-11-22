@@ -144,7 +144,6 @@ const CreateSavings3 = (props) => {
       currency: ccyCode === "1" ? "NGN" : "USD",
     }).format(number);
 
-    console.log(props.message)
 
   return (
     <>

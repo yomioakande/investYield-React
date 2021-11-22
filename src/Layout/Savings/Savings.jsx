@@ -58,7 +58,6 @@ const Savings = ({ getData, getAccounts, deleteAccount }) => {
     // eslint-disable-next-line
   }, []);
 
-  console.log(coreAccounts)
 
   const terminateStash = (productCode, accountNo, currency) => {
     const obj = {
