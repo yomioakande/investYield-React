@@ -3,8 +3,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
 import mail from "../../assets/images/mail1.svg";
-// import { ToastContainer} from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
 import Swal from "sweetalert2";
@@ -27,10 +25,6 @@ const Pin = (props) => {
   });
 
   const success = () => {
-    // toast.success("Pin successfully changed!", {
-    //   position: toast.POSITION.TOP_CENTER,
-    // });
-
     Swal.fire({
       customClass: {
         title: "swal2-title",
@@ -70,8 +64,6 @@ const Pin = (props) => {
   return (
     <>
       {props.loading && <Loader />}
-
-      {/* <ToastContainer autoClose={1000} hideProgressBar /> */}
       {props.message && (
         <div className={`font-sm alert ${props.alertType}`}>
           {props.message}
@@ -161,7 +153,7 @@ const Pin = (props) => {
                 <div className="form-group">
                   <input
                     type="submit"
-                   className="btn login-submit"
+                    className="btn login-submit"
                     value="UPDATE PIN"
                   />
                 </div>

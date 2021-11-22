@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Swal from "sweetalert2";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import Loader from "../../common/Loader";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import cloudUpload from "../../assets/images/upload-cloud-grey.svg";
 import trashCan from "../../assets/images/trashCan.svg";
 const Group2 = (props) => {
@@ -15,8 +15,17 @@ const Group2 = (props) => {
   const [loading, setloading] = useState(false);
   //UPLOAD SUCCESSFUL ALERT
   const success = () => {
-    toast.success("Uploaded Successfully!", {
-      position: toast.POSITION.TOP_CENTER,
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Uploaded Successfully!",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 2000,
     });
   };
 
@@ -26,7 +35,6 @@ const Group2 = (props) => {
     let file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      // reader.onload = _handleReaderLoaded;
       reader.readAsBinaryString(file);
     }
 
@@ -34,7 +42,6 @@ const Group2 = (props) => {
     if (reader !== undefined && file !== undefined) {
       reader.onloadend = () => {
         setImageName(file.name);
-        //file.name,file.size,reader.result
         const baseObj = {
           name: file.name,
           content: reader.result,
@@ -80,8 +87,7 @@ const Group2 = (props) => {
 
   return (
     <>
-      <ToastContainer autoClose={1000} hideProgressBar />
-      {loading && <Loader />}
+      {loading || (props.loading && <Loader />)}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row justify-content-center">
@@ -138,10 +144,21 @@ const Group2 = (props) => {
                             Would you like to upload an image that represents
                             your goal (optional)
                           </label>
+                          {props.message && (
+                            <div className={`font-sm ${props.alertType}`}>
+                              {props.message}
+                            </div>
+                          )}
                           <div className="img-upload-div d-flex justify-content-between align-items-center px-3">
                             <h6 className="text-green">{imageName}</h6>
                             {imageFile ? (
-                              <button style={{ flexBasis: "10%" }}>
+                              <button
+                                style={{ flexBasis: "10%" }}
+                                onClick={() => {
+                                  setImageFile(null);
+                                  setImageName("");
+                                }}
+                              >
                                 <img
                                   src={trashCan}
                                   className="img-fluid"
@@ -174,7 +191,7 @@ const Group2 = (props) => {
                             />
                           </div>
 
-                          {imageFile && (
+                          {imageFile && !props.message && (
                             <div className="mt-3">
                               <img
                                 className="img-fluid w-100"
@@ -188,9 +205,12 @@ const Group2 = (props) => {
                           <div className="col-lg-8">
                             <div className="row">
                               <div className="col-lg-6">
-                                <button className="btn btn-previous text-green">
+                                <Link
+                                  to="/"
+                                  className="btn btn-previous text-green"
+                                >
                                   PREVIOUS
-                                </button>
+                                </Link>
                               </div>
                               <div className="col-lg-6">
                                 {/* <Link
@@ -223,15 +243,11 @@ const Group2 = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  // alertType, message
-  const { alert } = state;
-  const { loading } = state.registration;
-  const username = state.authentication.user;
-  return { alert, username, loading };
+  const { loading, alertType, message } = state.registration;
+  return { loading, alertType, message };
 };
 
 const actionCreators = {
-  // createCore: usersActions.createCore,
   postImageBase64: usersActions.postImageBase64,
 };
 

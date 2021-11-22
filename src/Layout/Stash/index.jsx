@@ -64,9 +64,7 @@ const Index = ({ getFrequency, createStash, loading }) => {
       ).then();
       const { interest } = datas;
       setFreqOptions(interest);
-
       sessionStorage.setItem("interestList", JSON.stringify(interest));
-      // console.log("cvb", freqOptions);
     })();
     //eslint-disable-next-line
   }, [ccy]);

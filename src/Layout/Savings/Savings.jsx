@@ -58,6 +58,8 @@ const Savings = ({ getData, getAccounts, deleteAccount }) => {
     // eslint-disable-next-line
   }, []);
 
+  console.log(coreAccounts)
+
   const terminateStash = (productCode, accountNo, currency) => {
     const obj = {
       productCode,
@@ -312,14 +314,13 @@ const Savings = ({ getData, getAccounts, deleteAccount }) => {
                                 data: single,
                               },
                             }}
-                            // href="#0"
                             className="col-xl-4 col-lg-4 col-md-6 col-6 d-flex flex-column mb-4"
                           >
                             <div className="savings-card-box d-flex flex-column">
                               <img
                                 src={single?.image}
                                 className="img-fluid w-100"
-                                alt=""
+                                alt="savingsImg"
                               />
                               <div className="p-4 detail-div">
                                 <div className="">

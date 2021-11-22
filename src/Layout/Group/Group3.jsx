@@ -32,7 +32,6 @@ const Group3 = (props) => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
-   
     const obj = {
       start: values.start,
       freq: values.freq,
@@ -51,7 +50,6 @@ const Group3 = (props) => {
     );
     onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
-    // setloading(false);
   };
 
   const formik = useFormik({
@@ -246,7 +244,6 @@ const Group3 = (props) => {
                         </label>
                         <div className="form-group position-relative">
                           <NumberFormat
-                            // type="text"
                             isNumericString={true}
                             thousandSeparator={true}
                             className="text-field-profile"
@@ -254,12 +251,6 @@ const Group3 = (props) => {
                             // value="cntr_amt"
                             value={currencyVal(targetNum)}
                             disabled
-                            // onValueChange={(values) => {
-                            //   setNum({ value: values.value });
-                            // }}
-                            // onChange={formik.handleChange}
-                            // {...formik.getFieldProps("cntr_amt")}
-                            // readonly
                           />
                           <label
                             for="firstName"
@@ -279,12 +270,6 @@ const Group3 = (props) => {
                               </button>
                             </div>
                             <div className="col-lg-6">
-                              {/* <Link
-                                to="/app/groupsavings4"
-                                className="btn login-submit"
-                              >
-                                NEXT
-                              </Link> */}
                               <button
                                 type="submit"
                                 className="btn login-submit"
@@ -319,5 +304,3 @@ const actionCreators = {
 };
 
 export default connect(mapStateToProps, actionCreators)(Group3);
-
-// export default ;

@@ -1,7 +1,6 @@
 import { userConstants } from "../constants";
 import { userService } from "../../services";
 import { alertActions } from "./alertActions";
-// import { useErrorHandler } from "react-error-boundary";
 
 export const usersActions = {
   login,
@@ -163,7 +162,7 @@ function register4(obj, apiUrl, func) {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
     const { success, messages } = register;
-    if (apiUrl === "/api/v1/user/pin" && success === true) {
+    if (apiUrl && success === true) {
       func();
       dispatch(successReg(messages));
     } else {
@@ -177,9 +176,9 @@ function postImageBase64(obj, apiUrl, func) {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
     const { data, success, messages } = register;
-    if (apiUrl === "/api/v1/util/fileupload" && success === true) {
+    if (apiUrl && success === true) {
       func();
-      dispatch(successReg(messages));
+      dispatch(successReg(''));
       return data;
     } else {
       dispatch(failure(messages));
@@ -192,7 +191,7 @@ function resend(resendObj, apiUrl) {
     dispatch(request());
     const register = await userService.register1(resendObj, apiUrl);
     const { success, messages } = register;
-    if (apiUrl === "/api/v1/util/resendotp" && success === true) {
+    if (apiUrl && success === true) {
       dispatch(successReg(messages));
     } else {
       dispatch(failure(messages));
@@ -206,7 +205,7 @@ function bvnReg(obj, apiUrl, func) {
     const register = await userService.postData(obj, apiUrl);
 
     const { success, messages } = register;
-    if (apiUrl === "/api/v1/user/bvn" && success === true) {
+    if (apiUrl && success === true) {
       dispatch(successReg(messages));
       func();
     } else {
@@ -296,7 +295,7 @@ function createCore(obj, apiUrl, nextRoute) {
     const register = await userService.postData(obj, apiUrl);
 
     const { data, success, messages } = register;
-    if (apiUrl === "/api/v1/user/coreaccount" && success === true) {
+    if (apiUrl && success === true) {
       dispatch(successReg(data?.reference));
       sessionStorage.setItem(
         "core",
@@ -476,7 +475,6 @@ function getGroupCode(apiUrl, code, func) {
       return data;
     } else {
       dispatch(failure(messages));
-      // dispatch(alertActions.error(messages));
     }
   };
 }
@@ -486,7 +484,7 @@ function getFrequency(apiUrl, firstQ, secondQ) {
     const getAll = await userService.getFreq(apiUrl, firstQ, secondQ);
     const { data, success, messages } = getAll;
 
-    if (apiUrl === "/api/v1/util/productinterest" && success === true) {
+    if (apiUrl && success === true) {
       return data;
     } else {
       dispatch(alertActions.error(messages));
@@ -511,8 +509,7 @@ function getTargetValue(apiUrl, firstQ, secondQ, thirdQ, fourthQ) {
     );
 
     const { data, success, messages } = getAll;
-
-    if (apiUrl === "/api/v1/util/future_value" && success === true) {
+    if (apiUrl && success === true) {
       return data;
     } else {
       dispatch(alertActions.error(messages));
@@ -547,13 +544,6 @@ function getTargetValue2(
     );
 
     const { data, success, messages } = getAll;
-
-    // if (apiUrl === "/api/v1/util/future_value" && success === true) {
-    //   return data;
-    // } else {
-    //   dispatch(alertActions.error(messages));
-    // }
-
     if (apiUrl && success === true) {
       return data;
     } else {
@@ -565,7 +555,6 @@ function getTargetValue2(
 function deleteData(apiUrl, obj, func) {
   return async (dispatch) => {
     dispatch(request());
-
     const deleteId = await userService.deleteData(apiUrl, obj);
     const { data, success, messages } = deleteId;
 
@@ -585,7 +574,6 @@ function addCard() {
     const getCard = await userService.getData("/api/v1/user/card_url").then();
     window.open(getCard?.data?.authUrl, "_blank");
     dispatch(successReg());
-    // window.location.href = getCard?.data?.authUrl;
   };
 }
 
