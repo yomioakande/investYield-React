@@ -6,11 +6,9 @@ import { userService } from "../../services/usersService";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import cloudUpload from "../../assets/images/upload-cloud1.svg";
 import trashCan from "../../assets/images/trashCan.svg";
-// import homeImg from "../../assets/images/homeImg 2.png";
+import Swal from "sweetalert2";
 
 const CreateSavings3 = (props) => {
   const location = useLocation();
@@ -44,8 +42,17 @@ const CreateSavings3 = (props) => {
 
   //UPLOAD SUCCESSFUL ALERT
   const success = () => {
-    toast.success("Uploaded Successfully!", {
-      position: toast.POSITION.TOP_CENTER,
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Uploaded Successfully!",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 2000,
     });
   };
 
@@ -137,10 +144,10 @@ const CreateSavings3 = (props) => {
       currency: ccyCode === "1" ? "NGN" : "USD",
     }).format(number);
 
+
   return (
     <>
       {props.loading && <Loader />}
-      <ToastContainer autoClose={1000} hideProgressBar />
 
       <div className="section__content section__content--p30">
         <div className="container-fluid">
@@ -255,7 +262,6 @@ const CreateSavings3 = (props) => {
                                   type="radio"
                                   name="earnInterest"
                                   value={false}
-                                  // onChange={onChangers}
                                   onChange={formik.handleChange}
                                 />
                                 <span className="text-center">
@@ -295,12 +301,18 @@ const CreateSavings3 = (props) => {
                           Would you like to upload an image that represents your
                           goal (optional)
                         </label>
+                        {props.message && (
+                          <div className={`font-sm ${props.alertType}`}>
+                            {props.message}
+                          </div>
+                        )}
                         <div className="img-upload-div d-flex justify-content-between align-items-center px-3">
                           <h6 className="text-green">{imageName}</h6>
                           {imageFile ? (
                             <button
                               onClick={() => {
                                 setImageFile(null);
+                                setImageName("");
                               }}
                               style={{ flexBasis: "10%" }}
                             >
@@ -336,7 +348,7 @@ const CreateSavings3 = (props) => {
                           />
                         </div>
 
-                        {imageFile && (
+                        {imageFile && !props.message && (
                           <div className="mt-3">
                             {" "}
                             <img
@@ -381,11 +393,9 @@ const CreateSavings3 = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  // alertType, message
   const { alert } = state;
-  const { loading } = state.registration;
-  const username = state.authentication.user;
-  return { alert, username, loading };
+  const { loading, alertType, message } = state.registration;
+  return { alert, loading, alertType, message };
 };
 
 const actionCreators = {

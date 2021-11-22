@@ -4,8 +4,7 @@ import * as Yup from "yup";
 import "../../assets/css/style.css";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 import Loader from "../../common/Loader";
 const PasswordForgot = (props) => {
   const alert = props.alertType;
@@ -32,8 +31,17 @@ const PasswordForgot = (props) => {
   });
 
   const success = () => {
-    toast.success("Your Password has been successfully saved", {
-      position: toast.POSITION.TOP_CENTER,
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Your Password has been successfully saved",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 2000,
     });
   };
 
@@ -145,7 +153,6 @@ const PasswordForgot = (props) => {
                         />
                       </div>
                     </form>
-                    <ToastContainer autoClose={1000} hideProgressBar />
                   </div>
                 </div>
               </div>

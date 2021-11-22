@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../common/Loader";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Pin from "./ChangePin";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux";
@@ -30,10 +28,6 @@ const ChangePassword = (props) => {
   });
 
   const success = () => {
-    // toast.success("Password successfully changed!", {
-    //   position: toast.POSITION.TOP_CENTER,
-    // });
-
     Swal.fire({
       customClass: {
         title: "swal2-title",
@@ -73,7 +67,6 @@ const ChangePassword = (props) => {
   return (
     <>
       {props.loading && <Loader />}
-      <ToastContainer autoClose={1000} hideProgressBar />
 
       <div className="section__content section__content--p30">
         <div className="container-fluid">
@@ -259,7 +252,7 @@ const ChangePassword = (props) => {
                                 <div className="form-group">
                                   <input
                                     type="submit"
-                                  className="btn login-submit"
+                                    className="btn login-submit"
                                     value="UPDATE PASSWORD"
                                   />
                                 </div>

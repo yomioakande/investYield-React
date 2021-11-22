@@ -37,7 +37,7 @@ const SingleSavings = (props) => {
                       <div className="mt-4">
                         <h4 className="text-green">
                           {currencyVal(data?.contribution)}
-                          {/* #5,012.12 */}
+
                           <span className="text-blue">
                             /{currencyVal(data?.target)}{" "}
                           </span>
@@ -94,16 +94,13 @@ const SingleSavings = (props) => {
                         <div className="col-lg-8">
                           <div className="row">
                             <div className="col-lg-6">
-                              {/* <button className="btn btn-previous text-green">
-                                    PREVIOUS
-                                  </button> */}
                             </div>
                             <div className="col-lg-6">
                               <Link
-                                to="/app/dashboard"
+                                to="/app/savings"
                                 className="btn login-submit"
                               >
-                                PREVIOUS
+                                GO BACK
                               </Link>
                             </div>
                           </div>

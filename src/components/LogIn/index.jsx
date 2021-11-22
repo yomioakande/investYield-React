@@ -109,8 +109,8 @@ const Index = (props) => {
                     <div className="mt-5">
                       <form onSubmit={formik.handleSubmit}>
                         <div className="form-group">
-                          {props.alertType && (
-                            <div className={`font-sm alert ${props.alertType}`}>
+                          {props.message && (
+                            <div className={`font-sm ${props.alertType}`}>
                               {props.message}
                             </div>
                           )}

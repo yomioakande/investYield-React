@@ -4,8 +4,6 @@ import search from "../../assets/images/search-icon.svg";
 import { connect } from "react-redux";
 import { usersActions } from "../../redux/actions";
 import ModalB from "./ModalBeneficiary";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 const Beneficiary = ({ getData, deleteData }) => {
   const [beneficiary, setBeneficiary] = useState([]);
@@ -180,9 +178,7 @@ const Beneficiary = ({ getData, deleteData }) => {
           </div>
         </div>
       </div>
-      <ToastContainer autoClose={1000} hideProgressBar />
-
-      {modalOpen && <ModalB dataInfo={dataInfo} close={close} />}
+    {modalOpen && <ModalB dataInfo={dataInfo} close={close} />}
     </>
   );
 };

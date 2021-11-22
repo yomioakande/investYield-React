@@ -18,7 +18,6 @@ const Loader = () => {
           left: "50%",
           transform: "translate(-50%, -50%)",
           zIndex:"9999",
-          width:"40px"
         }}
       >
         <ClipLoader color={"#12bc29"} css={override} size={150} />
