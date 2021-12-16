@@ -4,11 +4,8 @@ import { usersActions } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import refer from "../../assets/images/referImage.svg";
 import copy from "../../assets/images/copyIcon.svg";
-// import link from "../../assets/images/share-linkIcon.svg";
 import QRCode from "qrcode.react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import Swal from "sweetalert2";
 import {
   TwitterShareButton,
   WhatsappShareButton,
@@ -32,8 +29,17 @@ const Refer = (props) => {
     //eslint-disable-next-line
   }, []);
   const success = () => {
-    toast.success("Referral Code copied!", {
-      position: toast.POSITION.TOP_CENTER,
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Referral Code copied!",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 1500,
     });
   };
   const copyText = (e) => {
@@ -45,7 +51,6 @@ const Refer = (props) => {
 
   return (
     <>
-      <ToastContainer autoClose={1000} hideProgressBar />
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">

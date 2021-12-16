@@ -10,7 +10,6 @@ import { usersActions } from "../../redux/actions";
 import { format } from "date-fns";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 const Profile = ({
   postImageBase64,
@@ -168,9 +167,7 @@ const Profile = ({
   };
   return (
     <>
-      {/* <ToastContainer autoClose={1000} hideProgressBar /> */}
-
-      {(loading1 || loading) && <Loader />}
+     {(loading1 || loading) && <Loader />}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">

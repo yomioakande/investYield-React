@@ -32,7 +32,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
 
   return (
     <>
-      {loading && <Loader />}
+      {loading ? <Loader />:
       <div
         className="col-lg-6 flex-column flex-grow-1"
         style={{ position: "relative" }}
@@ -47,33 +47,33 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
                   className="payment-selection"
                   style={{ height: "100%", overflowY: "scroll" }}
                 >
-                  {cards.length === 0 ? <p>No cards registered</p> : null}
-                  {cards && cards.length > 0
-                    ? cards.map((single, index) => {
-                        return (
-                          <div className="checker1" key={index}>
-                            <input
-                              type="radio"
-                              name="select"
-                              value={single.id}
-                              checked={state.rad === single.id.toString()}
-                              onChange={(e) =>
-                                setState({ rad: e.target.value })
-                              }
-                              className="opt"
-                              id={`option-${index}`}
-                            />
-                            <label
-                              htmlFor={`option-${index}`}
-                              className={`option option-2`}
-                            >
-                              <div className="dot"></div>
-                              <span className="px-2">{`${single?.bin}******${single?.pan}`}</span>
-                            </label>
-                          </div>
-                        );
-                      })
-                    : null}
+                  {/* {loading? } */}
+                  {cards && cards.length > 0 ? (
+                    cards.map((single, index) => {
+                      return (
+                        <div className="checker1" key={index}>
+                          <input
+                            type="radio"
+                            name="select"
+                            value={single.id}
+                            checked={state.rad === single.id.toString()}
+                            onChange={(e) => setState({ rad: e.target.value })}
+                            className="opt"
+                            id={`option-${index}`}
+                          />
+                          <label
+                            htmlFor={`option-${index}`}
+                            className={`option option-2`}
+                          >
+                            <div className="dot"></div>
+                            <span className="px-2">{`${single?.bin}******${single?.pan}`}</span>
+                          </label>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <p>No cards registered</p>
+                  )}
                 </div>
 
                 <div className="row mt-50 align-items-center justify-content-end">
@@ -109,7 +109,7 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div>}
     </>
   );
 };
