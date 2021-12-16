@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../redux/actions";
 import { nairaCurrencyVal, dateConverter } from "../helpers/helper";
-// import challenge from "../assets/images/savingschallenge.svg";
+import challenge from "../assets/images/savingschallenge.svg";
 import challengeImg from "../assets/images/targetImgSmall.svg";
 
 const JoinSavings = ({ getData }) => {
@@ -45,13 +45,13 @@ const JoinSavings = ({ getData }) => {
               ></li>
             </ol>
             <div className="carousel-inner">
-              {/* <div className="carousel-item active">
+              <div className="carousel-item active">
                 <img
                   className="d-block w-100"
                   src={challenge}
                   alt="First slide"
                 />
-              </div> */}
+              </div>
               {accounts.length > 0 ? (
                 accounts.map((single, index) => {
                   return (
