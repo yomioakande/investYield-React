@@ -45,13 +45,13 @@ const JoinSavings = ({ getData }) => {
               ></li>
             </ol>
             <div className="carousel-inner">
-              <div className="carousel-item active">
+              {/* <div className="carousel-item active">
                 <img
                   className="d-block w-100"
                   src={challenge}
                   alt="First slide"
                 />
-              </div>
+              </div> */}
               {accounts.length > 0 ? (
                 accounts.map((single, index) => {
                   return (
