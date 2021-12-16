@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { usersActions } from "../redux/actions";
 import { nairaCurrencyVal, dateConverter } from "../helpers/helper";
-import challenge from "../assets/images/savingschallenge.svg";
+// import challenge from "../assets/images/savingschallenge.svg";
 import challengeImg from "../assets/images/targetImgSmall.svg";
 
 const JoinSavings = ({ getData }) => {
