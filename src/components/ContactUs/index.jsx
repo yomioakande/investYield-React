@@ -2,8 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 import callIcon from "../../assets/images/callIcon.svg";
 import mailIcon from "../../assets/images/mailIcon.svg";
 import locationIcon from "../../assets/images/locationIcon.svg";
@@ -11,12 +10,20 @@ import facebookIcon from "../../assets/images/facebookIcon.svg";
 import IGIcon from "../../assets/images/IGIcon.svg";
 import twitterIcon from "../../assets/images/twitterIcon.svg";
 import linkedinIcon from "../../assets/images/linkedin.svg";
-// import { Linkedin } from "react-feather";
-// import {}
+
 const Index = () => {
   const success = () => {
-    toast.success("Submitted Successfully!", {
-      position: toast.POSITION.TOP_CENTER,
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      position: "center",
+      icon: "success",
+      iconColor: "#003079",
+      title: "Submitted Successfully!",
+      titleColor: "#fff",
+      showConfirmButton: false,
+      timer: 2000,
     });
   };
 
@@ -25,8 +32,6 @@ const Index = () => {
     email: "",
     message: "",
   };
-
-  // const [state, setState] = useState(initialValues);
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is Required"),
     email: Yup.string().email("Invalid email").required("Email is Required"),
@@ -47,7 +52,6 @@ const Index = () => {
       success();
       return data;
     } catch (error) {
-     
       return error.response;
     }
   };
@@ -217,7 +221,6 @@ const Index = () => {
                         className="btn login-submit"
                         value="SEND"
                       />
-                      <ToastContainer autoClose={1000} hideProgressBar />
                     </div>
                   </form>
                 </div>

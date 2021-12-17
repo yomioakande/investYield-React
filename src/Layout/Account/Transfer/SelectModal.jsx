@@ -2,8 +2,6 @@ import React from "react";
 import ReactDom from "react-dom";
 import modalclose from "../../../assets/images/modal-close.svg";
 import { OVERLAY, ModalBox } from "../ModalBeneficiary";
-// import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
 
 const SelectModal = ({ beneficiary, close, setSingle, single, loading }) => {
@@ -24,7 +22,6 @@ const SelectModal = ({ beneficiary, close, setSingle, single, loading }) => {
       paddingTop: 14,
       paddingBottom: 14,
       hover: "#DDE9FB",
-      // zIndex: 9999,
     }),
 
     menuList: (provided, state) => ({

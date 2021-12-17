@@ -14,8 +14,6 @@ import { usersActions } from "../redux/actions";
 import Modal1 from "./Modal";
 import Loader from "../common/Loader";
 import { CSSTransition } from "react-transition-group";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "./transitions.css";
 import "swiper/swiper-bundle.min.css";
 import { nairaCurrencyVal, dollarCurrencyVal } from "../helpers/helper";
@@ -39,13 +37,10 @@ const Main = (props) => {
   // const [purseAccounts, setPurseAccounts] = useState([]);
 
   const [todoList, setTodoList] = useState({});
-  // const [hidden, setHidden] = useState({});
+
   const modalToggle = () => {
     setModalInOpen(true);
   };
-  // const modalToggle1 = () => {
-  //   setModalInOpen1(true);
-  // };
 
   const close = () => {
     setModalInOpen(false);
@@ -55,15 +50,6 @@ const Main = (props) => {
     setModalInOpen1(false);
   };
 
-  // const toggleHide = (index) => {
-  //   setHidden({ ...hidden, [index]: !hidden[index] });
-  // };
-
-  // const getTransactions = async () => {
-  //   const data = await props.getData("/api/v1/user/transaction").then();
-  //   setTransactions(data);
-  // };
-
   useEffect(() => {
     (async function dataInfo() {
       const data = await props.getData("/api/v1/user/summary").then();
@@ -71,14 +57,12 @@ const Main = (props) => {
         .getPaginateTransact("/api/v1/user/transaction", "1", "5")
         .then();
       const todo = await props.getData("/api/v1/user/todo").then();
-
       // const myPurseAccounts = await props
       //   .getAccounts("/api/v1/user/accountbyproduct", "0106")
       //   .then();
       setSummaryInfo(data);
       setTodoList(todo);
       // setPurseAccounts(myPurseAccounts);
-
       sessionStorage.removeItem("stash");
       sessionStorage.removeItem("stashfreq");
       sessionStorage.removeItem("interestList");
@@ -99,7 +83,6 @@ const Main = (props) => {
   return (
     <>
       {props.loading && <Loader />}
-      {/*MAIN CONTENT */}
       <div className="section__content section__content--p30">
         <div className="container-fluid">
           <div className="row">
@@ -364,6 +347,7 @@ const Main = (props) => {
                       <div className="au-message__item-text">
                         {!todoList.bvnConfirmed && (
                           <div className="au-message__item-inner px-2 py-2">
+
                             <button
                               onClick={() => modalToggle()}
                               className="text px-0 mx-0"
@@ -383,11 +367,12 @@ const Main = (props) => {
                         <span>
                           <i data-feather="chevron-right"></i>
                         </span>
-                      </div>
-                    </div>
 
-                    <div className="au-message__item">
-                      {!todoList?.riskProfiled && (
+                      </div>
+                    )}
+
+                    {!todoList?.riskProfiled && (
+                      <div className="au-message__item">
                         <div className="au-message__item-inner px-2 py-2">
                           <Link
                             to="/app/help"
@@ -410,11 +395,13 @@ const Main = (props) => {
                             </span>
                           </div>
                         </div>
+
                       )}
                     </div>
 
                     <div className="au-message__item">
                       {!todoList.cardLinked && (
+
                         <div className="au-message__item-inner px-2 py-2">
                           <div className="au-message__item-text">
                             <button
@@ -428,6 +415,8 @@ const Main = (props) => {
                               </p>
                             </button>
                           </div>
+
+
                         </div>
                       )}
                       <div className="au-message__item-time mt-0">
@@ -441,6 +430,7 @@ const Main = (props) => {
                       <div className="au-message__item-text">
                         {!todoList.savingsCreated && (
                           <div className="au-message__item-inner px-2 py-2">
+
                             <Link
                               to="/app/savings/create"
                               className="text px-0 mx-0"
@@ -454,17 +444,18 @@ const Main = (props) => {
                               </p>
                             </Link>
                           </div>
+
                         )}
                       </div>
                       <div className="au-message__item-time mt-0">
                         <span>
                           <i data-feather="chevron-right"></i>
                         </span>
-                      </div>
-                    </div>
 
-                    <div className="au-message__item">
-                      {!todoList?.withdrawalAccount && (
+                      </div>
+                    )}
+                    {!todoList?.withdrawalAccount && (
+                      <div className="au-message__item">
                         <div className="au-message__item-inner px-2 py-2">
                           <Link
                             to="/app/account/mycard#pills-withdrawalAccount"
@@ -485,8 +476,8 @@ const Main = (props) => {
                             </span>
                           </div>
                         </div>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -525,7 +516,6 @@ const Main = (props) => {
       >
         <FundPurse close={close1} />
       </CSSTransition>
-      <ToastContainer autoClose={1000} hideProgressBar />
     </>
   );
 };

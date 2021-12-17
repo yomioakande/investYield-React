@@ -9,8 +9,6 @@ import { usersActions } from "../redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Loader from "../common/Loader";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 const Modal1 = ({
   alertType,
@@ -278,7 +276,6 @@ const Modal1 = ({
                               value={"CONTINUE"}
                               className="btn modal-button"
                             />
-                            <ToastContainer autoClose={1000} hideProgressBar />
                           </div>
                         </form>
                         <div className="mt-4 d-flex flex-column">
