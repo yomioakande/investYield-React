@@ -361,9 +361,9 @@ const Main = (props) => {
 
                   <div className="au-message-list px-4 todolist mt-4">
                     <div className="au-message__item">
-                      <div className="au-message__item-inner px-2 py-2">
-                        <div className="au-message__item-text">
-                          {!todoList.bvnConfirmed && (
+                      <div className="au-message__item-text">
+                        {!todoList.bvnConfirmed && (
+                          <div className="au-message__item-inner px-2 py-2">
                             <button
                               onClick={() => modalToggle()}
                               className="text px-0 mx-0"
@@ -376,13 +376,13 @@ const Main = (props) => {
                               </h5>
                               <p>Gain access to more features</p>
                             </button>
-                          )}
-                        </div>
-                        <div className="au-message__item-time mt-0">
-                          <span>
-                            <i data-feather="chevron-right"></i>
-                          </span>
-                        </div>
+                          </div>
+                        )}
+                      </div>
+                      <div className="au-message__item-time mt-0">
+                        <span>
+                          <i data-feather="chevron-right"></i>
+                        </span>
                       </div>
                     </div>
 
@@ -414,8 +414,8 @@ const Main = (props) => {
                     </div>
 
                     <div className="au-message__item">
-                      <div className="au-message__item-inner px-2 py-2">
-                        {!todoList.cardLinked && (
+                      {!todoList.cardLinked && (
+                        <div className="au-message__item-inner px-2 py-2">
                           <div className="au-message__item-text">
                             <button
                               style={{ textAlign: "left" }}
@@ -428,19 +428,19 @@ const Main = (props) => {
                               </p>
                             </button>
                           </div>
-                        )}
-                        <div className="au-message__item-time mt-0">
-                          <span>
-                            <i data-feather="chevron-right"></i>
-                          </span>
                         </div>
+                      )}
+                      <div className="au-message__item-time mt-0">
+                        <span>
+                          <i data-feather="chevron-right"></i>
+                        </span>
                       </div>
                     </div>
 
                     <div className="au-message__item">
-                      <div className="au-message__item-inner px-2 py-2">
-                        <div className="au-message__item-text">
-                          {!todoList.savingsCreated && (
+                      <div className="au-message__item-text">
+                        {!todoList.savingsCreated && (
+                          <div className="au-message__item-inner px-2 py-2">
                             <Link
                               to="/app/savings/create"
                               className="text px-0 mx-0"
@@ -453,13 +453,13 @@ const Main = (props) => {
                                 saving.
                               </p>
                             </Link>
-                          )}
-                        </div>
-                        <div className="au-message__item-time mt-0">
-                          <span>
-                            <i data-feather="chevron-right"></i>
-                          </span>
-                        </div>
+                          </div>
+                        )}
+                      </div>
+                      <div className="au-message__item-time mt-0">
+                        <span>
+                          <i data-feather="chevron-right"></i>
+                        </span>
                       </div>
                     </div>
 
