@@ -343,10 +343,11 @@ const Main = (props) => {
                   </div>
 
                   <div className="au-message-list px-4 todolist mt-4">
-                    {!todoList.bvnConfirmed && (
-                      <div className="au-message__item">
-                        <div className="au-message__item-inner px-2 py-2">
-                          <div className="au-message__item-text">
+                    <div className="au-message__item">
+                      <div className="au-message__item-text">
+                        {!todoList.bvnConfirmed && (
+                          <div className="au-message__item-inner px-2 py-2">
+
                             <button
                               onClick={() => modalToggle()}
                               className="text px-0 mx-0"
@@ -360,12 +361,13 @@ const Main = (props) => {
                               <p>Gain access to more features</p>
                             </button>
                           </div>
-                          <div className="au-message__item-time mt-0">
-                            <span>
-                              <i data-feather="chevron-right"></i>
-                            </span>
-                          </div>
-                        </div>
+                        )}
+                      </div>
+                      <div className="au-message__item-time mt-0">
+                        <span>
+                          <i data-feather="chevron-right"></i>
+                        </span>
+
                       </div>
                     )}
 
@@ -393,10 +395,13 @@ const Main = (props) => {
                             </span>
                           </div>
                         </div>
-                      </div>
-                    )}
-                    {!todoList.cardLinked && (
-                      <div className="au-message__item">
+
+                      )}
+                    </div>
+
+                    <div className="au-message__item">
+                      {!todoList.cardLinked && (
+
                         <div className="au-message__item-inner px-2 py-2">
                           <div className="au-message__item-text">
                             <button
@@ -411,18 +416,21 @@ const Main = (props) => {
                             </button>
                           </div>
 
-                          <div className="au-message__item-time mt-0">
-                            <span>
-                              <i data-feather="chevron-right"></i>
-                            </span>
-                          </div>
+
                         </div>
+                      )}
+                      <div className="au-message__item-time mt-0">
+                        <span>
+                          <i data-feather="chevron-right"></i>
+                        </span>
                       </div>
-                    )}
-                    {!todoList.savingsCreated && (
-                      <div className="au-message__item">
-                        <div className="au-message__item-inner px-2 py-2">
-                          <div className="au-message__item-text">
+                    </div>
+
+                    <div className="au-message__item">
+                      <div className="au-message__item-text">
+                        {!todoList.savingsCreated && (
+                          <div className="au-message__item-inner px-2 py-2">
+
                             <Link
                               to="/app/savings/create"
                               className="text px-0 mx-0"
@@ -436,12 +444,14 @@ const Main = (props) => {
                               </p>
                             </Link>
                           </div>
-                          <div className="au-message__item-time mt-0">
-                            <span>
-                              <i data-feather="chevron-right"></i>
-                            </span>
-                          </div>
-                        </div>
+
+                        )}
+                      </div>
+                      <div className="au-message__item-time mt-0">
+                        <span>
+                          <i data-feather="chevron-right"></i>
+                        </span>
+
                       </div>
                     )}
                     {!todoList?.withdrawalAccount && (
