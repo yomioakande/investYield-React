@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import leftArrow from "../../assets/images/left-arrow.svg";
 import "../../assets/css/style.css";
 import { useFormik } from "formik";
@@ -11,9 +12,12 @@ import Congrats from "../../Layout/Congrats";
 const Fourth = (props) => {
   const [congratsModal1, setCongratsModal1] = useState(false);
   const [showError, setShowError] = useState(false);
-
+  const history = useHistory();
   const modalToggle2 = () => {
     setCongratsModal1(true);
+    setTimeout(() => {
+      history.push("/app/dashboard");
+    }, 3000);
   };
   const initialValues = {
     pin: "",
