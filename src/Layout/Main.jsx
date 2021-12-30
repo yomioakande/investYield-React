@@ -37,7 +37,6 @@ const Main = (props) => {
   const [transactions, setTransactions] = useState([]);
   // const [coreAccounts, setCoreAccounts] = useState([]);
   // const [purseAccounts, setPurseAccounts] = useState([]);
-
   const [todoList, setTodoList] = useState({});
   // const [hidden, setHidden] = useState({});
   const modalToggle = () => {

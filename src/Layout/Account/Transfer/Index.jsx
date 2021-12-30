@@ -46,7 +46,6 @@ const Index = (props) => {
 
   const setModal = () => {
     setSuccessModal(true);
-    // alert("success")
   };
 
   const onSubmit = (values, onSubmitProps) => {
