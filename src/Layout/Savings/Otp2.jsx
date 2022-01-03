@@ -10,18 +10,20 @@ const Otp = (props) => {
   const modalToggle1 = () => {
     setCongratsModal(true);
   };
+
   const initialValues = {
     token: "",
   };
-  
+
   const getTransfer = JSON.parse(sessionStorage.getItem("transferObj")) || null;
-  const onSubmit = (values, onSubmitProps) => {
+
+  const onSubmit = (values) => {
     const obj = {
       token: values.token,
-      transId: getTransfer?.transId,
-      challengeId: getTransfer?.challengeId,
+      transId: getTransfer?.challengeId,
     };
-    props.confirmToken(obj, "/api/v1/transfer/accountbycard", modalToggle1);
+    // /api/v1/transfer/accountbycard
+    props.confirmToken(obj, "/api/v1/transfer/savingswithdraw", modalToggle1);
   };
 
   const validationSchema = Yup.object({

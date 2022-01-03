@@ -7,7 +7,6 @@ import Select from "react-select";
 import { connect } from "react-redux";
 import { usersActions } from "../../../redux/actions";
 import Loader from "../../../common/Loader";
-
 import withdraw from "../../../assets/images/withdrawFundIcon.svg";
 const Index = (props) => {
   const [bankDetails, setBankDetails] = useState({});
@@ -51,7 +50,6 @@ const Index = (props) => {
   });
 
   const onSubmit = (values, onSubmitProps) => {
-    setloading(true);
     const obj = {
       pin: values.pin,
       amount: values.amount,
@@ -63,7 +61,7 @@ const Index = (props) => {
     props.withdrawal(
       obj,
       "/api/v1/transfer/savingswithdraw",
-      "/app/stash/otp/withdraw"
+      "/app/otpwithdraw"
     );
     onSubmitProps.setSubmitting(false);
   };
@@ -81,7 +79,6 @@ const Index = (props) => {
   }, [num?.value]);
 
   const purposeWithdrawal = [
-    { value: "purpose", label: " Purpose for withdrawal" },
     { value: "food", label: "Food" },
     { value: "entertainment", label: "Entertainment" },
     { value: "shopping", label: "Shopping" },
@@ -144,9 +141,10 @@ const Index = (props) => {
   const defaultValue = (options, value) => {
     return options ? options.find((option) => option.value === value) : "";
   };
+
   return (
     <>
-      {loading && <Loader />}
+      {(loading || props.loading) && <Loader />}
       <div className="section__content section__content--p30 pb-4">
         <div className="container-fluid">
           <div className="row mt-4">
@@ -172,7 +170,8 @@ const Index = (props) => {
                         </p>
                       ) : (
                         <p>
-                          Tap this tab to add your Account details for Withdrawal
+                          Tap this tab to add your Account details for
+                          Withdrawal
                         </p>
                       )}
                     </div>
@@ -191,6 +190,17 @@ const Index = (props) => {
                   <div className="px-5 mt-5">
                     <form onSubmit={formik.handleSubmit}>
                       <div className="form-group">
+                        {props.alert.message && (
+                          <div className={`font-sm ${props.alert.type}`}>
+                            {props.alert.message}
+                          </div>
+                        )}
+
+                        {props.message && (
+                          <div className={`font-sm ${props.alertType}`}>
+                            {props.message}
+                          </div>
+                        )}
                         <label
                           for="Amount"
                           className="text-blue font-sm weight-500"
@@ -243,24 +253,6 @@ const Index = (props) => {
                           }
                           autoFocus={true}
                         />
-                        {/* <select className="text-field">
-                          <option value="purpose" selected="selected" disabled>
-                            Purpose for withdrawal
-                          </option>
-                          <option value="food">Food</option>
-                          <option value="entertainment">Entertainment</option>
-                          <option value="shopping">Shopping</option>
-                          <option value="children">Children</option>
-                          <option value="vacation">Vacation</option>
-                          <option value="rent">Rent</option>
-                          <option value="pay bills">Pay Bills/Fees</option>
-                          <option value="party">Party</option>
-                          <option value="emergency fund">Emergency Fund</option>
-                          <option value="transportation">Transportation</option>
-                          <option value="health care">Health Care</option>
-                          <option value="retirement">Retirement</option>
-                          <option value="education">Education</option>
-                        </select> */}
                       </div>
                       <div className="form-group mt-4">
                         <label
@@ -350,7 +342,7 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
-  withdrawal: usersActions.createCore,
+  withdrawal: usersActions.payCard,
   getAccount: usersActions.getInfo,
   getAccounts: usersActions.getAccounts,
 };

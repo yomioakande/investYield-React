@@ -8,7 +8,6 @@ import DashboardLayout from "../Layout/index";
 import Main from "../Layout/Main";
 import StashIndexPage from "../Layout/Stash/index";
 import StashBreakdown from "../Layout/Stash/Breakdown";
-// import StashOtp from "../Layout/Stash/Otp";
 
 import Savings from "../Layout/Savings/Savings";
 import CreateSavings from "../Layout/Savings/CreateSavings";
@@ -35,8 +34,7 @@ import MyPortfolio from "../Layout/Account/MyPorfolio";
 import myProfile from "../Layout/Account/Profile";
 import myCard from "../Layout/Account/Card/index";
 import Transfer from "../Layout/Account/Transfer/Index";
-// import Transfer2 from "../Layout/Account/Transfer/Transfer2"
-// import Transfer3 from "../Layout/Account/Transfer/Transfer3"
+
 import SingleSavings from "../Layout/Savings/SingleSavings";
 import Withdraw from "../Layout/Account/Withdraw/index";
 
@@ -49,6 +47,7 @@ import BreakdownFund from "../Layout/BreakdownFund";
 import Blog from "../Layout/Blog/index";
 import SingleBlog from "../Layout/Blog/Main";
 import Help from "../Layout/FeedBack";
+import SecondOTPScreen from "../Layout/Savings/Otp2"
 
 import { PrivateRoute } from "./PrivateRoutes";
 
@@ -59,6 +58,10 @@ const DashboardRoutes = () => {
         <PrivateRoute exact path="/app/dashboard" component={Main} />
         <PrivateRoute exact path="/app/help" component={Help} />
         <PrivateRoute path="/app/stash/breakdown" component={StashBreakdown} />
+
+
+        <PrivateRoute path="/app/otpwithdraw" component={SecondOTPScreen} />
+        
         <PrivateRoute path="/app/stash/otp/:id" component={CardOTP} />
         <PrivateRoute path="/app/stash" component={StashIndexPage} />
         <PrivateRoute path="/app/savings/create" component={CreateSavings} />
@@ -107,8 +110,6 @@ const DashboardRoutes = () => {
         <PrivateRoute exact path="/app/account" component={Account} />
 
         <PrivateRoute exact path="/app/account/transfer" component={Transfer} />
-        {/* <PrivateRoute exact path="/app/account/transfer2" component={Transfer2} />
-        <PrivateRoute exact path="/app/account/transfer3" component={Transfer3} /> */}
         <PrivateRoute exact path="/app/account/withdraw" component={Withdraw} />
         <PrivateRoute exact path="/app/help" component={Help} />
 

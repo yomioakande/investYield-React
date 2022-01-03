@@ -12,7 +12,6 @@ const PayModel = ({
   addCard,
   payPurse,
   loading,
-  message,
 }) => {
   const [active, setActive] = useState(1);
   const [details, setDetails] = useState({});

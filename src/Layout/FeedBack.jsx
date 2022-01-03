@@ -44,8 +44,6 @@ const Help = (props) => {
       projection: values.projection,
     };
 
-  
-
     props.postFeedBack(obj, "/api/v1/util/feedback", modalToggle1);
     // onSubmitProps.resetForm();
     onSubmitProps.setSubmitting(false);
@@ -56,9 +54,10 @@ const Help = (props) => {
     onSubmit,
     validationSchema,
     validateOnMount: true,
+    // enableReinitialize:true
   });
 
-
+  // console.log(formik.values)
 
   return (
     <>
@@ -191,7 +190,7 @@ const Help = (props) => {
                                 <div className="form-group">
                                   <input
                                     name="mEarn"
-                                    className="styled-checkbox"
+                                    className="styled-checkbox2"
                                     id="styled-checkbox-e1"
                                     type="radio"
                                     value={1}
@@ -204,7 +203,7 @@ const Help = (props) => {
                                 <div className="form-group mt-1">
                                   <input
                                     name="mEarn"
-                                    className="styled-checkbox"
+                                    className="styled-checkbox2"
                                     id="styled-checkbox-e2"
                                     type="radio"
                                     value={2}
@@ -217,7 +216,7 @@ const Help = (props) => {
                                 <div className="form-group mt-1">
                                   <input
                                     name="mEarn"
-                                    className="styled-checkbox"
+                                    className="styled-checkbox2"
                                     id="styled-checkbox-e3"
                                     type="radio"
                                     value={3}
@@ -230,7 +229,7 @@ const Help = (props) => {
                                 <div className="form-group mt-1">
                                   <input
                                     name="mEarn"
-                                    className="styled-checkbox"
+                                    className="styled-checkbox2"
                                     id="styled-checkbox-e4"
                                     type="radio"
                                     value={4}
@@ -243,7 +242,7 @@ const Help = (props) => {
                                 <div className="form-group mt-1">
                                   <input
                                     name="mEarn"
-                                    className="styled-checkbox"
+                                    className="styled-checkbox2"
                                     id="styled-checkbox-e5"
                                     type="radio"
                                     value={5}
@@ -668,7 +667,7 @@ const Help = (props) => {
                                       <button
                                         type="button"
                                         onClick={() => setActive("5")}
-                                        className="btn  text-green"
+                                        className="btn text-green"
                                       >
                                         PREVIOUS
                                       </button>
