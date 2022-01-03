@@ -21,95 +21,100 @@ const PayCard = ({ transId, getCards, payCard, setActive }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const obj = {
       cardId: state.rad,
       transId,
     };
-
     await payCard(obj, "/api/v1/transfer/accountbycard", "/app/stash/otp");
   };
 
   return (
     <>
-      {loading ? <Loader />:
-      <div
-        className="col-lg-6 flex-column flex-grow-1"
-        style={{ position: "relative" }}
-      >
-        <div className="au-card h-100">
-          <div className="au-card-inner">
-            <h4 className="text-blue">Choose a Card to Pay with</h4>
-            <div className="small-red-line"></div>
-            <div className="mt-50">
-              <form onSubmit={handleSubmit}>
-                <div
-                  className="payment-selection"
-                  style={{ height: "100%", overflowY: "scroll" }}
-                >
-                  {/* {loading? } */}
-                  {cards && cards.length > 0 ? (
-                    cards.map((single, index) => {
-                      return (
-                        <div className="checker1" key={index}>
-                          <input
-                            type="radio"
-                            name="select"
-                            value={single.id}
-                            checked={state.rad === single.id.toString()}
-                            onChange={(e) => setState({ rad: e.target.value })}
-                            className="opt"
-                            id={`option-${index}`}
-                          />
-                          <label
-                            htmlFor={`option-${index}`}
-                            className={`option option-2`}
-                          >
-                            <div className="dot"></div>
-                            <span className="px-2">{`${single?.bin}******${single?.pan}`}</span>
-                          </label>
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <p>No cards registered</p>
-                  )}
-                </div>
-
-                <div className="row mt-50 align-items-center justify-content-end">
+      {loading ? (
+        <Loader />
+      ) : (
+        <div
+          className="col-lg-6 flex-column flex-grow-1"
+          style={{ position: "relative" }}
+        >
+          <div className="au-card h-100">
+            <div className="au-card-inner">
+              <h4 className="text-blue">Choose a Card to Pay with</h4>
+              <div className="small-red-line"></div>
+              <div className="mt-50">
+                <form onSubmit={handleSubmit}>
                   <div
-                    className="col-lg-8"
-                    style={{ position: "absolute", bottom: "2rem" }}
+                    className="payment-selection"
+                    style={{ height: "100%", overflowY: "scroll" }}
                   >
-                    <div className="row">
-                      <div className="col-lg-6">
-                        {!loading && (
-                          <button
-                            onClick={() => setActive(1)}
-                            className="btn btn-cancel text-danger"
-                          >
-                            Cancel
-                          </button>
-                        )}
-                      </div>
-
-                      {state?.rad.length > 0 ? (
-                        <>
-                          <div className="col-lg-6">
-                            <button type="submit" className="btn login-submit">
-                              NEXT
-                            </button>
+                    {cards && cards.length > 0 ? (
+                      cards.map((single, index) => {
+                        return (
+                          <div className="checker1" key={index}>
+                            <input
+                              type="radio"
+                              name="select"
+                              value={single.id}
+                              checked={state.rad === single.id.toString()}
+                              onChange={(e) =>
+                                setState({ rad: e.target.value })
+                              }
+                              className="opt"
+                              id={`option-${index}`}
+                            />
+                            <label
+                              htmlFor={`option-${index}`}
+                              className={`option option-2`}
+                            >
+                              <div className="dot"></div>
+                              <span className="px-2">{`${single?.bin}******${single?.pan}`}</span>
+                            </label>
                           </div>
-                        </>
-                      ) : null}
+                        );
+                      })
+                    ) : (
+                      <p>No cards registered</p>
+                    )}
+                  </div>
+
+                  <div className="row mt-50 align-items-center justify-content-end">
+                    <div
+                      className="col-lg-8"
+                      style={{ position: "absolute", bottom: "2rem" }}
+                    >
+                      <div className="row">
+                        <div className="col-lg-6">
+                          {!loading && (
+                            <button
+                              onClick={() => setActive(1)}
+                              className="btn btn-cancel text-danger"
+                            >
+                              Cancel
+                            </button>
+                          )}
+                        </div>
+
+                        {state?.rad.length > 0 ? (
+                          <>
+                            <div className="col-lg-6">
+                              <button
+                                type="submit"
+                                className="btn login-submit"
+                              >
+                                NEXT
+                              </button>
+                            </div>
+                          </>
+                        ) : null}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>}
+      )}
     </>
   );
 };

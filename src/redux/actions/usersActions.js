@@ -178,7 +178,7 @@ function postImageBase64(obj, apiUrl, func) {
     const { data, success, messages } = register;
     if (apiUrl && success === true) {
       func();
-      dispatch(successReg(''));
+      dispatch(successReg(""));
       return data;
     } else {
       dispatch(failure(messages));
@@ -293,7 +293,6 @@ function createCore(obj, apiUrl, nextRoute) {
   return async (dispatch) => {
     dispatch(request());
     const register = await userService.postData(obj, apiUrl);
-
     const { data, success, messages } = register;
     if (apiUrl && success === true) {
       dispatch(successReg(data?.reference));
